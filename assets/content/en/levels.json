@@ -46,5 +46,11 @@
     "title": "Forensics, Cloud & AI",
     "tagline": "Digital forensics, cloud security, deepfakes, and your personal security plan.",
     "moduleFile": "lv7.json"
+  },
+  {
+    "index": 8,
+    "title": "Toolkit",
+    "tagline": "Termux, Nmap, Wireshark, Burp Suite, CyberChef, Kali Linux, and legal practice labs.",
+    "moduleFile": "lv8.json"
   }
 ]

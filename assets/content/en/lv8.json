@@ -1,0 +1,549 @@
+[
+  {
+    "id": "lv8-termux",
+    "level": 8,
+    "title": "Termux: Linux on Your Phone",
+    "summary": "A real Linux terminal on Android, no root needed.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Install it the right way",
+        "body": "Termux is a terminal app that gives you a Linux environment on Android. You can install thousands of packages: Python, Git, Nmap, and more.\n\nInstall it from F-Droid or Termux's official GitHub releases. The old Play Store version went without updates for a long time and often fails to install packages.\n\nAfter first launch, refresh the package list:\n$ pkg update && pkg upgrade\n\nIf it asks questions during the upgrade, press Enter to keep the default.",
+        "tip": "Termux is like renting a small room with a Linux workshop inside your phone.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Android",
+            "Termux",
+            "Linux (pkg)",
+            "Python, Git, Nmap"
+          ]
+        }
+      },
+      {
+        "title": "First commands",
+        "body": "The LV.01 commands work right away here:\n$ pwd\n$ ls -a\n$ mkdir practice && cd practice\n\nTo let Termux read your phone's Download folder:\n$ termux-setup-storage\nOnce allowed, phone folders live in ~/storage/shared.\n\nInstall commonly used tools:\n$ pkg install python git curl nano\n\nTry creating a file and running Python:\n$ echo \"print('hello cipher')\" > hello.py\n$ python hello.py",
+        "tip": "Learning the terminal is like learning a manual car: awkward for a week, then it's habit."
+      },
+      {
+        "title": "Using Termux safely",
+        "body": "Termux is powerful, so be careful:\n- Don't paste commands or scripts from random groups or videos without understanding them. \"Hack WhatsApp\" or \"hack Facebook\" scripts are almost always scams, or they steal your data\n- Understand any command with rm -rf, curl ... | bash, or a password prompt before running it\n- Termux runs with normal app permissions, but files you grant access to can be deleted or changed\n- Type exit to leave, and if things get messy, clear the app's data to start fresh",
+        "tip": "A kitchen knife is a great tool. But don't accept a knife from a stranger who calls it a \"magic knife\"."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "The recommended source for installing Termux is...",
+        "options": [
+          "A WhatsApp group",
+          "F-Droid or Termux's official GitHub",
+          "An APK mod site",
+          "A friend's Bluetooth"
+        ],
+        "explanation": "The old Play Store version went unmaintained for a long time.",
+        "answer": 1
+      },
+      {
+        "prompt": "The first command after installing Termux should be...",
+        "options": [
+          "rm -rf /",
+          "pkg update && pkg upgrade",
+          "exit",
+          "reboot"
+        ],
+        "explanation": "It refreshes package lists and versions.",
+        "answer": 1
+      },
+      {
+        "prompt": "The command that lets Termux access phone folders is...",
+        "options": [
+          "termux-setup-storage",
+          "pkg storage",
+          "cd /sdcard!",
+          "ls -root"
+        ],
+        "explanation": "Once allowed, phone folders appear under ~/storage.",
+        "answer": 0
+      },
+      {
+        "prompt": "A video shows a \"1-minute Termux WhatsApp hack script\". You should...",
+        "options": [
+          "Try it now",
+          "Not run it; it's almost always a scam or data stealer",
+          "Share it with a group",
+          "Run it as root"
+        ],
+        "explanation": "Such scripts often steal the account of whoever runs them.",
+        "answer": 1
+      },
+      {
+        "prompt": "The command to install Python in Termux?",
+        "options": [
+          "pkg install python",
+          "apt-get pyhton",
+          "install.exe python",
+          "python --install"
+        ],
+        "explanation": "pkg is Termux's package manager.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv8-nmap",
+    "level": 8,
+    "title": "Nmap: Mapping Networks",
+    "summary": "Finding devices and open ports on your own network.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "What Nmap is for",
+        "body": "Nmap (Network Mapper) is the best-known network scanner. Admins use it for inventory and pentesters for active recon:\n- Which devices are up on the network\n- Which ports are open\n- What services and versions run on those ports\n\nRemember LV.04: scanning other people's networks or servers without permission is illegal. Practice only on your own home network, or on targets provided for practice.",
+        "tip": "Nmap is like walking around the neighborhood checking which doors are open. Fine at your own house; at others', it's suspicious.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "Phones & laptops",
+            "TV & CCTV",
+            "IoT",
+            "router"
+          ]
+        }
+      },
+      {
+        "title": "Your first scan",
+        "body": "In Termux:\n$ pkg install nmap\n\nFirst find your router's IP in Toolbox → Network Info (usually 192.168.1.1 or 192.168.0.1). Then:\n$ nmap 192.168.1.1\n\nFind which devices are up in one subnet (the /24 from LV.01):\n$ nmap -sn 192.168.1.0/24\n\nSee service versions on open ports:\n$ nmap -sV 192.168.1.1\n\nNmap also offers an official practice target: scanme.nmap.org, which you may scan gently.",
+        "tip": "-sn is like taking a headcount at home without knocking on every door."
+      },
+      {
+        "title": "Reading the results",
+        "body": "Sample output:\n| PORT    STATE  SERVICE\n| 53/tcp  open   domain\n| 80/tcp  open   http\n| 443/tcp open   https\n\nMeaning:\n- open: a service is listening\n- closed: reachable but nothing is listening\n- filtered: blocked by a firewall, Nmap can't tell\n\nA home router opening port 80 (its admin page) to the local network is normal. It's dangerous if the admin page is reachable from the internet. Make sure the router admin password has been changed.",
+        "tip": "Scan results are like a floor plan marking which doors are open, closed, or fenced off.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            ":80 :443 :53",
+            "nmap",
+            "router"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Where can you legally practice Nmap?",
+        "options": [
+          "Your campus server",
+          "Your own home network or scanme.nmap.org",
+          "A bank's site",
+          "Your neighbor's Wi-Fi"
+        ],
+        "explanation": "Scanning without permission can be illegal.",
+        "answer": 1
+      },
+      {
+        "prompt": "The Nmap option to find live devices without port scanning?",
+        "options": [
+          "-sV",
+          "-sn",
+          "-rm",
+          "-pwd"
+        ],
+        "explanation": "-sn = ping scan / host discovery.",
+        "answer": 1
+      },
+      {
+        "prompt": "A \"filtered\" port state means...",
+        "options": [
+          "The service is surely down",
+          "A firewall blocks it so Nmap can't be sure",
+          "Wide open",
+          "A broken port"
+        ],
+        "explanation": "The probe got no clear reply.",
+        "answer": 1
+      },
+      {
+        "prompt": "The -sV option is used to...",
+        "options": [
+          "Detect service versions",
+          "Delete files",
+          "Store passwords",
+          "Speed up Wi-Fi"
+        ],
+        "explanation": "Service versions help find known flaws.",
+        "answer": 0
+      },
+      {
+        "prompt": "The notation 192.168.1.0/24 in Nmap scans...",
+        "options": [
+          "One address",
+          "The 256 addresses in that subnet",
+          "The whole internet",
+          "Only the router"
+        ],
+        "explanation": "Remember the subnet math from LV.01.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-packets",
+    "level": 8,
+    "title": "Wireshark & PCAPdroid",
+    "summary": "Inspecting network packets from your own device to see HTTP vs HTTPS.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Meet packet capture",
+        "body": "Packet capture means recording packets passing through a network, then dissecting them. It's the most honest way to see what apps really send.\n\n- Wireshark: the most popular desktop app (Windows, Mac, Linux) for packet analysis\n- PCAPdroid: a no-root Android app that records your own phone's traffic through a local VPN, and can export .pcap files to open in Wireshark\n\nWhich app talks to which server, when, and how often all becomes visible.",
+        "tip": "Packet capture is like a CCTV on the street outside: you see whose cars pass, which way, and when.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Your phone",
+            "PCAPdroid",
+            "Wi-Fi",
+            "Server"
+          ]
+        }
+      },
+      {
+        "title": "Practice: HTTP vs HTTPS",
+        "body": "Try it in PCAPdroid:\n- Start recording, open one http:// site (e.g. http://neverssl.com) and one https:// site\n- Stop, then inspect the connections\n\nIn Wireshark, use filters to focus:\n$ http\n$ dns\n$ tls\n$ ip.addr == 192.168.1.1\n\nHTTP packets are plainly readable: the page address, headers, even form contents. HTTPS packets only show the destination domain; the content is encrypted noise. Real proof of what LV.00 and LV.03 taught.",
+        "tip": "HTTP is a postcard, HTTPS a sealed envelope. Now you've seen the difference yourself."
+      },
+      {
+        "title": "Ethics & privacy",
+        "body": "Recording other people's traffic without permission is wiretapping and can be illegal. So:\n- Record only your own devices and networks\n- .pcap files may contain sensitive data (cookies, sites visited). Don't share them carelessly\n- Stop recording when done, since PCAPdroid shows up as an active VPN\n\nEveryday benefit: you can check whether a suspicious app quietly sends data to unknown servers.",
+        "tip": "Putting CCTV in your own house is fine. Putting it in someone else's room is a violation."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "PCAPdroid records phone traffic without root by...",
+        "options": [
+          "Hacking the carrier",
+          "Using Android's local VPN feature",
+          "Swapping the SIM",
+          "Opening the phone case"
+        ],
+        "explanation": "Traffic is routed through a local VPN on the phone itself.",
+        "answer": 1
+      },
+      {
+        "prompt": "The Wireshark filter to show only DNS queries?",
+        "options": [
+          "dns",
+          "http.cookie",
+          "ls -a",
+          "tcp.flag"
+        ],
+        "explanation": "Display filters match protocol names.",
+        "answer": 0
+      },
+      {
+        "prompt": "In a packet capture, an HTTPS site shows...",
+        "options": [
+          "The full page content",
+          "The destination domain, with encrypted content",
+          "Your password",
+          "Nothing at all"
+        ],
+        "explanation": "The domain is still visible via SNI/DNS, but content is encrypted.",
+        "answer": 1
+      },
+      {
+        "prompt": "Recording a cafe's Wi-Fi traffic without permission is...",
+        "options": [
+          "Good practice",
+          "Wiretapping that can be illegal",
+          "Required for beginners",
+          "Legal at night"
+        ],
+        "explanation": "Record only your own devices and networks.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why shouldn't .pcap files be shared carelessly?",
+        "options": [
+          "They're small",
+          "They can contain sensitive data like cookies",
+          "The format is a state secret",
+          "No reason"
+        ],
+        "explanation": "Session cookies in a capture can be used to hijack accounts.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-burp",
+    "level": 8,
+    "title": "Burp Suite & Web Labs",
+    "summary": "Intercepting web requests and practicing LV.02 flaws legally.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "An intercepting proxy",
+        "body": "Burp Suite is the main tool for testing web apps. The Community edition is free for Windows, Mac, and Linux.\n\nHow it works: Burp sits as a proxy between the browser and the server. Each request pauses in Burp so you can view it, change it, and send it on.\n\nBurp has a preconfigured built-in browser, so there's no manual proxy or certificate setup.",
+        "tip": "Burp is like a mail carrier you can tell to stop, open the envelope, change the letter, and deliver it. That's why it belongs only in a practice \"post office\".",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Browser",
+            "Burp Proxy",
+            "edit request",
+            "Lab"
+          ]
+        }
+      },
+      {
+        "title": "Features beginners use",
+        "body": "- Proxy → Intercept: hold a request and see its method, headers, cookies, and body (recall LV.02)\n- HTTP history: every request is logged\n- Repeater: resend one request repeatedly while tweaking parameters, e.g. change id=1042 to id=1043 to test IDOR\n- Decoder: encode/decode Base64, URL, hex (like Cipher's Hash tool)\n\nIntruder is deliberately rate-limited in Community. That's enough for learning.",
+        "tip": "Repeater is like trying keys one by one in a practice lab, noting which ones open the door."
+      },
+      {
+        "title": "Official practice grounds",
+        "body": "PortSwigger (Burp's maker) runs the free Web Security Academy, with lessons plus hundreds of labs built to be attacked: SQL injection, XSS, access control, and more.\n\nA good order:\n- \"Apprentice\" SQL injection and XSS labs\n- Access control / IDOR labs\n- Then move up to Practitioner\n\nLocal alternatives: DVWA or OWASP Juice Shop, vulnerable apps you run on your own laptop.",
+        "tip": "A practice lab is a boxing gym: the opponent is there to be hit."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Burp Suite works as a...",
+        "options": [
+          "Antivirus",
+          "Proxy between the browser and the server",
+          "Wi-Fi router",
+          "Photo editor"
+        ],
+        "explanation": "Requests pause in Burp before going on.",
+        "answer": 1
+      },
+      {
+        "prompt": "The Burp feature to resend a request while tweaking parameters is...",
+        "options": [
+          "Repeater",
+          "Decoder",
+          "Dashboard",
+          "Extender"
+        ],
+        "explanation": "Repeater suits testing IDOR or injection.",
+        "answer": 0
+      },
+      {
+        "prompt": "The free, legal place to practice Burp from its maker is...",
+        "options": [
+          "PortSwigger's Web Security Academy",
+          "A marketplace site",
+          "Your school site",
+          "A friend's social account"
+        ],
+        "explanation": "Hundreds of labs are built to be attacked.",
+        "answer": 0
+      },
+      {
+        "prompt": "DVWA and OWASP Juice Shop are...",
+        "options": [
+          "Antivirus apps",
+          "Vulnerable apps for practicing on your own laptop",
+          "Digital banks",
+          "Browsers"
+        ],
+        "explanation": "Deliberately flawed for learning.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why shouldn't Burp be used on random sites?",
+        "options": [
+          "It's paid",
+          "Altering requests to others' systems without permission is an illegal attack",
+          "It's slow",
+          "It needs root"
+        ],
+        "explanation": "The tool is legal; how you use it decides.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-cyberchef",
+    "level": 8,
+    "title": "CyberChef & Online Tools",
+    "summary": "A Swiss Army knife for data, plus safe ways to check files and links.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "CyberChef: a data kitchen",
+        "body": "CyberChef is a free web app made by GCHQ (the UK intelligence agency), nicknamed the \"cyber Swiss Army knife\". You build a \"recipe\" of steps:\n- From Base64 → From Hex → Gunzip\n- Hashes, ROT13, XOR, extracting URLs or IPs from text\n- Magic: auto-detects the encoding used\n\nEverything runs in the browser; data isn't sent to a server. It can also be downloaded to use offline. Popular in CTF crypto and forensics challenges.",
+        "tip": "CyberChef is a kitchen: ingredients in on the left, the recipe in the middle, the dish out on the right.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "CyberChef",
+            "Q0lQSEVS...",
+            "CIPHER{...}"
+          ]
+        }
+      },
+      {
+        "title": "Checking suspicious files & links",
+        "body": "- VirusTotal: scans files, links, or hashes with dozens of antivirus engines at once\n- urlscan.io: opens a link on their servers and shows a screenshot and where it leads\n- haveibeenpwned.com: checks whether your email has leaked\n\nImportant about VirusTotal: uploaded files can be accessed by the security community. Don't upload personal documents or work secrets. To just check, search by the file's SHA-256 hash first (computable in Cipher's Hash tool).",
+        "tip": "Checking a link on urlscan is like sending a courier to photograph the address before you go yourself."
+      },
+      {
+        "title": "Practice: crack a CTF flag",
+        "body": "Cipher hides a Base64-encoded flag (see the hint in Mini CTF). Try cracking it with CyberChef:\n- Open CyberChef in a browser\n- Paste the Base64 text into the Input box\n- Drag the \"From Base64\" operation into the Recipe\n- Read the Output\n\nOr click the magic wand (Magic) and let CyberChef guess. Once you have it, enter the flag in Mini CTF.",
+        "tip": "Like a puzzle in a workbook: the answer is there, you just need the right tool."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "CyberChef is best for...",
+        "options": [
+          "Editing videos",
+          "Transforming and decoding data with step recipes",
+          "Port scanning",
+          "Capturing packets"
+        ],
+        "explanation": "Encoding, decoding, hashing, and data extraction.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why not upload personal documents to VirusTotal?",
+        "options": [
+          "Too large",
+          "Uploaded files can be accessed by the security community",
+          "It's paid",
+          "It's slow"
+        ],
+        "explanation": "Search by hash first if you only want to check.",
+        "answer": 1
+      },
+      {
+        "prompt": "The service that opens a link on its servers and shows a screenshot is...",
+        "options": [
+          "urlscan.io",
+          "Spotify",
+          "Google Maps",
+          "Canva"
+        ],
+        "explanation": "You see where a link leads without opening it yourself.",
+        "answer": 0
+      },
+      {
+        "prompt": "The CyberChef operation that auto-guesses encodings is...",
+        "options": [
+          "Magic",
+          "Auto",
+          "Guess",
+          "Wizard"
+        ],
+        "explanation": "The magic wand icon.",
+        "answer": 0
+      },
+      {
+        "prompt": "Data you process in CyberChef is...",
+        "options": [
+          "Sent to GCHQ",
+          "Processed in your browser",
+          "Sold to advertisers",
+          "Saved to Google Drive"
+        ],
+        "explanation": "CyberChef runs entirely client-side.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-kali",
+    "level": 8,
+    "title": "Kali Linux & Practice Labs",
+    "summary": "Build your own lab and start a guided practice path.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Meet Kali Linux",
+        "body": "Kali Linux is a Linux distro packed with hundreds of security tools: Nmap, Wireshark, Burp, John the Ripper, and more.\n\nKali isn't meant for daily use, and using Kali doesn't automatically make you skilled. The foundations still matter: networking, Linux, web, and the reasoning from earlier levels.\n\nThe safest way to start is running it inside your current laptop, not wiping Windows.",
+        "tip": "Kali is a complete toolbox. But an expensive toolbox doesn't make someone a mechanic overnight."
+      },
+      {
+        "title": "How to run it",
+        "body": "Three options on a Windows laptop:\n- WSL (lightest). In PowerShell as admin:\n$ wsl --install -d kali-linux\n- VirtualBox or VMware: download the official VM image from kali.org, import it, and run. Give it at least 2–4 GB RAM\n- Live USB: boot from a flash drive without touching the hard drive\n\nOnce inside, always update first:\n$ sudo apt update && sudo apt full-upgrade\n\nDownload Kali only from kali.org. Images from other sites may be tampered with.",
+        "tip": "A virtual machine is a house inside a house: making a mess inside doesn't mess up the main house.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Windows",
+            "WSL / VirtualBox",
+            "Kali Linux",
+            "Security tools"
+          ]
+        }
+      },
+      {
+        "title": "A guided practice path",
+        "body": "Legal, beginner-friendly practice platforms:\n- TryHackMe: guided \"rooms\", many free. Start with Pre Security, then Cyber Security 101\n- Hack The Box: tougher practice machines, with a Starting Point path\n- PicoCTF: a beginner CTF from Carnegie Mellon, great for students\n- OverTheWire Bandit: Linux command practice over SSH, level by level\n\nAim for 30 minutes a day, log each finished room on GitHub, and you've got a portfolio.",
+        "tip": "Like a game that levels up: every room you finish is XP for your career."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kali Linux is...",
+        "options": [
+          "A Windows antivirus",
+          "A Linux distro with hundreds of security tools",
+          "A chat app",
+          "A programming language"
+        ],
+        "explanation": "A ready-made set of security testing tools.",
+        "answer": 1
+      },
+      {
+        "prompt": "The lightest way to run Kali on Windows?",
+        "options": [
+          "Wipe Windows",
+          "WSL: wsl --install -d kali-linux",
+          "Buy a new laptop",
+          "Over Bluetooth"
+        ],
+        "explanation": "WSL runs Linux alongside Windows.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kali images should be downloaded from...",
+        "options": [
+          "kali.org",
+          "A Telegram group",
+          "A free download site",
+          "A link in comments"
+        ],
+        "explanation": "Other sources may carry tampered images.",
+        "answer": 0
+      },
+      {
+        "prompt": "The beginner platform with guided \"rooms\" is...",
+        "options": [
+          "TryHackMe",
+          "Instagram",
+          "Shopee",
+          "Netflix"
+        ],
+        "explanation": "Many free rooms, great for starting out.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why doesn't using Kali automatically make you skilled?",
+        "options": [
+          "It's paid",
+          "Tools are just tools; networking, Linux, and web basics are key",
+          "It's slow",
+          "It's banned"
+        ],
+        "explanation": "Understanding the basics is what makes tools useful.",
+        "answer": 1
+      }
+    ]
+  }
+]

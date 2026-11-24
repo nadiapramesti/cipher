@@ -1,0 +1,181 @@
+[
+  {
+    "group": "Termux",
+    "items": [
+      {
+        "cmd": "pkg update && pkg upgrade",
+        "desc": "Update all packages"
+      },
+      {
+        "cmd": "termux-setup-storage",
+        "desc": "Allow access to phone folders"
+      },
+      {
+        "cmd": "pkg install python git curl nano",
+        "desc": "Install basic tools"
+      },
+      {
+        "cmd": "pkg install nmap",
+        "desc": "Install Nmap"
+      },
+      {
+        "cmd": "pkg list-installed",
+        "desc": "List installed packages"
+      }
+    ]
+  },
+  {
+    "group": "Linux",
+    "items": [
+      {
+        "cmd": "pwd",
+        "desc": "Current folder"
+      },
+      {
+        "cmd": "ls -la",
+        "desc": "Folder contents + hidden files + permissions"
+      },
+      {
+        "cmd": "cd ..",
+        "desc": "Go up one folder"
+      },
+      {
+        "cmd": "cat file.txt",
+        "desc": "Read a file"
+      },
+      {
+        "cmd": "grep -i error log.txt",
+        "desc": "Search a word (case-insensitive)"
+      },
+      {
+        "cmd": "chmod 600 rahasia.txt",
+        "desc": "Owner-only read/write"
+      },
+      {
+        "cmd": "whoami",
+        "desc": "Current user account"
+      },
+      {
+        "cmd": "sudo apt update && sudo apt full-upgrade",
+        "desc": "Update Kali/Debian"
+      }
+    ]
+  },
+  {
+    "group": "Network",
+    "items": [
+      {
+        "cmd": "ip a",
+        "desc": "Show device IP addresses"
+      },
+      {
+        "cmd": "ping -c 4 8.8.8.8",
+        "desc": "Check connectivity to an address"
+      },
+      {
+        "cmd": "nslookup google.com",
+        "desc": "Ask DNS for a domain's IP"
+      },
+      {
+        "cmd": "curl -I https://contoh.com",
+        "desc": "See a site's HTTP headers"
+      },
+      {
+        "cmd": "traceroute google.com",
+        "desc": "Trace the packet route"
+      }
+    ]
+  },
+  {
+    "group": "Nmap (your own network)",
+    "items": [
+      {
+        "cmd": "nmap 192.168.1.1",
+        "desc": "Scan common ports on your router"
+      },
+      {
+        "cmd": "nmap -sn 192.168.1.0/24",
+        "desc": "Find live devices"
+      },
+      {
+        "cmd": "nmap -sV 192.168.1.1",
+        "desc": "Detect service versions"
+      },
+      {
+        "cmd": "nmap -p 22,80,443 192.168.1.1",
+        "desc": "Scan specific ports"
+      },
+      {
+        "cmd": "nmap scanme.nmap.org",
+        "desc": "Nmap's official practice target"
+      }
+    ]
+  },
+  {
+    "group": "Wireshark filters",
+    "items": [
+      {
+        "cmd": "http",
+        "desc": "HTTP traffic only"
+      },
+      {
+        "cmd": "dns",
+        "desc": "DNS queries only"
+      },
+      {
+        "cmd": "tls",
+        "desc": "TLS traffic only"
+      },
+      {
+        "cmd": "ip.addr == 192.168.1.1",
+        "desc": "Traffic to/from one IP"
+      },
+      {
+        "cmd": "tcp.port == 443",
+        "desc": "Port 443 traffic"
+      }
+    ]
+  },
+  {
+    "group": "Hashes & encoding",
+    "items": [
+      {
+        "cmd": "sha256sum file.apk",
+        "desc": "SHA-256 hash of a file"
+      },
+      {
+        "cmd": "echo -n 'teks' | base64",
+        "desc": "Encode Base64"
+      },
+      {
+        "cmd": "echo 'Q0lQSEVS' | base64 -d",
+        "desc": "Decode Base64"
+      },
+      {
+        "cmd": "echo -n 'teks' | xxd -p",
+        "desc": "Text to hex"
+      }
+    ]
+  },
+  {
+    "group": "Windows",
+    "items": [
+      {
+        "cmd": "wsl --install -d kali-linux",
+        "desc": "Install Kali on WSL (admin PowerShell)"
+      },
+      {
+        "cmd": "ipconfig /all",
+        "desc": "Show network details"
+      },
+      {
+        "cmd": "netstat -ano",
+        "desc": "Active connections + process IDs"
+      },
+      {
+        "cmd": "certutil -hashfile file.exe SHA256",
+        "desc": "Hash a file on Windows"
+      }
+    ]
+  }
+]

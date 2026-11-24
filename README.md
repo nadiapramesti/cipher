@@ -14,16 +14,17 @@ Aplikasi Android buat belajar cyber security dari nol, buat umum dan berbasis le
 | LV.05 Malware & Ancaman | Jenis malware, ransomware, APK jahat di Android, botnet & DDoS, serangan rantai pasok | ✅ 5 modul |
 | LV.06 Pertahanan | Firewall/IDS/IPS, VPN & zero trust, hardening, passkey & password manager, pertahanan berlapis | ✅ 5 modul |
 | LV.07 Forensik, Cloud & AI | Forensik digital, keamanan cloud, deepfake & penipuan AI, rencana keamanan pribadi | ✅ 4 modul |
+| LV.08 Alat Tempur | Termux, Nmap, Wireshark & PCAPdroid, Burp Suite, CyberChef & alat online, Kali Linux & lab latihan | ✅ 6 modul |
 
 ## Fitur
-- **42 modul di 8 level**, ID & EN, tiap modul ada analogi dan 5 soal berpembahasan
-- **Adegan 3D interaktif** di 50+ halaman materi (paket data, lapisan pertahanan, brankas, roda Caesar, pohon DNS, botnet, dll.) yang bisa diputer pakai jari
+- **48 modul di 9 level**, ID & EN, tiap modul ada analogi dan 5 soal berpembahasan
+- **Adegan 3D interaktif** di 60 halaman materi (paket data, lapisan pertahanan, brankas, roda Caesar, pohon DNS, botnet, dll.) yang bisa diputer pakai jari
 - **Kamus 46 istilah** lengkap dengan analogi
 
 - Onboarding + tes penempatan 8 soal yang ngasih rekomendasi level
 - Modul: materi singkat + analogi, kuis dengan pembahasan, lulus minimal 70% buat buka modul berikutnya
 - XP dan streak harian
-- Toolbox: **Cek Kekuatan Password**, **Tebak Penipuan**, **Mini CTF** (5 flag), **Terminal Simulasi** (plus log buat latihan grep), **Info Jaringan**, **Inspektor URL** (deteksi domain tiruan), **Hash & Encode**, **Cipher Klasik** (Caesar, Vigenère, analisis frekuensi, brute force)
+- Toolbox: **Cek Kekuatan Password**, **Tebak Penipuan**, **Mini CTF** (5 flag), **Terminal Simulasi** (plus log buat latihan grep), **Info Jaringan**, **Inspektor URL** (deteksi domain tiruan), **Hash & Encode**, **Contekan Perintah** (36 perintah siap salin), **Cipher Klasik** (Caesar, Vigenère, analisis frekuensi, brute force)
 - **Ulasan** berkala buat soal yang pernah salah, **Pencarian** di semua materi
 - **Profil** dengan statistik & 11 lencana, **pengingat harian**
 - **Cipher Pro** (Google Play Billing, produk `cipher_pro`) + **sertifikat PDF** per level

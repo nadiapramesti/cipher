@@ -449,6 +449,12 @@ const _id = <String, String>{
   'cp_brute_hide': 'Tutup brute force',
   'cp_brute_head': 'Brute force: 25 kemungkinan',
   'scene_drag': 'geser buat muter',
+  'tool_cheat_title': 'Contekan Perintah',
+  'tool_cheat_desc': '36 perintah Termux, Linux, Nmap, Wireshark, dan Windows. Ketuk buat salin.',
+  'cs_ethics': 'Pakai cuma di perangkat, jaringan, atau lab yang memang milikmu atau kamu diizinkan.',
+  'cs_search': 'Cari perintah',
+  'cs_none': 'Gak ketemu',
+  'cs_none_d': 'Coba kata lain, misal "dns" atau "hash".',
 };
 
 const _en = <String, String>{
@@ -870,4 +876,10 @@ const _en = <String, String>{
   'cp_brute_hide': 'Hide brute force',
   'cp_brute_head': 'Brute force: 25 possibilities',
   'scene_drag': 'drag to rotate',
+  'tool_cheat_title': 'Command Cheatsheet',
+  'tool_cheat_desc': '36 Termux, Linux, Nmap, Wireshark, and Windows commands. Tap to copy.',
+  'cs_ethics': 'Use only on devices, networks, or labs you own or are authorized to test.',
+  'cs_search': 'Search commands',
+  'cs_none': 'Nothing found',
+  'cs_none_d': 'Try another word, like "dns" or "hash".',
 };

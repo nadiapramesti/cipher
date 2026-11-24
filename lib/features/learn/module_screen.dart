@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../app/theme.dart';
 import '../../core/models.dart';
@@ -162,7 +163,7 @@ class _LessonView extends StatelessWidget {
 }
 
 /// Render teks materi sederhana: paragraf dipisah baris kosong,
-/// baris yang diawali "- " jadi poin.
+/// baris yang diawali "- " jadi poin, "$ " jadi perintah yang bisa disalin, "| " jadi contoh output.
 class RichBody extends StatelessWidget {
   const RichBody({super.key, required this.text});
 
@@ -176,6 +177,8 @@ class RichBody extends StatelessWidget {
       final t = line.trimRight();
       if (t.isEmpty) {
         widgets.add(const SizedBox(height: 10));
+      } else if (t.startsWith(r'$ ') || t.startsWith('| ')) {
+        widgets.add(CodeLine(text: t.substring(2), command: t.startsWith(r'$ ')));
       } else if (t.startsWith('- ')) {
         widgets.add(Padding(
           padding: const EdgeInsets.only(bottom: 6),
@@ -195,5 +198,48 @@ class RichBody extends StatelessWidget {
       }
     }
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: widgets);
+  }
+}
+
+/// Satu baris perintah terminal (bisa disalin) atau contoh output.
+class CodeLine extends StatelessWidget {
+  const CodeLine({super.key, required this.text, this.command = true});
+
+  final String text;
+  final bool command;
+
+  @override
+  Widget build(BuildContext context) {
+    final box = Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.fromLTRB(12, 9, 8, 9),
+      decoration: BoxDecoration(
+        color: C.bgDeep,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: command ? C.accent.withValues(alpha: 0.45) : C.line),
+      ),
+      child: Row(
+        children: [
+          if (command) Text(r'$ ', style: mono(size: 12.5, color: C.ok, weight: FontWeight.w800, spacing: 0)),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Text(text, style: mono(size: 12.5, color: command ? C.text : C.textSoft, spacing: 0)),
+            ),
+          ),
+          if (command) Icon(Icons.copy_rounded, size: 16, color: C.accent),
+        ],
+      ),
+    );
+    if (!command) return box;
+    return GestureDetector(
+      onTap: () {
+        Clipboard.setData(ClipboardData(text: text));
+        HapticFeedback.selectionClick();
+        showInfo(context, tr('copied'));
+      },
+      child: box,
+    );
   }
 }

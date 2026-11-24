@@ -1,0 +1,549 @@
+[
+  {
+    "id": "lv8-termux",
+    "level": 8,
+    "title": "Termux: Linux di HP",
+    "summary": "Terminal Linux beneran di Android, tanpa root.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Pasang yang benar",
+        "body": "Termux adalah aplikasi terminal yang ngasih lingkungan Linux di Android. Kamu bisa install ribuan paket: Python, Git, Nmap, dan lain-lain.\n\nInstall dari F-Droid atau rilis GitHub resmi Termux. Versi lama di Play Store sempat lama gak diperbarui dan sering error saat install paket.\n\nSetelah dibuka pertama kali, perbarui dulu daftar paketnya:\n$ pkg update && pkg upgrade\n\nKalau ditanya-tanya saat upgrade, tekan Enter buat pilih jawaban bawaan.",
+        "tip": "Termux itu kayak nyewa satu kamar kecil berisi bengkel Linux di dalam HP kamu.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Android",
+            "Termux",
+            "Linux (pkg)",
+            "Python, Git, Nmap"
+          ]
+        }
+      },
+      {
+        "title": "Perintah pertama",
+        "body": "Perintah dari LV.01 langsung kepake di sini:\n$ pwd\n$ ls -a\n$ mkdir latihan && cd latihan\n\nBiar Termux bisa baca folder Download HP:\n$ termux-setup-storage\nSetelah diizinkan, folder HP ada di ~/storage/shared.\n\nInstall alat yang sering dipakai:\n$ pkg install python git curl nano\n\nCoba bikin file dan jalankan Python:\n$ echo \"print('halo cipher')\" > halo.py\n$ python halo.py",
+        "tip": "Belajar terminal itu kayak belajar nyetir manual: canggung seminggu, abis itu kebiasaan."
+      },
+      {
+        "title": "Aman pakai Termux",
+        "body": "Termux itu alat yang kuat, jadi hati-hati:\n- Jangan copas perintah atau script dari grup atau video random tanpa paham isinya. Script \"hack WA\" atau \"hack FB\" itu hampir selalu penipuan atau malah nyuri data kamu\n- Pahami dulu perintah yang mengandung rm -rf, curl ... | bash, atau minta password\n- Termux berjalan dengan izin aplikasi biasa, tapi file yang kamu izinkan aksesnya bisa dihapus atau diubah\n- Ketik exit buat keluar, dan kalau berantakan, hapus data aplikasi buat mulai bersih",
+        "tip": "Pisau dapur itu alat masak yang bagus. Tapi jangan nerima pisau dari orang asing yang bilang \"ini pisau ajaib\"."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Sumber yang disarankan buat install Termux adalah...",
+        "options": [
+          "Grup WhatsApp",
+          "F-Droid atau GitHub resmi Termux",
+          "Situs APK mod",
+          "Bluetooth teman"
+        ],
+        "explanation": "Versi lama di Play Store lama gak diperbarui.",
+        "answer": 1
+      },
+      {
+        "prompt": "Perintah pertama setelah install Termux sebaiknya...",
+        "options": [
+          "rm -rf /",
+          "pkg update && pkg upgrade",
+          "exit",
+          "reboot"
+        ],
+        "explanation": "Memperbarui daftar dan versi paket.",
+        "answer": 1
+      },
+      {
+        "prompt": "Perintah biar Termux bisa akses folder HP adalah...",
+        "options": [
+          "termux-setup-storage",
+          "pkg storage",
+          "cd /sdcard!",
+          "ls -root"
+        ],
+        "explanation": "Setelah diizinkan, folder HP muncul di ~/storage.",
+        "answer": 0
+      },
+      {
+        "prompt": "Ada video \"script Termux hack WA cuma 1 menit\". Sebaiknya...",
+        "options": [
+          "Langsung coba",
+          "Jangan dijalankan; hampir selalu penipuan atau pencuri data",
+          "Bagikan ke grup",
+          "Jalankan pakai root"
+        ],
+        "explanation": "Script begini sering malah mencuri akun orang yang menjalankannya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Perintah buat install Python di Termux?",
+        "options": [
+          "pkg install python",
+          "apt-get pyhton",
+          "install.exe python",
+          "python --install"
+        ],
+        "explanation": "pkg adalah pengelola paket Termux.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv8-nmap",
+    "level": 8,
+    "title": "Nmap: Peta Jaringan",
+    "summary": "Nyari perangkat dan port yang kebuka di jaringan milikmu sendiri.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Nmap buat apa",
+        "body": "Nmap (Network Mapper) adalah alat pemindai jaringan paling terkenal. Dipakai admin buat inventaris dan pentester buat recon aktif:\n- Perangkat mana yang nyala di jaringan\n- Port mana yang kebuka\n- Layanan dan versi apa yang jalan di port itu\n\nIngat LV.04: memindai jaringan atau server orang lain tanpa izin itu melanggar hukum. Latihan cuma di jaringan rumahmu sendiri, atau di target yang memang disediakan buat latihan.",
+        "tip": "Nmap itu kayak keliling kompleks sambil ngecek pintu mana yang kebuka. Di rumah sendiri boleh; di rumah orang, itu mencurigakan.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "HP & laptop",
+            "TV & CCTV",
+            "IoT",
+            "router"
+          ]
+        }
+      },
+      {
+        "title": "Scan pertama",
+        "body": "Di Termux:\n$ pkg install nmap\n\nCek dulu IP router kamu di Toolbox → Info Jaringan (biasanya 192.168.1.1 atau 192.168.0.1). Lalu:\n$ nmap 192.168.1.1\n\nCari perangkat yang nyala di satu subnet (/24 dari LV.01):\n$ nmap -sn 192.168.1.0/24\n\nLihat versi layanan di port yang kebuka:\n$ nmap -sV 192.168.1.1\n\nNmap juga nyediain target latihan resmi: scanme.nmap.org, boleh dipindai pelan-pelan.",
+        "tip": "-sn itu kayak ngabsen siapa yang ada di rumah, tanpa ngetuk tiap pintu."
+      },
+      {
+        "title": "Baca hasilnya",
+        "body": "Contoh hasil:\n| PORT    STATE  SERVICE\n| 53/tcp  open   domain\n| 80/tcp  open   http\n| 443/tcp open   https\n\nArtinya:\n- open: ada layanan yang dengerin\n- closed: bisa dijangkau tapi gak ada layanan\n- filtered: diblokir firewall, Nmap gak bisa mastiin\n\nKalau router rumah ngebuka port 80 (halaman admin) ke jaringan lokal, itu normal. Yang bahaya kalau halaman admin bisa diakses dari internet. Pastikan password admin router udah diganti.",
+        "tip": "Hasil scan itu kayak denah rumah dengan tanda pintu mana yang kebuka, ketutup, atau dipagar.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            ":80 :443 :53",
+            "nmap",
+            "router"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Di mana tempat legal buat latihan Nmap?",
+        "options": [
+          "Server kampus",
+          "Jaringan rumah sendiri atau scanme.nmap.org",
+          "Situs bank",
+          "Wi-Fi tetangga"
+        ],
+        "explanation": "Memindai tanpa izin bisa melanggar UU ITE.",
+        "answer": 1
+      },
+      {
+        "prompt": "Opsi Nmap buat nyari perangkat yang nyala tanpa scan port?",
+        "options": [
+          "-sV",
+          "-sn",
+          "-rm",
+          "-pwd"
+        ],
+        "explanation": "-sn = ping scan / host discovery.",
+        "answer": 1
+      },
+      {
+        "prompt": "Status port \"filtered\" artinya...",
+        "options": [
+          "Layanan pasti mati",
+          "Diblokir firewall sehingga Nmap gak bisa memastikan",
+          "Port terbuka lebar",
+          "Port rusak"
+        ],
+        "explanation": "Paket probe gak dapat balasan yang jelas.",
+        "answer": 1
+      },
+      {
+        "prompt": "Opsi -sV dipakai untuk...",
+        "options": [
+          "Melihat versi layanan",
+          "Menghapus file",
+          "Menyimpan password",
+          "Mempercepat Wi-Fi"
+        ],
+        "explanation": "Versi layanan membantu mencari celah yang dikenal.",
+        "answer": 0
+      },
+      {
+        "prompt": "Notasi 192.168.1.0/24 di Nmap berarti memindai...",
+        "options": [
+          "Satu alamat",
+          "256 alamat di subnet itu",
+          "Seluruh internet",
+          "Cuma router"
+        ],
+        "explanation": "Ingat hitungan subnet di LV.01.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-packets",
+    "level": 8,
+    "title": "Wireshark & PCAPdroid",
+    "summary": "Ngintip paket jaringan dari perangkat sendiri, biar kelihatan HTTP vs HTTPS.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Kenalan sama packet capture",
+        "body": "Packet capture adalah merekam paket yang lewat di jaringan, lalu membedahnya. Ini cara paling jujur buat ngerti apa yang beneran dikirim aplikasi.\n\n- Wireshark: aplikasi desktop (Windows, Mac, Linux) paling populer buat analisis paket\n- PCAPdroid: aplikasi Android tanpa root yang merekam lalu lintas HP kamu sendiri lewat fitur VPN lokal, dan bisa ekspor file .pcap buat dibuka di Wireshark\n\nAplikasi apa ngobrol ke server mana, kapan, dan seberapa sering, semua kelihatan.",
+        "tip": "Packet capture itu kayak CCTV di jalan depan rumah: kelihatan mobil siapa lewat, ke arah mana, jam berapa.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "HP kamu",
+            "PCAPdroid",
+            "Wi-Fi",
+            "Server"
+          ]
+        }
+      },
+      {
+        "title": "Latihan: HTTP vs HTTPS",
+        "body": "Coba di PCAPdroid:\n- Mulai rekam, buka satu situs http:// (misal http://neverssl.com) dan satu situs https://\n- Berhenti, lalu lihat koneksinya\n\nDi Wireshark, pakai filter biar fokus:\n$ http\n$ dns\n$ tls\n$ ip.addr == 192.168.1.1\n\nPaket HTTP isinya kebaca jelas: alamat halaman, header, bahkan isi form. Paket HTTPS cuma kelihatan nama domain tujuannya, isinya acak terenkripsi. Ini bukti nyata materi LV.00 dan LV.03.",
+        "tip": "HTTP itu kartu pos, HTTPS itu amplop tersegel. Sekarang kamu lihat sendiri bedanya."
+      },
+      {
+        "title": "Etika & privasi",
+        "body": "Merekam lalu lintas orang lain tanpa izin itu penyadapan, dan bisa melanggar hukum. Jadi:\n- Rekam cuma perangkat dan jaringan milikmu\n- File .pcap bisa berisi data sensitif (cookie, alamat yang dikunjungi). Jangan dibagikan sembarangan\n- Matikan rekaman setelah selesai, karena PCAPdroid tampil sebagai VPN aktif\n\nManfaat buat sehari-hari: kamu bisa ngecek aplikasi mencurigakan yang diam-diam ngirim data ke server asing.",
+        "tip": "Boleh pasang CCTV di rumah sendiri. Pasang di kamar orang lain itu pelanggaran."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "PCAPdroid merekam lalu lintas HP tanpa root dengan cara...",
+        "options": [
+          "Membobol operator",
+          "Memakai fitur VPN lokal Android",
+          "Mengganti kartu SIM",
+          "Membuka casing HP"
+        ],
+        "explanation": "Lalu lintas dialihkan lewat VPN lokal di HP itu sendiri.",
+        "answer": 1
+      },
+      {
+        "prompt": "Filter Wireshark buat lihat kueri DNS saja?",
+        "options": [
+          "dns",
+          "http.cookie",
+          "ls -a",
+          "tcp.flag"
+        ],
+        "explanation": "Filter tampilan sesuai nama protokol.",
+        "answer": 0
+      },
+      {
+        "prompt": "Di rekaman paket, situs HTTPS menampilkan...",
+        "options": [
+          "Isi halaman lengkap",
+          "Domain tujuan, isinya terenkripsi",
+          "Password kamu",
+          "Gak muncul sama sekali"
+        ],
+        "explanation": "Nama domain masih terlihat lewat SNI/DNS, tapi isinya terenkripsi.",
+        "answer": 1
+      },
+      {
+        "prompt": "Merekam lalu lintas Wi-Fi kafe milik orang lain tanpa izin itu...",
+        "options": [
+          "Latihan yang bagus",
+          "Penyadapan yang bisa melanggar hukum",
+          "Wajib buat pemula",
+          "Legal kalau malam"
+        ],
+        "explanation": "Rekam hanya perangkat dan jaringan milikmu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa file .pcap gak boleh dibagikan sembarangan?",
+        "options": [
+          "Ukurannya kecil",
+          "Bisa berisi data sensitif seperti cookie",
+          "Formatnya rahasia negara",
+          "Gak ada alasannya"
+        ],
+        "explanation": "Cookie sesi di rekaman bisa dipakai membajak akun.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-burp",
+    "level": 8,
+    "title": "Burp Suite & Lab Web",
+    "summary": "Nyegat request web dan praktek celah LV.02 secara legal.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Proxy pencegat",
+        "body": "Burp Suite adalah alat utama pengujian aplikasi web. Versi Community gratis buat Windows, Mac, dan Linux.\n\nCara kerjanya: Burp jadi proxy di antara browser dan server. Tiap request berhenti dulu di Burp, jadi kamu bisa lihat, ubah, lalu teruskan.\n\nBurp punya browser bawaan yang udah tersetel, jadi gak perlu ngatur proxy dan sertifikat manual.",
+        "tip": "Burp itu kayak tukang pos yang boleh kamu suruh berhenti, buka amplop, ganti isi surat, lalu kirim lagi. Makanya cuma boleh di \"kantor pos\" latihan.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Browser",
+            "Burp Proxy",
+            "ubah request",
+            "Lab"
+          ]
+        }
+      },
+      {
+        "title": "Fitur yang dipakai pemula",
+        "body": "- Proxy → Intercept: tahan request, lihat method, header, cookie, dan body (ingat LV.02)\n- HTTP history: semua request yang lewat tercatat\n- Repeater: kirim ulang satu request berkali-kali sambil ngubah parameternya, misal ganti id=1042 jadi id=1043 buat ngetes IDOR\n- Decoder: encode/decode Base64, URL, hex (kayak Toolbox Hash di Cipher)\n\nIntruder versi Community sengaja dibatasi kecepatannya. Itu cukup buat belajar.",
+        "tip": "Repeater itu kayak nyobain kunci-kunci di lab latihan satu per satu, sambil nyatet mana yang bikin pintu kebuka."
+      },
+      {
+        "title": "Tempat latihan resmi",
+        "body": "PortSwigger (pembuat Burp) punya Web Security Academy gratis. Isinya materi plus ratusan lab yang memang dibuat buat diserang: SQL injection, XSS, kontrol akses, dan lainnya.\n\nUrutan yang enak:\n- Lab \"Apprentice\" SQL injection dan XSS\n- Lab access control / IDOR\n- Baru naik ke Practitioner\n\nAlternatif lokal: DVWA atau OWASP Juice Shop, aplikasi rentan yang dijalankan di laptop sendiri.",
+        "tip": "Lab latihan itu sasana tinju: lawannya memang disiapin buat dipukul."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Burp Suite bekerja sebagai...",
+        "options": [
+          "Antivirus",
+          "Proxy di antara browser dan server",
+          "Router Wi-Fi",
+          "Editor foto"
+        ],
+        "explanation": "Request berhenti di Burp sebelum diteruskan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Fitur Burp buat mengirim ulang request sambil mengubah parameter adalah...",
+        "options": [
+          "Repeater",
+          "Decoder",
+          "Dashboard",
+          "Extender"
+        ],
+        "explanation": "Repeater cocok buat ngetes IDOR atau injeksi.",
+        "answer": 0
+      },
+      {
+        "prompt": "Tempat legal latihan Burp yang gratis dari pembuatnya adalah...",
+        "options": [
+          "Web Security Academy PortSwigger",
+          "Situs marketplace",
+          "Situs sekolah",
+          "Akun medsos teman"
+        ],
+        "explanation": "Ratusan lab memang disiapkan buat diserang.",
+        "answer": 0
+      },
+      {
+        "prompt": "DVWA dan OWASP Juice Shop adalah...",
+        "options": [
+          "Antivirus",
+          "Aplikasi rentan buat latihan di laptop sendiri",
+          "Bank digital",
+          "Browser"
+        ],
+        "explanation": "Sengaja dibuat bercelah untuk belajar.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa Burp gak boleh dipakai di situs sembarangan?",
+        "options": [
+          "Karena berbayar",
+          "Mengubah request ke sistem orang tanpa izin itu serangan ilegal",
+          "Karena lambat",
+          "Karena butuh root"
+        ],
+        "explanation": "Alatnya legal, penggunaannya yang menentukan.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-cyberchef",
+    "level": 8,
+    "title": "CyberChef & Alat Online",
+    "summary": "Pisau Swiss buat data, plus cara aman ngecek file dan link.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "CyberChef: dapur pengolah data",
+        "body": "CyberChef adalah aplikasi web gratis buatan GCHQ (badan intelijen Inggris) yang dijuluki \"pisau Swiss cyber\". Kamu nyusun \"resep\" dari langkah-langkah:\n- From Base64 → From Hex → Gunzip\n- Hitung hash, ROT13, XOR, ekstrak URL atau IP dari teks\n- Magic: nebak otomatis encoding yang dipakai\n\nSemua berjalan di browser, data gak dikirim ke server. Bisa juga diunduh dan dipakai offline. Sering dipakai di CTF kategori crypto dan forensik.",
+        "tip": "CyberChef itu dapur yang bahan masuk di kiri, resep di tengah, dan hasil masakan keluar di kanan.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "CyberChef",
+            "Q0lQSEVS...",
+            "CIPHER{...}"
+          ]
+        }
+      },
+      {
+        "title": "Ngecek file & link mencurigakan",
+        "body": "- VirusTotal: memindai file, link, atau hash pakai puluhan mesin antivirus sekaligus\n- urlscan.io: membuka link di server mereka dan nampilin screenshot serta ke mana link itu nyambung\n- haveibeenpwned.com: cek email kamu pernah bocor atau belum\n\nPenting soal VirusTotal: file yang diunggah bisa diakses komunitas keamanan. Jangan unggah dokumen pribadi atau rahasia kantor. Kalau cuma mau ngecek, cari pakai hash SHA-256 file-nya dulu (bisa dihitung di Toolbox Hash).",
+        "tip": "Ngecek link di urlscan itu kayak nyuruh kurir nyamperin alamat dulu dan motoin rumahnya, sebelum kamu sendiri dateng."
+      },
+      {
+        "title": "Latihan: pecahkan flag CTF",
+        "body": "Di dalam app Cipher ada flag yang dikodein Base64 (lihat petunjuk di Mini CTF). Coba pecahkan pakai CyberChef:\n- Buka CyberChef di browser\n- Tempel teks Base64-nya di kotak Input\n- Tarik operasi \"From Base64\" ke kotak Recipe\n- Lihat hasilnya di Output\n\nAtau klik ikon tongkat sihir (Magic) dan biarkan CyberChef nebak sendiri. Setelah dapat, masukkan flag-nya di Mini CTF.",
+        "tip": "Kayak teka-teki di buku latihan: kuncinya ada, tinggal pakai alat yang tepat."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "CyberChef paling cocok buat...",
+        "options": [
+          "Mengedit video",
+          "Mengolah dan decode data lewat resep langkah",
+          "Memindai port",
+          "Merekam paket"
+        ],
+        "explanation": "Encode, decode, hash, dan ekstraksi data.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa jangan unggah dokumen pribadi ke VirusTotal?",
+        "options": [
+          "Ukurannya kebesaran",
+          "File yang diunggah bisa diakses komunitas keamanan",
+          "Karena berbayar",
+          "Karena lambat"
+        ],
+        "explanation": "Cari pakai hash dulu kalau cuma mau mengecek.",
+        "answer": 1
+      },
+      {
+        "prompt": "Layanan yang membuka link di servernya dan nampilin screenshot adalah...",
+        "options": [
+          "urlscan.io",
+          "Spotify",
+          "Google Maps",
+          "Canva"
+        ],
+        "explanation": "Kamu bisa lihat tujuan link tanpa membukanya sendiri.",
+        "answer": 0
+      },
+      {
+        "prompt": "Operasi CyberChef yang menebak encoding otomatis disebut...",
+        "options": [
+          "Magic",
+          "Auto",
+          "Guess",
+          "Wizard"
+        ],
+        "explanation": "Ikon tongkat sihir.",
+        "answer": 0
+      },
+      {
+        "prompt": "Data yang kamu proses di CyberChef...",
+        "options": [
+          "Dikirim ke GCHQ",
+          "Diproses di browser kamu",
+          "Dijual ke iklan",
+          "Disimpan di Google Drive"
+        ],
+        "explanation": "CyberChef berjalan sepenuhnya di sisi klien.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-kali",
+    "level": 8,
+    "title": "Kali Linux & Lab Latihan",
+    "summary": "Bangun lab sendiri dan mulai jalur latihan yang terarah.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Kenalan sama Kali Linux",
+        "body": "Kali Linux adalah distro Linux yang udah berisi ratusan alat keamanan: Nmap, Wireshark, Burp, John the Ripper, dan lain-lain.\n\nKali bukan buat dipakai sehari-hari, dan pakai Kali gak otomatis bikin jago. Dasarnya tetap: jaringan, Linux, web, dan logika dari level-level sebelumnya.\n\nCara paling aman buat mulai adalah menjalankannya di dalam laptop yang sekarang, bukan menghapus Windows.",
+        "tip": "Kali itu kotak perkakas lengkap. Tapi kotak perkakas mahal gak bikin orang langsung jadi montir."
+      },
+      {
+        "title": "Cara menjalankan",
+        "body": "Tiga pilihan buat laptop Windows:\n- WSL (paling ringan). Di PowerShell sebagai admin:\n$ wsl --install -d kali-linux\n- VirtualBox atau VMware: unduh image virtual machine resmi dari kali.org, impor, lalu jalankan. Kasih RAM minimal 2–4 GB\n- Live USB: booting dari flashdisk tanpa menyentuh harddisk\n\nSetelah masuk, selalu update dulu:\n$ sudo apt update && sudo apt full-upgrade\n\nUnduh Kali cuma dari kali.org. Image dari situs lain bisa disusupi.",
+        "tip": "Virtual machine itu rumah dalam rumah: berantakan di dalamnya gak bikin rumah utama ikut berantakan.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Windows",
+            "WSL / VirtualBox",
+            "Kali Linux",
+            "Alat keamanan"
+          ]
+        }
+      },
+      {
+        "title": "Jalur latihan terarah",
+        "body": "Platform latihan legal yang ramah pemula:\n- TryHackMe: belajar lewat \"room\" berpanduan, banyak yang gratis. Mulai dari jalur Pre Security, lalu Cyber Security 101\n- Hack The Box: mesin latihan yang lebih menantang, ada jalur Starting Point\n- PicoCTF: CTF pemula dari Carnegie Mellon, cocok buat pelajar\n- OverTheWire Bandit: latihan perintah Linux lewat SSH, level demi level\n\nTargetkan 30 menit per hari, catat tiap room yang selesai di GitHub, dan kamu udah punya portofolio.",
+        "tip": "Kayak main game yang naik level: tiap room yang selesai itu XP buat karier kamu."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kali Linux adalah...",
+        "options": [
+          "Antivirus Windows",
+          "Distro Linux berisi ratusan alat keamanan",
+          "Aplikasi chat",
+          "Bahasa pemrograman"
+        ],
+        "explanation": "Kumpulan alat siap pakai buat pengujian keamanan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Cara paling ringan menjalankan Kali di Windows?",
+        "options": [
+          "Hapus Windows",
+          "WSL: wsl --install -d kali-linux",
+          "Beli laptop baru",
+          "Lewat Bluetooth"
+        ],
+        "explanation": "WSL menjalankan Linux berdampingan dengan Windows.",
+        "answer": 1
+      },
+      {
+        "prompt": "Image Kali sebaiknya diunduh dari...",
+        "options": [
+          "kali.org",
+          "Grup Telegram",
+          "Situs download gratisan",
+          "Link di komentar"
+        ],
+        "explanation": "Sumber lain bisa membawa image yang disusupi.",
+        "answer": 0
+      },
+      {
+        "prompt": "Platform latihan pemula dengan \"room\" berpanduan adalah...",
+        "options": [
+          "TryHackMe",
+          "Instagram",
+          "Shopee",
+          "Netflix"
+        ],
+        "explanation": "Banyak room gratis, cocok buat mulai.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa pakai Kali gak otomatis bikin jago?",
+        "options": [
+          "Karena berbayar",
+          "Alat cuma alat; dasar jaringan, Linux, dan web tetap kunci",
+          "Karena lambat",
+          "Karena dilarang"
+        ],
+        "explanation": "Pemahaman dasar yang bikin alat itu berguna.",
+        "answer": 1
+      }
+    ]
+  }
+]

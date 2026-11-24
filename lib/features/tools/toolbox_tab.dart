@@ -7,6 +7,7 @@ import '../ctf/ctf_screen.dart';
 import '../pro/paywall_screen.dart';
 import '../sim/scam_sort_screen.dart';
 import '../sim/terminal_screen.dart';
+import 'cheatsheet_screen.dart';
 import 'cipher_screen.dart';
 import 'hash_screen.dart';
 import 'network_info_screen.dart';
@@ -65,6 +66,13 @@ List<_Tool> get _tools => <_Tool>[
     level: 1,
     icon: Icons.lan_outlined,
     builder: (_) => const NetworkInfoScreen(),
+  ),
+  _Tool(
+    title: tr('tool_cheat_title'),
+    desc: tr('tool_cheat_desc'),
+    level: 1,
+    icon: Icons.integration_instructions_outlined,
+    builder: (_) => const CheatsheetScreen(),
   ),
   _Tool(
     title: tr('tool_url_title'),

@@ -1,5 +1,7 @@
 import 'package:cipher/core/content_repository.dart';
 import 'package:cipher/core/models.dart';
+import 'package:cipher/features/tools/cheatsheet_screen.dart';
+import 'package:cipher/l10n/strings.dart';
 import 'package:cipher/widgets/lesson_scene.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,7 +29,7 @@ void main() {
       }
     }
     expect(total, greaterThan(40));
-    expect(id.levels.length, 8);
+    expect(id.levels.length, 9);
   });
 
   for (final kind in SceneSpec.kinds) {
@@ -41,4 +43,16 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+
+  test('contekan perintah ID dan EN sejajar', () async {
+    L.lang = AppLang.id;
+    final id = await loadCheatsheet();
+    L.lang = AppLang.en;
+    final en = await loadCheatsheet();
+    L.lang = AppLang.id;
+    expect(en.length, id.length);
+    for (var i = 0; i < id.length; i++) {
+      expect(en[i].items.map((e) => e.$1), id[i].items.map((e) => e.$1));
+    }
+  });
 }
