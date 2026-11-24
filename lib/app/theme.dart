@@ -34,7 +34,7 @@ const String kMono = 'MartianMono';
 const String kDisplay = 'ChakraPetch';
 const String kBody = 'PlusJakartaSans';
 
-List<FontVariation> wght(FontWeight w) => [FontVariation('wght', (w.index + 1) * 100.0)];
+List<FontVariation> wght(FontWeight w) => [FontVariation('wght', w.value.toDouble())];
 
 TextStyle mono({
   double size = 12,
