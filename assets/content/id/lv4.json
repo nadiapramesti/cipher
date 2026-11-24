@@ -1,0 +1,326 @@
+[
+  {
+    "id": "lv4-ethics",
+    "level": 4,
+    "title": "Etika & Hukum Hacking",
+    "summary": "Garis tegas antara belajar dan melanggar hukum.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Izin adalah segalanya",
+        "body": "Teknik yang dipakai hacker etis dan penjahat sering sama persis. Bedanya cuma satu: izin.\n\n- White hat: menguji sistem dengan izin tertulis, lalu melaporkan temuannya\n- Black hat: masuk tanpa izin untuk keuntungan atau merusak\n- Grey hat: masuk tanpa izin walau niatnya \"baik\", tetap melanggar hukum\n\nTanpa izin, \"cuma ngetes\" tetap dianggap serangan.",
+        "tip": "Tukang kunci yang buka pintu karena dipanggil pemilik rumah itu kerja. Yang buka pintu orang tanpa dipanggil itu maling."
+      },
+      {
+        "title": "Hukum di Indonesia",
+        "body": "UU ITE mengatur akses ilegal ke sistem elektronik. Secara garis besar, yang dilarang termasuk:\n- Mengakses komputer atau sistem orang lain tanpa hak\n- Menjebol atau melewati sistem pengamanan\n- Mengubah, merusak, atau memindahkan data orang lain tanpa hak\n- Mengganggu sistem sampai gak bisa bekerja normal\n\nAncamannya pidana penjara dan denda. UU Pelindungan Data Pribadi juga mengatur penyalahgunaan data pribadi.\n\nIni gambaran umum, bukan nasihat hukum.",
+        "tip": "Rambu lalu lintas berlaku walau jalanan sepi. Sistem orang lain tetap dilindungi walau keamanannya lemah."
+      },
+      {
+        "title": "Jalur legal buat berkembang",
+        "body": "Kabar baiknya, banyak jalur legal buat latihan dan bahkan dibayar:\n- Lab latihan: TryHackMe, Hack The Box, PortSwigger Web Security Academy, DVWA\n- Kompetisi CTF untuk pelajar dan mahasiswa\n- Bug bounty: program resmi perusahaan yang membayar laporan celah, dengan aturan main jelas\n- Responsible disclosure: kalau gak sengaja nemu celah, laporkan ke pemiliknya tanpa dieksploitasi atau disebar\n\nReputasi bersih itu modal karier di cyber security.",
+        "tip": "Mau jago tinju? Latihannya di sasana, bukan mukulin orang di jalan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Pembeda utama hacker etis dan penjahat adalah...",
+        "options": [
+          "Alat yang dipakai",
+          "Izin dari pemilik sistem",
+          "Kecepatan internet",
+          "Bahasa pemrograman"
+        ],
+        "explanation": "Tekniknya bisa sama; izin yang membedakan legal atau tidak.",
+        "answer": 1
+      },
+      {
+        "prompt": "Iseng ngetes celah login situs kampus tanpa izin itu...",
+        "options": [
+          "Boleh karena niatnya baik",
+          "Tetap melanggar hukum",
+          "Legal kalau gak ketahuan",
+          "Wajib buat belajar"
+        ],
+        "explanation": "Akses tanpa hak tetap pelanggaran, apa pun niatnya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Undang-undang di Indonesia yang mengatur akses ilegal sistem elektronik adalah...",
+        "options": [
+          "UU Lalu Lintas",
+          "UU ITE",
+          "UU Perkawinan",
+          "UU Pajak"
+        ],
+        "explanation": "UU ITE mengatur akses ilegal, perusakan data, dan gangguan sistem.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kamu gak sengaja nemu celah di aplikasi toko online. Langkah terbaik?",
+        "options": [
+          "Sebarkan di medsos",
+          "Laporkan ke pemiliknya tanpa dieksploitasi",
+          "Jual ke orang lain",
+          "Coba ambil datanya buat bukti"
+        ],
+        "explanation": "Responsible disclosure melindungi pengguna dan kamu sendiri.",
+        "answer": 1
+      },
+      {
+        "prompt": "Mana yang tempat latihan legal?",
+        "options": [
+          "Situs pemerintah",
+          "TryHackMe",
+          "Wi-Fi tetangga",
+          "Akun medsos teman"
+        ],
+        "explanation": "Lab seperti TryHackMe memang dibuat untuk diserang secara legal.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv4-osint",
+    "level": 4,
+    "title": "Recon & OSINT",
+    "summary": "Ngumpulin informasi dari sumber terbuka, dan cara melindungi jejakmu.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Recon: tahap pertama",
+        "body": "Sebelum menguji sistem, pentester ngumpulin informasi dulu. Tahap ini disebut reconnaissance (recon).\n\n- Pasif: cuma membaca info publik tanpa menyentuh sistem target, misal record DNS, situs resmi, lowongan kerja\n- Aktif: berinteraksi langsung, misal memindai port. Ini wajib dengan izin\n\nMakin lengkap recon, makin terarah pengujiannya.",
+        "tip": "Recon itu kayak survei lokasi sebelum renovasi: ukur dulu, baru bongkar."
+      },
+      {
+        "title": "OSINT: intelijen sumber terbuka",
+        "body": "OSINT (Open Source Intelligence) adalah info dari sumber publik:\n- Mesin pencari dan arsip web\n- Media sosial dan profil profesional\n- Record DNS dan data pendaftaran domain\n- Metadata foto (lokasi GPS, tipe kamera)\n- Data bocoran yang udah tersebar publik\n\nOSINT dipakai jurnalis, peneliti, tim keamanan, dan sayangnya juga penipu. Dari beberapa postingan, orang bisa tahu tempat kerja, rutinitas, bahkan alamat seseorang.",
+        "tip": "OSINT itu ngerangkai potongan koran bekas jadi cerita utuh. Tiap potongan publik, tapi gabungannya bisa sangat pribadi."
+      },
+      {
+        "title": "Batas etis dan lindungi dirimu",
+        "body": "Etika OSINT:\n- Pakai buat menilai risiko organisasi yang kamu uji dengan izin, atau buat ngecek jejak digital sendiri\n- Jangan dipakai buat menguntit, doxing, atau melacak orang\n\nCek jejakmu sendiri:\n- Cari nama dan nomor HP kamu di mesin pencari\n- Cek apakah email kamu pernah bocor di haveibeenpwned.com\n- Hapus metadata lokasi sebelum kirim foto (banyak aplikasi chat menghapus otomatis, tapi file \"dokumen\" sering enggak)\n- Rapikan info publik di profil",
+        "tip": "Sebelum orang lain ngecek rumahmu, kelilingi dulu sendiri dan tutup jendela yang kebuka."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Recon pasif artinya...",
+        "options": [
+          "Memindai port target",
+          "Mengumpulkan info publik tanpa menyentuh sistem target",
+          "Login ke server",
+          "Mengirim malware"
+        ],
+        "explanation": "Recon pasif cuma membaca sumber terbuka.",
+        "answer": 1
+      },
+      {
+        "prompt": "OSINT adalah...",
+        "options": [
+          "Antivirus",
+          "Informasi dari sumber terbuka/publik",
+          "Jenis enkripsi",
+          "Bahasa pemrograman"
+        ],
+        "explanation": "Open Source Intelligence = intelijen dari sumber publik.",
+        "answer": 1
+      },
+      {
+        "prompt": "Metadata foto bisa membocorkan...",
+        "options": [
+          "Password Wi-Fi",
+          "Lokasi GPS tempat foto diambil",
+          "Saldo rekening",
+          "Isi chat"
+        ],
+        "explanation": "Foto dari HP sering menyimpan koordinat GPS di metadata.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pemakaian OSINT yang TIDAK etis adalah...",
+        "options": [
+          "Ngecek jejak digital sendiri",
+          "Melacak dan menyebar alamat orang (doxing)",
+          "Menilai risiko perusahaan dengan izin",
+          "Riset jurnalistik"
+        ],
+        "explanation": "Doxing merugikan orang dan bisa melanggar hukum.",
+        "answer": 1
+      },
+      {
+        "prompt": "Situs untuk mengecek apakah email kamu pernah bocor?",
+        "options": [
+          "haveibeenpwned.com",
+          "wikipedia.org",
+          "maps.google.com",
+          "translate.google.com"
+        ],
+        "explanation": "Have I Been Pwned mengumpulkan data kebocoran publik untuk dicek.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv4-logs",
+    "level": 4,
+    "title": "Membaca Log & Respons Insiden",
+    "summary": "Cara tim keamanan tahu ada serangan, dan apa yang dilakukan setelahnya.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Log itu CCTV-nya sistem",
+        "body": "Hampir semua sistem mencatat aktivitas ke log: siapa login, kapan, dari IP mana, request apa, hasilnya apa.\n\nContoh baris log web:\n203.0.113.7 - [24/Nov 21:03] \"POST /login\" 401\n\nArtinya: IP 203.0.113.7 mencoba login dan gagal (401). Satu baris gak aneh. Seribu baris serupa dalam lima menit, itu baru cerita.\n\nCoba grep di Terminal Simulasi buat latihan nyari pola.",
+        "tip": "Log itu kayak buku tamu dan rekaman CCTV gedung. Biasanya membosankan, sampai ada kejadian."
+      },
+      {
+        "title": "Pola yang mencurigakan",
+        "body": "Hal yang biasa dicari analis (blue team / SOC):\n- Banyak login gagal lalu satu berhasil: tebakan password yang akhirnya tembus\n- Login dari negara atau jam yang gak biasa\n- Request berisi pola aneh seperti ' OR 1=1 atau <script>\n- Lonjakan traffic besar dari banyak IP: kemungkinan DDoS\n- Akun biasa tiba-tiba mengakses data admin\n\nAlat bernama SIEM membantu mengumpulkan log dari banyak sistem dan memberi peringatan otomatis.",
+        "tip": "Satpam yang bagus bukan yang nonton semua rekaman, tapi yang tahu momen mana yang perlu diputar ulang."
+      },
+      {
+        "title": "Langkah respons insiden",
+        "body": "Kalau insiden terjadi, tim mengikuti alur umum:\n1. Persiapan: punya rencana, kontak, dan backup sebelum kejadian\n2. Deteksi & analisis: pastikan ini insiden beneran dan seberapa luas\n3. Penahanan: isolasi sistem yang kena biar gak menyebar\n4. Pembersihan: hapus akses penyerang, tambal celahnya\n5. Pemulihan: kembalikan layanan dari backup yang bersih\n6. Evaluasi: catat pelajaran supaya gak terulang\n\nBuat akun pribadi juga sama: kunci (ganti password), cek kerusakan, pulihkan, dan perkuat (2FA).",
+        "tip": "Kayak penanganan kebakaran: padamkan biar gak merembet, cari penyebabnya, perbaiki, lalu pasang alarm yang lebih baik."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Baris log \"POST /login\" 401 artinya...",
+        "options": [
+          "Login berhasil",
+          "Percobaan login gagal",
+          "Halaman gak ketemu",
+          "Server rusak"
+        ],
+        "explanation": "401 = gagal autentikasi.",
+        "answer": 1
+      },
+      {
+        "prompt": "Ratusan login gagal lalu satu berhasil dari IP yang sama menandakan...",
+        "options": [
+          "Pengguna lupa password sekali",
+          "Tebakan password yang akhirnya berhasil",
+          "Server sedang update",
+          "Gak ada yang aneh"
+        ],
+        "explanation": "Pola brute force yang tembus perlu ditindaklanjuti segera.",
+        "answer": 1
+      },
+      {
+        "prompt": "SIEM berfungsi untuk...",
+        "options": [
+          "Membuat desain aplikasi",
+          "Mengumpulkan log dan memberi peringatan otomatis",
+          "Mengenkripsi password",
+          "Mempercepat Wi-Fi"
+        ],
+        "explanation": "SIEM menyatukan log dari banyak sistem untuk dianalisis.",
+        "answer": 1
+      },
+      {
+        "prompt": "Langkah setelah insiden terdeteksi supaya gak menyebar adalah...",
+        "options": [
+          "Evaluasi",
+          "Penahanan / isolasi",
+          "Persiapan",
+          "Hapus semua log"
+        ],
+        "explanation": "Penahanan mencegah kerusakan meluas sebelum pembersihan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Akun medsos kamu dibajak. Urutan yang tepat?",
+        "options": [
+          "Bikin akun baru dan lupakan",
+          "Amankan (ganti password, keluarkan sesi), cek kerusakan, pulihkan, aktifkan 2FA",
+          "Tunggu pembajak bosan",
+          "Posting marah-marah"
+        ],
+        "explanation": "Alur respons insiden juga berlaku untuk akun pribadi.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv4-roadmap",
+    "level": 4,
+    "title": "CTF & Jalan Karier",
+    "summary": "Cara latihan terarah dan peran-peran di dunia cyber security.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "CTF: belajar sambil main",
+        "body": "Capture The Flag (CTF) adalah kompetisi cari \"flag\", teks rahasia yang disembunyikan di soal. Kategorinya biasanya:\n- Web: celah aplikasi web\n- Crypto: memecahkan sandi\n- Forensics: menganalisis file, gambar, atau rekaman jaringan\n- Reverse engineering: membedah program\n- OSINT dan misc\n\nKamu udah nyobain versi mininya di app ini. Flag-nya formatnya sama: CIPHER{...}.",
+        "tip": "CTF itu escape room versi digital: tiap petunjuk ngebuka pintu berikutnya."
+      },
+      {
+        "title": "Peran di cyber security",
+        "body": "Dunia cyber security luas, gak cuma \"hacker\":\n- Red team / pentester: menguji sistem dengan cara menyerang, dengan izin\n- Blue team / SOC analyst: memantau, mendeteksi, dan merespons serangan\n- Security engineer: membangun sistem dan infrastruktur yang aman\n- AppSec: mengamankan kode aplikasi, cocok buat yang suka ngoding\n- GRC: kebijakan, audit, dan kepatuhan\n- Digital forensics: menyelidiki bukti setelah insiden\n\nBanyak orang masuk lewat IT support, jaringan, atau developer, lalu pindah ke keamanan.",
+        "tip": "Kayak rumah sakit: ada dokter bedah, dokter jaga, apoteker, sampai manajemen. Semua penting."
+      },
+      {
+        "title": "Rencana belajar berikutnya",
+        "body": "Setelah Cipher, urutan yang masuk akal:\n1. Kuatkan dasar: jaringan, Linux, dan satu bahasa scripting (Python atau Bash)\n2. Latihan terarah: jalur pemula TryHackMe atau PortSwigger Academy untuk web\n3. Ikut CTF pemula, kerjakan bareng teman atau sendiri, tulis write-up\n4. Bikin portofolio: catat lab yang selesai di GitHub atau blog\n5. Sertifikasi pemula kalau butuh untuk kerja, misal CompTIA Security+ atau sertifikasi entry-level lain\n\nKonsisten 30 menit sehari lebih ampuh daripada maraton seminggu sekali.",
+        "tip": "Belajar cyber security itu kayak naik gunung: gak perlu lari, yang penting langkahnya gak berhenti."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Dalam CTF, \"flag\" adalah...",
+        "options": [
+          "Bendera negara",
+          "Teks rahasia yang harus ditemukan",
+          "Nama tim",
+          "Jenis virus"
+        ],
+        "explanation": "Menemukan flag membuktikan soal berhasil dipecahkan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kategori CTF yang membedah program adalah...",
+        "options": [
+          "Web",
+          "Reverse engineering",
+          "OSINT",
+          "Crypto"
+        ],
+        "explanation": "Reverse engineering menganalisis cara kerja program tanpa kode sumber.",
+        "answer": 1
+      },
+      {
+        "prompt": "Peran yang memantau dan merespons serangan disebut...",
+        "options": [
+          "Red team",
+          "Blue team / SOC analyst",
+          "Desainer UI",
+          "Sales"
+        ],
+        "explanation": "Blue team bertahan; red team menguji dengan menyerang.",
+        "answer": 1
+      },
+      {
+        "prompt": "Buat yang suka ngoding, peran keamanan yang paling nyambung adalah...",
+        "options": [
+          "AppSec",
+          "GRC",
+          "Forensik",
+          "Sales"
+        ],
+        "explanation": "AppSec fokus mengamankan kode dan aplikasi.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kebiasaan belajar yang paling efektif menurut modul ini?",
+        "options": [
+          "Maraton seminggu sekali",
+          "Konsisten sedikit tiap hari",
+          "Langsung ambil sertifikasi tersulit",
+          "Belajar cuma pas ujian"
+        ],
+        "explanation": "Latihan rutin bikin ilmu nempel lebih lama.",
+        "answer": 1
+      }
+    ]
+  }
+]

@@ -15,18 +15,18 @@
     "index": 2,
     "title": "Web",
     "tagline": "HTTP, cookies, XSS, SQL injection, and the OWASP Top 10.",
-    "moduleFile": null
+    "moduleFile": "lv2.json"
   },
   {
     "index": 3,
     "title": "Cryptography",
     "tagline": "Encoding vs hashing vs encryption, all the way to classic ciphers.",
-    "moduleFile": null
+    "moduleFile": "lv3.json"
   },
   {
     "index": 4,
     "title": "Practice",
-    "tagline": "Offline mini CTF: find the flags hidden inside the app.",
-    "moduleFile": null
+    "tagline": "Ethics, OSINT, reading logs, incident response, CTFs, and career paths.",
+    "moduleFile": "lv4.json"
   }
 ]

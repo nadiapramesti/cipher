@@ -1,0 +1,407 @@
+[
+  {
+    "id": "lv3-ehe",
+    "level": 3,
+    "title": "Encoding vs Hashing vs Enkripsi",
+    "summary": "Tiga hal yang sering ketuker, padahal tujuannya beda jauh.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Encoding: ganti format, bukan rahasia",
+        "body": "Encoding mengubah data ke format lain supaya bisa dikirim atau disimpan dengan aman secara teknis. Contohnya Base64, URL encoding, dan hex.\n\nPenting: encoding gak pakai kunci. Siapa pun bisa membalikkannya. \"Q0lQSEVS\" itu cuma Base64 dari \"CIPHER\".\n\nJadi kalau ada aplikasi yang \"mengamankan\" password pakai Base64, itu sama aja gak diamankan.",
+        "tip": "Encoding itu kayak nerjemahin tulisan ke kode Morse. Bukan rahasia, cuma beda bentuk."
+      },
+      {
+        "title": "Hashing: sidik jari satu arah",
+        "body": "Hash mengubah data apa pun jadi deretan karakter panjang tetap, misal SHA-256 selalu 64 karakter hex.\n\nSifatnya:\n- Satu arah: gak bisa dibalik jadi data asli\n- Beda satu huruf, hasilnya beda total\n- Data sama selalu menghasilkan hash sama\n\nDipakai buat nyimpen password dan ngecek file gak berubah (checksum saat download).",
+        "tip": "Hash itu sidik jari. Dari jari bisa dapet sidiknya, tapi dari sidik gak bisa bikin ulang jarinya."
+      },
+      {
+        "title": "Enkripsi: rahasia pakai kunci",
+        "body": "Enkripsi mengacak data pakai kunci, dan cuma yang punya kunci yang bisa mengembalikannya (dekripsi).\n\nBedanya dengan dua yang lain:\n- Encoding: bisa dibalik siapa aja, tanpa kunci\n- Hashing: gak bisa dibalik sama sekali\n- Enkripsi: bisa dibalik, tapi cuma dengan kunci\n\nContoh: chat end-to-end WhatsApp, HTTPS, dan enkripsi penyimpanan HP.",
+        "tip": "Enkripsi itu brankas. Isinya bisa diambil lagi, tapi harus punya kuncinya."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Base64 termasuk...",
+        "options": [
+          "Enkripsi",
+          "Encoding",
+          "Hashing",
+          "Firewall"
+        ],
+        "explanation": "Base64 cuma mengubah format, bisa dibalik siapa pun tanpa kunci.",
+        "answer": 1
+      },
+      {
+        "prompt": "Sifat utama hash adalah...",
+        "options": [
+          "Bisa dibalik dengan kunci",
+          "Satu arah, gak bisa dibalik",
+          "Panjangnya ngikutin data",
+          "Selalu acak tiap dihitung"
+        ],
+        "explanation": "Hash dirancang satu arah dan konsisten untuk input yang sama.",
+        "answer": 1
+      },
+      {
+        "prompt": "Yang bisa dibalik tapi cuma dengan kunci adalah...",
+        "options": [
+          "Encoding",
+          "Hashing",
+          "Enkripsi",
+          "Kompresi"
+        ],
+        "explanation": "Enkripsi butuh kunci untuk dekripsi.",
+        "answer": 2
+      },
+      {
+        "prompt": "Aplikasi nyimpen password pakai Base64. Ini...",
+        "options": [
+          "Aman banget",
+          "Gak aman, karena gampang dibalik",
+          "Standar industri",
+          "Sama dengan enkripsi"
+        ],
+        "explanation": "Encoding bukan pengamanan. Password harus di-hash dengan algoritma khusus.",
+        "answer": 1
+      },
+      {
+        "prompt": "Checksum SHA-256 di halaman download dipakai buat...",
+        "options": [
+          "Mempercepat download",
+          "Memastikan file gak berubah atau rusak",
+          "Mengenkripsi file",
+          "Mengganti nama file"
+        ],
+        "explanation": "Kalau hash file yang kamu unduh sama dengan yang tertulis, isinya identik.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv3-classic",
+    "level": 3,
+    "title": "Cipher Klasik",
+    "summary": "Caesar dan Vigenère: cara kerja, dan kenapa sekarang gampang dipecahkan.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Caesar cipher",
+        "body": "Salah satu cipher tertua. Tiap huruf digeser sejumlah langkah tetap. Dengan geser 3: A→D, B→E, ... X→A.\n\n\"HALO\" jadi \"KDOR\".\n\nKelemahannya: cuma ada 25 kemungkinan geseran. Komputer, bahkan manusia yang sabar, bisa nyoba semuanya dalam hitungan detik. Ini disebut brute force.",
+        "tip": "Caesar itu gembok angka satu digit. Paling banyak 25 kali coba, pasti kebuka."
+      },
+      {
+        "title": "Vigenère: geseran yang berubah-ubah",
+        "body": "Vigenère pakai kata kunci. Tiap huruf kunci menentukan geseran buat huruf pesan yang sejajar. Kunci \"KEY\" berarti geser 10, 4, 24, lalu berulang.\n\nIni bikin huruf yang sama gak selalu jadi huruf yang sama, jadi lebih susah ditebak. Ratusan tahun dijuluki \"cipher yang gak bisa dipecahkan\".\n\nTapi karena kuncinya berulang, polanya tetap bisa dianalisis dan sekarang mudah dipecahkan komputer.",
+        "tip": "Vigenère itu kayak gembok yang kombinasinya ganti tiap huruf, tapi kombinasinya muter terus dalam urutan yang sama."
+      },
+      {
+        "title": "Analisis frekuensi",
+        "body": "Di bahasa apa pun, beberapa huruf jauh lebih sering muncul. Di bahasa Indonesia, huruf A paling sering; di bahasa Inggris, E.\n\nCipher klasik cuma ngacak huruf, gak ngilangin pola ini. Jadi kalau di teks sandi huruf R paling sering muncul, kemungkinan R itu A atau E yang disamarkan.\n\nPelajarannya: jangan pernah bikin enkripsi sendiri buat data beneran. Pakai algoritma modern yang udah diuji, kayak AES.\n\nCoba sendiri di Toolbox → Cipher.",
+        "tip": "Nyamar pakai baju lain tapi cara jalannya tetap sama: orang yang kenal tetap bisa nebak."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Dengan Caesar geser 3, huruf A menjadi...",
+        "options": [
+          "B",
+          "C",
+          "D",
+          "Z"
+        ],
+        "explanation": "A geser tiga langkah: B, C, D.",
+        "answer": 2
+      },
+      {
+        "prompt": "Kenapa Caesar gampang dipecahkan?",
+        "options": [
+          "Hurufnya kebanyakan",
+          "Cuma ada 25 kemungkinan geseran",
+          "Butuh internet",
+          "Pakai kunci panjang"
+        ],
+        "explanation": "Semua kemungkinan bisa dicoba dengan cepat (brute force).",
+        "answer": 1
+      },
+      {
+        "prompt": "Vigenère menentukan geseran tiap huruf berdasarkan...",
+        "options": [
+          "Jam saat ini",
+          "Kata kunci",
+          "Panjang pesan",
+          "Huruf acak"
+        ],
+        "explanation": "Tiap huruf kata kunci memberi geseran berbeda dan berulang.",
+        "answer": 1
+      },
+      {
+        "prompt": "Analisis frekuensi memanfaatkan...",
+        "options": [
+          "Huruf tertentu yang lebih sering muncul",
+          "Kecepatan internet",
+          "Warna teks",
+          "Ukuran file"
+        ],
+        "explanation": "Cipher klasik gak menyembunyikan pola frekuensi huruf.",
+        "answer": 0
+      },
+      {
+        "prompt": "Buat mengenkripsi data beneran, sebaiknya...",
+        "options": [
+          "Bikin cipher sendiri",
+          "Pakai algoritma modern yang teruji seperti AES",
+          "Pakai Caesar geser 13",
+          "Pakai Base64"
+        ],
+        "explanation": "Algoritma buatan sendiri hampir selalu punya kelemahan yang gak kelihatan.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv3-hash-pass",
+    "level": 3,
+    "title": "Hash & Penyimpanan Password",
+    "summary": "Salt, algoritma lambat, dan kenapa MD5 udah pensiun.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Server yang baik gak tahu password kamu",
+        "body": "Aplikasi yang benar gak nyimpen password asli. Yang disimpan hash-nya. Saat login, password yang kamu ketik di-hash lagi dan dibandingin.\n\nKalau database bocor, penyerang cuma dapet hash, bukan password. Tapi mereka masih bisa nebak: hash kata-kata umum, lalu cocokkan.\n\nKumpulan hash siap pakai buat ditebak kayak gini disebut rainbow table.",
+        "tip": "Satpam yang baik gak nyimpen duplikat kunci rumahmu, cuma foto bentuk kuncinya buat dicocokkan."
+      },
+      {
+        "title": "Salt: bumbu unik tiap pengguna",
+        "body": "Salt adalah data acak unik yang ditambahkan ke password sebelum di-hash, lalu disimpan bareng hash-nya.\n\nManfaatnya:\n- Dua orang dengan password sama punya hash berbeda\n- Rainbow table jadi gak berguna, karena harus dibuat ulang per salt\n\nSalt bukan rahasia. Fungsinya bikin tebakan massal jadi mahal.",
+        "tip": "Dua mangkok sup yang sama rasanya jadi beda karena tiap mangkok dikasih bumbu rahasia berbeda."
+      },
+      {
+        "title": "Kenapa harus lambat",
+        "body": "MD5 dan SHA-1 dirancang buat cepat. Bagus buat checksum, buruk buat password, karena komputer bisa nebak miliaran kali per detik. MD5 juga udah dianggap rusak.\n\nBuat password, pakai algoritma yang sengaja lambat dan bisa diatur beratnya:\n- bcrypt\n- scrypt\n- Argon2 (rekomendasi modern)\n\nBuat pengguna: karena kebocoran tetap mungkin, password panjang dan unik per akun tetap kunci utamanya.",
+        "tip": "Pintu yang butuh satu detik buat dibuka gak ganggu pemilik, tapi bikin maling yang mau nyoba sejuta kunci frustasi."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Aplikasi yang aman menyimpan password sebagai...",
+        "options": [
+          "Teks asli",
+          "Base64",
+          "Hash dengan salt",
+          "Screenshot"
+        ],
+        "explanation": "Hash bersalt bikin password asli gak tersimpan dan susah ditebak massal.",
+        "answer": 2
+      },
+      {
+        "prompt": "Fungsi salt adalah...",
+        "options": [
+          "Mengenkripsi password",
+          "Membuat hash unik walau password sama",
+          "Mempercepat login",
+          "Menyembunyikan username"
+        ],
+        "explanation": "Salt acak bikin rainbow table gak berguna.",
+        "answer": 1
+      },
+      {
+        "prompt": "Rainbow table adalah...",
+        "options": [
+          "Tema warna aplikasi",
+          "Kumpulan hash siap pakai buat menebak password",
+          "Jenis firewall",
+          "Daftar pengguna"
+        ],
+        "explanation": "Tabel berisi hash dari banyak kata yang umum dipakai sebagai password.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa MD5 gak cocok buat password?",
+        "options": [
+          "Terlalu lambat",
+          "Terlalu cepat dan sudah dianggap rusak",
+          "Gak bisa dipakai di Android",
+          "Hasilnya terlalu panjang"
+        ],
+        "explanation": "Algoritma cepat memudahkan penyerang menebak miliaran kali per detik.",
+        "answer": 1
+      },
+      {
+        "prompt": "Algoritma hash password yang direkomendasikan sekarang adalah...",
+        "options": [
+          "MD5",
+          "SHA-1",
+          "Argon2",
+          "Base64"
+        ],
+        "explanation": "Argon2 sengaja lambat dan butuh memori, jadi tebakan massal mahal.",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "lv3-keys",
+    "level": 3,
+    "title": "Kunci Simetris & Asimetris",
+    "summary": "Satu kunci bersama vs pasangan kunci publik-privat.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Simetris: satu kunci berdua",
+        "body": "Di enkripsi simetris, kunci yang sama dipakai buat mengunci dan membuka. Contoh: AES.\n\nKelebihannya cepat, cocok buat data besar. Masalahnya: gimana caranya ngirim kunci ke lawan bicara tanpa dicegat? Kalau kuncinya dikirim lewat jalur yang sama, penyadap bisa ikut dapet.",
+        "tip": "Kayak satu kunci gembok yang diduplikat. Praktis, tapi ngirim duplikatnya ke teman jauh itu yang repot."
+      },
+      {
+        "title": "Asimetris: kunci publik dan privat",
+        "body": "Enkripsi asimetris pakai sepasang kunci yang saling terhubung:\n- Kunci publik: boleh disebar ke siapa aja\n- Kunci privat: disimpan sendiri, gak boleh bocor\n\nPesan yang dikunci pakai kunci publik cuma bisa dibuka pakai kunci privat pasangannya. Jadi siapa pun bisa ngirim pesan rahasia ke kamu tanpa harus tukeran kunci dulu. Contoh: RSA dan kurva eliptik (ECC).",
+        "tip": "Kunci publik itu kotak surat dengan lubang. Siapa aja bisa masukin surat, tapi cuma pemilik kunci yang bisa buka kotaknya."
+      },
+      {
+        "title": "Dipakai bareng",
+        "body": "Asimetris aman buat tukar kunci tapi lambat. Simetris cepat tapi susah bagi kunci. Solusinya: gabung keduanya.\n\n- Pakai asimetris buat sepakat atau ngirim kunci simetris secara aman\n- Lalu semua data dienkripsi pakai kunci simetris itu\n\nPola ini dipakai di HTTPS, WhatsApp, dan VPN. Kunci privat juga dipakai buat tanda tangan digital, dibahas di modul berikutnya.",
+        "tip": "Kirim kunci brankas lewat kotak surat yang aman, abis itu semua barang disimpen di brankas yang cepat dibuka."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Ciri enkripsi simetris adalah...",
+        "options": [
+          "Pakai sepasang kunci berbeda",
+          "Kunci yang sama buat mengunci dan membuka",
+          "Gak pakai kunci",
+          "Cuma buat tanda tangan"
+        ],
+        "explanation": "AES contoh simetris: satu kunci bersama.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kunci yang boleh disebar ke siapa pun adalah...",
+        "options": [
+          "Kunci privat",
+          "Kunci publik",
+          "Kunci simetris",
+          "Password"
+        ],
+        "explanation": "Kunci publik memang dibuat buat dibagikan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pesan dikunci pakai kunci publik Nadia. Siapa yang bisa membukanya?",
+        "options": [
+          "Semua orang",
+          "Cuma pemegang kunci privat Nadia",
+          "Pengirimnya",
+          "Server Google"
+        ],
+        "explanation": "Hanya kunci privat pasangannya yang bisa membuka.",
+        "answer": 1
+      },
+      {
+        "prompt": "Masalah utama enkripsi simetris adalah...",
+        "options": [
+          "Terlalu lambat",
+          "Membagikan kunci dengan aman",
+          "Gak bisa dipakai di HP",
+          "Hasilnya terlalu besar"
+        ],
+        "explanation": "Kunci harus sampai ke penerima tanpa dicegat.",
+        "answer": 1
+      },
+      {
+        "prompt": "HTTPS memakai...",
+        "options": [
+          "Cuma simetris",
+          "Cuma asimetris",
+          "Gabungan asimetris (tukar kunci) dan simetris (data)",
+          "Base64"
+        ],
+        "explanation": "Asimetris buat kunci, simetris buat data karena lebih cepat.",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "lv3-tls",
+    "level": 3,
+    "title": "HTTPS, Sertifikat & Tanda Tangan",
+    "summary": "Gimana browser yakin situsnya asli, dan arti gembok di address bar.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Tanda tangan digital",
+        "body": "Kunci privat juga bisa dipakai buat \"menandatangani\" data. Siapa pun bisa memverifikasinya pakai kunci publik.\n\nTanda tangan digital membuktikan dua hal:\n- Keaslian: data memang dari pemilik kunci privat\n- Integritas: data gak diubah sejak ditandatangani\n\nContoh nyata: update aplikasi Android ditandatangani developer. Kalau tanda tangannya beda, HP nolak update di atas aplikasi lama.",
+        "tip": "Tanda tangan digital itu segel lilin dengan cap pribadi: semua orang bisa ngecek capnya asli, tapi cuma pemilik stempel yang bisa bikin."
+      },
+      {
+        "title": "Sertifikat dan Certificate Authority",
+        "body": "Waktu buka situs HTTPS, server ngirim sertifikat yang berisi kunci publik dan nama domain. Sertifikat itu ditandatangani Certificate Authority (CA), lembaga yang dipercaya browser dan sistem operasi.\n\nBrowser ngecek:\n- Tanda tangan CA valid\n- Nama domain cocok\n- Sertifikat belum kedaluwarsa\n\nKalau ada yang gak cocok, muncul peringatan merah. Itu alasan peringatan sertifikat gak boleh di-skip.",
+        "tip": "Sertifikat itu KTP situs, CA itu Dukcapil. Browser percaya KTP-nya karena percaya yang nerbitin."
+      },
+      {
+        "title": "Arti gembok yang sebenarnya",
+        "body": "Gembok di address bar artinya koneksi kamu ke server itu terenkripsi dan servernya memang pemilik domain tersebut.\n\nTapi gembok gak berarti situsnya jujur. Penipu bisa dapet sertifikat gratis buat domain palsu kayak bca-hadiah-resmi.com. Koneksinya aman, tapi kamu tetap ngobrol sama penipu.\n\nJadi selalu cek nama domainnya dengan teliti, jangan cuma lihat gemboknya.",
+        "tip": "Gembok itu jaminan suratmu disegel sampai tujuan. Tapi kalau alamat tujuannya salah, surat tersegel itu tetap nyampe ke orang yang salah."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Tanda tangan digital membuktikan...",
+        "options": [
+          "Data cepat terkirim",
+          "Keaslian pengirim dan data gak diubah",
+          "Data terkompresi",
+          "Pengirim online"
+        ],
+        "explanation": "Tanda tangan menjamin keaslian dan integritas.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa APK dengan tanda tangan berbeda gak bisa menimpa aplikasi lama?",
+        "options": [
+          "Karena ukurannya beda",
+          "Android memastikan update datang dari developer yang sama",
+          "Karena warnanya beda",
+          "Karena butuh internet"
+        ],
+        "explanation": "Tanda tangan berbeda bisa berarti aplikasi palsu, jadi Android menolaknya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Certificate Authority (CA) bertugas...",
+        "options": [
+          "Menjual domain",
+          "Menandatangani sertifikat yang dipercaya browser",
+          "Membuat password",
+          "Memblokir iklan"
+        ],
+        "explanation": "Browser percaya sertifikat karena ditandatangani CA tepercaya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Situs penipuan pakai gembok HTTPS. Artinya...",
+        "options": [
+          "Situsnya pasti aman",
+          "Koneksinya terenkripsi, tapi situsnya tetap bisa penipuan",
+          "Situsnya milik bank",
+          "Browser error"
+        ],
+        "explanation": "Gembok cuma soal koneksi, bukan kejujuran pemilik situs.",
+        "answer": 1
+      },
+      {
+        "prompt": "Browser nampilin peringatan karena nama domain gak cocok sama sertifikat. Sebaiknya...",
+        "options": [
+          "Lanjutkan",
+          "Jangan lanjut dan jangan masukin data",
+          "Matikan browser selamanya",
+          "Kirim screenshot ke grup"
+        ],
+        "explanation": "Ini tanda situs palsu atau koneksi sedang dicegat.",
+        "answer": 1
+      }
+    ]
+  }
+]

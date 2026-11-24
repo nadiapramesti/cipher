@@ -1,0 +1,407 @@
+[
+  {
+    "id": "lv2-http",
+    "level": 2,
+    "title": "HTTP: The Browser's Language",
+    "summary": "Requests, responses, methods, and status codes behind every web page.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Requests and responses",
+        "body": "Every time you open a page, the browser sends an HTTP request to the server, and the server replies with a response.\n\nA request contains:\n- Method: what to do (GET, POST, etc.)\n- Path: the page requested, e.g. /login\n- Headers: extra info (browser type, cookies, language)\n- Body: data being sent, e.g. form contents\n\nA response contains a status code, headers, and the content (HTML, images, JSON).",
+        "tip": "A request is the order slip at a restaurant; the response is the food that arrives with the receipt."
+      },
+      {
+        "title": "Common methods",
+        "body": "- GET: fetch data. Parameters appear in the URL, e.g. /search?q=cats\n- POST: send data, e.g. a login form. The data goes in the body\n- PUT / PATCH: update data\n- DELETE: remove data\n\nSince GET parameters show in the URL, secrets like passwords must never be sent via GET. URLs end up in browser history, server logs, and shared links.",
+        "tip": "GET is a postcard: anyone holding it can read it. POST is a letter in an envelope."
+      },
+      {
+        "title": "Status codes",
+        "body": "A 3-digit number in the response that tells you the outcome:\n- 2xx success, e.g. 200 OK\n- 3xx redirect, e.g. 301 moved permanently\n- 4xx client-side error: 401 not logged in, 403 forbidden, 404 not found\n- 5xx server-side error, e.g. 500 Internal Server Error\n\nFor security analysts, status code patterns in logs are clues. Hundreds of 401s from one IP in a minute may mean someone is guessing passwords.",
+        "tip": "Status codes are like machine indicator lights: green is fine, yellow needs attention, red means trouble."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Which HTTP method should send a login form?",
+        "options": [
+          "GET",
+          "POST",
+          "DELETE",
+          "HEAD"
+        ],
+        "explanation": "POST puts data in the body, not in a URL that ends up in history and logs.",
+        "answer": 1
+      },
+      {
+        "prompt": "Status 404 means...",
+        "options": [
+          "Success",
+          "Page not found",
+          "Server crashed",
+          "Redirected"
+        ],
+        "explanation": "404 Not Found: the requested resource doesn't exist.",
+        "answer": 1
+      },
+      {
+        "prompt": "Status codes in the 5xx range indicate...",
+        "options": [
+          "A server-side error",
+          "A user error",
+          "Success",
+          "Login required"
+        ],
+        "explanation": "5xx means the server failed to handle a valid request.",
+        "answer": 0
+      },
+      {
+        "prompt": "Hundreds of 401 responses to one IP in a minute likely signal...",
+        "options": [
+          "A server update",
+          "Someone guessing passwords",
+          "Slow internet",
+          "New sign-ups"
+        ],
+        "explanation": "401 means failed authentication. Many at once suggests brute force.",
+        "answer": 1
+      },
+      {
+        "prompt": "The part of a request that carries cookies and browser info is the...",
+        "options": [
+          "Status code",
+          "Headers",
+          "Path",
+          "Port"
+        ],
+        "explanation": "Headers carry request metadata, including cookies and the User-Agent.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv2-cookie",
+    "level": 2,
+    "title": "Cookies & Sessions",
+    "summary": "How sites remember you're logged in, and why session cookies are targeted.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "HTTP is forgetful",
+        "body": "HTTP doesn't remember previous requests. Each request stands alone. So how does a site know you're logged in?\n\nThe answer: sessions. After a successful login, the server creates a random session ID and stores \"this ID = Nadia\". That ID is sent to the browser as a cookie, and the browser automatically sends it back with every later request.",
+        "tip": "A session cookie is a concert wristband. Checked once at the door; after that you just show the band."
+      },
+      {
+        "title": "Session hijacking",
+        "body": "Since a session cookie proves you're logged in, anyone who gets it can enter as you without your password, even bypassing 2FA.\n\nHow cookies get stolen:\n- Malware or malicious browser extensions that siphon cookies\n- XSS that reads cookies through JavaScript\n- Logging in on a public computer and forgetting to log out\n\nThat's why \"open this file\" scams often turn out to be cookie stealers used to hijack YouTube, Instagram, and Facebook accounts.",
+        "tip": "If someone takes your wristband and wears it, the guard still lets them in."
+      },
+      {
+        "title": "Secure cookie attributes",
+        "body": "Developers can protect session cookies with attributes:\n- HttpOnly: JavaScript can't read the cookie, so XSS has a hard time stealing it\n- Secure: the cookie is only sent over HTTPS\n- SameSite: the cookie isn't sent from other sites (helps prevent CSRF)\n- Short lifetimes, and a fresh session ID after login\n\nFor users: log out on other people's devices, check \"logged-in devices\" on important accounts, and don't install random extensions.",
+        "tip": "Cookie attributes are like a wristband that can't come off without scissors and only works in this venue."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Why do sites need session cookies?",
+        "options": [
+          "To color pages",
+          "Because HTTP doesn't remember previous requests",
+          "To speed up Wi-Fi",
+          "To store your real password"
+        ],
+        "explanation": "Session cookies tie separate requests to one logged-in user.",
+        "answer": 1
+      },
+      {
+        "prompt": "An attacker gets your session cookie. What can they do?",
+        "options": [
+          "Nothing without your password",
+          "Enter your account as you",
+          "Only see your profile photo",
+          "Change your IP"
+        ],
+        "explanation": "A session cookie is proof of login. It can even bypass 2FA.",
+        "answer": 1
+      },
+      {
+        "prompt": "The HttpOnly attribute makes a cookie...",
+        "options": [
+          "Faster",
+          "Unreadable by JavaScript",
+          "Usable on every site",
+          "Never expire"
+        ],
+        "explanation": "This reduces the risk of cookie theft via XSS.",
+        "answer": 1
+      },
+      {
+        "prompt": "The Secure attribute means a cookie is...",
+        "options": [
+          "Encrypted with a password",
+          "Only sent over HTTPS",
+          "Stored on the server",
+          "Deleted every minute"
+        ],
+        "explanation": "A Secure cookie is never sent over plain, unencrypted HTTP.",
+        "answer": 1
+      },
+      {
+        "prompt": "After logging in on an internet cafe computer, the most important step?",
+        "options": [
+          "Just close the tab",
+          "Log out of the account",
+          "Turn off the monitor",
+          "Change the wallpaper"
+        ],
+        "explanation": "Closing a tab doesn't end the session. Logging out invalidates the session cookie.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv2-xss",
+    "level": 2,
+    "title": "XSS: Sneaky Scripts",
+    "summary": "When user input turns into code running in other people's browsers.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "What XSS is",
+        "body": "Cross-Site Scripting (XSS) happens when a site displays user input as-is, without processing it. If that input contains a <script> tag, other visitors' browsers run it as code.\n\nExample: a comment box shows raw text. An attacker posts a comment containing a script. Everyone who opens the page runs that script in their browser.",
+        "tip": "Picture a notice board that reads every note aloud over a loudspeaker, including one that says \"everyone hand your wallet to me\"."
+      },
+      {
+        "title": "Types and impact",
+        "body": "Three main types:\n- Stored: the script is saved in the database (comments, profiles) and hits every visitor\n- Reflected: the script is in a link and hits whoever clicks it\n- DOM-based: the page's own JavaScript mishandles input\n\nThe impact: stealing session cookies, swapping page content for a fake login form, or performing actions as the victim.",
+        "tip": "Stored is a trap set in the floor. Reflected is a trap wrapped as a gift and sent out."
+      },
+      {
+        "title": "How to prevent it",
+        "body": "The principle: user data must stay data, never become code.\n- Output encoding/escaping: turn < into &lt; before display, so it shows as text\n- Use modern frameworks (Flutter, React, Vue) that escape automatically\n- Input validation: reject things that clearly don't fit the format\n- Content Security Policy (CSP): restrict where scripts may load from\n- HttpOnly cookies as an extra layer\n\nFor users: be careful clicking long, strange links, even on real domains.",
+        "tip": "Escaping is like framing a note behind glass: still readable, but it can't be \"spoken\" as a command."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "XSS happens because...",
+        "options": [
+          "Passwords are too short",
+          "User input is displayed unprocessed and becomes code",
+          "The server runs out of memory",
+          "Wi-Fi isn't encrypted"
+        ],
+        "explanation": "The core of XSS: user data runs as script in the browser.",
+        "answer": 1
+      },
+      {
+        "prompt": "XSS saved in a comment box that hits every visitor is called...",
+        "options": [
+          "Reflected",
+          "Stored",
+          "DOM-based",
+          "SQL injection"
+        ],
+        "explanation": "Stored XSS sits in the database and appears for every visitor.",
+        "answer": 1
+      },
+      {
+        "prompt": "The main defense against XSS is...",
+        "options": [
+          "Changing site colors",
+          "Output encoding/escaping",
+          "Turning off HTTPS",
+          "Bigger servers"
+        ],
+        "explanation": "Escaping makes input display as text instead of running.",
+        "answer": 1
+      },
+      {
+        "prompt": "One impact of XSS is...",
+        "options": [
+          "Stealing the victim's session cookie",
+          "Speeding up the site",
+          "Changing the server's IP",
+          "Deleting Wi-Fi"
+        ],
+        "explanation": "A script running in the victim's browser can read cookies (if not HttpOnly).",
+        "answer": 0
+      },
+      {
+        "prompt": "Content Security Policy (CSP) helps by...",
+        "options": [
+          "Restricting which script sources may run",
+          "Encrypting the database",
+          "Blocking all images",
+          "Changing passwords automatically"
+        ],
+        "explanation": "CSP tells the browser which script sources are allowed.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv2-sqli",
+    "level": 2,
+    "title": "SQL Injection",
+    "summary": "When form input rewrites the commands sent to the database.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Databases and queries",
+        "body": "Almost every app stores data in a database and retrieves it with SQL. An example login query:\n\nSELECT * FROM users WHERE user = 'nadia' AND pass = '...'\n\nThe trouble starts when an app builds the query by gluing user input text directly into the command.",
+        "tip": "A query is like an order form the waiter fills in. It's dangerous if guests can write on the order slip directly."
+      },
+      {
+        "title": "How injection happens",
+        "body": "If input is glued in raw, a quote mark from the user can \"close\" the text early and the rest is read as a command. The classic example: ' OR '1'='1 makes the condition always true, so login succeeds without the right password.\n\nSQL injection can be severe:\n- Logging in without a password\n- Reading all user data\n- Modifying or deleting data\n\nMany major data breaches began with this flaw.",
+        "tip": "Like a guest writing on the order slip: \"1 fried rice, and give me the cash drawer.\" If the cook just obeys, trouble."
+      },
+      {
+        "title": "The fix: parameterized queries",
+        "body": "The fix is simple and powerful: never glue input into a query. Use parameterized queries (prepared statements):\n\nSELECT * FROM users WHERE user = ? AND pass = ?\n\nThe database receives the command and the data separately, so any input is treated as data.\n\nExtras:\n- Use an ORM or query builder\n- Give the database account minimal privileges\n- Store passwords as hashes, not plain text\n\nPractice attacks only in official labs like DVWA or TryHackMe, never on other people's sites.",
+        "tip": "A parameterized query is a form with locked fields: guests can only write in the \"menu\" box, not add new commands."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "SQL injection happens when...",
+        "options": [
+          "User input is glued directly into a database query",
+          "Passwords are stored as hashes",
+          "The site uses HTTPS",
+          "The server is turned off"
+        ],
+        "explanation": "User text gets read as part of the SQL command.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why can ' OR '1'='1 bypass login on a vulnerable app?",
+        "options": [
+          "It makes the condition always true",
+          "It's the admin password",
+          "The browser errors out",
+          "The database is full"
+        ],
+        "explanation": "The quote closes the text, then OR '1'='1' makes the WHERE clause always true.",
+        "answer": 0
+      },
+      {
+        "prompt": "The most effective defense against SQL injection is...",
+        "options": [
+          "Hiding the login form",
+          "Parameterized queries / prepared statements",
+          "Changing button colors",
+          "Limiting URL length"
+        ],
+        "explanation": "Command and data are sent separately, so input can't alter the command.",
+        "answer": 1
+      },
+      {
+        "prompt": "Where is the right place to practice SQL injection?",
+        "options": [
+          "Your school's website",
+          "Official labs like DVWA or TryHackMe",
+          "A bank's website",
+          "A friend's site without permission"
+        ],
+        "explanation": "Attacking systems without permission is illegal, including under Indonesia's ITE Law.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why should an app's database account have minimal rights?",
+        "options": [
+          "Faster queries",
+          "To limit damage if there's a flaw",
+          "So it can drop tables",
+          "No reason"
+        ],
+        "explanation": "Least privilege: if injection happens, the attacker can't do everything.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv2-owasp",
+    "level": 2,
+    "title": "Access & the OWASP Top 10",
+    "summary": "The most common web app flaws, starting with broken access control.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Broken access control",
+        "body": "Login proves who you are (authentication). Access control decides what you may do (authorization). The most common web flaws live right here.\n\nIDOR example: your invoice page is /invoice?id=1042. If changing it to 1043 shows someone else's invoice, the server forgot to check \"whose invoice is this\".\n\nThe fix: the server must always check ownership and role on every request, and never trust anything the browser sends.",
+        "tip": "An office access card proves you're an employee, not that you may enter the director's room."
+      },
+      {
+        "title": "The OWASP Top 10",
+        "body": "OWASP is an open community that regularly publishes a list of the 10 most important web security risks. Some that always appear:\n- Broken Access Control (like the IDOR above)\n- Cryptographic Failures: sensitive data left unencrypted\n- Injection: SQL injection, XSS, and friends\n- Security Misconfiguration: default settings, error pages that leak info\n- Vulnerable Components: outdated libraries with known flaws\n- Authentication Failures: weak passwords allowed, no login attempt limits\n\nThe list is a reference for developers, auditors, and pentesters worldwide.",
+        "tip": "The OWASP Top 10 is like a list of \"10 most common causes of fire\": not everything, but checking these cuts the risk sharply."
+      },
+      {
+        "title": "Safe developer habits",
+        "body": "If you build your own apps, start here:\n- Check authorization on the server for every endpoint\n- Use parameterized queries and auto-escaping frameworks\n- Update dependencies regularly (flutter pub outdated, npm audit)\n- Never commit passwords or API keys to GitHub\n- Turn off debug mode and detailed error messages in production\n- Limit login attempts and support 2FA\n\nSecurity isn't a feature bolted on at the end; it's a habit from the first line of code.",
+        "tip": "Fitting locks while building the house is cheaper than tearing down walls after a burglary."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "The difference between authentication and authorization?",
+        "options": [
+          "They're the same",
+          "Authentication = who you are, authorization = what you may do",
+          "Authentication = what you may do, authorization = who you are",
+          "Both are about passwords"
+        ],
+        "explanation": "Logging in (authentication) doesn't mean you may access everything (authorization).",
+        "answer": 1
+      },
+      {
+        "prompt": "Changing id=1042 to id=1043 in the URL shows someone else's data. This flaw is...",
+        "options": [
+          "XSS",
+          "IDOR / broken access control",
+          "Phishing",
+          "DNS spoofing"
+        ],
+        "explanation": "The server isn't checking who owns the requested data.",
+        "answer": 1
+      },
+      {
+        "prompt": "The OWASP Top 10 is...",
+        "options": [
+          "A list of the best antivirus",
+          "A list of the most important web app security risks",
+          "A ranking of world hackers",
+          "An internet speed standard"
+        ],
+        "explanation": "Published by the OWASP community and used as a global reference.",
+        "answer": 1
+      },
+      {
+        "prompt": "Outdated libraries with known flaws fall under...",
+        "options": [
+          "Vulnerable Components",
+          "Phishing",
+          "Social engineering",
+          "Backup"
+        ],
+        "explanation": "Vulnerable components make an app vulnerable even if its own code is clean.",
+        "answer": 0
+      },
+      {
+        "prompt": "Which developer habit is wrong?",
+        "options": [
+          "Updating dependencies regularly",
+          "Committing API keys to GitHub",
+          "Limiting login attempts",
+          "Checking authorization on the server"
+        ],
+        "explanation": "Secrets in public repos can be found by bots within minutes.",
+        "answer": 1
+      }
+    ]
+  }
+]

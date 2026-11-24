@@ -64,6 +64,7 @@ class ProfileTab extends StatelessWidget {
             ],
           ),
         ),
+        if (kStoreBuild) ...[
         const SizedBox(height: 10),
         Panel(
           onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const PaywallScreen())),
@@ -90,6 +91,7 @@ class ProfileTab extends StatelessWidget {
             ],
           ),
         ),
+        ],
         const SizedBox(height: 26),
         Row(
           children: [
@@ -123,7 +125,7 @@ class ProfileTab extends StatelessWidget {
                 onTap: () {
                   if (!done) {
                     showInfo(context, tr('pf_cert_locked', {'l': level.code}));
-                  } else if (!s.isPro) {
+                  } else if (!s.hasPro) {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => const PaywallScreen(reasonKey: 'pw_reason_cert'),
                     ));
@@ -144,7 +146,7 @@ class ProfileTab extends StatelessWidget {
                     ),
                     if (!done)
                       Icon(Icons.lock_outline_rounded, color: C.muted, size: 20)
-                    else if (!s.isPro)
+                    else if (!s.hasPro)
                       MonoTag('PRO', color: C.accent, filled: true)
                     else
                       Icon(Icons.chevron_right_rounded, color: C.accent),

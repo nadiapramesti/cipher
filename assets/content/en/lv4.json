@@ -1,0 +1,326 @@
+[
+  {
+    "id": "lv4-ethics",
+    "level": 4,
+    "title": "Hacking Ethics & Law",
+    "summary": "The firm line between learning and breaking the law.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Permission is everything",
+        "body": "The techniques used by ethical hackers and criminals are often identical. The only difference: permission.\n\n- White hat: tests systems with written permission and reports findings\n- Black hat: breaks in without permission for gain or damage\n- Grey hat: breaks in without permission even with \"good\" intentions, still illegal\n\nWithout permission, \"just testing\" is still an attack.",
+        "tip": "A locksmith opening a door because the owner called is working. One opening doors uninvited is a burglar."
+      },
+      {
+        "title": "The law in Indonesia",
+        "body": "Indonesia's ITE Law regulates illegal access to electronic systems. Broadly, it prohibits:\n- Accessing someone else's computer or system without right\n- Breaching or bypassing security systems\n- Altering, damaging, or moving others' data without right\n- Disrupting a system so it can't work normally\n\nPenalties include prison and fines. The Personal Data Protection Law also covers misuse of personal data. Most countries have similar laws.\n\nThis is a general overview, not legal advice.",
+        "tip": "Traffic laws apply even on empty roads. Other people's systems are protected even when their security is weak."
+      },
+      {
+        "title": "Legal paths to grow",
+        "body": "The good news: there are many legal ways to practice and even get paid:\n- Practice labs: TryHackMe, Hack The Box, PortSwigger Web Security Academy, DVWA\n- CTF competitions for students\n- Bug bounties: official company programs that pay for vulnerability reports, with clear rules\n- Responsible disclosure: if you stumble on a flaw, report it to the owner without exploiting or sharing it\n\nA clean reputation is career capital in cyber security.",
+        "tip": "Want to be a great boxer? Train at the gym, not by punching people in the street."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "The main difference between an ethical hacker and a criminal is...",
+        "options": [
+          "The tools used",
+          "Permission from the system owner",
+          "Internet speed",
+          "Programming language"
+        ],
+        "explanation": "The techniques can be identical; permission decides legality.",
+        "answer": 1
+      },
+      {
+        "prompt": "Casually testing your campus site's login without permission is...",
+        "options": [
+          "Fine if intentions are good",
+          "Still illegal",
+          "Legal if unnoticed",
+          "Required for learning"
+        ],
+        "explanation": "Access without right is still a violation, whatever the intent.",
+        "answer": 1
+      },
+      {
+        "prompt": "The Indonesian law covering illegal access to electronic systems is the...",
+        "options": [
+          "Traffic Law",
+          "ITE Law",
+          "Marriage Law",
+          "Tax Law"
+        ],
+        "explanation": "The ITE Law covers illegal access, data tampering, and system disruption.",
+        "answer": 1
+      },
+      {
+        "prompt": "You stumble on a flaw in an online store app. Best step?",
+        "options": [
+          "Post it on social media",
+          "Report it to the owner without exploiting it",
+          "Sell it",
+          "Grab data as proof"
+        ],
+        "explanation": "Responsible disclosure protects users and yourself.",
+        "answer": 1
+      },
+      {
+        "prompt": "Which is a legal place to practice?",
+        "options": [
+          "Government websites",
+          "TryHackMe",
+          "Your neighbor's Wi-Fi",
+          "A friend's social media account"
+        ],
+        "explanation": "Labs like TryHackMe are built to be attacked legally.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv4-osint",
+    "level": 4,
+    "title": "Recon & OSINT",
+    "summary": "Gathering information from open sources, and protecting your own trail.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Recon: the first phase",
+        "body": "Before testing a system, pentesters gather information. This phase is called reconnaissance (recon).\n\n- Passive: only reading public info without touching the target, e.g. DNS records, the official site, job postings\n- Active: interacting directly, e.g. port scanning. This requires permission\n\nThe better the recon, the more focused the testing.",
+        "tip": "Recon is like surveying a site before renovating: measure first, then demolish."
+      },
+      {
+        "title": "OSINT: open source intelligence",
+        "body": "OSINT (Open Source Intelligence) is info from public sources:\n- Search engines and web archives\n- Social media and professional profiles\n- DNS records and domain registration data\n- Photo metadata (GPS location, camera model)\n- Leaked data already circulating publicly\n\nOSINT is used by journalists, researchers, security teams, and sadly scammers too. From a few posts, someone can learn a person's workplace, routine, even address.",
+        "tip": "OSINT is piecing old newspaper clippings into a full story. Each clipping is public, but together they can be very personal."
+      },
+      {
+        "title": "Ethical limits and protecting yourself",
+        "body": "OSINT ethics:\n- Use it to assess risk for organizations you're authorized to test, or to audit your own footprint\n- Never use it for stalking, doxxing, or tracking people\n\nCheck your own trail:\n- Search your name and phone number\n- Check whether your email appeared in breaches at haveibeenpwned.com\n- Strip location metadata before sending photos (many chat apps do it automatically, but \"document\" files often don't)\n- Tidy the public info on your profiles",
+        "tip": "Before others inspect your house, walk around it yourself and close any open windows."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Passive recon means...",
+        "options": [
+          "Scanning the target's ports",
+          "Gathering public info without touching the target",
+          "Logging into the server",
+          "Sending malware"
+        ],
+        "explanation": "Passive recon only reads open sources.",
+        "answer": 1
+      },
+      {
+        "prompt": "OSINT is...",
+        "options": [
+          "An antivirus",
+          "Information from open/public sources",
+          "A type of encryption",
+          "A programming language"
+        ],
+        "explanation": "Open Source Intelligence = intelligence from public sources.",
+        "answer": 1
+      },
+      {
+        "prompt": "Photo metadata can leak...",
+        "options": [
+          "Your Wi-Fi password",
+          "The GPS location where it was taken",
+          "Your bank balance",
+          "Your chats"
+        ],
+        "explanation": "Phone photos often store GPS coordinates in metadata.",
+        "answer": 1
+      },
+      {
+        "prompt": "Which use of OSINT is NOT ethical?",
+        "options": [
+          "Auditing your own footprint",
+          "Tracking and exposing someone's address (doxxing)",
+          "Assessing a company's risk with permission",
+          "Journalistic research"
+        ],
+        "explanation": "Doxxing harms people and can be illegal.",
+        "answer": 1
+      },
+      {
+        "prompt": "Which site checks whether your email was in a breach?",
+        "options": [
+          "haveibeenpwned.com",
+          "wikipedia.org",
+          "maps.google.com",
+          "translate.google.com"
+        ],
+        "explanation": "Have I Been Pwned indexes public breach data for checking.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv4-logs",
+    "level": 4,
+    "title": "Reading Logs & Incident Response",
+    "summary": "How security teams spot attacks, and what they do next.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Logs are a system's CCTV",
+        "body": "Almost every system records activity in logs: who logged in, when, from which IP, what was requested, and the result.\n\nA sample web log line:\n203.0.113.7 - [24/Nov 21:03] \"POST /login\" 401\n\nMeaning: IP 203.0.113.7 tried to log in and failed (401). One line is normal. A thousand similar lines in five minutes is a story.\n\nTry grep in the Terminal Simulator to practice finding patterns.",
+        "tip": "Logs are a building's guest book and CCTV footage. Usually boring, until something happens."
+      },
+      {
+        "title": "Suspicious patterns",
+        "body": "What analysts (blue team / SOC) usually hunt for:\n- Many failed logins then one success: a password guess that finally worked\n- Logins from unusual countries or hours\n- Requests with odd patterns like ' OR 1=1 or <script>\n- Huge traffic spikes from many IPs: possibly DDoS\n- A regular account suddenly accessing admin data\n\nTools called SIEMs gather logs from many systems and raise alerts automatically.",
+        "tip": "A good guard doesn't watch every recording, but knows which moments to replay."
+      },
+      {
+        "title": "Incident response steps",
+        "body": "When an incident happens, teams follow a common flow:\n1. Preparation: have a plan, contacts, and backups before anything happens\n2. Detection & analysis: confirm it's real and how wide it is\n3. Containment: isolate affected systems so it doesn't spread\n4. Eradication: remove the attacker's access and patch the flaw\n5. Recovery: restore services from clean backups\n6. Lessons learned: record what to improve so it doesn't recur\n\nPersonal accounts work the same way: lock (change password), check damage, recover, and harden (2FA).",
+        "tip": "Like firefighting: contain the fire so it doesn't spread, find the cause, repair, then install better alarms."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "The log line \"POST /login\" 401 means...",
+        "options": [
+          "Login succeeded",
+          "A failed login attempt",
+          "Page not found",
+          "Server crashed"
+        ],
+        "explanation": "401 = authentication failed.",
+        "answer": 1
+      },
+      {
+        "prompt": "Hundreds of failed logins then one success from the same IP suggests...",
+        "options": [
+          "A user forgot once",
+          "A password guess that finally worked",
+          "A server update",
+          "Nothing unusual"
+        ],
+        "explanation": "A successful brute-force pattern needs immediate follow-up.",
+        "answer": 1
+      },
+      {
+        "prompt": "A SIEM is used to...",
+        "options": [
+          "Design apps",
+          "Collect logs and raise automatic alerts",
+          "Encrypt passwords",
+          "Speed up Wi-Fi"
+        ],
+        "explanation": "A SIEM unifies logs from many systems for analysis.",
+        "answer": 1
+      },
+      {
+        "prompt": "The step after detection that stops an incident from spreading is...",
+        "options": [
+          "Lessons learned",
+          "Containment / isolation",
+          "Preparation",
+          "Deleting all logs"
+        ],
+        "explanation": "Containment limits damage before eradication.",
+        "answer": 1
+      },
+      {
+        "prompt": "Your social media account was hijacked. The right order?",
+        "options": [
+          "Make a new account and forget it",
+          "Secure it (change password, sign out sessions), check damage, recover, enable 2FA",
+          "Wait for the hijacker to get bored",
+          "Post angrily"
+        ],
+        "explanation": "The incident response flow applies to personal accounts too.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv4-roadmap",
+    "level": 4,
+    "title": "CTF & Career Paths",
+    "summary": "How to practice with direction, and the roles in cyber security.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "CTF: learning by playing",
+        "body": "Capture The Flag (CTF) competitions are about finding \"flags\", secret text hidden in challenges. Typical categories:\n- Web: web app flaws\n- Crypto: breaking ciphers\n- Forensics: analyzing files, images, or network captures\n- Reverse engineering: dissecting programs\n- OSINT and misc\n\nYou've already tried a mini version in this app. The flags use the same format: CIPHER{...}.",
+        "tip": "A CTF is a digital escape room: each clue opens the next door."
+      },
+      {
+        "title": "Roles in cyber security",
+        "body": "Cyber security is broad, not just \"hackers\":\n- Red team / pentester: tests systems by attacking them, with permission\n- Blue team / SOC analyst: monitors, detects, and responds to attacks\n- Security engineer: builds secure systems and infrastructure\n- AppSec: secures application code, great for people who like coding\n- GRC: policy, audits, and compliance\n- Digital forensics: investigates evidence after incidents\n\nMany people start in IT support, networking, or development, then move into security.",
+        "tip": "Like a hospital: surgeons, on-call doctors, pharmacists, management. All essential."
+      },
+      {
+        "title": "Your next learning plan",
+        "body": "After Cipher, a sensible order:\n1. Strengthen the basics: networking, Linux, and one scripting language (Python or Bash)\n2. Guided practice: TryHackMe beginner paths, or PortSwigger Academy for web\n3. Join beginner CTFs, solo or with friends, and write up your solutions\n4. Build a portfolio: log completed labs on GitHub or a blog\n5. An entry-level certification if you need it for jobs, e.g. CompTIA Security+ or similar\n\n30 consistent minutes a day beats a weekly marathon.",
+        "tip": "Learning cyber security is like climbing a mountain: no need to run, just don't stop walking."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "In a CTF, a \"flag\" is...",
+        "options": [
+          "A country's flag",
+          "Secret text you need to find",
+          "The team name",
+          "A type of virus"
+        ],
+        "explanation": "Finding the flag proves you solved the challenge.",
+        "answer": 1
+      },
+      {
+        "prompt": "The CTF category about dissecting programs is...",
+        "options": [
+          "Web",
+          "Reverse engineering",
+          "OSINT",
+          "Crypto"
+        ],
+        "explanation": "Reverse engineering analyzes how programs work without source code.",
+        "answer": 1
+      },
+      {
+        "prompt": "The role that monitors and responds to attacks is...",
+        "options": [
+          "Red team",
+          "Blue team / SOC analyst",
+          "UI designer",
+          "Sales"
+        ],
+        "explanation": "The blue team defends; the red team tests by attacking.",
+        "answer": 1
+      },
+      {
+        "prompt": "For people who love coding, the most related security role is...",
+        "options": [
+          "AppSec",
+          "GRC",
+          "Forensics",
+          "Sales"
+        ],
+        "explanation": "AppSec focuses on securing code and applications.",
+        "answer": 0
+      },
+      {
+        "prompt": "The most effective study habit according to this module?",
+        "options": [
+          "A weekly marathon",
+          "A little, consistently, every day",
+          "Jumping to the hardest certification",
+          "Studying only before exams"
+        ],
+        "explanation": "Regular practice makes knowledge stick longer.",
+        "answer": 1
+      }
+    ]
+  }
+]

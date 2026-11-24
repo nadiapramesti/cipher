@@ -4,8 +4,10 @@ import '../ctf/flags.dart';
 class VirtualShell {
   VirtualShell({bool english = false}) : _en = english {
     _fs = {
-      '/': ['home', 'etc'],
+      '/': ['home', 'etc', 'var'],
       '/etc': ['motd'],
+      '/var': ['log'],
+      '/var/log': ['auth.log'],
       '/home': ['kamu'],
       '/home/kamu': [_t('baca_aku.txt', 'read_me.txt'), _t('catatan', 'notes'), '.rahasia'],
       '/home/kamu/${_t('catatan', 'notes')}': [_t('tugas.txt', 'todo.txt'), _t('password_lama.txt', 'old_password.txt')],
@@ -14,8 +16,8 @@ class VirtualShell {
     _files = {
       '/etc/motd': _t('Selamat datang di Cipher Linux (simulasi).', 'Welcome to Cipher Linux (simulated).'),
       '/home/kamu/${_t('baca_aku.txt', 'read_me.txt')}': _t(
-        'Halo! Ini terminal latihan.\nCoba: ls, cd, pwd, cat, grep.\nPetunjuk: file tersembunyi namanya diawali titik. Pakai "ls -a".',
-        'Hi! This is a practice terminal.\nTry: ls, cd, pwd, cat, grep.\nHint: hidden files start with a dot. Use "ls -a".',
+        'Halo! Ini terminal latihan.\nCoba: ls, cd, pwd, cat, grep.\nPetunjuk: file tersembunyi namanya diawali titik. Pakai "ls -a".\nLatihan log: grep Failed /var/log/auth.log',
+        'Hi! This is a practice terminal.\nTry: ls, cd, pwd, cat, grep.\nHint: hidden files start with a dot. Use "ls -a".\nLog practice: grep Failed /var/log/auth.log',
       ),
       '/home/kamu/${_t('catatan', 'notes')}/${_t('tugas.txt', 'todo.txt')}': _t(
         '1. Pelajari perintah dasar\n2. Cari folder yang disembunyikan\n3. Baca flag-nya',
@@ -26,6 +28,16 @@ class VirtualShell {
         'bismillah123\n(BAD example: never keep passwords in a plain file!)',
       ),
       '/home/kamu/.rahasia/flag.txt': Flags.terminal,
+      '/var/log/auth.log': [
+        'Nov 24 08:01:12 sshd: Accepted password for kamu from 192.168.1.20',
+        'Nov 24 21:03:01 sshd: Failed password for root from 203.0.113.7',
+        'Nov 24 21:03:02 sshd: Failed password for root from 203.0.113.7',
+        'Nov 24 21:03:03 sshd: Failed password for admin from 203.0.113.7',
+        'Nov 24 21:03:04 sshd: Failed password for admin from 203.0.113.7',
+        'Nov 24 21:03:05 sshd: Failed password for kamu from 203.0.113.7',
+        'Nov 24 21:03:07 sshd: Accepted password for kamu from 203.0.113.7',
+        'Nov 24 21:03:09 sudo: kamu : COMMAND=/bin/cat /home/kamu/.rahasia/flag.txt',
+      ].join('\n'),
     };
   }
 

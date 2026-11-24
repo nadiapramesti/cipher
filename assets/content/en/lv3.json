@@ -1,0 +1,407 @@
+[
+  {
+    "id": "lv3-ehe",
+    "level": 3,
+    "title": "Encoding vs Hashing vs Encryption",
+    "summary": "Three things often mixed up, with very different goals.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Encoding: a format change, not a secret",
+        "body": "Encoding converts data to another format so it can be sent or stored safely in a technical sense. Examples: Base64, URL encoding, and hex.\n\nKey point: encoding uses no key. Anyone can reverse it. \"Q0lQSEVS\" is just the Base64 of \"CIPHER\".\n\nSo if an app \"secures\" passwords with Base64, they aren't secured at all.",
+        "tip": "Encoding is like translating text to Morse code. Not a secret, just a different form."
+      },
+      {
+        "title": "Hashing: a one-way fingerprint",
+        "body": "A hash turns any data into a fixed-length string, e.g. SHA-256 is always 64 hex characters.\n\nProperties:\n- One-way: it can't be reversed into the original data\n- Change one letter and the result changes completely\n- The same data always gives the same hash\n\nUsed to store passwords and to check files haven't changed (download checksums).",
+        "tip": "A hash is a fingerprint. You can take a print from a finger, but you can't rebuild the finger from the print."
+      },
+      {
+        "title": "Encryption: secrets with a key",
+        "body": "Encryption scrambles data with a key, and only someone with the key can restore it (decryption).\n\nCompared with the other two:\n- Encoding: reversible by anyone, no key\n- Hashing: not reversible at all\n- Encryption: reversible, but only with the key\n\nExamples: WhatsApp end-to-end chats, HTTPS, and phone storage encryption.",
+        "tip": "Encryption is a safe. You can get the contents back, but only with the key."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Base64 is...",
+        "options": [
+          "Encryption",
+          "Encoding",
+          "Hashing",
+          "A firewall"
+        ],
+        "explanation": "Base64 only changes the format; anyone can reverse it without a key.",
+        "answer": 1
+      },
+      {
+        "prompt": "The main property of a hash is...",
+        "options": [
+          "Reversible with a key",
+          "One-way, not reversible",
+          "Length matches the data",
+          "Random every time"
+        ],
+        "explanation": "Hashes are designed to be one-way and consistent for the same input.",
+        "answer": 1
+      },
+      {
+        "prompt": "Which is reversible, but only with a key?",
+        "options": [
+          "Encoding",
+          "Hashing",
+          "Encryption",
+          "Compression"
+        ],
+        "explanation": "Encryption needs a key to decrypt.",
+        "answer": 2
+      },
+      {
+        "prompt": "An app stores passwords in Base64. This is...",
+        "options": [
+          "Very secure",
+          "Insecure, because it's easily reversed",
+          "Industry standard",
+          "The same as encryption"
+        ],
+        "explanation": "Encoding isn't protection. Passwords must be hashed with a dedicated algorithm.",
+        "answer": 1
+      },
+      {
+        "prompt": "A SHA-256 checksum on a download page is used to...",
+        "options": [
+          "Speed up the download",
+          "Verify the file wasn't altered or corrupted",
+          "Encrypt the file",
+          "Rename the file"
+        ],
+        "explanation": "If your downloaded file's hash matches the listed one, the contents are identical.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv3-classic",
+    "level": 3,
+    "title": "Classic Ciphers",
+    "summary": "Caesar and Vigenère: how they work, and why they're easy to break today.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "The Caesar cipher",
+        "body": "One of the oldest ciphers. Every letter shifts a fixed number of places. With a shift of 3: A→D, B→E, ... X→A.\n\n\"HELLO\" becomes \"KHOOR\".\n\nIts weakness: there are only 25 possible shifts. A computer, or even a patient human, can try them all in seconds. This is called brute force.",
+        "tip": "Caesar is a one-digit combination lock. At most 25 tries and it opens."
+      },
+      {
+        "title": "Vigenère: shifting shifts",
+        "body": "Vigenère uses a keyword. Each key letter sets the shift for the matching message letter. The key \"KEY\" means shift 10, 4, 24, then repeat.\n\nThat way the same letter doesn't always become the same letter, making it harder to guess. For centuries it was called \"the unbreakable cipher\".\n\nBut because the key repeats, patterns can still be analyzed, and computers now break it easily.",
+        "tip": "Vigenère is a lock whose combination changes every letter, but the combinations cycle in the same order forever."
+      },
+      {
+        "title": "Frequency analysis",
+        "body": "In every language, some letters appear far more often. In English, E is the most common; in Indonesian, A.\n\nClassic ciphers only shuffle letters; they don't hide these patterns. So if R is the most common letter in a ciphertext, it's probably a disguised E or A.\n\nThe lesson: never invent your own encryption for real data. Use modern, tested algorithms like AES.\n\nTry it yourself in Toolbox → Cipher.",
+        "tip": "A disguise changes the clothes, not the walk: people who know you can still guess."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "With a Caesar shift of 3, the letter A becomes...",
+        "options": [
+          "B",
+          "C",
+          "D",
+          "Z"
+        ],
+        "explanation": "A shifted three places: B, C, D.",
+        "answer": 2
+      },
+      {
+        "prompt": "Why is Caesar easy to break?",
+        "options": [
+          "Too many letters",
+          "There are only 25 possible shifts",
+          "It needs internet",
+          "It uses a long key"
+        ],
+        "explanation": "Every possibility can be tried quickly (brute force).",
+        "answer": 1
+      },
+      {
+        "prompt": "Vigenère sets each letter's shift based on...",
+        "options": [
+          "The current time",
+          "A keyword",
+          "Message length",
+          "Random letters"
+        ],
+        "explanation": "Each keyword letter gives a different, repeating shift.",
+        "answer": 1
+      },
+      {
+        "prompt": "Frequency analysis exploits...",
+        "options": [
+          "Certain letters appearing more often",
+          "Internet speed",
+          "Text color",
+          "File size"
+        ],
+        "explanation": "Classic ciphers don't hide letter frequency patterns.",
+        "answer": 0
+      },
+      {
+        "prompt": "To encrypt real data you should...",
+        "options": [
+          "Invent your own cipher",
+          "Use a modern, tested algorithm like AES",
+          "Use Caesar shift 13",
+          "Use Base64"
+        ],
+        "explanation": "Homemade algorithms almost always have hidden weaknesses.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv3-hash-pass",
+    "level": 3,
+    "title": "Hashing & Password Storage",
+    "summary": "Salts, slow algorithms, and why MD5 is retired.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "A good server doesn't know your password",
+        "body": "A properly built app doesn't store your actual password. It stores the hash. At login, what you type is hashed again and compared.\n\nIf the database leaks, attackers get hashes, not passwords. But they can still guess: hash common words, then match.\n\nPrecomputed tables of hashes for this kind of guessing are called rainbow tables.",
+        "tip": "A good guard doesn't keep a copy of your house key, only a photo of its shape to compare against."
+      },
+      {
+        "title": "Salt: a unique seasoning per user",
+        "body": "A salt is random, unique data added to a password before hashing, then stored alongside the hash.\n\nBenefits:\n- Two people with the same password get different hashes\n- Rainbow tables become useless, since they'd have to be rebuilt per salt\n\nA salt isn't secret. Its job is to make mass guessing expensive.",
+        "tip": "Two identical bowls of soup taste different because each gets a different secret seasoning."
+      },
+      {
+        "title": "Why it must be slow",
+        "body": "MD5 and SHA-1 were designed to be fast. Great for checksums, bad for passwords, because computers can guess billions of times per second. MD5 is also considered broken.\n\nFor passwords, use deliberately slow algorithms with a tunable cost:\n- bcrypt\n- scrypt\n- Argon2 (the modern recommendation)\n\nFor users: since leaks still happen, a long, unique password per account remains the key defense.",
+        "tip": "A door that takes one second to open doesn't bother the owner, but frustrates a thief trying a million keys."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A secure app stores passwords as...",
+        "options": [
+          "Plain text",
+          "Base64",
+          "Salted hashes",
+          "Screenshots"
+        ],
+        "explanation": "Salted hashes keep the real password unstored and hard to mass-guess.",
+        "answer": 2
+      },
+      {
+        "prompt": "A salt's purpose is to...",
+        "options": [
+          "Encrypt the password",
+          "Make hashes unique even for identical passwords",
+          "Speed up login",
+          "Hide the username"
+        ],
+        "explanation": "A random salt makes rainbow tables useless.",
+        "answer": 1
+      },
+      {
+        "prompt": "A rainbow table is...",
+        "options": [
+          "An app color theme",
+          "A precomputed set of hashes for guessing passwords",
+          "A type of firewall",
+          "A user list"
+        ],
+        "explanation": "A table of hashes for many commonly used passwords.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why is MD5 unsuitable for passwords?",
+        "options": [
+          "Too slow",
+          "Too fast and considered broken",
+          "Doesn't work on Android",
+          "Output too long"
+        ],
+        "explanation": "Fast algorithms let attackers guess billions of times per second.",
+        "answer": 1
+      },
+      {
+        "prompt": "The currently recommended password hashing algorithm is...",
+        "options": [
+          "MD5",
+          "SHA-1",
+          "Argon2",
+          "Base64"
+        ],
+        "explanation": "Argon2 is deliberately slow and memory-hard, making mass guessing costly.",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "lv3-keys",
+    "level": 3,
+    "title": "Symmetric & Asymmetric Keys",
+    "summary": "One shared key vs a public-private key pair.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Symmetric: one shared key",
+        "body": "In symmetric encryption, the same key locks and unlocks. Example: AES.\n\nIt's fast and great for large data. The problem: how do you send the key to the other person without it being intercepted? If the key travels the same channel, an eavesdropper gets it too.",
+        "tip": "Like one padlock key with a duplicate. Handy, but getting the duplicate to a distant friend is the hard part."
+      },
+      {
+        "title": "Asymmetric: public and private keys",
+        "body": "Asymmetric encryption uses a linked pair of keys:\n- Public key: can be shared with anyone\n- Private key: kept to yourself, must never leak\n\nA message locked with the public key can only be opened by its matching private key. So anyone can send you a secret message without exchanging keys first. Examples: RSA and elliptic curves (ECC).",
+        "tip": "A public key is a mailbox with a slot. Anyone can drop in a letter, but only the key holder can open the box."
+      },
+      {
+        "title": "Used together",
+        "body": "Asymmetric is safe for exchanging keys but slow. Symmetric is fast but hard to share. The answer: combine them.\n\n- Use asymmetric to agree on or send a symmetric key safely\n- Then encrypt all data with that symmetric key\n\nThis pattern powers HTTPS, WhatsApp, and VPNs. Private keys are also used for digital signatures, covered in the next module.",
+        "tip": "Send the safe's key through a secure mailbox, then keep everything in the fast-opening safe."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Symmetric encryption means...",
+        "options": [
+          "A pair of different keys",
+          "The same key locks and unlocks",
+          "No key at all",
+          "Signatures only"
+        ],
+        "explanation": "AES is symmetric: one shared key.",
+        "answer": 1
+      },
+      {
+        "prompt": "The key that can be shared with anyone is the...",
+        "options": [
+          "Private key",
+          "Public key",
+          "Symmetric key",
+          "Password"
+        ],
+        "explanation": "Public keys are made to be shared.",
+        "answer": 1
+      },
+      {
+        "prompt": "A message is locked with Nadia's public key. Who can open it?",
+        "options": [
+          "Everyone",
+          "Only the holder of Nadia's private key",
+          "The sender",
+          "Google's servers"
+        ],
+        "explanation": "Only the matching private key can open it.",
+        "answer": 1
+      },
+      {
+        "prompt": "The main problem with symmetric encryption is...",
+        "options": [
+          "It's too slow",
+          "Sharing the key safely",
+          "It doesn't work on phones",
+          "Output is too large"
+        ],
+        "explanation": "The key must reach the recipient without interception.",
+        "answer": 1
+      },
+      {
+        "prompt": "HTTPS uses...",
+        "options": [
+          "Only symmetric",
+          "Only asymmetric",
+          "Asymmetric (key exchange) plus symmetric (data)",
+          "Base64"
+        ],
+        "explanation": "Asymmetric for the key, symmetric for the data because it's faster.",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "lv3-tls",
+    "level": 3,
+    "title": "HTTPS, Certificates & Signatures",
+    "summary": "How browsers know a site is real, and what the padlock means.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Digital signatures",
+        "body": "A private key can also \"sign\" data. Anyone can verify the signature with the public key.\n\nA digital signature proves two things:\n- Authenticity: the data really came from the private key's owner\n- Integrity: the data hasn't changed since it was signed\n\nA real example: Android app updates are signed by the developer. If the signature differs, the phone refuses to install it over the old app.",
+        "tip": "A digital signature is a wax seal with a personal stamp: anyone can check it's genuine, but only the stamp's owner can make it."
+      },
+      {
+        "title": "Certificates and Certificate Authorities",
+        "body": "When you open an HTTPS site, the server sends a certificate containing its public key and domain name. The certificate is signed by a Certificate Authority (CA), an organization trusted by browsers and operating systems.\n\nThe browser checks:\n- The CA signature is valid\n- The domain name matches\n- The certificate hasn't expired\n\nIf anything fails, a red warning appears. That's why certificate warnings must never be skipped.",
+        "tip": "A certificate is a site's ID card; the CA is the government office. The browser trusts the ID because it trusts the issuer."
+      },
+      {
+        "title": "What the padlock really means",
+        "body": "The padlock in the address bar means your connection to that server is encrypted and the server really controls that domain.\n\nBut a padlock doesn't mean the site is honest. Scammers can get free certificates for fake domains like bank-official-prize.com. The connection is secure, but you're still talking to a scammer.\n\nSo always check the domain name carefully, not just the padlock.",
+        "tip": "The padlock guarantees your letter stays sealed on the way. But if the address is wrong, the sealed letter still reaches the wrong person."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A digital signature proves...",
+        "options": [
+          "Data was sent fast",
+          "The sender is authentic and the data unchanged",
+          "Data is compressed",
+          "The sender is online"
+        ],
+        "explanation": "Signatures guarantee authenticity and integrity.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why can't an APK with a different signature replace the old app?",
+        "options": [
+          "Different size",
+          "Android ensures updates come from the same developer",
+          "Different colors",
+          "It needs internet"
+        ],
+        "explanation": "A different signature could mean a fake app, so Android refuses it.",
+        "answer": 1
+      },
+      {
+        "prompt": "A Certificate Authority (CA)...",
+        "options": [
+          "Sells domains",
+          "Signs certificates that browsers trust",
+          "Creates passwords",
+          "Blocks ads"
+        ],
+        "explanation": "Browsers trust certificates because a trusted CA signed them.",
+        "answer": 1
+      },
+      {
+        "prompt": "A scam site has an HTTPS padlock. This means...",
+        "options": [
+          "It's definitely safe",
+          "The connection is encrypted, but it can still be a scam",
+          "It belongs to a bank",
+          "A browser error"
+        ],
+        "explanation": "The padlock covers the connection, not the owner's honesty.",
+        "answer": 1
+      },
+      {
+        "prompt": "Your browser warns the domain doesn't match the certificate. You should...",
+        "options": [
+          "Continue",
+          "Not continue and not enter any data",
+          "Quit browsers forever",
+          "Post a screenshot to a group"
+        ],
+        "explanation": "It's a sign of a fake site or an intercepted connection.",
+        "answer": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,407 @@
+[
+  {
+    "id": "lv2-http",
+    "level": 2,
+    "title": "HTTP: Bahasa Browser",
+    "summary": "Request, response, method, dan status code di balik tiap halaman web.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Request dan response",
+        "body": "Tiap kali buka halaman, browser ngirim request HTTP ke server, lalu server bales pakai response.\n\nRequest berisi:\n- Method: mau ngapain (GET, POST, dll.)\n- Path: halaman yang diminta, misal /login\n- Header: info tambahan (browser apa, cookie, bahasa)\n- Body: data yang dikirim, misal isi form\n\nResponse berisi status code, header, dan isi halaman (HTML, gambar, JSON).",
+        "tip": "Request itu kertas pesanan di restoran, response itu makanan yang dateng plus struknya."
+      },
+      {
+        "title": "Method yang sering dipakai",
+        "body": "- GET: ambil data. Parameternya kelihatan di URL, misal /cari?q=kucing\n- POST: kirim data, misal form login. Datanya ada di body\n- PUT / PATCH: ubah data\n- DELETE: hapus data\n\nKarena parameter GET muncul di URL, data rahasia kayak password gak boleh dikirim lewat GET. URL bisa kesimpen di riwayat browser, log server, dan kebawa saat link dibagi.",
+        "tip": "GET itu kartu pos: isinya kebaca siapa aja yang megang. POST itu surat dalam amplop."
+      },
+      {
+        "title": "Status code",
+        "body": "Angka 3 digit di response yang ngasih tahu hasilnya:\n- 2xx sukses, misal 200 OK\n- 3xx dialihkan, misal 301 pindah permanen\n- 4xx salah di sisi client: 401 belum login, 403 dilarang, 404 gak ketemu\n- 5xx salah di sisi server, misal 500 Internal Server Error\n\nBuat analis keamanan, pola status code di log itu petunjuk. Ratusan 401 dari satu IP dalam semenit bisa jadi tanda ada yang nyoba nebak password.",
+        "tip": "Status code itu kayak lampu indikator mesin: hijau aman, kuning perhatian, merah ada masalah."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Method HTTP buat ngirim isi form login sebaiknya...",
+        "options": [
+          "GET",
+          "POST",
+          "DELETE",
+          "HEAD"
+        ],
+        "explanation": "POST naruh data di body, bukan di URL yang bisa kesimpen di riwayat dan log.",
+        "answer": 1
+      },
+      {
+        "prompt": "Status 404 artinya...",
+        "options": [
+          "Sukses",
+          "Halaman gak ketemu",
+          "Server rusak",
+          "Dialihkan"
+        ],
+        "explanation": "404 Not Found: yang diminta gak ada di server.",
+        "answer": 1
+      },
+      {
+        "prompt": "Status code kelompok 5xx menandakan...",
+        "options": [
+          "Kesalahan di sisi server",
+          "Kesalahan pengguna",
+          "Berhasil",
+          "Butuh login"
+        ],
+        "explanation": "5xx berarti server gagal memproses request yang sebenarnya valid.",
+        "answer": 0
+      },
+      {
+        "prompt": "Ratusan respons 401 ke satu IP dalam semenit kemungkinan tanda...",
+        "options": [
+          "Server lagi update",
+          "Ada yang nyoba nebak password",
+          "Internet lemot",
+          "Pengguna baru daftar"
+        ],
+        "explanation": "401 artinya gagal autentikasi. Banyak sekaligus = pola brute force.",
+        "answer": 1
+      },
+      {
+        "prompt": "Bagian request yang membawa cookie dan info browser adalah...",
+        "options": [
+          "Status code",
+          "Header",
+          "Path",
+          "Port"
+        ],
+        "explanation": "Header berisi metadata request, termasuk cookie dan User-Agent.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv2-cookie",
+    "level": 2,
+    "title": "Cookie & Sesi",
+    "summary": "Gimana situs inget kamu udah login, dan kenapa cookie sesi diincer.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "HTTP itu pelupa",
+        "body": "HTTP gak inget request sebelumnya. Tiap request berdiri sendiri. Jadi gimana situs tahu kamu udah login?\n\nJawabannya: sesi. Setelah login berhasil, server bikin ID sesi acak dan nyimpen \"ID ini = Nadia\". ID itu dikirim ke browser sebagai cookie, dan browser otomatis ngirim balik cookie itu di tiap request berikutnya.",
+        "tip": "Cookie sesi itu gelang tiket konser. Udah dicek sekali di pintu, selanjutnya cukup tunjukin gelangnya."
+      },
+      {
+        "title": "Pembajakan sesi",
+        "body": "Karena cookie sesi = bukti login, siapa pun yang dapet cookie itu bisa masuk sebagai kamu tanpa password, bahkan tanpa 2FA.\n\nCara cookie dicuri:\n- Malware atau ekstensi browser jahat yang nyedot cookie\n- XSS yang membaca cookie lewat JavaScript\n- Login di komputer umum lalu lupa logout\n\nIni sebabnya ada modus \"kirim file ini\" yang ternyata pencuri cookie buat bajak akun YouTube, Instagram, dan Facebook.",
+        "tip": "Gelang tiket yang dicopot dan dipakai orang lain, satpamnya tetep ngizinin masuk."
+      },
+      {
+        "title": "Atribut cookie yang aman",
+        "body": "Developer bisa ngelindungin cookie sesi pakai atribut:\n- HttpOnly: cookie gak bisa dibaca JavaScript, jadi XSS susah nyuri\n- Secure: cookie cuma dikirim lewat HTTPS\n- SameSite: cookie gak ikut terkirim dari situs lain (bantu cegah CSRF)\n- Masa berlaku pendek, dan ID sesi diganti setelah login\n\nBuat pengguna: logout di perangkat orang lain, cek \"perangkat yang login\" di akun penting, dan jangan pasang ekstensi asal-asalan.",
+        "tip": "Atribut cookie itu kayak gelang yang gak bisa dicopot tanpa digunting, plus cuma berlaku di gedung itu."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kenapa situs butuh cookie sesi?",
+        "options": [
+          "Biar halaman berwarna",
+          "Karena HTTP gak inget request sebelumnya",
+          "Buat mempercepat Wi-Fi",
+          "Buat nyimpen password asli"
+        ],
+        "explanation": "Cookie sesi menghubungkan request-request terpisah ke satu pengguna yang udah login.",
+        "answer": 1
+      },
+      {
+        "prompt": "Penyerang dapet cookie sesi kamu. Apa yang bisa dia lakukan?",
+        "options": [
+          "Gak bisa apa-apa tanpa password",
+          "Masuk ke akun sebagai kamu",
+          "Cuma lihat foto profil",
+          "Mengubah IP kamu"
+        ],
+        "explanation": "Cookie sesi = bukti login. Ini bahkan bisa melewati 2FA.",
+        "answer": 1
+      },
+      {
+        "prompt": "Atribut HttpOnly membuat cookie...",
+        "options": [
+          "Lebih cepat",
+          "Gak bisa dibaca JavaScript",
+          "Bisa dipakai di semua situs",
+          "Gak pernah kedaluwarsa"
+        ],
+        "explanation": "Ini mengurangi risiko cookie dicuri lewat XSS.",
+        "answer": 1
+      },
+      {
+        "prompt": "Atribut Secure artinya cookie...",
+        "options": [
+          "Dienkripsi pakai password",
+          "Cuma dikirim lewat HTTPS",
+          "Disimpan di server",
+          "Dihapus tiap menit"
+        ],
+        "explanation": "Cookie Secure gak akan dikirim lewat HTTP biasa yang gak terenkripsi.",
+        "answer": 1
+      },
+      {
+        "prompt": "Habis login di komputer warnet, langkah terpenting?",
+        "options": [
+          "Tutup tab aja",
+          "Logout dari akun",
+          "Matikan monitor",
+          "Ganti wallpaper"
+        ],
+        "explanation": "Nutup tab gak menghapus sesi. Logout membuat cookie sesi gak berlaku lagi.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv2-xss",
+    "level": 2,
+    "title": "XSS: Script Nyusup",
+    "summary": "Saat input pengguna berubah jadi kode yang jalan di browser orang lain.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Apa itu XSS",
+        "body": "Cross-Site Scripting (XSS) terjadi ketika situs menampilkan input pengguna apa adanya, tanpa diolah. Kalau input itu berisi tag <script>, browser pengunjung lain akan menjalankannya sebagai kode.\n\nContoh: kolom komentar nampilin teks mentah. Penyerang nulis komentar berisi script. Tiap orang yang buka halaman itu, script-nya jalan di browser mereka.",
+        "tip": "Bayangin papan pengumuman yang otomatis ngebacain semua tulisan pakai pengeras suara, termasuk tulisan \"semua orang serahin dompet ke saya\"."
+      },
+      {
+        "title": "Jenis dan dampaknya",
+        "body": "Tiga jenis utama:\n- Stored: script kesimpen di database (komentar, profil), nyerang tiap pengunjung\n- Reflected: script ada di link, nyerang orang yang ngeklik link itu\n- DOM-based: JavaScript di halaman sendiri yang salah ngolah input\n\nDampaknya: nyuri cookie sesi, ganti isi halaman jadi form login palsu, atau ngelakuin aksi atas nama korban.",
+        "tip": "Stored itu jebakan yang dipasang di lantai. Reflected itu jebakan yang dibungkus jadi kado buat dikirim."
+      },
+      {
+        "title": "Cara mencegahnya",
+        "body": "Prinsipnya: data pengguna harus tetap jadi data, jangan sampai jadi kode.\n- Output encoding/escaping: ubah < jadi &lt; sebelum ditampilkan, jadi tampil sebagai teks\n- Pakai framework modern (Flutter, React, Vue) yang otomatis escape\n- Validasi input: tolak yang jelas gak sesuai format\n- Content Security Policy (CSP): batasi script dari mana aja yang boleh jalan\n- Cookie HttpOnly sebagai lapisan tambahan\n\nBuat pengguna: hati-hati klik link panjang aneh, walau domainnya asli.",
+        "tip": "Escaping itu kayak masukin tulisan ke dalam bingkai kaca: tetep kebaca, tapi gak bisa \"diucapin\" sebagai perintah."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "XSS terjadi karena...",
+        "options": [
+          "Password terlalu pendek",
+          "Input pengguna ditampilkan tanpa diolah sehingga jadi kode",
+          "Server kehabisan memori",
+          "Wi-Fi gak dienkripsi"
+        ],
+        "explanation": "Inti XSS: data dari pengguna dieksekusi sebagai script di browser.",
+        "answer": 1
+      },
+      {
+        "prompt": "XSS yang kesimpen di kolom komentar dan nyerang semua pengunjung disebut...",
+        "options": [
+          "Reflected",
+          "Stored",
+          "DOM-based",
+          "SQL injection"
+        ],
+        "explanation": "Stored XSS tersimpan di database dan muncul untuk setiap pengunjung.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pencegahan utama XSS adalah...",
+        "options": [
+          "Ganti warna situs",
+          "Output encoding/escaping",
+          "Matikan HTTPS",
+          "Perbesar server"
+        ],
+        "explanation": "Escaping membuat input tampil sebagai teks, bukan dijalankan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Salah satu dampak XSS adalah...",
+        "options": [
+          "Mencuri cookie sesi korban",
+          "Mempercepat situs",
+          "Mengganti IP server",
+          "Menghapus Wi-Fi"
+        ],
+        "explanation": "Script yang jalan di browser korban bisa membaca cookie (kalau gak HttpOnly).",
+        "answer": 0
+      },
+      {
+        "prompt": "Content Security Policy (CSP) membantu dengan cara...",
+        "options": [
+          "Membatasi sumber script yang boleh jalan",
+          "Mengenkripsi database",
+          "Memblokir semua gambar",
+          "Mengganti password otomatis"
+        ],
+        "explanation": "CSP memberi tahu browser script dari mana saja yang diizinkan.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv2-sqli",
+    "level": 2,
+    "title": "SQL Injection",
+    "summary": "Saat isian form ikut ngubah perintah ke database.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Database dan query",
+        "body": "Hampir semua aplikasi nyimpen data di database dan ngambilnya pakai bahasa SQL. Contoh query login:\n\nSELECT * FROM users WHERE user = 'nadia' AND pass = '...'\n\nMasalah muncul kalau aplikasi nyusun query dengan cara nyambung-nyambungin teks dari input pengguna langsung ke dalam perintah.",
+        "tip": "Query itu kayak formulir pesanan yang diisi pelayan. Bahaya kalau tamu boleh nulis langsung di kertas pesanannya."
+      },
+      {
+        "title": "Gimana injeksinya terjadi",
+        "body": "Kalau input disambung mentah, tanda kutip dari pengguna bisa \"menutup\" teks lebih awal dan sisanya dibaca sebagai perintah. Contoh klasik: isian ' OR '1'='1 bikin kondisi selalu benar, jadi login lolos tanpa password yang benar.\n\nDampak SQL injection bisa parah:\n- Login tanpa password\n- Baca seluruh data pengguna\n- Ubah atau hapus data\n\nBanyak kebocoran data besar berawal dari celah ini.",
+        "tip": "Kayak tamu yang nulis di kertas pesanan: \"1 nasi goreng, dan kasih saya isi laci kasir\". Kalau koki nurut aja, bahaya."
+      },
+      {
+        "title": "Pencegahannya: parameterized query",
+        "body": "Solusinya sederhana dan ampuh: jangan pernah nyambung input ke query. Pakai parameterized query (prepared statement):\n\nSELECT * FROM users WHERE user = ? AND pass = ?\n\nDatabase menerima perintah dan data secara terpisah, jadi input apa pun tetap dianggap data.\n\nTambahan:\n- Pakai ORM atau query builder\n- Akun database dengan hak seminimal mungkin\n- Password disimpan sebagai hash, bukan teks asli\n\nLatihan menyerang hanya di lab resmi seperti DVWA atau TryHackMe, jangan di situs orang.",
+        "tip": "Parameterized query itu formulir dengan kotak isian terkunci: tamu cuma bisa nulis di kotak \"menu\", gak bisa nambah perintah baru."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "SQL injection terjadi ketika...",
+        "options": [
+          "Input pengguna disambung langsung ke query database",
+          "Password disimpan sebagai hash",
+          "Situs pakai HTTPS",
+          "Server dimatikan"
+        ],
+        "explanation": "Teks dari pengguna ikut dibaca sebagai bagian perintah SQL.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa isian ' OR '1'='1 bisa meloloskan login di aplikasi rentan?",
+        "options": [
+          "Karena kondisinya jadi selalu benar",
+          "Karena itu password admin",
+          "Karena browser error",
+          "Karena database penuh"
+        ],
+        "explanation": "Tanda kutip menutup teks, lalu OR '1'='1' membuat WHERE selalu bernilai benar.",
+        "answer": 0
+      },
+      {
+        "prompt": "Pencegahan paling efektif SQL injection adalah...",
+        "options": [
+          "Menyembunyikan form login",
+          "Parameterized query / prepared statement",
+          "Mengganti warna tombol",
+          "Membatasi panjang URL"
+        ],
+        "explanation": "Perintah dan data dikirim terpisah, jadi input gak bisa mengubah perintah.",
+        "answer": 1
+      },
+      {
+        "prompt": "Di mana tempat yang benar buat latihan SQL injection?",
+        "options": [
+          "Situs sekolah",
+          "Lab resmi seperti DVWA atau TryHackMe",
+          "Situs bank",
+          "Situs teman tanpa izin"
+        ],
+        "explanation": "Menyerang sistem tanpa izin itu melanggar hukum, termasuk UU ITE.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa akun database aplikasi sebaiknya punya hak minimal?",
+        "options": [
+          "Biar query lebih cepat",
+          "Supaya kerusakan terbatas kalau ada celah",
+          "Biar bisa hapus tabel",
+          "Gak ada alasannya"
+        ],
+        "explanation": "Least privilege: kalau injeksi terjadi, penyerang gak bisa melakukan semuanya.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv2-owasp",
+    "level": 2,
+    "title": "Akses & OWASP Top 10",
+    "summary": "Celah paling umum di aplikasi web, dimulai dari kontrol akses yang bolong.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Kontrol akses yang bolong",
+        "body": "Login membuktikan siapa kamu (autentikasi). Kontrol akses menentukan apa yang boleh kamu lakukan (otorisasi). Celah paling umum di web justru ada di sini.\n\nContoh IDOR: halaman invoice kamu di /invoice?id=1042. Kalau diganti jadi 1043 dan muncul invoice orang lain, server lupa ngecek \"invoice ini punya siapa\".\n\nPerbaikannya: server harus selalu ngecek kepemilikan dan peran di tiap request, jangan percaya apa pun yang dikirim browser.",
+        "tip": "Kartu akses kantor ngebuktiin kamu karyawan, tapi bukan berarti boleh masuk ruang direktur."
+      },
+      {
+        "title": "OWASP Top 10",
+        "body": "OWASP adalah komunitas terbuka yang rutin merilis daftar 10 risiko keamanan web paling penting. Beberapa yang selalu muncul:\n- Broken Access Control (kayak IDOR tadi)\n- Cryptographic Failures: data sensitif gak dienkripsi\n- Injection: SQL injection, XSS, dan sejenisnya\n- Security Misconfiguration: setelan bawaan, halaman error yang ngebocorin info\n- Vulnerable Components: library usang yang punya celah\n- Authentication Failures: password lemah dibolehin, gak ada batas percobaan login\n\nDaftar ini jadi acuan developer, auditor, dan pentester di seluruh dunia.",
+        "tip": "OWASP Top 10 itu kayak daftar \"10 penyebab kebakaran paling sering\": gak semuanya, tapi kalau ini dicek, risiko turun drastis."
+      },
+      {
+        "title": "Kebiasaan developer yang aman",
+        "body": "Kalau kamu bikin aplikasi sendiri, mulai dari sini:\n- Cek otorisasi di server untuk tiap endpoint\n- Pakai parameterized query dan framework yang auto-escape\n- Update dependency rutin (flutter pub outdated, npm audit)\n- Jangan pernah commit password atau API key ke GitHub\n- Matikan mode debug dan pesan error detail di produksi\n- Batasi percobaan login dan dukung 2FA\n\nKeamanan itu bukan fitur tambahan di akhir, tapi kebiasaan dari awal ngoding.",
+        "tip": "Lebih murah pasang kunci waktu bangun rumah daripada bongkar tembok setelah kemalingan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Bedanya autentikasi dan otorisasi?",
+        "options": [
+          "Sama aja",
+          "Autentikasi = siapa kamu, otorisasi = boleh ngapain",
+          "Autentikasi = boleh ngapain, otorisasi = siapa kamu",
+          "Dua-duanya soal password"
+        ],
+        "explanation": "Login (autentikasi) belum tentu berarti boleh mengakses semuanya (otorisasi).",
+        "answer": 1
+      },
+      {
+        "prompt": "Ganti id=1042 jadi id=1043 di URL dan muncul data orang lain. Ini celah...",
+        "options": [
+          "XSS",
+          "IDOR / broken access control",
+          "Phishing",
+          "DNS spoofing"
+        ],
+        "explanation": "Server gak ngecek kepemilikan data yang diminta.",
+        "answer": 1
+      },
+      {
+        "prompt": "OWASP Top 10 adalah...",
+        "options": [
+          "Daftar antivirus terbaik",
+          "Daftar risiko keamanan aplikasi web paling penting",
+          "Peringkat hacker dunia",
+          "Standar kecepatan internet"
+        ],
+        "explanation": "Dirilis komunitas OWASP dan jadi acuan global.",
+        "answer": 1
+      },
+      {
+        "prompt": "Library usang yang punya celah diketahui masuk kategori...",
+        "options": [
+          "Vulnerable Components",
+          "Phishing",
+          "Social engineering",
+          "Backup"
+        ],
+        "explanation": "Komponen rentan bikin aplikasi ikut rentan walau kodenya sendiri rapi.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kebiasaan yang salah buat developer?",
+        "options": [
+          "Update dependency rutin",
+          "Commit API key ke GitHub",
+          "Batasi percobaan login",
+          "Cek otorisasi di server"
+        ],
+        "explanation": "Rahasia di repo publik bisa ditemukan bot dalam hitungan menit.",
+        "answer": 1
+      }
+    ]
+  }
+]

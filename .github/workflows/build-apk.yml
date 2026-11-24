@@ -64,10 +64,21 @@ jobs:
           fi
           exit $code
 
+      - name: Kunci tanda tangan tetap (biar APK bisa update tanpa uninstall)
+        env:
+          KS: ${{ secrets.SIDELOAD_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$KS" ]; then
+            mkdir -p ~/.android && echo "$KS" | base64 -d > ~/.android/debug.keystore
+            echo "Pakai kunci tetap"
+          else
+            echo "::warning::Secret SIDELOAD_KEYSTORE_B64 belum diisi, APK ditandatangani kunci acak"
+          fi
+
       - name: Build APK
         run: |
           set +e
-          flutter build apk --release > build.txt 2>&1
+          flutter build apk --release --build-number=${{ github.run_number }} > build.txt 2>&1
           code=$?
           tail -80 build.txt
           if [ $code -ne 0 ]; then

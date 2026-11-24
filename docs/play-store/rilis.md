@@ -40,7 +40,7 @@ lalu di `buildTypes { release { ... } }` ganti `signingConfig = signingConfigs.g
 
 Build AAB:
 ```bash
-flutter build appbundle --release
+flutter build appbundle --release --dart-define=STORE_BUILD=true
 # hasil: build/app/outputs/bundle/release/app-release.aab
 ```
 Aktifkan **Play App Signing** saat upload pertama (default).
@@ -74,6 +74,7 @@ Aktifkan **Play App Signing** saat upload pertama (default).
 2. Review Google biasanya 1–7 hari.
 
 ## Checklist sebelum produksi
+- [ ] Build pakai `--dart-define=STORE_BUILD=true` (tanpa ini semua fitur Pro gratis!)
 - [ ] Ganti `[EMAIL KONTAK]` di `docs/privacy/index.md`
 - [ ] Coba beli Pro pakai akun penguji lisensi, cek level terbuka dan sertifikat PDF jalan
 - [ ] Cek mode terang di HP asli (peta 3D, kubus, kartu materi)

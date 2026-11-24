@@ -7,7 +7,10 @@ import '../ctf/ctf_screen.dart';
 import '../pro/paywall_screen.dart';
 import '../sim/scam_sort_screen.dart';
 import '../sim/terminal_screen.dart';
+import 'cipher_screen.dart';
+import 'hash_screen.dart';
 import 'network_info_screen.dart';
+import 'url_inspector_screen.dart';
 import 'password_checker_screen.dart';
 import '../../l10n/strings.dart';
 
@@ -68,18 +71,21 @@ List<_Tool> get _tools => <_Tool>[
     desc: tr('tool_url_desc'),
     level: 2,
     icon: Icons.link_rounded,
+    builder: (_) => const UrlInspectorScreen(),
   ),
   _Tool(
     title: tr('tool_hash_title'),
     desc: tr('tool_hash_desc'),
     level: 3,
     icon: Icons.tag_rounded,
+    builder: (_) => const HashScreen(),
   ),
   _Tool(
     title: tr('tool_cipher_title'),
     desc: tr('tool_cipher_desc'),
     level: 3,
     icon: Icons.key_rounded,
+    builder: (_) => const CipherScreen(),
   ),
 ];
 
@@ -129,7 +135,7 @@ class _ToolCard extends StatelessWidget {
       color: ready ? C.surface : C.bg,
       borderColor: ready ? C.accent.withValues(alpha: 0.35) : C.line,
       onTap: () {
-        if (AppState.isProLevel(tool.level) && !AppScope.read(context).isPro) {
+        if (AppState.isProLevel(tool.level) && !AppScope.read(context).hasPro) {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (_) => const PaywallScreen(reasonKey: 'pw_reason_tool'),
           ));

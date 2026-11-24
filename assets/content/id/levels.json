@@ -15,18 +15,18 @@
     "index": 2,
     "title": "Web",
     "tagline": "HTTP, cookie, XSS, SQL injection, dan OWASP Top 10.",
-    "moduleFile": null
+    "moduleFile": "lv2.json"
   },
   {
     "index": 3,
     "title": "Kriptografi",
     "tagline": "Encoding vs hashing vs enkripsi, sampai cipher klasik.",
-    "moduleFile": null
+    "moduleFile": "lv3.json"
   },
   {
     "index": 4,
     "title": "Praktek",
-    "tagline": "Mini CTF offline: cari flag yang disembunyiin di dalam app.",
-    "moduleFile": null
+    "tagline": "Etika, OSINT, baca log, respons insiden, CTF, dan jalan karier.",
+    "moduleFile": "lv4.json"
   }
 ]

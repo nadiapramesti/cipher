@@ -13,6 +13,9 @@ import '../l10n/strings.dart';
 import 'theme.dart';
 
 /// Progres user disimpan lokal di HP. Gak ada akun, gak ada server.
+/// true hanya untuk build yang dijual di Play Store.
+const bool kStoreBuild = bool.fromEnvironment('STORE_BUILD');
+
 class AppState extends ChangeNotifier {
   AppState(this._prefs, this.content) {
     _load();
@@ -300,6 +303,10 @@ class AppState extends ChangeNotifier {
 
   /// Level ini termasuk konten Pro? (LV.02 ke atas)
   static bool isProLevel(int index) => index >= 2;
+
+  /// Edisi pribadi (default): semua fitur Pro kebuka tanpa beli.
+  /// Build Play Store: `flutter build appbundle --dart-define=STORE_BUILD=true`.
+  bool get hasPro => isPro || !kStoreBuild;
 
   Future<void> _touchStreak() async {
     final now = DateTime.now();

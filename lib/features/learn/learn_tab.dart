@@ -238,7 +238,7 @@ IsoTileState _tileState(AppState state, Level level) {
 
 void openLevel(BuildContext context, Level level) {
   final state = AppScope.read(context);
-  if (AppState.isProLevel(level.index) && !state.isPro) {
+  if (AppState.isProLevel(level.index) && !state.hasPro) {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (_) => const PaywallScreen(reasonKey: 'pw_reason_level'),
     ));
@@ -349,7 +349,7 @@ class _LevelCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          if (AppState.isProLevel(level.index) && !state.isPro)
+          if (AppState.isProLevel(level.index) && !state.hasPro)
             MonoTag('PRO', color: C.accent, filled: true)
           else if (!level.available)
             const MonoTag('SOON', filled: true)
