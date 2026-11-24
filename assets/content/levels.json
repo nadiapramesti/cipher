@@ -1,0 +1,32 @@
+[
+  {
+    "index": 0,
+    "title": "Aman Digital",
+    "tagline": "Password, 2FA, phishing, scam WA/SMS. Bekal wajib semua orang.",
+    "moduleFile": "assets/content/lv0.json"
+  },
+  {
+    "index": 1,
+    "title": "Fondasi",
+    "tagline": "Cara internet bekerja: IP, DNS, port, dan dasar Linux.",
+    "moduleFile": null
+  },
+  {
+    "index": 2,
+    "title": "Web",
+    "tagline": "HTTP, cookie, XSS, SQL injection, dan OWASP Top 10.",
+    "moduleFile": null
+  },
+  {
+    "index": 3,
+    "title": "Kriptografi",
+    "tagline": "Encoding vs hashing vs enkripsi, sampai cipher klasik.",
+    "moduleFile": null
+  },
+  {
+    "index": 4,
+    "title": "Praktek",
+    "tagline": "Mini CTF offline: cari flag yang disembunyiin di dalam app.",
+    "moduleFile": null
+  }
+]

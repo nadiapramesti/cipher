@@ -1,0 +1,90 @@
+[
+  {
+    "level": 0,
+    "prompt": "Ada yang minta kode OTP kamu lewat telepon, ngaku dari bank. Itu...",
+    "options": [
+      "Wajar, prosedur bank",
+      "Hampir pasti penipuan",
+      "Aman kalau suaranya sopan",
+      "Aman kalau nomornya diawali 021"
+    ],
+    "answer": 1
+  },
+  {
+    "level": 0,
+    "prompt": "Password mana yang paling kuat?",
+    "options": [
+      "Jakarta2024!",
+      "admin12345",
+      "hujan-gerimis-di-atap-seng",
+      "Qwerty!@#"
+    ],
+    "answer": 2
+  },
+  {
+    "level": 1,
+    "prompt": "Fungsi DNS adalah...",
+    "options": [
+      "Menghemat baterai",
+      "Menerjemahkan nama domain jadi alamat IP",
+      "Mengenkripsi semua data",
+      "Memblokir iklan otomatis"
+    ],
+    "answer": 1
+  },
+  {
+    "level": 1,
+    "prompt": "Port 443 biasanya dipakai untuk...",
+    "options": [
+      "HTTPS",
+      "Email masuk",
+      "Remote desktop",
+      "FTP"
+    ],
+    "answer": 0
+  },
+  {
+    "level": 2,
+    "prompt": "Menyisipkan script ke halaman web supaya jalan di browser korban disebut...",
+    "options": [
+      "SQL Injection",
+      "XSS",
+      "DDoS",
+      "Brute force"
+    ],
+    "answer": 1
+  },
+  {
+    "level": 2,
+    "prompt": "Input ' OR '1'='1 di form login adalah contoh percobaan...",
+    "options": [
+      "XSS",
+      "Phishing",
+      "SQL Injection",
+      "CSRF"
+    ],
+    "answer": 2
+  },
+  {
+    "level": 3,
+    "prompt": "Hash berbeda dari enkripsi karena hash...",
+    "options": [
+      "Bisa dibalikin pakai kunci",
+      "Satu arah, gak dirancang buat dibalikin",
+      "Selalu lebih panjang dari aslinya",
+      "Cuma bisa dipakai buat gambar"
+    ],
+    "answer": 1
+  },
+  {
+    "level": 3,
+    "prompt": "\"SGFsbw==\" kemungkinan besar adalah...",
+    "options": [
+      "Hash SHA-256",
+      "Teks yang di-encode Base64",
+      "Password terenkripsi AES",
+      "Alamat IP"
+    ],
+    "answer": 1
+  }
+]

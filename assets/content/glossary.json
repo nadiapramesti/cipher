@@ -1,0 +1,112 @@
+[
+  {
+    "term": "Phishing",
+    "short": "Penipuan yang menyamar jadi pihak terpercaya buat mancing korban nyerahin data atau klik link jahat.",
+    "analogy": "Kayak pemancing yang pasang umpan mirip makanan asli. Ikan yang buru-buru langsung gigit."
+  },
+  {
+    "term": "Malware",
+    "short": "Software jahat: virus, trojan, spyware, ransomware, dan sejenisnya.",
+    "analogy": "Tamu yang nyamar jadi tukang servis, padahal mau nyuri."
+  },
+  {
+    "term": "Ransomware",
+    "short": "Malware yang mengunci/mengenkripsi file korban lalu minta tebusan.",
+    "analogy": "Maling yang gembok semua lemari di rumahmu terus minta bayaran buat kuncinya."
+  },
+  {
+    "term": "2FA",
+    "short": "Two-Factor Authentication: login butuh dua jenis bukti, misalnya password + kode dari HP.",
+    "analogy": "ATM butuh kartu dan PIN. Satu doang gak cukup."
+  },
+  {
+    "term": "OTP",
+    "short": "One-Time Password: kode sekali pakai yang berlaku sebentar.",
+    "analogy": "Tiket masuk yang langsung hangus setelah dipakai sekali."
+  },
+  {
+    "term": "Password Manager",
+    "short": "Aplikasi yang nyimpen dan bikinin password kuat secara terenkripsi.",
+    "analogy": "Brankas kunci: kamu cukup inget satu kombinasi brankasnya."
+  },
+  {
+    "term": "Enkripsi",
+    "short": "Mengacak data supaya cuma bisa dibaca yang punya kuncinya.",
+    "analogy": "Surat yang ditulis pakai bahasa sandi yang cuma kamu dan temanmu ngerti."
+  },
+  {
+    "term": "Hash",
+    "short": "Sidik jari digital dari data. Satu arah dan gak dirancang buat dibalikin.",
+    "analogy": "Blender: buah bisa jadi jus, tapi jus gak bisa balik jadi buah."
+  },
+  {
+    "term": "Encoding",
+    "short": "Mengubah format data biar bisa dikirim/dibaca sistem lain, contohnya Base64. Bukan pengaman.",
+    "analogy": "Nerjemahin teks ke kode Morse. Siapa pun yang tau Morse bisa bacanya."
+  },
+  {
+    "term": "IP Address",
+    "short": "Alamat unik perangkat di jaringan atau internet.",
+    "analogy": "Alamat rumah supaya paket bisa nyampe ke tujuan."
+  },
+  {
+    "term": "DNS",
+    "short": "Sistem yang menerjemahkan nama domain (google.com) jadi alamat IP.",
+    "analogy": "Buku kontak: kamu cari nama, dia kasih nomornya."
+  },
+  {
+    "term": "Port",
+    "short": "Nomor \"pintu\" di sebuah perangkat untuk layanan tertentu, misal 443 untuk HTTPS.",
+    "analogy": "Satu gedung (IP) punya banyak loket (port) dengan layanan beda-beda."
+  },
+  {
+    "term": "Firewall",
+    "short": "Penyaring lalu lintas jaringan berdasarkan aturan tertentu.",
+    "analogy": "Satpam gerbang yang ngecek siapa boleh masuk dan keluar."
+  },
+  {
+    "term": "VPN",
+    "short": "Jalur terenkripsi antara perangkatmu dan server VPN.",
+    "analogy": "Terowongan tertutup: orang di jalan gak bisa liat apa yang lewat di dalamnya."
+  },
+  {
+    "term": "HTTPS",
+    "short": "Versi HTTP yang koneksinya dienkripsi pakai TLS.",
+    "analogy": "Ngobrol di ruangan tertutup, bukan teriak-teriak di pasar."
+  },
+  {
+    "term": "Cookie",
+    "short": "Data kecil yang disimpan browser buat ngingetin situs soal kamu, misal status login.",
+    "analogy": "Gelang tiket konser: nunjukin kamu udah bayar tanpa harus antre lagi."
+  },
+  {
+    "term": "XSS",
+    "short": "Cross-Site Scripting: menyisipkan script jahat ke halaman web supaya jalan di browser korban.",
+    "analogy": "Nempel brosur palsu di papan pengumuman resmi, yang baca jadi ketipu."
+  },
+  {
+    "term": "SQL Injection",
+    "short": "Menyisipkan perintah SQL lewat input supaya database menjalankan perintah penyerang.",
+    "analogy": "Ngisi formulir pesanan dengan tulisan \"dan kasih semua isi gudang ke saya\", terus petugasnya nurut."
+  },
+  {
+    "term": "Brute Force",
+    "short": "Menebak password dengan mencoba semua kombinasi secara otomatis.",
+    "analogy": "Nyobain semua kunci di gantungan satu per satu sampai gemboknya kebuka."
+  },
+  {
+    "term": "Social Engineering",
+    "short": "Memanipulasi orang (bukan sistem) supaya ngasih akses atau informasi.",
+    "analogy": "Maling yang gak jebol pintu, tapi ngaku petugas PLN biar dibukain."
+  },
+  {
+    "term": "SIM Swap",
+    "short": "Memindahkan nomor HP korban ke kartu SIM milik penipu buat nyegat SMS dan OTP.",
+    "analogy": "Penipu ngaku jadi kamu ke kantor pos, terus semua suratmu dialihin ke alamatnya."
+  },
+  {
+    "term": "CTF",
+    "short": "Capture The Flag: latihan atau lomba keamanan buat nemuin \"flag\" tersembunyi lewat tantangan.",
+    "analogy": "Lomba cari harta karun, tapi petunjuknya berupa teka-teki keamanan."
+  }
+]

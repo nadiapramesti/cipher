@@ -1,0 +1,331 @@
+[
+  {
+    "id": "lv0-password",
+    "level": 0,
+    "title": "Password yang Gak Gampang Ditebak",
+    "summary": "Kenapa panjang lebih penting dari ribet, dan cara ngatur banyak password.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Password itu kunci rumah",
+        "body": "Akun email, WA, bank digital, semuanya dijaga sama password. Kalau kuncinya gampang ditebak, orang lain bisa masuk tanpa perlu jebol pintu.\n\nPenyerang jarang nebak satu-satu pakai tangan. Mereka pakai program yang bisa nyoba miliaran kombinasi per detik, dimulai dari daftar password paling pasaran.\n\nPassword yang paling sering bocor:\n- 123456, 12345678, qwerty\n- password, admin, iloveyou\n- nama sendiri + tanggal lahir",
+        "tip": "Password pasaran itu kayak kunci gembok yang dijual sama di semua toko. Maling cukup bawa satu kunci itu buat nyoba ke banyak rumah."
+      },
+      {
+        "title": "Panjang ngalahin ribet",
+        "body": "\"P@ssw0rd!\" kelihatan ribet, tapi programnya udah hafal trik ganti huruf jadi simbol kayak gitu.\n\nYang bikin susah dibobol itu panjangnya. Tiap karakter tambahan bikin jumlah kombinasi berlipat ganda.\n\nCaranya pakai passphrase, gabungan 4 kata acak:\n- kucing-oren-makan-tahu\n- payung-biru-di-kulkas-27\n\nGampang diinget, tapi butuh waktu ribuan tahun buat ditebak.",
+        "tip": "Gembok angka 3 digit cuma punya 1.000 kombinasi. Tambah jadi 10 digit, kombinasinya jadi 10 miliar. Tiap digit tambahan ngelipetin kerjaan maling."
+      },
+      {
+        "title": "Satu akun, satu password",
+        "body": "Kalau satu situs bocor dan password-nya kamu pakai di mana-mana, semua akun ikut kebuka. Modus ini namanya credential stuffing: password bocoran dicoba otomatis ke banyak situs lain.\n\nSolusinya pakai password manager (contoh: Bitwarden, atau bawaan Google/Apple). Cukup inget satu password utama yang kuat, sisanya dibikinin dan diingetin sama aplikasinya.\n\nJangan simpan password di catatan biasa atau screenshot galeri.",
+        "tip": "Satu kunci buat rumah, motor, kantor, dan brankas itu praktis. Tapi sekali kuncinya hilang, semuanya kebuka barengan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Mana password yang paling kuat?",
+        "options": [
+          "P@ssw0rd!",
+          "Andi1999",
+          "kucing-oren-makan-tahu-27",
+          "qwerty123456"
+        ],
+        "answer": 2,
+        "explanation": "Passphrase panjang dari kata acak jauh lebih susah ditebak dibanding password pendek yang cuma diganti huruf ke simbol."
+      },
+      {
+        "prompt": "Kenapa \"123456\" berbahaya walaupun akunmu gak penting?",
+        "options": [
+          "Karena terlalu pendek buat diketik",
+          "Karena ada di daftar paling atas yang dicoba penyerang",
+          "Karena HP gak bisa nyimpennya",
+          "Gak berbahaya kalau akunnya gak penting"
+        ],
+        "answer": 1,
+        "explanation": "Program penyerang selalu mulai dari daftar password pasaran. Akun yang \"gak penting\" juga bisa dipakai buat nipu teman-temanmu."
+      },
+      {
+        "prompt": "Apa itu credential stuffing?",
+        "options": [
+          "Ngisi formulir pakai data palsu",
+          "Mencoba password bocoran dari satu situs ke banyak situs lain",
+          "Menyimpan password di kulkas",
+          "Menghapus akun lama"
+        ],
+        "answer": 1,
+        "explanation": "Kalau kamu pakai password yang sama di banyak tempat, satu kebocoran bisa membuka semua akunmu."
+      },
+      {
+        "prompt": "Cara paling aman ngatur banyak password?",
+        "options": [
+          "Tulis di catatan HP",
+          "Pakai satu password buat semua akun",
+          "Pakai password manager",
+          "Screenshot terus simpan di galeri"
+        ],
+        "answer": 2,
+        "explanation": "Password manager nyimpen password secara terenkripsi, jadi kamu cukup inget satu password utama yang kuat."
+      },
+      {
+        "prompt": "Yang paling bikin password susah dibobol adalah...",
+        "options": [
+          "Panjangnya",
+          "Ada tanggal lahirnya",
+          "Huruf pertama kapital",
+          "Ada nama hewan peliharaan"
+        ],
+        "answer": 0,
+        "explanation": "Tiap karakter tambahan melipatgandakan jumlah kombinasi. Info pribadi kayak tanggal lahir malah gampang ditebak."
+      }
+    ]
+  },
+  {
+    "id": "lv0-2fa",
+    "level": 0,
+    "title": "2FA: Kunci Kedua",
+    "summary": "Lapisan pengaman tambahan biar password bocor pun akun tetap aman.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Satu kunci gak cukup",
+        "body": "Password bisa bocor: dari situs yang kebobolan, dari phishing, atau karena diintip. Two-Factor Authentication (2FA) nambahin pengecekan kedua saat login.\n\nFaktornya bisa:\n- Sesuatu yang kamu tahu: password, PIN\n- Sesuatu yang kamu punya: HP, kunci keamanan\n- Sesuatu yang ada di dirimu: sidik jari, wajah\n\n2FA artinya minimal dua jenis yang berbeda.",
+        "tip": "ATM pakai 2FA dari dulu: kartunya (yang kamu punya) + PIN (yang kamu tahu). Kartu dicuri doang gak cukup buat narik duit."
+      },
+      {
+        "title": "Jenis-jenis 2FA",
+        "body": "Dari yang lumayan sampai paling kuat:\n- Kode SMS: lebih baik daripada gak ada, tapi bisa dicegat lewat modus SIM swap\n- Aplikasi authenticator (Google Authenticator, Authy, dll.): kode berubah tiap 30 detik, jalan offline\n- Passkey / kunci keamanan: login pakai sidik jari atau wajah, kebal phishing\n\nAktifin 2FA minimal di email, WhatsApp (verifikasi dua langkah), dan aplikasi keuangan.",
+        "tip": "Kode SMS itu kayak titip kunci cadangan ke satpam. Biasanya aman, tapi kalau satpamnya ketipu, kuncinya bisa dikasih ke orang lain."
+      },
+      {
+        "title": "Kode OTP itu rahasia mati",
+        "body": "Modus paling umum: penipu ngaku dari bank, kurir, atau CS, lalu minta kamu nyebutin kode OTP yang \"gak sengaja kekirim\".\n\nAturannya simpel:\n- OTP gak pernah boleh dikasih ke siapa pun, termasuk yang ngaku petugas resmi\n- Bank dan aplikasi resmi gak pernah minta OTP lewat telepon atau chat\n- Kalau dapet OTP padahal gak lagi login, berarti ada yang nyoba masuk. Segera ganti password",
+        "tip": "OTP itu kunci sekali pakai buat pintu rumahmu. Orang yang minta kunci itu, siapa pun dia, lagi berdiri di depan pintumu."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Mana yang termasuk 2FA?",
+        "options": [
+          "Password + PIN",
+          "Password + kode dari aplikasi authenticator",
+          "Dua password berbeda",
+          "Username + password"
+        ],
+        "answer": 1,
+        "explanation": "2FA butuh dua jenis faktor yang beda. Password dan PIN sama-sama \"yang kamu tahu\"."
+      },
+      {
+        "prompt": "Ada yang nelpon ngaku CS bank dan minta kode OTP. Kamu harus...",
+        "options": [
+          "Kasih aja karena dari bank",
+          "Kasih setengahnya",
+          "Tolak dan tutup teleponnya",
+          "Minta dia kirim ulang"
+        ],
+        "answer": 2,
+        "explanation": "Bank gak pernah minta OTP. Siapa pun yang minta OTP hampir pasti penipu."
+      },
+      {
+        "prompt": "Jenis 2FA yang paling tahan phishing?",
+        "options": [
+          "Kode SMS",
+          "Pertanyaan keamanan",
+          "Passkey / kunci keamanan",
+          "Email konfirmasi"
+        ],
+        "answer": 2,
+        "explanation": "Passkey terikat ke situs aslinya, jadi gak bisa dipakai di situs palsu."
+      },
+      {
+        "prompt": "Kamu dapet SMS OTP padahal gak lagi login. Artinya?",
+        "options": [
+          "Bonus dari operator",
+          "Ada yang tahu password-mu dan lagi nyoba masuk",
+          "HP lagi error",
+          "Gak ada artinya"
+        ],
+        "answer": 1,
+        "explanation": "OTP cuma dikirim saat ada percobaan login. Segera ganti password akun itu."
+      },
+      {
+        "prompt": "Kelemahan 2FA lewat SMS adalah...",
+        "options": [
+          "Gak bisa dipakai di HP Android",
+          "Bisa dicegat lewat SIM swap",
+          "Kodenya terlalu panjang",
+          "Harus bayar per SMS"
+        ],
+        "answer": 1,
+        "explanation": "Dengan SIM swap, penipu memindahkan nomormu ke kartu SIM mereka, jadi SMS OTP masuk ke mereka."
+      }
+    ]
+  },
+  {
+    "id": "lv0-phishing",
+    "level": 0,
+    "title": "Phishing & Scam WA/SMS",
+    "summary": "Kenali umpan penipu: link palsu, file APK, dan pesan yang bikin panik.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Phishing itu mancing",
+        "body": "Phishing adalah trik nipu orang biar nyerahin data (password, OTP, nomor kartu) atau nginstall aplikasi jahat. Bentuknya bisa email, SMS, chat WA, sampai telepon.\n\nPola umumnya selalu sama:\n- Bikin panik: \"akun kamu diblokir\", \"paket ditahan\"\n- Bikin ngiler: \"selamat kamu menang hadiah\"\n- Minta bertindak cepat: \"klik dalam 1x24 jam\"",
+        "tip": "Pemancing gak ngejar ikannya, dia cuma masang umpan yang menarik terus nunggu ada yang gigit. Panik dan buru-buru itu bikin kita gampang gigit."
+      },
+      {
+        "title": "Awas file .APK di WhatsApp",
+        "body": "Modus yang lagi rame: kiriman file \"Undangan Pernikahan.apk\", \"Foto Paket.apk\", atau \"Surat Tilang.apk\".\n\nFile .APK itu aplikasi, bukan foto atau dokumen. Kalau diinstall, aplikasi ini bisa:\n- Baca semua SMS termasuk OTP\n- Ngambil alih akun bank digital\n- Nyebarin dirinya ke kontak kamu\n\nUndangan asli formatnya gambar atau PDF. Jangan pernah install APK kiriman chat, sekalipun dari kontak yang kamu kenal (bisa jadi akunnya udah dibajak).",
+        "tip": "Ini kayak dikasih kado yang ternyata isinya orang. Begitu kamu buka pintu dan persilakan masuk, dia bebas ngubek-ngubek rumahmu."
+      },
+      {
+        "title": "Cek link sebelum klik",
+        "body": "Situs palsu sering pakai alamat yang mirip banget sama aslinya:\n- bca.co.id (asli) vs bca-co.id atau bcaa.co.id (palsu)\n- tokopedia.com vs tokopedia.com.promo-hadiah.xyz\n\nYang dilihat itu nama domain tepat sebelum garis miring pertama. Di contoh kedua, domain aslinya promo-hadiah.xyz, bukan tokopedia.\n\nKalau ragu, jangan klik. Buka aplikasi resminya langsung atau ketik alamatnya sendiri.",
+        "tip": "Penipu bikin papan nama toko yang mirip, misal \"Indomaret\" jadi \"Indomarett\". Kalau gak teliti, kamu udah belanja di toko palsu."
+      },
+      {
+        "title": "Kalau udah terlanjur",
+        "body": "Jangan malu, langsung bertindak:\n- Putus internet HP kalau sempat install APK aneh, lalu hapus aplikasinya\n- Ganti password akun penting dari perangkat lain\n- Hubungi bank lewat nomor resmi di balik kartu atau di aplikasi\n- Kabari kontak kalau akun WA-mu sempat dibajak\n- Laporkan ke kanal aduan resmi, misalnya patrolisiber.id\n\nMakin cepat bertindak, makin kecil kerugiannya.",
+        "tip": "Sama kayak kunci rumah hilang: makin cepat ganti gembok, makin kecil peluang maling masuk."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kamu dapet WA berisi file \"Undangan Nikah.apk\". Langkah yang benar?",
+        "options": [
+          "Buka, siapa tau undangan beneran",
+          "Jangan buka/install, hapus, kabari pengirimnya lewat jalur lain",
+          "Teruskan ke grup biar yang lain tau",
+          "Install di HP lain aja"
+        ],
+        "answer": 1,
+        "explanation": "Undangan asli gak berformat APK. File APK adalah aplikasi yang bisa mencuri SMS dan OTP kamu."
+      },
+      {
+        "prompt": "Mana alamat yang benar-benar milik Tokopedia?",
+        "options": [
+          "tokopedia.com.promo-hadiah.xyz",
+          "tokopedia-promo.com",
+          "www.tokopedia.com/promo",
+          "tokoped1a.com"
+        ],
+        "answer": 2,
+        "explanation": "Lihat domain tepat sebelum garis miring pertama. Hanya pilihan ketiga yang domainnya tokopedia.com."
+      },
+      {
+        "prompt": "Ciri khas pesan phishing adalah...",
+        "options": [
+          "Bahasanya santai",
+          "Bikin panik dan minta bertindak cepat",
+          "Dikirim jam kerja",
+          "Ada logo perusahaannya"
+        ],
+        "answer": 1,
+        "explanation": "Penipu sengaja bikin panik biar kamu gak sempat mikir. Logo gampang banget dipalsuin."
+      },
+      {
+        "prompt": "Teman dekatmu tiba-tiba minta pinjam uang lewat WA dan buru-buru. Sebaiknya...",
+        "options": [
+          "Langsung transfer, kan teman",
+          "Telepon dia langsung buat memastikan",
+          "Minta dia kirim foto KTP",
+          "Transfer setengahnya dulu"
+        ],
+        "answer": 1,
+        "explanation": "Akun WA bisa dibajak. Pastikan lewat telepon atau ketemu langsung sebelum kirim uang."
+      },
+      {
+        "prompt": "Terlanjur install APK mencurigakan. Apa yang pertama dilakukan?",
+        "options": [
+          "Diamkan saja",
+          "Matikan internet, hapus aplikasinya, lalu ganti password dari perangkat lain",
+          "Restart HP berkali-kali",
+          "Install antivirus dari link iklan"
+        ],
+        "answer": 1,
+        "explanation": "Memutus internet menghentikan pengiriman data. Ganti password dari perangkat lain karena HP-mu mungkin masih tersusupi."
+      }
+    ]
+  },
+  {
+    "id": "lv0-update",
+    "level": 0,
+    "title": "Update & Izin Aplikasi",
+    "summary": "Kenapa update itu penting dan gimana nyaring izin aplikasi yang kebanyakan minta.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Update itu tambal bocor",
+        "body": "Tiap aplikasi dan sistem operasi pasti punya celah. Begitu celahnya ketemu, pembuatnya ngeluarin update buat nambal.\n\nMasalahnya, setelah update rilis, celahnya jadi diketahui publik. Penyerang langsung ngincer HP yang belum update.\n\nKebiasaan yang aman:\n- Nyalakan update otomatis di Play Store\n- Install update sistem (Android/iOS) secepatnya\n- HP yang udah gak dapet update keamanan sebaiknya gak dipakai buat m-banking",
+        "tip": "Update itu kayak tukang yang benerin genteng bocor. Makin lama ditunda, makin lama juga rumahmu kehujanan."
+      },
+      {
+        "title": "Install dari sumber resmi",
+        "body": "Play Store dan App Store gak sempurna, tapi aplikasinya diperiksa dulu sebelum tayang.\n\nAplikasi dari link, grup Telegram, atau situs \"APK mod/premium gratis\" sering disisipin malware. Gratisnya dibayar pakai data kamu.\n\nDi Android, biarin pengaturan \"Install aplikasi tak dikenal\" tetap mati, dan aktifkan Play Protect.",
+        "tip": "Beli makanan di restoran yang diawasi dinas kesehatan vs dari orang asing di jalan yang ngaku kokinya hebat. Dua-duanya bisa enak, tapi risikonya beda jauh."
+      },
+      {
+        "title": "Izin yang masuk akal",
+        "body": "Tiap aplikasi minta izin (permission): kamera, lokasi, kontak, SMS, dan lain-lain. Tanya ke diri sendiri: izin ini nyambung gak sama fungsinya?\n\nContoh yang wajar:\n- Aplikasi kamera minta akses kamera\n- Aplikasi peta minta lokasi\n\nContoh yang mencurigakan:\n- Senter minta akses kontak dan SMS\n- Game minta izin Aksesibilitas\n\nIzin Aksesibilitas dan akses SMS itu paling berbahaya, karena bisa dipakai buat baca layar dan nyolong OTP. Cek dan cabut izin lewat Pengaturan > Aplikasi > Izin.",
+        "tip": "Tukang ledeng yang minta masuk kamar mandi itu wajar. Tukang ledeng yang minta kunci lemari dan buku tabungan? Usir."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kenapa HP yang telat update lebih berisiko?",
+        "options": [
+          "Baterainya cepat habis",
+          "Celah yang udah diumumkan bisa langsung dimanfaatkan penyerang",
+          "Aplikasinya jadi lemot",
+          "Gak ada bedanya"
+        ],
+        "answer": 1,
+        "explanation": "Setelah update rilis, celahnya jadi diketahui publik. HP yang belum update jadi target empuk."
+      },
+      {
+        "prompt": "Aplikasi senter minta izin baca SMS. Sebaiknya...",
+        "options": [
+          "Izinkan, biar senternya terang",
+          "Tolak dan pertimbangkan hapus aplikasinya",
+          "Izinkan sekali aja",
+          "Restart HP"
+        ],
+        "answer": 1,
+        "explanation": "Senter gak butuh SMS. Izin yang gak nyambung sama fungsinya adalah tanda bahaya."
+      },
+      {
+        "prompt": "Izin mana yang paling berbahaya kalau dikasih ke aplikasi gak jelas?",
+        "options": [
+          "Getar",
+          "Aksesibilitas",
+          "Senter",
+          "Wallpaper"
+        ],
+        "answer": 1,
+        "explanation": "Izin Aksesibilitas bisa membaca dan mengontrol layar, termasuk menyalin OTP."
+      },
+      {
+        "prompt": "Sumber paling aman buat install aplikasi?",
+        "options": [
+          "Link dari grup Telegram",
+          "Situs APK mod premium gratis",
+          "Play Store / App Store resmi",
+          "File kiriman teman di WA"
+        ],
+        "answer": 2,
+        "explanation": "Toko resmi memeriksa aplikasi sebelum tayang. Sumber lain sering menyisipkan malware."
+      },
+      {
+        "prompt": "Pengaturan \"Install aplikasi tak dikenal\" sebaiknya...",
+        "options": [
+          "Dinyalakan terus",
+          "Dibiarkan mati",
+          "Dinyalakan cuma malam hari",
+          "Gak ngaruh apa-apa"
+        ],
+        "answer": 1,
+        "explanation": "Dengan pengaturan ini mati, APK dari luar toko resmi gak bisa langsung terinstall."
+      }
+    ]
+  }
+]
