@@ -88,3 +88,6 @@ Semua tools cuma memproses input pengguna sendiri, secara offline. Cipher gak pu
 ---
 
 Dibuat oleh Nadia Pramesti, dibantu Claude (Anthropic) sebagai pair programmer.
+
+## Rilis Play Store
+Semua bahan ada di `docs/play-store/`: teks listing ID/EN (`listing.md`), jawaban Data Safety (`data-safety.md`), feature graphic, dan langkah rilis lengkap (`rilis.md`). Kebijakan privasi di `docs/privacy/` (GitHub Pages).
