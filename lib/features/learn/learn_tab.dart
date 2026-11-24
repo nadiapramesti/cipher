@@ -5,6 +5,8 @@ import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
 import '../../widgets/scene3d.dart';
+import '../review/review_screen.dart';
+import '../search/search_screen.dart';
 import '../settings/settings_screen.dart';
 import 'level_screen.dart';
 import 'module_screen.dart';
@@ -28,6 +30,26 @@ class LearnTab extends StatelessWidget {
                 style: mono(size: 18, color: C.text, weight: FontWeight.w800, spacing: 4)),
             Text('_', style: mono(size: 18, color: C.accent, weight: FontWeight.w800)),
             const Spacer(),
+            _HeaderButton(
+              icon: Icons.search_rounded,
+              label: tr('search_title'),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const SearchScreen()),
+              ),
+            ),
+            const SizedBox(width: 6),
+            _HeaderButton(
+              icon: Icons.tune_rounded,
+              label: tr('settings'),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const SettingsScreen()),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
             _Stat(icon: Icons.bolt_rounded, value: '${state.xp}', label: tr('xp')),
             const SizedBox(width: 8),
             _Stat(
@@ -35,28 +57,6 @@ class LearnTab extends StatelessWidget {
               value: '${state.streak}',
               label: tr('days'),
               color: state.streak > 0 ? C.orange : C.muted,
-            ),
-            const SizedBox(width: 8),
-            Tooltip(
-              message: tr('settings'),
-              child: Material(
-                color: C.surface,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(color: C.lineStrong),
-                ),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const SettingsScreen()),
-                  ),
-                  child: SizedBox(
-                    width: 40,
-                    height: 34,
-                    child: Icon(Icons.tune_rounded, size: 19, color: C.accent, semanticLabel: tr('settings')),
-                  ),
-                ),
-              ),
             ),
           ],
         ),
@@ -78,6 +78,38 @@ class LearnTab extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
+        if (state.dueReviews.isNotEmpty) ...[
+          Panel(
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ReviewScreen()),
+            ),
+            color: C.okTint,
+            borderColor: C.okDeep,
+            child: Row(
+              children: [
+                Icon(Icons.replay_rounded, color: C.ok),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(tr('rv_due', {'n': state.dueReviews.length}),
+                          style: TextStyle(fontWeight: FontWeight.w800, color: C.text)),
+                      const SizedBox(height: 2),
+                      Text(tr('rv_hint'), style: TextStyle(fontSize: 12.5, color: C.muted)),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(color: C.ok, borderRadius: BorderRadius.circular(10)),
+                  child: Text(tr('rv_start'), style: TextStyle(fontWeight: FontWeight.w800, color: C.onAccent, fontSize: 13)),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+        ],
         if (next != null)
           Panel(
             borderColor: C.accent.withValues(alpha: 0.55),
@@ -128,6 +160,36 @@ class LearnTab extends StatelessWidget {
             child: _LevelCard(level: level),
           ),
       ],
+    );
+  }
+}
+
+class _HeaderButton extends StatelessWidget {
+  const _HeaderButton({required this.icon, required this.label, required this.onTap});
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: label,
+      child: Material(
+        color: C.surface,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(color: C.lineStrong),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: onTap,
+          child: SizedBox(
+            width: 40,
+            height: 34,
+            child: Icon(icon, size: 19, color: C.accent, semanticLabel: label),
+          ),
+        ),
+      ),
     );
   }
 }

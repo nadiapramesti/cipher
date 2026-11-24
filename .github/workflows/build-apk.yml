@@ -29,11 +29,7 @@ jobs:
           flutter --version
           flutter create . --project-name cipher --org com.nadiapramesti --platforms android
           rm -f test/widget_test.dart
-          sed -i 's/android:label="cipher"/android:label="Cipher"/' android/app/src/main/AndroidManifest.xml
-          # Auto Backup Android: progres ikut backup Google & balik pas ganti HP
-          grep -q 'android:allowBackup' android/app/src/main/AndroidManifest.xml || \
-            sed -i 's/<application/<application android:allowBackup="true"/' android/app/src/main/AndroidManifest.xml
-          grep -o '<application[^>]*' android/app/src/main/AndroidManifest.xml
+          python3 tool/patch_android.py
 
       - name: Ambil package
         run: flutter pub get

@@ -4,6 +4,7 @@ import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../l10n/strings.dart';
 import '../../widgets/common.dart';
+import '../../services/reminder_service.dart';
 import 'backup_screens.dart';
 
 /// Pengaturan tampilan & bahasa. Semua pilihan langsung kepakai dan tersimpan.
@@ -84,6 +85,45 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 26),
+          _SectionTitle(tr('rm_title')),
+          Row(
+            children: [
+              Expanded(
+                child: _Choice(
+                  selected: !state.reminderOn,
+                  icon: Icons.notifications_off_outlined,
+                  label: tr('rm_off'),
+                  onTap: () => _setReminder(context, on: false),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _Choice(
+                  selected: state.reminderOn,
+                  icon: Icons.notifications_active_outlined,
+                  label: tr('rm_on'),
+                  onTap: () => _setReminder(context, on: true),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          _ActionRow(
+            icon: Icons.schedule_rounded,
+            title: tr('rm_time', {
+              't': '${state.reminderHour.toString().padLeft(2, '0')}:${state.reminderMinute.toString().padLeft(2, '0')}'
+            }),
+            desc: tr('rm_time_desc'),
+            onTap: () async {
+              final picked = await showTimePicker(
+                context: context,
+                initialTime: TimeOfDay(hour: state.reminderHour, minute: state.reminderMinute),
+              );
+              if (picked == null || !context.mounted) return;
+              await _setReminder(context, on: true, time: picked);
+            },
+          ),
+          const SizedBox(height: 26),
           _SectionTitle(tr('set_progress')),
           _ActionRow(
             icon: Icons.upload_rounded,
@@ -128,6 +168,36 @@ class SettingsScreen extends StatelessWidget {
         ),
       ]),
     );
+  }
+}
+
+/// Nyalain / matiin / ubah jam pengingat, sekalian jadwalin notifikasinya.
+Future<void> _setReminder(BuildContext context, {required bool on, TimeOfDay? time}) async {
+  final state = AppScope.read(context);
+  final svc = ReminderService.instance;
+  if (!on) {
+    await svc.cancel();
+    await state.setReminder(on: false);
+    return;
+  }
+  final allowed = await svc.requestPermission();
+  if (!allowed) {
+    if (context.mounted) showInfo(context, tr('rm_denied'));
+    await state.setReminder(on: false);
+    return;
+  }
+  await state.setReminder(on: true, hour: time?.hour, minute: time?.minute);
+  await svc.scheduleDaily(
+    hour: state.reminderHour,
+    minute: state.reminderMinute,
+    title: tr('rm_notif_title'),
+    body: tr('rm_notif_body'),
+    channelName: tr('rm_channel'),
+  );
+  if (context.mounted) {
+    showInfo(context, tr('rm_set', {
+      't': '${state.reminderHour.toString().padLeft(2, '0')}:${state.reminderMinute.toString().padLeft(2, '0')}'
+    }));
   }
 }
 

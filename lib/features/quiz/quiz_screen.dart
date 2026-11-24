@@ -30,7 +30,12 @@ class _QuizScreenState extends State<QuizScreen> {
     if (_selected == null) return;
     setState(() {
       _revealed = true;
-      if (_selected == _qs[_index].answer) _correct++;
+      if (_selected == _qs[_index].answer) {
+        _correct++;
+      } else {
+        // soal yang salah masuk antrean ulasan besok
+        AppScope.read(context).markWrong(widget.module.id, _index);
+      }
     });
   }
 

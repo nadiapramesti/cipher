@@ -86,6 +86,7 @@ class AppState extends ChangeNotifier {
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
       bestScores = decoded.map((k, v) => MapEntry(k, v as int));
     }
+    _loadExtra();
   }
 
   /// Kode backup progres (buat dipindah ke HP lain).
@@ -99,6 +100,7 @@ class AppState extends ChangeNotifier {
         accent: accent.name,
         themeMode: themeMode.name,
         lang: L.code,
+        extra: extraJson,
       ));
 
   /// Pulihkan dari kode backup. Lempar [FormatException] kalau kodenya gak valid.
@@ -120,6 +122,10 @@ class AppState extends ChangeNotifier {
       await _prefs.remove(_kLastActive);
     }
     await _prefs.setString(_kScores, jsonEncode(bestScores));
+    if (d.extra != null) {
+      _applyExtra(d.extra!);
+      await _saveExtra(notify: false);
+    }
     final a = ThemeAccent.values.asNameMap()[d.accent];
     if (a != null) {
       accent = a;
@@ -136,6 +142,172 @@ class AppState extends ChangeNotifier {
       return;
     }
     notifyListeners();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Data tambahan: statistik (buat lencana), flag CTF, antrean ulasan,
+  // pengingat harian, status Pro, nama di sertifikat.
+  // ---------------------------------------------------------------------------
+  static const _kExtra = 'extra_v1';
+
+  Map<String, int> stats = {};
+  Set<String> flags = {};
+
+  /// kunci "modulId#indexSoal" -> "YYYY-MM-DD|kotak" (Leitner sederhana)
+  Map<String, String> reviewQueue = {};
+  bool reminderOn = false;
+  int reminderHour = 19;
+  int reminderMinute = 0;
+  bool isPro = false;
+  String certName = '';
+
+  void _loadExtra() {
+    final raw = _prefs.getString(_kExtra);
+    if (raw == null) return;
+    try {
+      final j = jsonDecode(raw) as Map<String, dynamic>;
+      stats = (j['stats'] as Map? ?? {}).map((k, v) => MapEntry(k as String, (v as num).toInt()));
+      flags = ((j['flags'] as List?) ?? []).cast<String>().toSet();
+      reviewQueue = (j['review'] as Map? ?? {}).map((k, v) => MapEntry(k as String, v as String));
+      reminderOn = j['remOn'] as bool? ?? false;
+      reminderHour = (j['remH'] as num?)?.toInt() ?? 19;
+      reminderMinute = (j['remM'] as num?)?.toInt() ?? 0;
+      isPro = j['pro'] as bool? ?? false;
+      certName = j['cert'] as String? ?? '';
+    } catch (_) {
+      // data rusak: mulai bersih, progres utama tetap aman
+    }
+  }
+
+  Map<String, Object?> get extraJson => {
+        'stats': stats,
+        'flags': flags.toList(),
+        'review': reviewQueue,
+        'remOn': reminderOn,
+        'remH': reminderHour,
+        'remM': reminderMinute,
+        'cert': certName,
+      };
+
+  Future<void> _saveExtra({bool notify = true}) async {
+    await _prefs.setString(_kExtra, jsonEncode({...extraJson, 'pro': isPro}));
+    if (notify) notifyListeners();
+  }
+
+  void _applyExtra(Map<String, dynamic> j) {
+    stats = (j['stats'] as Map? ?? {}).map((k, v) => MapEntry(k as String, (v as num).toInt()));
+    flags = ((j['flags'] as List?) ?? []).cast<String>().toSet();
+    reviewQueue = (j['review'] as Map? ?? {}).map((k, v) => MapEntry(k as String, v as String));
+    certName = j['cert'] as String? ?? certName;
+  }
+
+  int stat(String key) => stats[key] ?? 0;
+
+  /// Naikin statistik ke nilai tertinggi (mis. skor terbaik Tebak Penipuan).
+  Future<void> bumpMax(String key, int value) async {
+    if (value <= stat(key)) return;
+    stats[key] = value;
+    await _saveExtra();
+  }
+
+  Future<void> addStat(String key, [int by = 1]) async {
+    stats[key] = stat(key) + by;
+    await _saveExtra();
+  }
+
+  Future<void> captureFlag(String id) async {
+    if (!flags.add(id)) return;
+    xp += 25;
+    await _prefs.setInt(_kXp, xp);
+    await _saveExtra();
+  }
+
+  // --- ulasan (spaced repetition ringan) ---
+  static const _boxDays = [1, 3, 7];
+
+  static String _day(DateTime d) =>
+      '${d.year.toString().padLeft(4, '0')}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+  Future<void> markWrong(String moduleId, int index) async {
+    final due = DateTime.now().add(const Duration(days: 1));
+    reviewQueue['$moduleId#$index'] = '${_day(due)}|0';
+    await _saveExtra(notify: false);
+  }
+
+  /// Soal yang udah waktunya diulang (dan modulnya masih ada).
+  List<String> get dueReviews {
+    final today = _day(DateTime.now());
+    final out = <String>[];
+    reviewQueue.forEach((key, v) {
+      final due = v.split('|').first;
+      final id = key.split('#').first;
+      if (due.compareTo(today) <= 0 && content.modules.containsKey(id)) out.add(key);
+    });
+    out.sort();
+    return out;
+  }
+
+  QuizQuestion? reviewQuestion(String key) {
+    final parts = key.split('#');
+    final m = content.modules[parts.first];
+    final i = int.tryParse(parts.length > 1 ? parts[1] : '');
+    if (m == null || i == null || i < 0 || i >= m.quiz.length) return null;
+    return m.quiz[i];
+  }
+
+  Future<void> answerReview(String key, bool correct) async {
+    final v = reviewQueue[key];
+    if (v == null) return;
+    final box = int.tryParse(v.split('|').last) ?? 0;
+    if (!correct) {
+      reviewQueue[key] = '${_day(DateTime.now().add(const Duration(days: 1)))}|0';
+    } else if (box + 1 >= _boxDays.length) {
+      reviewQueue.remove(key);
+    } else {
+      final next = box + 1;
+      reviewQueue[key] = '${_day(DateTime.now().add(Duration(days: _boxDays[next])))}|$next';
+    }
+    await _saveExtra(notify: false);
+  }
+
+  Future<void> finishReviewSession(int answered) async {
+    stats['reviews'] = stat('reviews') + 1;
+    xp += answered * 3;
+    await _prefs.setInt(_kXp, xp);
+    await _touchStreak();
+    await _saveExtra();
+  }
+
+  // --- pengingat ---
+  Future<void> setReminder({required bool on, int? hour, int? minute}) async {
+    reminderOn = on;
+    reminderHour = hour ?? reminderHour;
+    reminderMinute = minute ?? reminderMinute;
+    await _saveExtra();
+  }
+
+  // --- Pro & sertifikat ---
+  Future<void> setPro(bool value) async {
+    if (isPro == value) return;
+    isPro = value;
+    await _saveExtra();
+  }
+
+  Future<void> setCertName(String name) async {
+    certName = name.trim();
+    await _saveExtra();
+  }
+
+  /// Level ini termasuk konten Pro? (LV.02 ke atas)
+  static bool isProLevel(int index) => index >= 2;
+
+  Future<void> _touchStreak() async {
+    final now = DateTime.now();
+    _streak = nextStreak(last: lastActive, today: now, current: _streak);
+    lastActive = now;
+    stats['maxStreak'] = _streak > stat('maxStreak') ? _streak : stat('maxStreak');
+    await _prefs.setInt(_kStreak, _streak);
+    await _prefs.setString(_kLastActive, now.toIso8601String());
   }
 
   int get streak =>
@@ -194,16 +366,12 @@ class AppState extends ChangeNotifier {
       bestScores[moduleId] = percent;
     }
     xp += gained;
+    if (percent == 100) stats['perfect'] = stat('perfect') + 1;
 
-    final now = DateTime.now();
-    _streak = nextStreak(last: lastActive, today: now, current: _streak);
-    lastActive = now;
-
+    await _touchStreak();
     await _prefs.setString(_kScores, jsonEncode(bestScores));
     await _prefs.setInt(_kXp, xp);
-    await _prefs.setInt(_kStreak, _streak);
-    await _prefs.setString(_kLastActive, now.toIso8601String());
-    notifyListeners();
+    await _saveExtra();
     return gained;
   }
 }

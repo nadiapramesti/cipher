@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../glossary/glossary_tab.dart';
 import '../learn/learn_tab.dart';
+import '../profile/profile_tab.dart';
 import '../tools/toolbox_tab.dart';
 import '../../l10n/strings.dart';
 
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
         bottom: false,
         child: IndexedStack(
           index: _tab,
-          children: const [LearnTab(), ToolboxTab(), GlossaryTab()],
+          children: const [LearnTab(), ToolboxTab(), GlossaryTab(), ProfileTab()],
         ),
       ),
       bottomNavigationBar: NavigationBar(
@@ -43,6 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book_rounded),
             label: tr('nav_glossary'),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.person_outline_rounded),
+            selectedIcon: const Icon(Icons.person_rounded),
+            label: tr('nav_profile'),
           ),
         ],
       ),

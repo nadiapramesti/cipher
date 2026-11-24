@@ -8,17 +8,22 @@ import '../quiz/quiz_screen.dart';
 import '../../l10n/strings.dart';
 
 class ModuleScreen extends StatefulWidget {
-  const ModuleScreen({super.key, required this.module});
+  const ModuleScreen({super.key, required this.module, this.initialPage = 0});
 
   final LearnModule module;
+
+  /// Halaman awal (dipakai hasil pencarian buat langsung lompat ke bagian itu).
+  final int initialPage;
 
   @override
   State<ModuleScreen> createState() => _ModuleScreenState();
 }
 
 class _ModuleScreenState extends State<ModuleScreen> {
-  final _controller = PageController();
-  int _page = 0;
+  late final _controller = PageController(initialPage: widget.initialPage.clamp(0, _maxPage));
+  late int _page = widget.initialPage.clamp(0, _maxPage);
+
+  int get _maxPage => widget.module.pages.isEmpty ? 0 : widget.module.pages.length - 1;
 
   int get _count => widget.module.pages.length;
   bool get _isLast => _page >= _count - 1;

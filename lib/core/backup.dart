@@ -13,6 +13,7 @@ class BackupData {
     this.accent,
     this.themeMode,
     this.lang,
+    this.extra,
   });
 
   final bool onboardingDone;
@@ -25,6 +26,9 @@ class BackupData {
   final String? themeMode;
   final String? lang;
 
+  /// Statistik, flag CTF, antrean ulasan (opsional).
+  final Map<String, dynamic>? extra;
+
   Map<String, Object?> toJson() => {
         'v': 1,
         'onb': onboardingDone,
@@ -36,6 +40,7 @@ class BackupData {
         'accent': accent,
         'mode': themeMode,
         'lang': lang,
+        if (extra != null) 'x': extra,
       };
 
   factory BackupData.fromJson(Map<String, dynamic> j) {
@@ -53,6 +58,7 @@ class BackupData {
       accent: j['accent'] as String?,
       themeMode: j['mode'] as String?,
       lang: j['lang'] as String?,
+      extra: j['x'] is Map ? Map<String, dynamic>.from(j['x'] as Map) : null,
     );
   }
 }
@@ -60,6 +66,8 @@ class BackupData {
 const _prefix = 'CIPHER1';
 
 /// FNV-1a 32-bit: cukup buat ngecek kode gak salah ketik / kepotong.
+String fnv32(String s) => _checksum(s);
+
 String _checksum(String s) {
   var h = 0x811c9dc5;
   for (final b in utf8.encode(s)) {
