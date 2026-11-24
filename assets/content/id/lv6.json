@@ -463,5 +463,105 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "lv6-windows",
+    "level": 6,
+    "title": "Windows & Active Directory",
+    "summary": "Akun, log kejadian, dan otak jaringan kantor.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Akun dan hak akses di Windows",
+        "body": "Di Windows ada dua jenis akun utama:\n- Standard: buat kerja sehari-hari, gak bisa ngubah setelan sistem\n- Administrator: bisa pasang software dan ngubah apa pun\n\nUAC (jendela \"Do you want to allow this app...\") muncul saat sesuatu butuh hak admin. Itu bukan gangguan, tapi rem darurat. Kalau muncul padahal kamu gak lagi install apa-apa, curigai.\n\nCek akun di komputer lewat Command Prompt:\n$ net user\n$ whoami /groups",
+        "tip": "UAC itu satpam yang nanya \"beneran mau buka brankas?\". Jangan dijawab \"ya\" kalau kamu gak lagi ngapa-ngapain."
+      },
+      {
+        "title": "Event Viewer: CCTV-nya Windows",
+        "body": "Windows mencatat aktivitas penting di Event Viewer (ketik eventvwr di Start). Bagian Windows Logs → Security berisi catatan login.\n\nEvent ID yang wajib dikenal:\n- 4624: login berhasil\n- 4625: login gagal\n- 4720: akun baru dibuat\n- 4732: akun ditambahkan ke grup (misal Administrators)\n\nBanyak 4625 berturut-turut lalu satu 4624 = pola tebakan password yang tembus, sama kayak di LV.04. Akun baru yang gak kamu bikin = tanda bahaya.",
+        "tip": "Event Viewer itu buku tamu digital. Kalau ada nama yang gak kamu kenal, berarti ada tamu tak diundang.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "4625 x50",
+            "Event Viewer"
+          ]
+        }
+      },
+      {
+        "title": "Active Directory: otak jaringan kantor",
+        "body": "Di kantor, ratusan komputer dan akun diatur terpusat lewat Active Directory (AD):\n- Domain Controller: server yang menyimpan semua akun dan memeriksa login\n- User & Group: akun karyawan dikelompokkan, misal \"Keuangan\" atau \"IT\"\n- Group Policy (GPO): aturan yang dipaksakan ke semua komputer, misal panjang password minimal\n\nKarena AD pegang semua kunci, dia sasaran utama penyerang. Serangan umum: password spraying (satu password umum dicoba ke banyak akun) dan nyuri akun admin domain.\n\nPertahanannya: MFA, password kuat, akun admin terpisah dari akun harian, dan least privilege.",
+        "tip": "AD itu kantor HRD plus ruang kunci gedung sekaligus. Siapa yang nguasain ruangan itu, nguasain seluruh gedung.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "Domain Controller",
+            "Keuangan",
+            "IT",
+            "PC-01",
+            "PC-02",
+            "Server",
+            "Admin"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Jendela UAC muncul padahal kamu gak lagi install apa pun. Sebaiknya...",
+        "options": [
+          "Klik Yes biar cepat",
+          "Klik No dan curigai",
+          "Matikan UAC",
+          "Restart terus klik Yes"
+        ],
+        "explanation": "Permintaan hak admin yang tiba-tiba bisa berasal dari malware.",
+        "answer": 1
+      },
+      {
+        "prompt": "Event ID 4625 di log Security Windows artinya...",
+        "options": [
+          "Login berhasil",
+          "Login gagal",
+          "Akun dihapus",
+          "Komputer dimatikan"
+        ],
+        "explanation": "4624 berhasil, 4625 gagal.",
+        "answer": 1
+      },
+      {
+        "prompt": "Server yang menyimpan akun dan memeriksa login di Active Directory adalah...",
+        "options": [
+          "Domain Controller",
+          "Printer server",
+          "Router",
+          "Web server"
+        ],
+        "explanation": "Domain Controller adalah pusat autentikasi AD.",
+        "answer": 0
+      },
+      {
+        "prompt": "Password spraying adalah...",
+        "options": [
+          "Mencoba banyak password ke satu akun",
+          "Mencoba satu password umum ke banyak akun",
+          "Menyemprot keyboard",
+          "Mengenkripsi password"
+        ],
+        "explanation": "Teknik ini menghindari penguncian akun karena tiap akun cuma dicoba sekali.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa akun admin sebaiknya terpisah dari akun harian?",
+        "options": [
+          "Biar gaya",
+          "Supaya kalau akun harian dibobol, hak admin gak ikut",
+          "Biar login dua kali",
+          "Gak ada alasannya"
+        ],
+        "explanation": "Least privilege membatasi kerusakan.",
+        "answer": 1
+      }
+    ]
   }
 ]

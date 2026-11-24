@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/backup.dart';
 import '../core/content_repository.dart';
+import '../core/exam.dart';
 import '../core/models.dart';
 import '../features/quiz/quiz_logic.dart';
 import '../l10n/strings.dart';
@@ -342,6 +343,30 @@ class AppState extends ChangeNotifier {
   }
 
   int levelProgress(Level l) => l.moduleIds.where(isModuleDone).length;
+
+  bool isLevelDone(Level l) => l.moduleIds.isNotEmpty && l.moduleIds.every(isModuleDone);
+
+  /// Jumlah modul yang lulus (skor ujian akhir gak dihitung).
+  int get modulesPassed => bestScores.entries.where((e) => !isExamKey(e.key) && isPassed(e.value)).length;
+
+  int? examScore(int level) => bestScores[examKey(level)];
+  bool isExamPassed(int level) => (examScore(level) ?? 0) >= examPassPercent;
+  int get examsPassed => bestScores.entries.where((e) => isExamKey(e.key) && e.value >= examPassPercent).length;
+
+  /// Simpan hasil ujian akhir. Lulus pertama kali dapet 100 XP.
+  Future<int> recordExam(int level, int percent) async {
+    final key = examKey(level);
+    final wasPassed = isExamPassed(level);
+    if ((bestScores[key] ?? -1) < percent) bestScores[key] = percent;
+    final gained = (!wasPassed && percent >= examPassPercent) ? 100 : (percent >= examPassPercent ? 10 : 0);
+    xp += gained;
+    if (percent == 100) stats['perfect'] = stat('perfect') + 1;
+    await _touchStreak();
+    await _prefs.setString(_kScores, jsonEncode(bestScores));
+    await _prefs.setInt(_kXp, xp);
+    await _saveExtra();
+    return gained;
+  }
 
   /// Modul pertama yang udah kebuka tapi belum lulus.
   LearnModule? get nextModule {

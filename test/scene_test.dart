@@ -29,7 +29,7 @@ void main() {
       }
     }
     expect(total, greaterThan(40));
-    expect(id.levels.length, 9);
+    expect(id.levels.length, 10);
   });
 
   for (final kind in SceneSpec.kinds) {

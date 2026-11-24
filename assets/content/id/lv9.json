@@ -1,0 +1,378 @@
+[
+  {
+    "id": "lv9-qris",
+    "level": 9,
+    "title": "QRIS Palsu & Quishing",
+    "summary": "Stiker QR yang ditimpa dan kode QR yang ngarah ke situs jebakan.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Stiker QRIS yang ditimpa",
+        "body": "Modus yang pernah ramai: penipu nempel stiker QRIS miliknya di atas QRIS asli, misal di kotak amal masjid, warung, atau parkiran. Pembayaran pun masuk ke rekening penipu, bukan ke pemilik asli.\n\nCara gak ketipu:\n- Setelah scan, baca nama merchant yang muncul di aplikasi sebelum bayar\n- Nama gak cocok sama tempatnya? Batalkan dan tanya kasir\n- Perhatikan stiker yang kelihatan ditempel ulang, miring, atau beda bahan\n\nBuat pedagang: cek stiker QRIS-mu tiap hari, atau pakai QRIS dinamis yang muncul di layar kasir.",
+        "tip": "Kayak kotak amal yang lubangnya diganti corong ke saku orang lain: isinya kelihatan masuk, tapi gak sampai ke tujuan.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "QRIS asli",
+            "Stiker palsu",
+            "Rekening penipu"
+          ]
+        }
+      },
+      {
+        "title": "Quishing: phishing lewat QR",
+        "body": "Quishing (QR phishing) adalah QR code yang ngarah ke situs palsu. QR sering lolos dari filter email dan orang jarang ngecek alamatnya.\n\nContoh polanya:\n- Email \"verifikasi akun, scan QR ini\"\n- Pamflet promo atau \"bansos\" dengan QR\n- QR di meteran parkir atau tiket yang ditimpa\n\nSebelum ngebuka, kamera HP biasanya nampilin pratinjau alamatnya. Baca domainnya dulu, atau tempel ke Inspektor URL di Toolbox Cipher.",
+        "tip": "QR itu kayak amplop tanpa alamat pengirim. Lihat dulu alamat tujuannya sebelum dibuka.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Scan QR",
+            "Link tersembunyi",
+            "Situs palsu",
+            "Data kamu"
+          ]
+        }
+      },
+      {
+        "title": "Kalau terlanjur",
+        "body": "Kalau terlanjur bayar ke QRIS palsu:\n- Simpan bukti transaksi (nama merchant tujuan, waktu, nominal)\n- Segera hubungi bank atau e-wallet lewat kanal resmi\n- Laporkan ke Indonesia Anti-Scam Centre (IASC) OJK supaya dana bisa coba ditelusuri dan diblokir\n\nKalau terlanjur ngisi data di situs dari QR palsu: ganti password akun itu, keluarkan semua sesi, dan aktifkan 2FA.\n\nMakin cepat lapor, makin besar peluang dana bisa diselamatkan.",
+        "tip": "Sama kayak kebakaran: lima menit pertama paling menentukan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Setelah scan QRIS di kotak amal, apa yang harus dicek sebelum bayar?",
+        "options": [
+          "Warna stiker",
+          "Nama merchant yang muncul di aplikasi",
+          "Jumlah saldo",
+          "Jam di HP"
+        ],
+        "explanation": "Nama merchant harus cocok dengan tempatnya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Quishing adalah...",
+        "options": [
+          "Kuis online",
+          "Phishing lewat kode QR",
+          "Jenis antivirus",
+          "Aplikasi pembayaran"
+        ],
+        "explanation": "QR code dipakai buat mengarahkan ke situs palsu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa QR sering lolos dari filter email?",
+        "options": [
+          "Karena berwarna",
+          "Karena isinya gambar, bukan link teks",
+          "Karena kecil",
+          "Karena gratis"
+        ],
+        "explanation": "Filter biasa memeriksa link teks, bukan isi gambar.",
+        "answer": 1
+      },
+      {
+        "prompt": "Nama merchant di aplikasi gak cocok dengan warungnya. Sebaiknya...",
+        "options": [
+          "Bayar aja",
+          "Batalkan dan tanya kasir",
+          "Scan ulang sampai cocok",
+          "Bayar setengah"
+        ],
+        "explanation": "Bisa jadi stiker QRIS sudah ditimpa.",
+        "answer": 1
+      },
+      {
+        "prompt": "Terlanjur bayar ke QRIS palsu. Langkah tercepat?",
+        "options": [
+          "Tunggu seminggu",
+          "Hubungi bank/e-wallet lewat kanal resmi dan lapor ke IASC OJK",
+          "Posting di medsos aja",
+          "Scan QR lagi"
+        ],
+        "explanation": "Laporan cepat memperbesar peluang dana diblokir.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv9-vishing",
+    "level": 9,
+    "title": "Telepon \"CS Bank\" & Vishing",
+    "summary": "Suara ramah, nomor meyakinkan, ujungnya minta OTP.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Pola telepon penipuan",
+        "body": "Vishing (voice phishing) adalah penipuan lewat telepon. Skenario yang sering dipakai:\n- \"CS bank\": ada transaksi mencurigakan, tarif transfer naik, atau rekening mau diblokir\n- \"Kurir\": paket bermasalah, minta klik link atau sebut kode\n- \"Polisi/jaksa\": keluarga terlibat kasus, harus bayar sekarang\n- \"Hadiah\": menang undian, bayar pajak dulu\n\nPenipu sering udah tahu nama, nomor rekening sebagian, atau alamat kamu dari data bocor. Itu bikin mereka terdengar resmi.",
+        "tip": "Penipu yang tahu nama kamu itu kayak maling yang tahu nama satpam: bukan berarti dia orang dalam."
+      },
+      {
+        "title": "Trik yang dipakai",
+        "body": "- Spoofing: nomor yang tampil dibikin mirip nomor resmi\n- Rasa panik dan waktu sempit: \"dalam 10 menit rekening diblokir\"\n- Minta OTP, PIN, atau kode verifikasi \"buat membatalkan transaksi\"\n- Minta install aplikasi remote (seperti AnyDesk) atau APK \"aplikasi bank versi baru\"\n- Minta pindahin dana ke \"rekening aman\"\n\nSatu aturan yang gak ada pengecualiannya: bank gak pernah minta OTP, PIN, atau password lewat telepon, chat, atau email.",
+        "tip": "Kalau ada yang nelpon minta kunci rumah buat \"ngamanin rumahmu\", dia bukan satpam.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "\"CS Bank\"",
+            "Minta OTP",
+            "AnyDesk",
+            "Rekening aman?"
+          ]
+        }
+      },
+      {
+        "title": "Cara menghadapinya",
+        "body": "- Tutup teleponnya. Gak perlu sopan sama penipu\n- Telepon balik bank lewat nomor yang tertulis di belakang kartu ATM atau aplikasi resmi, bukan nomor yang barusan nelpon\n- Jangan sebut kode apa pun yang masuk lewat SMS\n- Kalau terlanjur ngasih OTP: langsung hubungi bank buat blokir, ganti PIN dan password m-banking\n- Laporkan nomornya ke operator atau lewat aduan resmi (misal aduannomor.id dari Komdigi)\n\nAjarin juga orang tua, karena mereka sasaran favorit modus ini.",
+        "tip": "Telepon balik lewat nomor resmi itu kayak ngecek tamu lewat lubang intip sebelum buka pintu."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Penelepon ngaku CS bank minta kode OTP buat \"membatalkan transaksi\". Ini...",
+        "options": [
+          "Prosedur normal",
+          "Penipuan; bank gak pernah minta OTP",
+          "Fitur baru bank",
+          "Wajib dituruti"
+        ],
+        "explanation": "OTP adalah kunci transaksi; siapa pun yang minta itu penipu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Spoofing nomor telepon artinya...",
+        "options": [
+          "Nomor yang tampil dibuat mirip nomor resmi",
+          "Nomor diblokir",
+          "Pulsa habis",
+          "Sinyal lemah"
+        ],
+        "explanation": "Nomor yang tampil di layar bisa dipalsukan.",
+        "answer": 0
+      },
+      {
+        "prompt": "Cara memastikan telepon dari bank itu asli?",
+        "options": [
+          "Tanya nama penelpon",
+          "Tutup, lalu telepon balik ke nomor di belakang kartu ATM",
+          "Minta mereka kirim foto KTP",
+          "Percaya karena tahu nama kamu"
+        ],
+        "explanation": "Hubungi lewat jalur yang kamu cari sendiri.",
+        "answer": 1
+      },
+      {
+        "prompt": "Penelpon minta kamu install AnyDesk biar \"dibantu teknisi bank\". Bahayanya?",
+        "options": [
+          "Gak ada",
+          "Penipu bisa mengendalikan HP dan melihat OTP",
+          "HP jadi lebih cepat",
+          "Baterai boros sedikit"
+        ],
+        "explanation": "Aplikasi remote memberi kendali penuh layar ke orang lain.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa penipu sering udah tahu nama dan sebagian data kamu?",
+        "options": [
+          "Karena mereka orang bank",
+          "Dari data yang bocor atau dijual",
+          "Karena kebetulan",
+          "Dari horoskop"
+        ],
+        "explanation": "Tahu data pribadi gak membuktikan mereka resmi.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv9-pinjol",
+    "level": 9,
+    "title": "Pinjol Ilegal",
+    "summary": "Cair cepat, bunga mencekik, dan teror ke seluruh kontak.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Bedanya legal dan ilegal",
+        "body": "Pinjaman online (pinjol) legal terdaftar dan diawasi OJK. Pinjol ilegal tidak, dan sering:\n- Menawarkan lewat SMS atau WhatsApp tanpa diminta\n- Cair tanpa verifikasi berarti, bahkan tanpa kamu minta\n- Bunga dan denda gak jelas, tenor sangat pendek\n- Minta akses kontak dan galeri\n\nAturan OJK membatasi pinjol legal cuma boleh mengakses kamera, mikrofon, dan lokasi (sering disingkat \"CAMILAN\"). Yang minta kontak dan galeri itu tanda bahaya.",
+        "tip": "Pinjol ilegal itu kayak rentenir yang minta kunci rumah semua tetanggamu sebagai jaminan."
+      },
+      {
+        "title": "Cara mereka meneror",
+        "body": "Setelah dapat akses kontak, pinjol ilegal bisa:\n- Menghubungi teman, keluarga, dan atasan kamu saat telat bayar\n- Menyebar foto dari galeri disertai fitnah\n- Membuat grup WhatsApp berisi kontakmu buat mempermalukan\n- Menelepon tiap hari dengan ancaman\n\nBanyak korban terjebak gali lubang tutup lubang: pinjam di aplikasi lain buat bayar yang pertama.",
+        "tip": "Satu utang kecil di pinjol ilegal bisa jadi bola salju yang ngegelinding nimpa semua orang di kontakmu.",
+        "visual": {
+          "kind": "botnet",
+          "labels": [
+            "kamu",
+            "kontakmu"
+          ]
+        }
+      },
+      {
+        "title": "Melindungi diri",
+        "body": "- Cek legalitas sebelum pinjam di situs OJK atau lewat Kontak OJK 157\n- Abaikan dan blokir tawaran pinjaman lewat SMS/WA\n- Jangan pernah kasih izin kontak dan galeri ke aplikasi pinjaman\n- Kalau terlanjur dan diteror: simpan bukti ancaman, laporkan ke Satgas PASTI / OJK, dan ke polisi kalau ada ancaman atau penyebaran data\n- Kasih tahu orang terdekat lebih dulu supaya mereka gak kaget dan gak ikut transfer\n\nKalau butuh dana darurat, bicarakan dengan keluarga atau lembaga resmi lebih dulu.",
+        "tip": "Sebelum ninggalin barang di tempat penitipan, pastiin tempatnya punya izin."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Izin yang boleh diakses pinjol legal menurut aturan OJK adalah...",
+        "options": [
+          "Kontak dan galeri",
+          "Kamera, mikrofon, dan lokasi",
+          "SMS dan email",
+          "Semua izin"
+        ],
+        "explanation": "Sering disingkat CAMILAN.",
+        "answer": 1
+      },
+      {
+        "prompt": "Ciri pinjol ilegal adalah...",
+        "options": [
+          "Terdaftar OJK",
+          "Menawarkan lewat SMS tanpa diminta dan minta akses kontak",
+          "Bunga jelas",
+          "Kantor resmi"
+        ],
+        "explanation": "Tawaran tanpa diminta dan akses kontak adalah tanda bahaya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Cara cek legalitas pinjol di Indonesia?",
+        "options": [
+          "Tanya di komentar",
+          "Situs OJK atau Kontak OJK 157",
+          "Lihat jumlah download",
+          "Lihat logonya"
+        ],
+        "explanation": "Download banyak gak menjamin legal.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa pinjol ilegal minta akses kontak?",
+        "options": [
+          "Buat kirim ucapan ulang tahun",
+          "Buat meneror dan mempermalukan saat telat bayar",
+          "Buat backup",
+          "Gak ada alasannya"
+        ],
+        "explanation": "Kontak dipakai sebagai alat tekanan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Terlanjur diteror pinjol ilegal. Langkah yang tepat?",
+        "options": [
+          "Pinjam di aplikasi lain buat bayar",
+          "Simpan bukti dan lapor ke OJK/Satgas PASTI, polisi kalau ada ancaman",
+          "Hapus semua chat",
+          "Ganti nama"
+        ],
+        "explanation": "Gali lubang tutup lubang memperparah masalah.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv9-crypto",
+    "level": 9,
+    "title": "Investasi Bodong, Kripto & Giveaway",
+    "summary": "Janji cuan pasti, \"kirim 1 dapat 2\", dan pacar online yang ngajak trading.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Ciri investasi bodong",
+        "body": "Ciri yang hampir selalu ada:\n- Untung tinggi dan \"pasti\", misal 5% per hari\n- Untung didapat dari ngajak anggota baru (skema Ponzi/piramida)\n- Pakai testimoni, artis, atau deepfake tokoh terkenal\n- Desakan: \"slot terbatas, gabung hari ini\"\n- Penarikan dana makin susah, selalu ada \"biaya\" tambahan\n\nInvestasi beneran selalu punya risiko. Yang menjanjikan untung pasti dan tinggi itu hampir pasti penipuan.",
+        "tip": "Ponzi itu kayak bayar bunga ke nasabah lama pakai uang nasabah baru. Begitu yang baru berhenti dateng, semuanya runtuh.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "Bandar",
+            "Anggota 1",
+            "Anggota 2",
+            "Baru",
+            "Baru",
+            "Baru",
+            "Baru"
+          ]
+        }
+      },
+      {
+        "title": "Modus kripto & giveaway",
+        "body": "- Giveaway palsu: akun mirip artis atau exchange bilang \"kirim 1 koin, kami balikin 2\". Yang dikirim gak akan balik\n- Pig butchering: kenalan di aplikasi kencan atau salah sambung, ngobrol berminggu-minggu, lalu ngajak \"trading\" di aplikasi yang ternyata palsu. Saldo di layar naik, tapi gak bisa ditarik\n- Airdrop dan token gratis yang minta kamu menghubungkan dompet atau menyetujui transaksi, padahal isinya izin menguras dompet\n- Recovery scam: \"jasa\" yang ngaku bisa balikin dana hilang, asal bayar dulu\n\nDi Indonesia, perdagangan aset kripto diawasi OJK sejak 2025. Cek izin platformnya sebelum menyetor.",
+        "tip": "Saldo di aplikasi trading palsu itu kayak angka di papan skor yang dipegang penipu: bisa dia tulis berapa aja.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "DOMPET",
+            "SEED PHRASE"
+          ]
+        }
+      },
+      {
+        "title": "Pegangan sebelum menyetor",
+        "body": "Sebelum menaruh uang di mana pun:\n- Cek izin di OJK (atau regulator resmi negaramu)\n- Cek daftar entitas ilegal dari Satgas PASTI\n- Kalau gak paham produknya, jangan masuk\n- Jangan pernah bagikan seed phrase atau private key dompet kripto ke siapa pun\n- Kenalan online yang tiba-tiba ngajak investasi = berhenti di situ\n\nDan ingat: korban penipuan sering ditarget lagi lewat recovery scam. Lapor ke jalur resmi, jangan ke \"jasa\" di komentar medsos.",
+        "tip": "Seed phrase itu kunci brankas sekaligus surat kepemilikannya. Siapa pun yang tahu, dia pemiliknya."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Tawaran \"untung pasti 5% per hari\" kemungkinan besar...",
+        "options": [
+          "Investasi aman",
+          "Investasi bodong",
+          "Program pemerintah",
+          "Tabungan biasa"
+        ],
+        "explanation": "Untung tinggi yang dijamin adalah ciri klasik penipuan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Giveaway \"kirim 1 koin, dapat balik 2\" dari akun mirip artis adalah...",
+        "options": [
+          "Rezeki",
+          "Penipuan; yang dikirim gak akan kembali",
+          "Promo resmi",
+          "Fitur exchange"
+        ],
+        "explanation": "Gak ada yang menggandakan uang orang asing.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pig butchering biasanya dimulai dari...",
+        "options": [
+          "Iklan TV",
+          "Kenalan online yang lama-lama ngajak trading",
+          "Surat resmi bank",
+          "Teman sekolah"
+        ],
+        "explanation": "Penipu membangun kepercayaan dulu, baru menawarkan investasi.",
+        "answer": 1
+      },
+      {
+        "prompt": "Seed phrase dompet kripto boleh dibagikan ke...",
+        "options": [
+          "CS exchange",
+          "Teman dekat",
+          "Gak ke siapa pun",
+          "Admin grup"
+        ],
+        "explanation": "Siapa pun yang tahu seed phrase bisa menguasai dompet.",
+        "answer": 2
+      },
+      {
+        "prompt": "Setelah ditipu, ada \"jasa\" di komentar yang janji balikin dana asal bayar dulu. Ini...",
+        "options": [
+          "Solusi cepat",
+          "Recovery scam, penipuan lanjutan",
+          "Layanan OJK",
+          "Bantuan polisi"
+        ],
+        "explanation": "Lapor lewat jalur resmi saja.",
+        "answer": 1
+      }
+    ]
+  }
+]

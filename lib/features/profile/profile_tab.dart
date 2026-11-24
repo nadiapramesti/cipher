@@ -15,7 +15,7 @@ class ProfileTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = AppScope.of(context);
-    final passed = s.bestScores.values.where((v) => v >= 70).length;
+    final passed = s.modulesPassed;
     final totalModules = s.content.modules.length;
     final earned = badges.where((b) => b.earned(s)).length;
     final due = s.dueReviews.length;
@@ -120,7 +120,7 @@ class ProfileTab extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Builder(builder: (context) {
-              final done = level.moduleIds.every(s.isModuleDone);
+              final done = s.isLevelDone(level) && s.isExamPassed(level.index);
               return Panel(
                 onTap: () {
                   if (!done) {

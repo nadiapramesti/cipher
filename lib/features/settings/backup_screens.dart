@@ -28,7 +28,7 @@ class _ExportBackupScreenState extends State<ExportBackupScreen> {
   @override
   Widget build(BuildContext context) {
     final state = AppScope.of(context);
-    final done = state.bestScores.values.where((v) => v >= 70).length;
+    final done = state.modulesPassed;
 
     return Scaffold(
       appBar: AppBar(title: Text(tr('bk_export_title'))),

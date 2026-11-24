@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/exam.dart';
+import '../exam/exam_screen.dart';
 import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../core/models.dart';
@@ -9,9 +11,12 @@ import 'quiz_logic.dart';
 import '../../l10n/strings.dart';
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key, required this.module});
+  const QuizScreen({super.key, required this.module, this.exam});
 
   final LearnModule module;
+
+  /// Diisi kalau ini ujian akhir level.
+  final ExamSet? exam;
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -34,7 +39,13 @@ class _QuizScreenState extends State<QuizScreen> {
         _correct++;
       } else {
         // soal yang salah masuk antrean ulasan besok
-        AppScope.read(context).markWrong(widget.module.id, _index);
+        final exam = widget.exam;
+        if (exam == null) {
+          AppScope.read(context).markWrong(widget.module.id, _index);
+        } else {
+          final src = exam.sourceKeys[_index].split('#');
+          AppScope.read(context).markWrong(src.first, int.parse(src.last));
+        }
       }
     });
   }
@@ -50,6 +61,15 @@ class _QuizScreenState extends State<QuizScreen> {
     }
     setState(() => _saving = true);
     final percent = scorePercent(_correct, _qs.length);
+    final exam = widget.exam;
+    if (exam != null) {
+      final gained = await AppScope.read(context).recordExam(exam.level.index, percent);
+      if (!mounted) return;
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (_) => ExamResultScreen(level: exam.level, percent: percent, correct: _correct, total: _qs.length, xpGained: gained),
+      ));
+      return;
+    }
     final gained = await AppScope.read(context).recordQuiz(widget.module.id, percent);
     if (!mounted) return;
     Navigator.of(context).pushReplacement(
@@ -118,7 +138,9 @@ class _QuizScreenState extends State<QuizScreen> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
         children: [
-          MonoTag('// ${widget.module.title.toLowerCase()}'),
+          MonoTag(widget.exam == null
+              ? '// ${widget.module.title.toLowerCase()}'
+              : '// ${widget.module.title.toLowerCase()} · ${tr('ex_pass_rule', {'p': examPassPercent})}'),
           const SizedBox(height: 10),
           Text(q.prompt,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, height: 1.3)),

@@ -163,7 +163,7 @@ class _LessonView extends StatelessWidget {
 }
 
 /// Render teks materi sederhana: paragraf dipisah baris kosong,
-/// baris yang diawali "- " jadi poin, "$ " jadi perintah yang bisa disalin, "| " jadi contoh output.
+/// baris yang diawali "- " jadi poin, "$ " perintah terminal, "> " baris kode, "| " contoh output.
 class RichBody extends StatelessWidget {
   const RichBody({super.key, required this.text});
 
@@ -173,12 +173,30 @@ class RichBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = TextStyle(fontSize: 15.5, height: 1.6, color: C.text);
     final widgets = <Widget>[];
+    // baris "> " (kode) dan "| " (output) yang berurutan digabung jadi satu blok
+    String? blockKind;
+    final block = <String>[];
+    void flush() {
+      if (blockKind == null) return;
+      widgets.add(CodeLine(text: block.join('\n'), command: blockKind == '> ', prompt: false));
+      block.clear();
+      blockKind = null;
+    }
+
     for (final line in text.split('\n')) {
       final t = line.trimRight();
+      final kind = t.startsWith('> ') ? '> ' : (t.startsWith('| ') ? '| ' : null);
+      if (kind != null) {
+        if (blockKind != kind) flush();
+        blockKind = kind;
+        block.add(t.substring(2));
+        continue;
+      }
+      flush();
       if (t.isEmpty) {
         widgets.add(const SizedBox(height: 10));
-      } else if (t.startsWith(r'$ ') || t.startsWith('| ')) {
-        widgets.add(CodeLine(text: t.substring(2), command: t.startsWith(r'$ ')));
+      } else if (t.startsWith(r'$ ')) {
+        widgets.add(CodeLine(text: t.substring(2)));
       } else if (t.startsWith('- ')) {
         widgets.add(Padding(
           padding: const EdgeInsets.only(bottom: 6),
@@ -197,16 +215,20 @@ class RichBody extends StatelessWidget {
         widgets.add(Text(t, style: style));
       }
     }
+    flush();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: widgets);
   }
 }
 
 /// Satu baris perintah terminal (bisa disalin) atau contoh output.
 class CodeLine extends StatelessWidget {
-  const CodeLine({super.key, required this.text, this.command = true});
+  const CodeLine({super.key, required this.text, this.command = true, this.prompt = true});
 
   final String text;
   final bool command;
+
+  /// Tampilkan tanda `$` (perintah terminal). Kode program pakai false.
+  final bool prompt;
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +243,7 @@ class CodeLine extends StatelessWidget {
       ),
       child: Row(
         children: [
-          if (command) Text(r'$ ', style: mono(size: 12.5, color: C.ok, weight: FontWeight.w800, spacing: 0)),
+          if (command && prompt) Text(r'$ ', style: mono(size: 12.5, color: C.ok, weight: FontWeight.w800, spacing: 0)),
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,

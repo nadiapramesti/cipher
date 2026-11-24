@@ -545,5 +545,199 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "lv8-python",
+    "level": 8,
+    "title": "Python for Cyber",
+    "summary": "From using tools to building them: your own port checker and hash checker.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Why Python",
+        "body": "Python is the most popular language in security: readable, with rich libraries, and many security tools are written in it.\n\nIn Termux or Kali:\n$ pkg install python\n$ python --version\n\nCreate a file with nano, write the code, save (Ctrl+O, Enter, Ctrl+X), then run it:\n$ nano check.py\n$ python check.py\n\nTap the code lines in this module to copy them, then paste into nano.",
+        "tip": "If tools are hammers, Python is the workshop where you build the hammer you need."
+      },
+      {
+        "title": "Build a port checker",
+        "body": "This small program checks a few ports on your own router, like a mini Nmap:\n> import socket\n> target = '192.168.1.1'\n> for port in [22, 53, 80, 443]:\n>     s = socket.socket()\n>     s.settimeout(0.5)\n>     is_open = s.connect_ex((target, port)) == 0\n>     print(port, 'OPEN' if is_open else 'closed')\n>     s.close()\n\nconnect_ex tries to connect; a result of 0 means something is listening. Replace target with your router IP from Network Info. LV.04's rule still applies: only your own network.",
+        "tip": "This program knocks on four doors one by one, noting which ones answer.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            ":22 :53 :80 :443",
+            "socket",
+            "router"
+          ]
+        }
+      },
+      {
+        "title": "Build a file hash checker",
+        "body": "Before installing a downloaded file, match its hash with the one on the official site:\n> import hashlib, sys\n> h = hashlib.sha256()\n> with open(sys.argv[1], 'rb') as f:\n>     for block in iter(lambda: f.read(65536), b''):\n>         h.update(block)\n> print(h.hexdigest())\n\nSave it as myhash.py, then run:\n$ python myhash.py ~/storage/shared/Download/file.apk\n\nThe file is read in blocks, so even big files won't exhaust your phone's memory. You can also search the result on VirusTotal without uploading the file.",
+        "tip": "Checking a hash is like matching the seal number on a water jug before drinking.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "hashlib",
+            "file.apk",
+            "sha256"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "In the port checker, connect_ex returning 0 means...",
+        "options": [
+          "The port is closed",
+          "Something is listening (port open)",
+          "No internet",
+          "A fatal error"
+        ],
+        "explanation": "0 = the connection succeeded.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why use settimeout(0.5)?",
+        "options": [
+          "So the program doesn't wait long on silent ports",
+          "For security",
+          "To save data",
+          "For different colors"
+        ],
+        "explanation": "Without a timeout, the program may hang.",
+        "answer": 0
+      },
+      {
+        "prompt": "The Python library for computing SHA-256 is...",
+        "options": [
+          "hashlib",
+          "socket",
+          "random",
+          "turtle"
+        ],
+        "explanation": "hashlib provides sha256, md5, and more.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why read the file in blocks in the hash checker?",
+        "options": [
+          "To change the hash",
+          "So big files don't exhaust memory",
+          "To go slower",
+          "It's mandatory"
+        ],
+        "explanation": "Same hash, less memory.",
+        "answer": 1
+      },
+      {
+        "prompt": "Your homemade port checker may be run against...",
+        "options": [
+          "Any server",
+          "Your own network and devices",
+          "Government sites",
+          "A neighbor's Wi-Fi"
+        ],
+        "explanation": "Building your own tool doesn't change the permission rules.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-apk",
+    "level": 8,
+    "title": "Dissecting Suspicious APKs",
+    "summary": "Look inside an app without installing it: permissions, servers, and Telegram bots.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Rule one: don't install it",
+        "body": "An .apk file is really a ZIP archive containing code, images, and an AndroidManifest.xml listing the app's permissions. You can dissect it without installing.\n\nThe safe way:\n- Check the hash on VirusTotal first (using the Python hash checker or the Toolbox)\n- Dissect on a laptop, ideally inside a Kali VM\n- Never install a suspicious APK on your main phone\n\nTools used:\n- jadx-gui: turns an APK into readable Java code\n- apktool: unpacks resources and the manifest\n- MobSF: an automated scanner that produces a report",
+        "tip": "Dissecting an APK is like X-raying a suspicious parcel at the airport, not opening it in your living room."
+      },
+      {
+        "title": "Read the permissions",
+        "body": "Open the APK in jadx-gui and look at AndroidManifest.xml. Permissions that should set off alarms:\n| android.permission.READ_SMS\n| android.permission.RECEIVE_SMS\n| android.permission.BIND_ACCESSIBILITY_SERVICE\n| android.permission.SYSTEM_ALERT_WINDOW\n| android.permission.READ_CONTACTS\n\nA \"wedding invitation\" or \"traffic ticket\" app has no reason to read SMS or request Accessibility. Reading SMS + sending to the internet = an OTP stealer.",
+        "tip": "A permission list is like the keys a guest asks for. A wedding guest doesn't need the safe key.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "READ_SMS",
+            "jadx"
+          ]
+        }
+      },
+      {
+        "title": "Find where the data goes",
+        "body": "In jadx-gui, use text search (Ctrl+Shift+F) to look for:\n| api.telegram.org/bot\n| http://\n| https://\n| sendMessage\n\nMany scam APKs send victims' SMS to a scammer's Telegram bot. If you find a bot token in the code, you've found the scammer's \"mailbox\".\n\nWhat you can do: report the file and your findings to the bank involved, the platform, and the relevant anti-scam authority. Don't use the token for \"revenge\"; accessing others' systems without permission is still illegal.",
+        "tip": "Finding the scammer's mailbox is like spotting the getaway car's plate. Hand it to the authorities; don't chase it yourself.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Malicious APK",
+            "OTP SMS",
+            "api.telegram.org",
+            "Scammer bot"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "An .apk file is basically...",
+        "options": [
+          "An image",
+          "A ZIP archive with code, resources, and a manifest",
+          "A video",
+          "A Word document"
+        ],
+        "explanation": "That's why it can be unpacked without installing.",
+        "answer": 1
+      },
+      {
+        "prompt": "The tool that turns an APK into readable Java code is...",
+        "options": [
+          "jadx-gui",
+          "Excel",
+          "Paint",
+          "Nmap"
+        ],
+        "explanation": "jadx is a popular APK decompiler.",
+        "answer": 0
+      },
+      {
+        "prompt": "The most suspicious permissions in a \"wedding invitation\" APK are...",
+        "options": [
+          "INTERNET only",
+          "READ_SMS and BIND_ACCESSIBILITY_SERVICE",
+          "VIBRATE",
+          "No permissions"
+        ],
+        "explanation": "This combination is used to steal OTPs.",
+        "answer": 1
+      },
+      {
+        "prompt": "The text \"api.telegram.org/bot\" in a scam APK's code usually means...",
+        "options": [
+          "An official chat feature",
+          "Victim data is sent to the scammer's Telegram bot",
+          "Ads",
+          "Auto-updates"
+        ],
+        "explanation": "Many scam APKs use Telegram bots to collect data.",
+        "answer": 1
+      },
+      {
+        "prompt": "You find a scammer's Telegram bot token. The right step?",
+        "options": [
+          "Use it to hack back",
+          "Report it to the bank, platform, and authorities",
+          "Sell it",
+          "Post it on social media"
+        ],
+        "explanation": "Accessing others' systems without permission is still illegal, even a scammer's.",
+        "answer": 1
+      }
+    ]
   }
 ]

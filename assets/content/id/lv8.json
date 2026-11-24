@@ -545,5 +545,199 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "lv8-python",
+    "level": 8,
+    "title": "Python buat Cyber",
+    "summary": "Dari pakai alat ke bikin alat: port checker dan pengecek hash sendiri.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Kenapa Python",
+        "body": "Python bahasa paling populer di dunia keamanan: gampang dibaca, librarynya lengkap, dan banyak alat keamanan ditulis pakai Python.\n\nDi Termux atau Kali:\n$ pkg install python\n$ python --version\n\nBikin file pakai nano, tulis kodenya, simpan (Ctrl+O, Enter, Ctrl+X), lalu jalankan:\n$ nano cek.py\n$ python cek.py\n\nKetuk baris kode di modul ini buat menyalin, lalu tempel di nano.",
+        "tip": "Kalau alat itu palu, Python itu bengkel tempat kamu bisa bikin palu sesuai kebutuhan."
+      },
+      {
+        "title": "Bikin pengecek port",
+        "body": "Program kecil ini ngecek beberapa port di router kamu sendiri, mirip versi mini Nmap:\n> import socket\n> target = '192.168.1.1'\n> for port in [22, 53, 80, 443]:\n>     s = socket.socket()\n>     s.settimeout(0.5)\n>     buka = s.connect_ex((target, port)) == 0\n>     print(port, 'BUKA' if buka else 'tutup')\n>     s.close()\n\nconnect_ex mencoba menyambung; hasil 0 artinya ada layanan yang dengerin. Ganti target dengan IP router kamu dari Info Jaringan. Aturan LV.04 tetap berlaku: cuma jaringan milikmu.",
+        "tip": "Program ini kayak ngetok empat pintu satu per satu sambil nyatet mana yang dijawab.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            ":22 :53 :80 :443",
+            "socket",
+            "router"
+          ]
+        }
+      },
+      {
+        "title": "Bikin pengecek hash file",
+        "body": "Sebelum pasang file yang diunduh, cocokkan hash-nya dengan yang tertulis di situs resmi:\n> import hashlib, sys\n> h = hashlib.sha256()\n> with open(sys.argv[1], 'rb') as f:\n>     for blok in iter(lambda: f.read(65536), b''):\n>         h.update(blok)\n> print(h.hexdigest())\n\nSimpan sebagai hashku.py, lalu jalankan:\n$ python hashku.py ~/storage/shared/Download/file.apk\n\nFile dibaca per blok, jadi file besar pun gak bikin HP kehabisan memori. Hasilnya bisa juga dicari di VirusTotal tanpa mengunggah file-nya.",
+        "tip": "Ngecek hash itu kayak nyocokin nomor segel galon sebelum diminum.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "hashlib",
+            "file.apk",
+            "sha256"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Di program port checker, connect_ex mengembalikan 0 artinya...",
+        "options": [
+          "Port tertutup",
+          "Ada layanan yang dengerin (port terbuka)",
+          "Internet mati",
+          "Error fatal"
+        ],
+        "explanation": "0 = koneksi berhasil.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa ada settimeout(0.5)?",
+        "options": [
+          "Biar program gak nunggu lama di port yang gak menjawab",
+          "Biar lebih aman",
+          "Biar hemat kuota",
+          "Biar warnanya beda"
+        ],
+        "explanation": "Tanpa batas waktu, program bisa menggantung.",
+        "answer": 0
+      },
+      {
+        "prompt": "Library Python buat menghitung SHA-256 adalah...",
+        "options": [
+          "hashlib",
+          "socket",
+          "random",
+          "turtle"
+        ],
+        "explanation": "hashlib menyediakan sha256, md5, dan lainnya.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa file dibaca per blok di pengecek hash?",
+        "options": [
+          "Biar hasil hash beda",
+          "Biar file besar gak menghabiskan memori",
+          "Biar lebih lambat",
+          "Karena wajib"
+        ],
+        "explanation": "Hash tetap sama, memori tetap hemat.",
+        "answer": 1
+      },
+      {
+        "prompt": "Port checker buatanmu boleh dijalankan ke...",
+        "options": [
+          "Server mana aja",
+          "Jaringan dan perangkat milikmu sendiri",
+          "Situs pemerintah",
+          "Wi-Fi tetangga"
+        ],
+        "explanation": "Bikin alat sendiri gak mengubah aturan izin.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv8-apk",
+    "level": 8,
+    "title": "Bedah APK Mencurigakan",
+    "summary": "Intip isi aplikasi tanpa memasangnya: izin, alamat server, dan bot Telegram.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Aturan pertama: jangan dipasang",
+        "body": "File .apk itu sebenarnya arsip ZIP berisi kode, gambar, dan file AndroidManifest.xml yang mendaftar izin aplikasi. Kamu bisa membedahnya tanpa memasang.\n\nCara aman:\n- Cek hash dulu di VirusTotal (pakai pengecek hash dari modul Python atau Toolbox)\n- Bedah di laptop, idealnya di dalam VM Kali\n- Jangan pernah pasang APK mencurigakan di HP utama\n\nAlat yang dipakai:\n- jadx-gui: mengubah APK jadi kode Java yang bisa dibaca\n- apktool: membongkar resource dan manifest\n- MobSF: pemindai otomatis yang bikin laporan",
+        "tip": "Bedah APK itu kayak ngecek isi paket mencurigakan pakai mesin X-ray bandara, bukan dibuka di ruang tamu."
+      },
+      {
+        "title": "Baca izinnya",
+        "body": "Buka APK di jadx-gui, lalu lihat AndroidManifest.xml. Izin yang bikin alarm:\n| android.permission.READ_SMS\n| android.permission.RECEIVE_SMS\n| android.permission.BIND_ACCESSIBILITY_SERVICE\n| android.permission.SYSTEM_ALERT_WINDOW\n| android.permission.READ_CONTACTS\n\nAplikasi \"undangan pernikahan\" atau \"surat tilang\" gak punya alasan baca SMS atau minta Aksesibilitas. Kombinasi baca SMS + kirim ke internet = pencuri OTP.",
+        "tip": "Daftar izin itu kayak daftar kunci yang diminta tamu. Tamu undangan gak butuh kunci brankas.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "READ_SMS",
+            "jadx"
+          ]
+        }
+      },
+      {
+        "title": "Cari ke mana datanya dikirim",
+        "body": "Di jadx-gui, pakai pencarian teks (Ctrl+Shift+F) buat nyari:\n| api.telegram.org/bot\n| http://\n| https://\n| sendMessage\n\nBanyak APK penipuan di Indonesia ngirim SMS korban ke bot Telegram milik penipu. Kalau ketemu token bot di kode, kamu udah nemu \"kotak surat\" penipunya.\n\nYang bisa kamu lakukan: laporkan file dan temuanmu ke bank terkait, platform, dan Indonesia Anti-Scam Centre (IASC) OJK. Jangan pakai token itu buat \"balas dendam\"; akses ke sistem orang tanpa izin tetap melanggar hukum.",
+        "tip": "Nemu alamat kotak surat penipu itu kayak nemu plat nomor mobil pelaku. Serahkan ke yang berwenang, jangan dikejar sendiri.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "APK jahat",
+            "SMS OTP",
+            "api.telegram.org",
+            "Bot penipu"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "File .apk pada dasarnya adalah...",
+        "options": [
+          "Gambar",
+          "Arsip ZIP berisi kode, resource, dan manifest",
+          "Video",
+          "Dokumen Word"
+        ],
+        "explanation": "Makanya bisa dibongkar tanpa dipasang.",
+        "answer": 1
+      },
+      {
+        "prompt": "Alat yang mengubah APK jadi kode Java yang bisa dibaca adalah...",
+        "options": [
+          "jadx-gui",
+          "Excel",
+          "Paint",
+          "Nmap"
+        ],
+        "explanation": "jadx adalah decompiler APK populer.",
+        "answer": 0
+      },
+      {
+        "prompt": "Izin yang paling mencurigakan di APK \"undangan pernikahan\" adalah...",
+        "options": [
+          "INTERNET saja",
+          "READ_SMS dan BIND_ACCESSIBILITY_SERVICE",
+          "VIBRATE",
+          "Gak ada izin"
+        ],
+        "explanation": "Kombinasi ini dipakai untuk mencuri OTP.",
+        "answer": 1
+      },
+      {
+        "prompt": "Teks \"api.telegram.org/bot\" di kode APK penipuan biasanya berarti...",
+        "options": [
+          "Fitur chat resmi",
+          "Data korban dikirim ke bot Telegram penipu",
+          "Iklan",
+          "Update otomatis"
+        ],
+        "explanation": "Banyak APK penipuan memakai bot Telegram sebagai penampung data.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kamu nemu token bot Telegram penipu. Langkah yang benar?",
+        "options": [
+          "Pakai buat bajak balik",
+          "Laporkan ke bank, platform, dan IASC OJK",
+          "Jual ke orang lain",
+          "Posting tokennya di medsos"
+        ],
+        "explanation": "Mengakses sistem orang tanpa izin tetap ilegal, walau milik penipu.",
+        "answer": 1
+      }
+    ]
   }
 ]

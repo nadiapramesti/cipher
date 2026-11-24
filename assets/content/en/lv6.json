@@ -463,5 +463,105 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": "lv6-windows",
+    "level": 6,
+    "title": "Windows & Active Directory",
+    "summary": "Accounts, event logs, and the brain of office networks.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Accounts and rights on Windows",
+        "body": "Windows has two main account types:\n- Standard: for daily work, can't change system settings\n- Administrator: can install software and change anything\n\nUAC (the \"Do you want to allow this app...\" window) appears when something needs admin rights. It isn't a nuisance; it's an emergency brake. If it pops up when you aren't installing anything, be suspicious.\n\nCheck accounts on a computer from Command Prompt:\n$ net user\n$ whoami /groups",
+        "tip": "UAC is a guard asking \"really open the safe?\". Don't say yes if you aren't doing anything."
+      },
+      {
+        "title": "Event Viewer: Windows' CCTV",
+        "body": "Windows records important activity in Event Viewer (type eventvwr in Start). Windows Logs → Security holds login records.\n\nEvent IDs worth knowing:\n- 4624: successful logon\n- 4625: failed logon\n- 4720: a user account was created\n- 4732: an account was added to a group (e.g. Administrators)\n\nMany 4625s in a row then a 4624 = a password guess that worked, just like in LV.04. A new account you didn't create = a red flag.",
+        "tip": "Event Viewer is a digital guest book. A name you don't recognize means an uninvited guest.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "4625 x50",
+            "Event Viewer"
+          ]
+        }
+      },
+      {
+        "title": "Active Directory: the office network's brain",
+        "body": "In offices, hundreds of computers and accounts are managed centrally through Active Directory (AD):\n- Domain Controller: the server that stores every account and checks logins\n- Users & Groups: employee accounts grouped, e.g. \"Finance\" or \"IT\"\n- Group Policy (GPO): rules enforced on every computer, e.g. a minimum password length\n\nSince AD holds every key, it's attackers' prime target. Common attacks: password spraying (one common password tried against many accounts) and stealing domain admin accounts.\n\nDefenses: MFA, strong passwords, admin accounts separate from daily ones, and least privilege.",
+        "tip": "AD is HR and the building's key room combined. Whoever controls that room controls the whole building.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "Domain Controller",
+            "Finance",
+            "IT",
+            "PC-01",
+            "PC-02",
+            "Server",
+            "Admin"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A UAC prompt appears when you aren't installing anything. You should...",
+        "options": [
+          "Click Yes to save time",
+          "Click No and be suspicious",
+          "Disable UAC",
+          "Restart and click Yes"
+        ],
+        "explanation": "A sudden admin request may come from malware.",
+        "answer": 1
+      },
+      {
+        "prompt": "Event ID 4625 in the Windows Security log means...",
+        "options": [
+          "Successful logon",
+          "Failed logon",
+          "Account deleted",
+          "Computer shut down"
+        ],
+        "explanation": "4624 is success, 4625 is failure.",
+        "answer": 1
+      },
+      {
+        "prompt": "The server that stores accounts and checks logins in Active Directory is the...",
+        "options": [
+          "Domain Controller",
+          "Print server",
+          "Router",
+          "Web server"
+        ],
+        "explanation": "The Domain Controller is AD's authentication hub.",
+        "answer": 0
+      },
+      {
+        "prompt": "Password spraying means...",
+        "options": [
+          "Trying many passwords on one account",
+          "Trying one common password on many accounts",
+          "Spraying the keyboard",
+          "Encrypting passwords"
+        ],
+        "explanation": "It avoids lockouts since each account is tried only once.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why keep admin accounts separate from daily accounts?",
+        "options": [
+          "For style",
+          "So a breached daily account doesn't carry admin rights",
+          "To log in twice",
+          "No reason"
+        ],
+        "explanation": "Least privilege limits damage.",
+        "answer": 1
+      }
+    ]
   }
 ]

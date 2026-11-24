@@ -4,6 +4,7 @@ import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
+import '../exam/exam_screen.dart';
 import 'module_screen.dart';
 import '../../l10n/strings.dart';
 
@@ -30,7 +31,7 @@ class LevelScreen extends StatelessWidget {
             )
           : ListView.separated(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
-              itemCount: modules.length + 1,
+              itemCount: modules.length + 2,
               separatorBuilder: (context, index) => const SizedBox(height: 10),
               itemBuilder: (context, i) {
                 if (i == 0) {
@@ -38,6 +39,12 @@ class LevelScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(level.tagline,
                         style: TextStyle(color: C.muted, height: 1.45)),
+                  );
+                }
+                if (i == modules.length + 1) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: ExamCard(level: level),
                   );
                 }
                 final m = modules[i - 1];

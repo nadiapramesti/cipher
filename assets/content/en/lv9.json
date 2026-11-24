@@ -1,0 +1,378 @@
+[
+  {
+    "id": "lv9-qris",
+    "level": 9,
+    "title": "Fake QRIS & Quishing",
+    "summary": "Swapped QR stickers and QR codes that lead to trap sites.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Swapped QRIS stickers",
+        "body": "A scam that went viral: fraudsters stick their own QRIS (Indonesia's national QR payment code) over the real one, e.g. on mosque donation boxes, food stalls, or parking lots. Payments go to the scammer, not the real owner.\n\nHow to avoid it:\n- After scanning, read the merchant name shown in your app before paying\n- Name doesn't match the place? Cancel and ask the cashier\n- Watch for stickers that look re-applied, crooked, or made of different material\n\nFor merchants: check your QRIS sticker daily, or use a dynamic QR shown on the cashier screen.",
+        "tip": "Like a donation box whose slot was replaced with a funnel into someone else's pocket: the money seems to go in, but never arrives.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Real QRIS",
+            "Fake sticker",
+            "Scammer account"
+          ]
+        }
+      },
+      {
+        "title": "Quishing: phishing via QR",
+        "body": "Quishing (QR phishing) uses QR codes that lead to fake sites. QR codes often slip past email filters, and people rarely check the address.\n\nCommon patterns:\n- Emails saying \"verify your account, scan this QR\"\n- Promo or \"aid program\" flyers with a QR\n- QR codes on parking meters or tickets covered by a fake one\n\nBefore opening, phone cameras usually preview the address. Read the domain first, or paste it into Cipher's URL Inspector.",
+        "tip": "A QR code is like an envelope with no sender. Check where it leads before opening it.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Scan QR",
+            "Hidden link",
+            "Fake site",
+            "Your data"
+          ]
+        }
+      },
+      {
+        "title": "If it already happened",
+        "body": "If you already paid a fake QRIS:\n- Keep the transaction proof (recipient merchant name, time, amount)\n- Contact your bank or e-wallet through official channels immediately\n- Report to the national anti-scam authority (in Indonesia, OJK's Indonesia Anti-Scam Centre / IASC) so funds can be traced and frozen\n\nIf you already entered data on a site from a fake QR: change that account's password, sign out all sessions, and enable 2FA.\n\nThe faster you report, the better the chance of recovering funds.",
+        "tip": "Like a fire: the first five minutes matter most."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "After scanning a QRIS on a donation box, what should you check before paying?",
+        "options": [
+          "Sticker color",
+          "The merchant name shown in the app",
+          "Your balance",
+          "Your phone's clock"
+        ],
+        "explanation": "The merchant name must match the place.",
+        "answer": 1
+      },
+      {
+        "prompt": "Quishing is...",
+        "options": [
+          "An online quiz",
+          "Phishing via QR codes",
+          "A type of antivirus",
+          "A payment app"
+        ],
+        "explanation": "QR codes are used to lead to fake sites.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why do QR codes often slip past email filters?",
+        "options": [
+          "They're colorful",
+          "They're images, not text links",
+          "They're small",
+          "They're free"
+        ],
+        "explanation": "Typical filters check text links, not image contents.",
+        "answer": 1
+      },
+      {
+        "prompt": "The merchant name in your app doesn't match the stall. You should...",
+        "options": [
+          "Pay anyway",
+          "Cancel and ask the cashier",
+          "Rescan until it matches",
+          "Pay half"
+        ],
+        "explanation": "The QRIS sticker may have been swapped.",
+        "answer": 1
+      },
+      {
+        "prompt": "You already paid a fake QRIS. The fastest step?",
+        "options": [
+          "Wait a week",
+          "Contact your bank/e-wallet via official channels and report to the anti-scam authority",
+          "Just post on social media",
+          "Scan the QR again"
+        ],
+        "explanation": "Quick reports improve the chance of freezing funds.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv9-vishing",
+    "level": 9,
+    "title": "\"Bank CS\" Calls & Vishing",
+    "summary": "A friendly voice, a convincing number, and in the end a request for your OTP.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Common scam call patterns",
+        "body": "Vishing (voice phishing) is fraud by phone. Common scripts:\n- \"Bank CS\": a suspicious transaction, new transfer fees, or your account is about to be blocked\n- \"Courier\": a problem with your parcel, click a link or read out a code\n- \"Police/prosecutor\": a family member is in trouble, pay now\n- \"Prize\": you won a lottery, pay the tax first\n\nScammers often already know your name, part of your account number, or address from leaked data. That makes them sound official.",
+        "tip": "A scammer who knows your name is like a thief who knows the guard's name: it doesn't make him an insider."
+      },
+      {
+        "title": "Tricks they use",
+        "body": "- Spoofing: the displayed number is made to look official\n- Panic and a deadline: \"your account will be blocked in 10 minutes\"\n- Asking for your OTP, PIN, or verification code \"to cancel the transaction\"\n- Asking you to install a remote app (like AnyDesk) or a \"new bank app\" APK\n- Asking you to move funds to a \"safe account\"\n\nOne rule with no exceptions: banks never ask for your OTP, PIN, or password by phone, chat, or email.",
+        "tip": "If someone calls asking for your house key to \"secure your house\", they're not a guard.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "\"Bank CS\"",
+            "Wants OTP",
+            "AnyDesk",
+            "\"Safe account\""
+          ]
+        }
+      },
+      {
+        "title": "How to handle it",
+        "body": "- Hang up. No need to be polite to a scammer\n- Call the bank back using the number on the back of your card or in the official app, not the number that just called\n- Don't read out any code you receive by SMS\n- If you already gave an OTP: call the bank immediately to block access, and change your PIN and mobile banking password\n- Report the number to your carrier or the official complaint channel in your country\n\nTeach your parents too; they're a favorite target of this scam.",
+        "tip": "Calling back on the official number is like checking the peephole before opening the door."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A caller claiming to be bank CS asks for your OTP to \"cancel a transaction\". This is...",
+        "options": [
+          "Normal procedure",
+          "A scam; banks never ask for OTPs",
+          "A new bank feature",
+          "Mandatory"
+        ],
+        "explanation": "An OTP authorizes transactions; anyone asking for it is a scammer.",
+        "answer": 1
+      },
+      {
+        "prompt": "Caller ID spoofing means...",
+        "options": [
+          "The displayed number is made to look official",
+          "The number is blocked",
+          "Out of credit",
+          "Weak signal"
+        ],
+        "explanation": "The number shown on screen can be faked.",
+        "answer": 0
+      },
+      {
+        "prompt": "How do you confirm a call from your bank is real?",
+        "options": [
+          "Ask the caller's name",
+          "Hang up, then call the number on the back of your card",
+          "Ask for their ID photo",
+          "Trust them because they know your name"
+        ],
+        "explanation": "Contact them through a channel you looked up yourself.",
+        "answer": 1
+      },
+      {
+        "prompt": "A caller asks you to install AnyDesk so a \"bank technician\" can help. The danger?",
+        "options": [
+          "None",
+          "The scammer can control your phone and see OTPs",
+          "Your phone gets faster",
+          "Slight battery drain"
+        ],
+        "explanation": "Remote apps give someone else full control of your screen.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why do scammers often already know your name and some details?",
+        "options": [
+          "They work at the bank",
+          "From leaked or sold data",
+          "Coincidence",
+          "From horoscopes"
+        ],
+        "explanation": "Knowing personal data doesn't prove they're official.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv9-pinjol",
+    "level": 9,
+    "title": "Illegal Online Loans",
+    "summary": "Fast cash, crushing interest, and harassment of your whole contact list.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Legal vs illegal",
+        "body": "Legal online lenders are registered and supervised by the financial regulator (in Indonesia, OJK). Illegal ones aren't, and often:\n- Offer loans by unsolicited SMS or WhatsApp\n- Disburse with no real verification, sometimes without you even asking\n- Have unclear interest and penalties, with very short terms\n- Ask for access to your contacts and gallery\n\nIndonesian rules restrict legal lenders to camera, microphone, and location access only. An app asking for contacts and gallery is a red flag.",
+        "tip": "An illegal lender is like a loan shark who wants keys to all your neighbors' houses as collateral."
+      },
+      {
+        "title": "How they harass",
+        "body": "With your contacts, illegal lenders can:\n- Contact your friends, family, and boss when you're late\n- Spread photos from your gallery along with slander\n- Create WhatsApp groups with your contacts to shame you\n- Call daily with threats\n\nMany victims get stuck borrowing from another app to repay the first.",
+        "tip": "One small debt to an illegal lender can snowball onto everyone in your contacts.",
+        "visual": {
+          "kind": "botnet",
+          "labels": [
+            "you",
+            "your contacts"
+          ]
+        }
+      },
+      {
+        "title": "Protecting yourself",
+        "body": "- Check legality with the financial regulator before borrowing (in Indonesia: OJK's website or Kontak OJK 157)\n- Ignore and block loan offers via SMS/WhatsApp\n- Never grant contacts or gallery access to a loan app\n- If you're already being harassed: keep evidence of threats and report to the regulator, and to police if there are threats or data leaks\n- Tell the people close to you first so they aren't shocked and don't send money\n\nIf you need emergency funds, talk to family or official institutions first.",
+        "tip": "Before leaving your belongings at a storage place, make sure it's licensed."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Under OJK rules, legal online lenders may access...",
+        "options": [
+          "Contacts and gallery",
+          "Camera, microphone, and location",
+          "SMS and email",
+          "Every permission"
+        ],
+        "explanation": "Often abbreviated CAMILAN in Indonesia.",
+        "answer": 1
+      },
+      {
+        "prompt": "A sign of an illegal lender is...",
+        "options": [
+          "Registered with OJK",
+          "Unsolicited SMS offers and contact access requests",
+          "Clear interest rates",
+          "An official office"
+        ],
+        "explanation": "Unsolicited offers and contact access are red flags.",
+        "answer": 1
+      },
+      {
+        "prompt": "How do you check a lender's legality in Indonesia?",
+        "options": [
+          "Ask in comments",
+          "OJK's website or Kontak OJK 157",
+          "Check download counts",
+          "Look at the logo"
+        ],
+        "explanation": "High downloads don't guarantee legality.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why do illegal lenders want contact access?",
+        "options": [
+          "To send birthday wishes",
+          "To harass and shame you when you're late",
+          "For backup",
+          "No reason"
+        ],
+        "explanation": "Contacts are used as leverage.",
+        "answer": 1
+      },
+      {
+        "prompt": "You're being harassed by an illegal lender. The right step?",
+        "options": [
+          "Borrow from another app to pay",
+          "Keep evidence and report to the regulator, and police if threatened",
+          "Delete all chats",
+          "Change your name"
+        ],
+        "explanation": "Borrowing to repay makes things worse.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv9-crypto",
+    "level": 9,
+    "title": "Bogus Investments, Crypto & Giveaways",
+    "summary": "Guaranteed profit, \"send 1 get 2\", and online romances that pitch trading.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Signs of a bogus investment",
+        "body": "Signs that almost always appear:\n- High, \"guaranteed\" returns, e.g. 5% per day\n- Profit comes from recruiting new members (Ponzi/pyramid schemes)\n- Testimonials, celebrities, or deepfakes of famous people\n- Pressure: \"limited slots, join today\"\n- Withdrawals get harder, with ever more \"fees\"\n\nReal investments always carry risk. Anything promising high, guaranteed returns is almost certainly a scam.",
+        "tip": "A Ponzi scheme pays old investors with new investors' money. Once new ones stop coming, it all collapses.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "Organizer",
+            "Member 1",
+            "Member 2",
+            "New",
+            "New",
+            "New",
+            "New"
+          ]
+        }
+      },
+      {
+        "title": "Crypto & giveaway scams",
+        "body": "- Fake giveaways: accounts imitating celebrities or exchanges say \"send 1 coin, we'll send back 2\". What you send never comes back\n- Pig butchering: you meet someone on a dating app or via a \"wrong number\", chat for weeks, then they pitch \"trading\" on an app that turns out to be fake. The on-screen balance grows, but you can't withdraw\n- Airdrops and free tokens that ask you to connect your wallet or approve a transaction, which actually grants permission to drain it\n- Recovery scams: \"services\" claiming they can recover lost funds, if you pay first\n\nIn Indonesia, crypto asset trading has been supervised by OJK since 2025. Check a platform's license before depositing.",
+        "tip": "The balance in a fake trading app is like a scoreboard held by the scammer: he can write any number.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "WALLET",
+            "SEED PHRASE"
+          ]
+        }
+      },
+      {
+        "title": "Rules before depositing",
+        "body": "Before putting money anywhere:\n- Check the license with your financial regulator\n- Check official lists of illegal entities\n- If you don't understand the product, stay out\n- Never share your crypto wallet's seed phrase or private key with anyone\n- An online acquaintance who suddenly pitches investing = stop right there\n\nAnd remember: scam victims are often targeted again by recovery scams. Report through official channels, not to \"services\" in social media comments.",
+        "tip": "A seed phrase is both the safe key and the ownership papers. Whoever knows it owns the wallet."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "An offer of \"guaranteed 5% daily profit\" is most likely...",
+        "options": [
+          "A safe investment",
+          "A bogus investment",
+          "A government program",
+          "A normal savings account"
+        ],
+        "explanation": "Guaranteed high returns are a classic scam sign.",
+        "answer": 1
+      },
+      {
+        "prompt": "A \"send 1 coin, get 2 back\" giveaway from a celebrity look-alike account is...",
+        "options": [
+          "Luck",
+          "A scam; what you send never returns",
+          "An official promo",
+          "An exchange feature"
+        ],
+        "explanation": "Nobody doubles strangers' money.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pig butchering usually starts with...",
+        "options": [
+          "A TV ad",
+          "An online acquaintance who eventually pitches trading",
+          "An official bank letter",
+          "A school friend"
+        ],
+        "explanation": "Scammers build trust first, then pitch the investment.",
+        "answer": 1
+      },
+      {
+        "prompt": "A crypto wallet's seed phrase may be shared with...",
+        "options": [
+          "Exchange support",
+          "A close friend",
+          "No one",
+          "A group admin"
+        ],
+        "explanation": "Whoever knows the seed phrase controls the wallet.",
+        "answer": 2
+      },
+      {
+        "prompt": "After a scam, a \"service\" in the comments promises to recover funds if you pay first. This is...",
+        "options": [
+          "A quick fix",
+          "A recovery scam, a follow-up fraud",
+          "An OJK service",
+          "Police help"
+        ],
+        "explanation": "Report only through official channels.",
+        "answer": 1
+      }
+    ]
+  }
+]

@@ -52,5 +52,11 @@
     "title": "Alat Tempur",
     "tagline": "Termux, Nmap, Wireshark, Burp Suite, CyberChef, Kali Linux, dan lab latihan legal.",
     "moduleFile": "lv8.json"
+  },
+  {
+    "index": 9,
+    "title": "Modus Lokal",
+    "tagline": "QRIS palsu, telepon CS bank, pinjol ilegal, investasi bodong & kripto.",
+    "moduleFile": "lv9.json"
   }
 ]

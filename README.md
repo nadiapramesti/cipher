@@ -12,14 +12,16 @@ Aplikasi Android buat belajar cyber security dari nol, buat umum dan berbasis le
 | LV.03 Kriptografi | Encoding/hash/enkripsi, cipher klasik, penyimpanan password, kunci simetris & asimetris, HTTPS & sertifikat | ✅ 5 modul |
 | LV.04 Praktek | Etika & hukum, recon & OSINT, baca log & respons insiden, CTF & karier | ✅ 4 modul |
 | LV.05 Malware & Ancaman | Jenis malware, ransomware, APK jahat di Android, botnet & DDoS, serangan rantai pasok | ✅ 5 modul |
-| LV.06 Pertahanan | Firewall/IDS/IPS, VPN & zero trust, hardening, passkey & password manager, pertahanan berlapis | ✅ 5 modul |
+| LV.06 Pertahanan | Firewall/IDS/IPS, VPN & zero trust, hardening, passkey & password manager, pertahanan berlapis, Windows & Active Directory | ✅ 6 modul |
 | LV.07 Forensik, Cloud & AI | Forensik digital, keamanan cloud, deepfake & penipuan AI, rencana keamanan pribadi | ✅ 4 modul |
-| LV.08 Alat Tempur | Termux, Nmap, Wireshark & PCAPdroid, Burp Suite, CyberChef & alat online, Kali Linux & lab latihan | ✅ 6 modul |
+| LV.08 Alat Tempur | Termux, Nmap, Wireshark & PCAPdroid, Burp Suite, CyberChef & alat online, Kali Linux & lab latihan, Python buat cyber, bedah APK | ✅ 8 modul |
+| LV.09 Modus Lokal | QRIS palsu & quishing, telepon "CS bank", pinjol ilegal, investasi bodong & kripto | ✅ 4 modul |
 
 ## Fitur
-- **48 modul di 9 level**, ID & EN, tiap modul ada analogi dan 5 soal berpembahasan
-- **Adegan 3D interaktif** di 60 halaman materi (paket data, lapisan pertahanan, brankas, roda Caesar, pohon DNS, botnet, dll.) yang bisa diputer pakai jari
+- **55 modul di 10 level**, ID & EN, tiap modul ada analogi dan 5 soal berpembahasan
+- **Adegan 3D interaktif** di 72 halaman materi (paket data, lapisan pertahanan, brankas, roda Caesar, pohon DNS, botnet, dll.) yang bisa diputer pakai jari
 - **Kamus 46 istilah** lengkap dengan analogi
+- **Ujian akhir tiap level** (10 soal acak, lulus 80%) sebagai syarat sertifikat, plus **24 lencana**
 
 - Onboarding + tes penempatan 8 soal yang ngasih rekomendasi level
 - Modul: materi singkat + analogi, kuis dengan pembahasan, lulus minimal 70% buat buka modul berikutnya

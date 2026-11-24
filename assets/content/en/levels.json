@@ -52,5 +52,11 @@
     "title": "Toolkit",
     "tagline": "Termux, Nmap, Wireshark, Burp Suite, CyberChef, Kali Linux, and legal practice labs.",
     "moduleFile": "lv8.json"
+  },
+  {
+    "index": 9,
+    "title": "Local Scams",
+    "tagline": "Fake QRIS, bank CS calls, illegal loans, bogus investments & crypto.",
+    "moduleFile": "lv9.json"
   }
 ]
