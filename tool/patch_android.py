@@ -42,13 +42,35 @@ if kts.exists():
     if 'isCoreLibraryDesugaringEnabled' not in g:
         g = re.sub(r'compileOptions\s*\{', 'compileOptions {\n        isCoreLibraryDesugaringEnabled = true', g, count=1)
         g += '\ndependencies {\n    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")\n}\n'
+    if 'checkReleaseBuilds' not in g:
+        # lint vital Android sempat crash di plugin in_app_purchase; bukan error kode kita
+        g = re.sub(r'android\s*\{', 'android {\n    lint {\n        checkReleaseBuilds = false\n        abortOnError = false\n    }', g, count=1)
     kts.write_text(g)
 elif groovy.exists():
     g = groovy.read_text()
     if 'coreLibraryDesugaringEnabled' not in g:
         g = re.sub(r'compileOptions\s*\{', 'compileOptions {\n        coreLibraryDesugaringEnabled true', g, count=1)
         g += "\ndependencies {\n    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'\n}\n"
+    if 'checkReleaseBuilds' not in g:
+        g = re.sub(r'android\s*\{', 'android {\n    lintOptions {\n        checkReleaseBuilds false\n        abortOnError false\n    }', g, count=1)
     groovy.write_text(g)
+
+root = pathlib.Path('android/build.gradle.kts')
+root_groovy = pathlib.Path('android/build.gradle')
+snippet_kts = '''
+subprojects {
+    tasks.matching { it.name.startsWith("lintVital") }.configureEach { enabled = false }
+}
+'''
+snippet_groovy = '''
+subprojects {
+    tasks.matching { it.name.startsWith("lintVital") }.configureEach { enabled = false }
+}
+'''
+if root.exists() and 'lintVital' not in root.read_text():
+    root.write_text(root.read_text() + snippet_kts)
+elif root_groovy.exists() and 'lintVital' not in root_groovy.read_text():
+    root_groovy.write_text(root_groovy.read_text() + snippet_groovy)
 
 print(manifest.read_text())
 print((kts if kts.exists() else groovy).read_text())
