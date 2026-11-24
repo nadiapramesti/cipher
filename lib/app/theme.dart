@@ -26,8 +26,15 @@ class C {
   static const muted = Color(0xFFA89CC4);
 }
 
-const String kMono = 'JetBrainsMono';
-const String kDisplay = 'SpaceGrotesk';
+/// Tipografi Cipher:
+/// - Chakra Petch: judul, bersudut tajam ala panel kokpit
+/// - Plus Jakarta Sans: isi materi, enak dibaca lama (font identitas kota Jakarta)
+/// - Martian Mono: label terminal, kode, angka XP (variable font, bobot lewat wght)
+const String kMono = 'MartianMono';
+const String kDisplay = 'ChakraPetch';
+const String kBody = 'PlusJakartaSans';
+
+List<FontVariation> wght(FontWeight w) => [FontVariation('wght', (w.index + 1) * 100.0)];
 
 TextStyle mono({
   double size = 12,
@@ -40,6 +47,7 @@ TextStyle mono({
       fontSize: size,
       color: color,
       fontWeight: weight,
+      fontVariations: wght(weight),
       letterSpacing: spacing,
     );
 
@@ -55,12 +63,13 @@ TextStyle display({
       color: color,
       fontWeight: weight,
       height: height,
-      letterSpacing: -0.4,
+      letterSpacing: -0.2,
     );
 
 ThemeData buildTheme() {
   final base = ThemeData(
     useMaterial3: true,
+    fontFamily: kBody,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: C.bg,
     colorScheme: const ColorScheme.dark(
@@ -87,8 +96,9 @@ ThemeData buildTheme() {
       centerTitle: false,
       titleTextStyle: TextStyle(
         fontFamily: kMono,
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.w700,
+        fontVariations: [FontVariation('wght', 700)],
         color: C.text,
         letterSpacing: 0.3,
       ),

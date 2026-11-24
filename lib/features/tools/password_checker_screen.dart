@@ -69,7 +69,11 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
             autocorrect: false,
             enableSuggestions: false,
             keyboardType: TextInputType.visiblePassword,
-            style: const TextStyle(fontFamily: kMono, fontSize: 16, letterSpacing: 0.5),
+            style: const TextStyle(
+              fontFamily: kMono,
+              fontSize: 15,
+              fontVariations: [FontVariation('wght', 500)],
+            ),
             decoration: InputDecoration(
               labelText: 'Password yang mau dicek',
               hintText: 'contoh: kucing-oren-makan-tahu-27',

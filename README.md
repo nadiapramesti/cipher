@@ -63,7 +63,7 @@ Perintah `flutter create .` cuma dibutuhkan sekali buat bikin folder `android/`,
 
 ## Font
 
-JetBrains Mono dan Space Grotesk, keduanya berlisensi SIL Open Font License (lihat `assets/fonts/OFL-*.txt`).
+Chakra Petch (judul), Plus Jakarta Sans (isi), dan Martian Mono (label terminal & kode). Semuanya berlisensi SIL Open Font License (lihat `assets/fonts/OFL-*.txt`).
 
 ## Prinsip
 
