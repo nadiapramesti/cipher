@@ -1,0 +1,488 @@
+[
+  {
+    "id": "lv1-internet",
+    "level": 1,
+    "title": "What the Internet Is",
+    "summary": "How your message reaches a server across the world in an instant.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "A network of networks",
+        "body": "The internet is a giant network connecting millions of smaller networks: home Wi-Fi, office networks, mobile carriers, and data centers.\n\nDevices on the internet usually act as:\n- Client: the one asking (your phone opening an app)\n- Server: the one answering (the computer holding the app's data)\n\nEvery time you open a site, your phone (the client) sends a request and the server sends a response.",
+        "tip": "The client is a shopper, the server is the shopkeeper. The shopper asks; the shopkeeper prepares and hands over the order."
+      },
+      {
+        "title": "Data is split into packets",
+        "body": "Data isn't sent in one piece. A 2 MB photo is cut into thousands of small packets, each with a sender and destination address.\n\nThose packets:\n- Can take different routes\n- Can arrive out of order and get reassembled at the destination\n- Get resent if any go missing\n\nRouters along the way decide where to forward each packet.",
+        "tip": "Like shipping a wardrobe: it's taken apart into numbered boards, sent separately, then reassembled at the destination."
+      },
+      {
+        "title": "Who's along the route",
+        "body": "One request's journey from your phone:\n- Phone → home Wi-Fi router or cell tower\n- → ISP (your internet provider, e.g. a mobile carrier)\n- → several routers between networks\n- → the destination server\n\nThat means many parties sit along the way. That's why encryption (HTTPS) matters: those in the middle only see the envelope, not its contents.",
+        "tip": "Your packet is like a letter passed through many post offices. That's why its contents must be sealed."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "When you open a news app, your phone acts as the...",
+        "options": [
+          "Server",
+          "Client",
+          "Router",
+          "ISP"
+        ],
+        "explanation": "The device requesting data is the client; the one providing it is the server.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why is data sent as small packets?",
+        "options": [
+          "To cost more",
+          "So they can take different routes and be resent if lost",
+          "Because phones can't handle big files",
+          "So they can't be read"
+        ],
+        "explanation": "Small packets are more flexible and resilient than one big transfer.",
+        "answer": 1
+      },
+      {
+        "prompt": "A router's job is to...",
+        "options": [
+          "Store photos",
+          "Forward packets toward their destination",
+          "Encrypt passwords",
+          "Build apps"
+        ],
+        "explanation": "A router reads a packet's destination and chooses the next hop.",
+        "answer": 1
+      },
+      {
+        "prompt": "An ISP is...",
+        "options": [
+          "A type of virus",
+          "An Internet Service Provider",
+          "A programming language",
+          "A chat app"
+        ],
+        "explanation": "An ISP is the company that connects you to the internet.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why does HTTPS matter when data passes through many parties?",
+        "options": [
+          "Fewer packets",
+          "Parties in the middle can't read the contents",
+          "Faster servers",
+          "It turns routers off"
+        ],
+        "explanation": "Encryption keeps contents secret even across many routers and networks.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-ip",
+    "level": 1,
+    "title": "IP Addresses",
+    "summary": "Every device's home address on a network: public, private, IPv4, and IPv6.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "IPv4 and IPv6",
+        "body": "An IP address is a number that identifies a device on a network.\n\n- IPv4: four numbers from 0–255 separated by dots, e.g. 192.168.1.10. About 4.3 billion addresses in total, which ran short long ago\n- IPv6: longer, using hexadecimal and colons, e.g. 2001:db8::1. Practically unlimited\n\nModern phones usually have both at once.",
+        "tip": "IPv4 is house numbers in a small, full neighborhood. IPv6 is a giant new neighborhood with room for everyone."
+      },
+      {
+        "title": "Private vs public IP",
+        "body": "Not every address is visible from the internet.\n\n- Private IP: only valid on a local network. The ranges are 10.x.x.x, 172.16–31.x.x, and 192.168.x.x\n- Public IP: the address seen on the internet, usually belonging to your home router or carrier\n\nRouters use NAT to translate many private IPs into one public IP. That's why the phone, laptop, and TV at home reach the internet with the same public IP.",
+        "tip": "A private IP is a hotel room number. The public IP is the hotel's address. Couriers only know the hotel; the receptionist (NAT) delivers to the room."
+      },
+      {
+        "title": "What an IP reveals",
+        "body": "A public IP can give a rough picture:\n- City or region (often inaccurate)\n- The internet provider you use\n\nBut an IP doesn't show your exact home address. Only the ISP can match an IP to a customer, usually only through legal process.\n\nSee your phone's own private IP in Toolbox → Network Info.",
+        "tip": "An IP is like a postal code. People can guess your area, but not which house is yours."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Which is a valid IPv4 address?",
+        "options": [
+          "192.168.1.300",
+          "10.0.0.25",
+          "2001:db8::1",
+          "abc.def.1.2"
+        ],
+        "explanation": "Each IPv4 part is 0–255. 300 is too big, and 2001:db8::1 is IPv6.",
+        "answer": 1
+      },
+      {
+        "prompt": "The address 192.168.0.5 is a...",
+        "options": [
+          "Public IP",
+          "Private IP",
+          "IPv6 address",
+          "Email address"
+        ],
+        "explanation": "The 192.168.x.x range is reserved for local networks.",
+        "answer": 1
+      },
+      {
+        "prompt": "NAT on a router is used to...",
+        "options": [
+          "Block all websites",
+          "Translate many private IPs into one public IP",
+          "Boost battery",
+          "Change the Wi-Fi password"
+        ],
+        "explanation": "NAT lets many devices share a single public IP.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why was IPv6 created?",
+        "options": [
+          "For shorter addresses",
+          "Because IPv4 addresses ran out",
+          "To make the internet free",
+          "To make it unhackable"
+        ],
+        "explanation": "IPv4 has only about 4.3 billion addresses, not enough for every device in the world.",
+        "answer": 1
+      },
+      {
+        "prompt": "From someone's public IP, others can usually learn...",
+        "options": [
+          "Their exact home address",
+          "A rough region and the ISP name",
+          "Their Wi-Fi password",
+          "Their chat messages"
+        ],
+        "explanation": "An IP gives only a rough picture. Customer data stays with the ISP.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-subnet",
+    "level": 1,
+    "title": "Subnets Without Headaches",
+    "summary": "Read /24 and /16, and tell the network part from the device part.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Two parts in one IP",
+        "body": "An IP address has two parts:\n- Network part: identifies the \"neighborhood\"\n- Host part: identifies the \"house\" or device inside it\n\nA subnet mask or CIDR notation (/number) tells how many leading bits belong to the network. IPv4 has 32 bits in total.\n\nExample 192.168.1.10/24: the first 24 bits (192.168.1) are the network, the remaining 8 bits (.10) are the device.",
+        "tip": "Like the address \"Jasmine St, Block C, No. 10\": \"Block C\" is the network, \"No. 10\" is the house."
+      },
+      {
+        "title": "Counting addresses",
+        "body": "The formula: number of addresses = 2 to the power of (32 minus the CIDR number).\n\n- /24 → 2^8 = 256 addresses\n- /16 → 2^16 = 65,536 addresses\n- /30 → 2^2 = 4 addresses\n\nIn each subnet, 2 addresses are special:\n- The first = the network address (e.g. 192.168.1.0)\n- The last = broadcast (e.g. 192.168.1.255)\n\nSo a /24 has 254 addresses usable by devices.",
+        "tip": "A housing block has 256 plots, but the first is for the gate and the last for the guard post. That leaves 254 for houses."
+      },
+      {
+        "title": "Why subnets matter for security",
+        "body": "Subnets aren't just about counting. In security, they're used to separate networks:\n- Guest Wi-Fi is kept apart from the office network\n- CCTV cameras and smart devices are separated from work laptops\n- Critical servers sit in their own subnet with strict firewall rules\n\nIf one device gets malware, spreading is harder because it's not in the same \"neighborhood\" as the others. This is called segmentation.",
+        "tip": "Like a ship with watertight compartments. One room floods, but the ship doesn't sink right away."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "How many total addresses are in a /24 subnet?",
+        "options": [
+          "24",
+          "128",
+          "256",
+          "65,536"
+        ],
+        "explanation": "2^(32-24) = 2^8 = 256 addresses.",
+        "answer": 2
+      },
+      {
+        "prompt": "How many addresses are usable by devices in a /24?",
+        "options": [
+          "256",
+          "255",
+          "254",
+          "24"
+        ],
+        "explanation": "256 minus the network and broadcast addresses = 254.",
+        "answer": 2
+      },
+      {
+        "prompt": "In 10.0.5.20/16, the network part is...",
+        "options": [
+          "10",
+          "10.0",
+          "10.0.5",
+          "10.0.5.20"
+        ],
+        "explanation": "/16 means the first 16 bits, which is the first two numbers: 10.0.",
+        "answer": 1
+      },
+      {
+        "prompt": "How many total addresses does a /30 subnet have?",
+        "options": [
+          "2",
+          "4",
+          "8",
+          "30"
+        ],
+        "explanation": "2^(32-30) = 2^2 = 4 addresses (2 usable).",
+        "answer": 1
+      },
+      {
+        "prompt": "Separating guest Wi-Fi from the office network is called...",
+        "options": [
+          "Encryption",
+          "Segmentation",
+          "Phishing",
+          "Backup"
+        ],
+        "explanation": "Segmentation limits how attacks spread between parts of a network.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-dns",
+    "level": 1,
+    "title": "DNS: The Internet's Phone Book",
+    "summary": "From domain name to IP address, and how DNS can be abused.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Easy names, hard numbers",
+        "body": "Humans remember wikipedia.org easily, but computers need an IP address. DNS (Domain Name System) translates domain names into IPs.\n\nThe short version:\n- Your phone asks a DNS resolver (usually your ISP's or a service like 1.1.1.1)\n- The resolver asks a chain of servers up to the authoritative one\n- The answer (an IP) comes back and is cached for a while\n\nTry it yourself in Toolbox → Network Info → Try DNS.",
+        "tip": "DNS is your contact list. You look up \"Mom\"; the phone knows the number."
+      },
+      {
+        "title": "Types of DNS records",
+        "body": "A domain can have several record types:\n- A: name → IPv4 address\n- AAAA: name → IPv6 address\n- CNAME: an alias pointing to another name\n- MX: the mail server for that domain\n- TXT: text notes, often used for verification and email anti-spam (SPF, DMARC)\n\nPentesters and analysts often check these records to map an organization's services.",
+        "tip": "DNS records are like a building directory: which floor an office is on, where the mailbox is, what else the building is called."
+      },
+      {
+        "title": "When DNS is abused",
+        "body": "Since almost every connection starts with DNS, attackers like to target it:\n- DNS spoofing: a fake answer that sends you to a look-alike site\n- A hacked home router whose DNS settings are changed\n- Look-alike domains (typosquatting) registered on purpose by scammers\n\nDefenses: change your router's admin password, use a trusted DNS resolver, check HTTPS and the site address, and turn on Private DNS on Android if needed.",
+        "tip": "If a prankster swapped your contact list, you'd call \"Mom\" and reach a scammer instead."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "DNS's main job is to...",
+        "options": [
+          "Encrypt data",
+          "Translate domain names into IP addresses",
+          "Block viruses",
+          "Save battery"
+        ],
+        "explanation": "DNS answers the question \"what's the IP for this name?\".",
+        "answer": 1
+      },
+      {
+        "prompt": "The DNS record pointing to a domain's mail server is...",
+        "options": [
+          "A",
+          "AAAA",
+          "MX",
+          "CNAME"
+        ],
+        "explanation": "MX (Mail Exchange) points to the mail server.",
+        "answer": 2
+      },
+      {
+        "prompt": "An AAAA record contains...",
+        "options": [
+          "An IPv4 address",
+          "An IPv6 address",
+          "Verification text",
+          "An alias name"
+        ],
+        "explanation": "A is for IPv4, AAAA is for IPv6.",
+        "answer": 1
+      },
+      {
+        "prompt": "An attacker changes your home router's DNS settings. The effect?",
+        "options": [
+          "Faster Wi-Fi",
+          "You can be redirected to fake sites",
+          "Longer battery life",
+          "No effect"
+        ],
+        "explanation": "A rogue DNS can point real site names to a scammer's server.",
+        "answer": 1
+      },
+      {
+        "prompt": "A simple step to protect your router from DNS hijacking?",
+        "options": [
+          "Keep the default admin password",
+          "Change the router's admin password",
+          "Turn Wi-Fi off forever",
+          "Use a funny Wi-Fi name"
+        ],
+        "explanation": "Many routers are hacked because the default admin password was never changed.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-ports",
+    "level": 1,
+    "title": "Ports & Protocols",
+    "summary": "One IP, many doors: ports, TCP vs UDP, and common services.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Ports: doors on one address",
+        "body": "One server can run many services at once: web, email, remote login. To keep them apart, each service \"listens\" on a different port number (0–65535).\n\nA full destination = IP + port, e.g. 93.184.216.34:443.\n\nOn your phone's side, the system also picks a temporary random port for each outgoing connection.",
+        "tip": "The IP is the building's address; the port is the counter number. Counter 443 handles secure web, counter 25 handles mail."
+      },
+      {
+        "title": "Ports worth knowing",
+        "body": "Memorize a few that show up most:\n- 22: SSH, encrypted remote login\n- 53: DNS\n- 80: HTTP (unencrypted web)\n- 443: HTTPS (encrypted web)\n- 25 / 587: sending email (SMTP)\n- 3389: Windows Remote Desktop\n\nA port open to the internet without need is a weakness. Attackers constantly hunt for servers with port 22 or 3389 using weak passwords.",
+        "tip": "Every open door is a chance for a thief to try. Doors you don't use, lock them."
+      },
+      {
+        "title": "TCP vs UDP",
+        "body": "The two main ways to send data:\n- TCP: does a \"handshake\" first, checks every packet arrives, and resends missing ones. Used for web, email, chat\n- UDP: sends right away without checking. Faster, but some may be lost. Used for DNS, video calls, online games\n\nThe choice depends on the need: accuracy (TCP) or speed (UDP).",
+        "tip": "TCP is shipping with a courier who needs a signature. UDP is tossing flyers: fast, but nobody checks they arrived."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Port 443 is usually used for...",
+        "options": [
+          "Incoming email",
+          "HTTPS",
+          "Remote Desktop",
+          "DNS"
+        ],
+        "explanation": "443 is the standard port for encrypted web (HTTPS).",
+        "answer": 1
+      },
+      {
+        "prompt": "Which service usually runs on port 22?",
+        "options": [
+          "SSH",
+          "HTTP",
+          "Games",
+          "Printing"
+        ],
+        "explanation": "Port 22 is used by SSH for encrypted remote login.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why should unused ports be closed?",
+        "options": [
+          "For free internet",
+          "To reduce weaknesses attackers can target",
+          "To change the IP",
+          "So DNS works"
+        ],
+        "explanation": "Every exposed service is one more door for attackers.",
+        "answer": 1
+      },
+      {
+        "prompt": "The protocol that checks every packet arrives and resends missing ones is...",
+        "options": [
+          "UDP",
+          "TCP",
+          "DNS",
+          "IP"
+        ],
+        "explanation": "TCP guarantees data arrives complete and in order.",
+        "answer": 1
+      },
+      {
+        "prompt": "Video calls suit UDP because...",
+        "options": [
+          "It's more secure",
+          "It's faster; losing a little data is fine",
+          "It can store video",
+          "It needs no internet"
+        ],
+        "explanation": "For live calls, delay is more annoying than losing a frame or two.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-linux",
+    "level": 1,
+    "title": "Linux & Terminal Basics",
+    "summary": "Meet the terminal: folders, files, permissions, and root.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Why Linux matters in cyber security",
+        "body": "Most servers on the internet run Linux, Android is built on the Linux kernel, and nearly every security tool is designed for Linux.\n\nOn Linux, the most efficient way to work is the terminal: you type a command, the system runs it. It sounds old-school, but it's exactly what lets admins and security analysts work fast and precisely.",
+        "tip": "A GUI is driving an automatic; the terminal is a manual. Tricky at first, but you get full control."
+      },
+      {
+        "title": "Basic commands",
+        "body": "The ones you'll use most:\n- pwd: which folder you're in\n- ls: list a folder (ls -a for hidden files)\n- cd name: change folder (cd .. to go up one level)\n- cat file: read a file\n- grep word file: find lines containing a word\n\nFiles or folders whose names start with a dot (.) are hidden. They're often settings files, and sometimes used to stash things that \"shouldn't be seen\".",
+        "tip": "pwd checks the \"You are here\" sign, ls looks inside the cupboard, cd moves rooms, cat opens and reads a letter."
+      },
+      {
+        "title": "Permissions & root",
+        "body": "Every file has permissions for three groups: owner, group, and others. Each can have:\n- r (read)\n- w (write)\n- x (execute)\n\nFor example, -rw-r--r-- means the owner can read and write, everyone else can only read.\n\nRoot is the super account that can do anything. That's why daily work uses a normal account, and sudo only when truly needed. This principle is called least privilege.\n\nPractice: open Toolbox → Terminal Simulator and find the hidden flag.",
+        "tip": "Root is the building's master key. Guards don't carry it every day, only in emergencies."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "The command to show hidden files is...",
+        "options": [
+          "ls",
+          "ls -a",
+          "pwd",
+          "cd .."
+        ],
+        "explanation": "The -a (all) option also shows files starting with a dot.",
+        "answer": 1
+      },
+      {
+        "prompt": "The pwd command shows...",
+        "options": [
+          "Your password",
+          "The folder you're in",
+          "A file's contents",
+          "A list of users"
+        ],
+        "explanation": "pwd = print working directory.",
+        "answer": 1
+      },
+      {
+        "prompt": "The permission -rw-r--r-- means...",
+        "options": [
+          "Everyone can edit the file",
+          "The owner can read and write, others can only read",
+          "Nobody can read it",
+          "Everyone can execute it"
+        ],
+        "explanation": "The first three letters are the owner's (rw-), then group (r--), then others (r--).",
+        "answer": 1
+      },
+      {
+        "prompt": "The least privilege principle means...",
+        "options": [
+          "Always use root for convenience",
+          "Grant only the access that's needed",
+          "Remove all permissions",
+          "Share passwords with the team"
+        ],
+        "explanation": "Minimal access limits the damage if an account is misused.",
+        "answer": 1
+      },
+      {
+        "prompt": "The command to find lines containing \"error\" in log.txt?",
+        "options": [
+          "cat error",
+          "grep error log.txt",
+          "cd log.txt",
+          "ls error"
+        ],
+        "explanation": "grep searches for a text pattern inside a file.",
+        "answer": 1
+      }
+    ]
+  }
+]

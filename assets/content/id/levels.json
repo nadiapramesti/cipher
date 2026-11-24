@@ -9,7 +9,7 @@
     "index": 1,
     "title": "Fondasi",
     "tagline": "Cara internet bekerja: IP, DNS, port, dan dasar Linux.",
-    "moduleFile": null
+    "moduleFile": "lv1.json"
   },
   {
     "index": 2,

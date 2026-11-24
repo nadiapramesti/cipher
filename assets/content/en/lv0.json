@@ -327,5 +327,329 @@
         "explanation": "With this setting off, APKs from outside the official store can't be installed directly."
       }
     ]
+  },
+  {
+    "id": "lv0-privacy",
+    "level": 0,
+    "title": "Social Media Privacy",
+    "summary": "What you post can become material to scam you.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Oversharing is raw material for scammers",
+        "body": "Your birthday, mother's name, school, pet's name, a plane ticket with a barcode. They seem harmless, but they're often answers to security questions or material to impersonate you.\n\nWhat leaks most often through posts:\n- Photos of your ID card, student card, or boarding pass\n- Your home location and daily routine (checking in at the same place every morning)\n- Family details used for \"your child had an accident\" scams",
+        "tip": "Posts are puzzle pieces. One piece is harmless, but a scammer collects them until the picture is complete."
+      },
+      {
+        "title": "Social engineering: fooling people, not systems",
+        "body": "Many attacks need no fancy hacking. The attacker just researches your profile, then pretends to be a friend, boss, or official.\n\nTypical patterns:\n- A fake account using your friend's photo and name, asking to borrow money\n- An \"HR person\" who knows your workplace from LinkedIn and asks for data\n- A quiz like \"your celebrity name = first pet + street name\" that actually fishes for security answers",
+        "tip": "A clever thief doesn't break the door. He learns the guard's name and greets him like an old friend to get let in."
+      },
+      {
+        "title": "Tidy up your privacy settings",
+        "body": "Five minutes well spent:\n- Make your account private if you're not a creator\n- Turn off automatic location on your camera and posts\n- Hide your phone number, email, and birthday from your public profile\n- Review your \"friends\": remove strangers or suspicious duplicate accounts\n- Post vacations after you're back, not while you're away\n\nBefore posting, ask yourself: if a stranger saw this, what could they learn about me?",
+        "tip": "Privacy settings are window curtains. Your house is still there, but passersby can't peek inside."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Which photo is most dangerous to post?",
+        "options": [
+          "Food at a cafe",
+          "A boarding pass with its barcode",
+          "A mountain view",
+          "A sleeping cat"
+        ],
+        "explanation": "A boarding pass barcode can be scanned to see booking details and even change your flight.",
+        "answer": 1
+      },
+      {
+        "prompt": "A \"first pet + street name\" quiz on social media is risky because...",
+        "options": [
+          "It slows your phone",
+          "It fishes for security-question answers",
+          "It breaks copyright",
+          "It's not risky at all"
+        ],
+        "explanation": "First pet and street names are common security questions for password resets.",
+        "answer": 1
+      },
+      {
+        "prompt": "Social engineering means...",
+        "options": [
+          "Breaking servers with viruses",
+          "Manipulating people into giving access or information",
+          "Building a new social network",
+          "Encrypting user data"
+        ],
+        "explanation": "It targets human trust, not technical weaknesses.",
+        "answer": 1
+      },
+      {
+        "prompt": "When is it safest to post vacation photos?",
+        "options": [
+          "Right as you leave",
+          "Every hour during the trip",
+          "After you're back home",
+          "It makes no difference"
+        ],
+        "explanation": "Posting while away tells everyone your home is empty.",
+        "answer": 2
+      },
+      {
+        "prompt": "An account with your friend's name and photo suddenly asks to borrow money. It's probably...",
+        "options": [
+          "Your friend in urgent need",
+          "A fake or hijacked account",
+          "A bank promotion",
+          "A new social media feature"
+        ],
+        "explanation": "Confirm by phone or in person before sending anything.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv0-wifi",
+    "level": 0,
+    "title": "Public Wi-Fi & Hotspots",
+    "summary": "Free doesn't mean safe: using public Wi-Fi without getting burned.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Public Wi-Fi is a busy highway",
+        "body": "On cafe, airport, or mall Wi-Fi you share a network with many strangers. The operator may not have set up security properly either.\n\nThe risks:\n- Unencrypted traffic can be snooped on\n- Attackers can create a fake Wi-Fi with a similar name, e.g. \"Cafe_Free\" vs \"Cafe Free\"\n- Phones that auto-join previously used network names can be fooled by a fake one",
+        "tip": "Talking over unencrypted public Wi-Fi is like sharing secrets on a crowded bus. Anyone can listen in."
+      },
+      {
+        "title": "HTTPS and VPNs are your shields",
+        "body": "The good news: almost every major site and app now uses HTTPS. The content is encrypted, so people on the same network can't read your password.\n\nStill be careful:\n- Watch for certificate warnings in your browser. If one appears, don't continue\n- A trusted VPN creates an encrypted tunnel for all your traffic, useful on public Wi-Fi\n- Random free VPNs may snoop on your data themselves",
+        "tip": "HTTPS is a sealed envelope. The mail carrier sees the address but can't read the letter."
+      },
+      {
+        "title": "Safe habits on public Wi-Fi",
+        "body": "A quick checklist:\n- Ask staff for the official Wi-Fi name instead of picking the strongest signal\n- Turn off \"auto-join\" for public Wi-Fi\n- Avoid banking on public Wi-Fi; use mobile data if you can\n- Forget the network when you're done\n- To share internet, use your own phone hotspot with a strong password",
+        "tip": "Like drinking from a glass at a food stall: usually fine, but bringing your own bottle is more reassuring."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A cafe shows two Wi-Fi networks: \"KopiSenja\" and \"KopiSenja_Free\". Best move?",
+        "options": [
+          "Pick the strongest signal",
+          "Ask staff which one is official",
+          "Join both",
+          "Pick the one that says Free"
+        ],
+        "explanation": "Attackers often create fake Wi-Fi with similar names. Staff know the real one.",
+        "answer": 1
+      },
+      {
+        "prompt": "HTTPS protects you on public Wi-Fi because...",
+        "options": [
+          "It makes the internet faster",
+          "The communication is encrypted",
+          "It hides the Wi-Fi name",
+          "It blocks ads"
+        ],
+        "explanation": "Others on the same network can't read encrypted content.",
+        "answer": 1
+      },
+      {
+        "prompt": "Your browser warns \"Connection not private / invalid certificate\". You should...",
+        "options": [
+          "Continue anyway",
+          "Stop and don't enter any data",
+          "Refresh until it goes away",
+          "Turn off antivirus"
+        ],
+        "explanation": "A certificate warning can mean someone is intercepting your connection.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why should \"auto-join\" for public Wi-Fi be turned off?",
+        "options": [
+          "It only drains battery",
+          "Your phone can join a fake Wi-Fi with the same name",
+          "It uses up your data",
+          "There's no reason"
+        ],
+        "explanation": "Attackers can create a network with a name you've used before, and your phone joins it automatically.",
+        "answer": 1
+      },
+      {
+        "prompt": "You need to transfer money at the airport. Safest option?",
+        "options": [
+          "Airport Wi-Fi",
+          "Your own mobile data",
+          "A stranger's hotspot",
+          "A Wi-Fi with no password"
+        ],
+        "explanation": "Your own mobile data isn't shared with strangers on the same network.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv0-backup",
+    "level": 0,
+    "title": "Backups & Lost Phones",
+    "summary": "Have a plan before your phone is lost, broken, or hit by ransomware.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "The 3-2-1 rule",
+        "body": "Data that lives in only one place is data waiting to be lost. Use the 3-2-1 rule:\n- 3 copies of your data (1 original + 2 backups)\n- 2 different types of media (e.g. phone + laptop/flash drive)\n- 1 copy off-site (e.g. the cloud)\n\nFor phones, the easiest way: turn on automatic Google/iCloud backup for photos, contacts, and important chats.",
+        "tip": "Don't put all your eggs in one basket. If the basket falls, you still have eggs in the kitchen."
+      },
+      {
+        "title": "Screen lock & Find My Phone",
+        "body": "Before anything happens, set these up:\n- Lock your screen with a PIN of at least 6 digits or a fingerprint, not an easy pattern\n- Turn on Find My Device (Android) or Find My (iPhone)\n- Note your phone's IMEI (dial *#06#) and keep it somewhere else\n- Turn on built-in encryption (usually automatic with a screen lock)\n\nWithout a screen lock, anyone who finds your phone can open your chats, email, and banking.",
+        "tip": "A screen lock is a drawer padlock. The drawer can be stolen, but its contents aren't easy to open."
+      },
+      {
+        "title": "If your phone is lost: the first 30 minutes",
+        "body": "In this order:\n- Open Find My Device from another phone or laptop: locate, ring, or lock your phone\n- If it won't come back, wipe it remotely\n- Call your carrier to block the SIM (prevents OTP misuse)\n- Change your email and key account passwords, and sign out the lost device\n- Tell your bank to block mobile banking\n- Report to the police with the IMEI if you need a loss report",
+        "tip": "Same as a lost wallet: block the cards first, then go looking for the wallet."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "The 3-2-1 backup rule means...",
+        "options": [
+          "3 passwords, 2 emails, 1 phone",
+          "3 copies, 2 media types, 1 off-site",
+          "Back up 3 times a day",
+          "3 different backup apps"
+        ],
+        "explanation": "Copies in different places protect against damage, loss, and even fire.",
+        "answer": 1
+      },
+      {
+        "prompt": "The safest screen lock here?",
+        "options": [
+          "An L-shaped pattern",
+          "PIN 1234",
+          "A random 6-digit PIN or fingerprint",
+          "No lock, for convenience"
+        ],
+        "explanation": "Patterns and simple PINs are easy to guess or peek at. A longer random PIN or biometrics is much safer.",
+        "answer": 2
+      },
+      {
+        "prompt": "Your phone is lost and probably won't come back. The right step?",
+        "options": [
+          "Wait in case someone returns it",
+          "Wipe it remotely with Find My Device",
+          "Just buy a new phone",
+          "Post about it on social media"
+        ],
+        "explanation": "A remote wipe prevents others from reading your data.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why block your SIM through the carrier when your phone is lost?",
+        "options": [
+          "To save credit",
+          "So nobody else receives your OTPs",
+          "So the phone can't charge",
+          "No need to block it"
+        ],
+        "explanation": "Whoever holds your SIM can receive OTP texts to break into your accounts.",
+        "answer": 1
+      },
+      {
+        "prompt": "A quick way to see your phone's IMEI?",
+        "options": [
+          "Dial *#06#",
+          "Dial *123#",
+          "Open the gallery",
+          "Restart the phone"
+        ],
+        "explanation": "The code *#06# shows the IMEI. Keep it somewhere other than the phone itself.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv0-family",
+    "level": 0,
+    "title": "Family Safety",
+    "summary": "Protect parents and kids from the scams that target them most.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Scams that target parents",
+        "body": "Parents are often targeted because they're less familiar with digital scams. The most common:\n- \"Your child had an accident\": a panicked call demanding hospital fees\n- A new number claiming to be their child: \"phone broke, this is my new number, please transfer\"\n- Fake lottery prizes or aid programs asking for an admin fee\n- Links or APKs disguised as invitations, bills, or official letters\n\nThey share one pattern: create panic or excitement, then demand money or data fast.",
+        "tip": "Scammers are like pickpockets at a bus terminal: they look for people who are confused and in a hurry."
+      },
+      {
+        "title": "A family code word",
+        "body": "A simple trick that works: agree on a secret family code.\n- Pick a word or question only your family knows\n- Never write it on social media or in group chats\n- If someone claiming to be family suddenly asks for money, ask for the code\n- Make it a rule: call back the old number before transferring\n\nAlso teach parents not to hesitate to hang up. A real scammer will pressure them; real family will understand.",
+        "tip": "A family code is like a house password. A \"relative\" who doesn't know it doesn't get let in."
+      },
+      {
+        "title": "Kids and teens online",
+        "body": "For kids, focus on guidance, not just bans:\n- Use parental controls (Google Family Link, Screen Time) suited to their age\n- Teach them: never send private photos or addresses to people met online\n- Teach them to tell a parent when something feels wrong, without fear of being scolded\n- Watch out for games or \"free top-up\" apps that ask for account logins\n- Set purchase limits in the Play Store to avoid surprise spending",
+        "tip": "Teaching kids online safety is like teaching them to cross the street: not banning them from going out, but showing them how."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Mom gets a call: \"Your child had an accident, transfer now for the hospital!\". First step?",
+        "options": [
+          "Transfer right away",
+          "Hang up and contact the child directly",
+          "Send an ID photo",
+          "Give the account number"
+        ],
+        "explanation": "Verify through the child's known number first. This scam relies on panic.",
+        "answer": 1
+      },
+      {
+        "prompt": "A family code word should be...",
+        "options": [
+          "Posted in the family group so everyone remembers",
+          "Known only to family, never written online",
+          "Changed every hour",
+          "Your birthday"
+        ],
+        "explanation": "A code that's ever written online can be found by scammers.",
+        "answer": 1
+      },
+      {
+        "prompt": "A common sign of scams targeting parents?",
+        "options": [
+          "Polite, relaxed messages",
+          "Creating panic or excitement, then asking for money fast",
+          "Always from an office number",
+          "Never asking for anything"
+        ],
+        "explanation": "Panic and urgency make people forget to verify.",
+        "answer": 1
+      },
+      {
+        "prompt": "Your child says an online gaming friend asked for photos and their home address. Best response?",
+        "options": [
+          "Scold your child",
+          "Praise them for telling you, then block and report the account",
+          "Ignore it",
+          "Tell them to send an old photo"
+        ],
+        "explanation": "Kids who feel safe telling you will report danger sooner.",
+        "answer": 1
+      },
+      {
+        "prompt": "How do you prevent kids from making accidental Play Store purchases?",
+        "options": [
+          "Delete the Play Store",
+          "Set purchase limits or approvals",
+          "Give the kid your account password",
+          "There's no way"
+        ],
+        "explanation": "Purchase approval (e.g. via Family Link) makes every purchase need a parent's OK.",
+        "answer": 1
+      }
+    ]
   }
 ]

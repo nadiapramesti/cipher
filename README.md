@@ -6,18 +6,21 @@ Aplikasi Android buat belajar cyber security dari nol, buat umum dan berbasis le
 
 | Level | Isi | Status |
 |---|---|---|
-| LV.00 Aman Digital | Password, 2FA, phishing & scam WA/SMS, update & izin aplikasi | ✅ 4 modul |
-| LV.01 Fondasi | Internet, IP, DNS, port, dasar Linux | segera |
+| LV.00 Aman Digital | Password, 2FA, phishing, update & izin, privasi medsos, Wi-Fi publik, backup & HP hilang, keamanan keluarga | ✅ 8 modul |
+| LV.01 Fondasi | Internet, alamat IP, subnet, DNS, port & protokol, Linux & terminal | ✅ 6 modul |
 | LV.02 Web | HTTP, cookie, XSS, SQLi, OWASP Top 10 | segera |
 | LV.03 Kriptografi | Encoding vs hashing vs enkripsi, cipher klasik | segera |
 | LV.04 Praktek | Mini CTF offline | segera |
 
-## Fitur (MVP tahap 1)
+## Fitur
 
 - Onboarding + tes penempatan 8 soal yang ngasih rekomendasi level
 - Modul: materi singkat + analogi, kuis dengan pembahasan, lulus minimal 70% buat buka modul berikutnya
 - XP dan streak harian
-- Toolbox yang kebuka sesuai level, sekarang ada **Cek Kekuatan Password** (entropi, estimasi waktu dibobol, checklist, saran)
+- Toolbox: **Cek Kekuatan Password**, **Tebak Penipuan**, **Mini CTF** (5 flag), **Terminal Simulasi**, **Info Jaringan**
+- **Ulasan** berkala buat soal yang pernah salah, **Pencarian** di semua materi
+- **Profil** dengan statistik & 11 lencana, **pengingat harian**
+- **Cipher Pro** (Google Play Billing, produk `cipher_pro`) + **sertifikat PDF** per level
 - Kamus 22 istilah dengan pencarian dan analogi
 - Tampilan **Violet Vault** + elemen 3D: brankas kubus berputar di onboarding, peta level isometrik, kartu materi yang miring, tombol tebal yang bisa "ditekan"
 

@@ -327,5 +327,329 @@
         "explanation": "Dengan pengaturan ini mati, APK dari luar toko resmi gak bisa langsung terinstall."
       }
     ]
+  },
+  {
+    "id": "lv0-privacy",
+    "level": 0,
+    "title": "Privasi Media Sosial",
+    "summary": "Yang kamu posting bisa jadi bahan buat nipu kamu sendiri.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Oversharing itu bahan baku penipu",
+        "body": "Tanggal lahir, nama ibu, nama sekolah, hewan peliharaan, tiket pesawat dengan barcode. Semua kelihatan sepele, tapi sering dipakai sebagai jawaban pertanyaan keamanan atau bahan buat nyamar jadi kamu.\n\nYang paling sering bocor lewat postingan:\n- Foto KTP, kartu pelajar, atau boarding pass\n- Lokasi rumah dan jadwal harian (check-in tiap pagi di tempat sama)\n- Info keluarga yang bisa dipakai buat modus \"anak kecelakaan\"",
+        "tip": "Postingan itu kayak kepingan puzzle. Satu keping gak bahaya, tapi penipu ngumpulin semuanya sampai gambarnya utuh."
+      },
+      {
+        "title": "Social engineering: nipu orangnya, bukan sistemnya",
+        "body": "Banyak serangan gak butuh hacking canggih. Penyerang cukup riset profil kamu, terus pura-pura jadi teman, atasan, atau petugas.\n\nContoh polanya:\n- Akun palsu pakai foto dan nama teman kamu, lalu pinjam uang\n- \"HRD\" yang tahu tempat kerja kamu dari LinkedIn, lalu minta data\n- Kuis \"nama artis kamu = nama hewan pertama + nama jalan\" yang sebenarnya mancing jawaban pertanyaan keamanan",
+        "tip": "Maling yang pinter gak jebol pintu. Dia cari tahu nama satpamnya, terus nyapa sok akrab biar dibukain."
+      },
+      {
+        "title": "Rapikan setelan privasimu",
+        "body": "Lima menit yang worth it:\n- Ubah akun jadi privat kalau kamu bukan kreator\n- Matikan lokasi otomatis di kamera dan postingan\n- Sembunyikan nomor HP, email, dan tanggal lahir dari profil publik\n- Cek daftar \"teman\": hapus akun asing atau akun ganda yang mencurigakan\n- Posting liburan setelah pulang, bukan selama pergi\n\nSebelum posting, tanya diri sendiri: kalau orang asing lihat ini, apa yang bisa dia tahu soal aku?",
+        "tip": "Setelan privasi itu tirai jendela. Rumahmu tetap ada, tapi orang lewat gak bisa ngintip isinya."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Foto mana yang paling berbahaya dipost?",
+        "options": [
+          "Foto makanan di kafe",
+          "Foto boarding pass dengan barcode",
+          "Foto pemandangan gunung",
+          "Foto kucing tidur"
+        ],
+        "explanation": "Barcode boarding pass bisa dipindai buat lihat data pemesanan, bahkan mengubah jadwal penerbangan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kuis \"nama hewan pertama + nama jalan rumah\" di medsos sebenarnya berisiko karena...",
+        "options": [
+          "Bikin HP lemot",
+          "Mancing jawaban pertanyaan keamanan",
+          "Melanggar hak cipta",
+          "Gak berisiko sama sekali"
+        ],
+        "explanation": "Nama hewan pertama dan nama jalan sering jadi pertanyaan keamanan buat reset password.",
+        "answer": 1
+      },
+      {
+        "prompt": "Social engineering artinya...",
+        "options": [
+          "Merusak server pakai virus",
+          "Memanipulasi orang supaya ngasih akses atau informasi",
+          "Membuat jaringan sosial baru",
+          "Mengenkripsi data pengguna"
+        ],
+        "explanation": "Yang diserang adalah kepercayaan manusia, bukan celah teknis.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kapan paling aman posting foto liburan?",
+        "options": [
+          "Pas lagi berangkat",
+          "Setiap jam selama liburan",
+          "Setelah pulang ke rumah",
+          "Kapan aja sama saja"
+        ],
+        "explanation": "Posting pas lagi pergi ngasih tahu orang kalau rumahmu kosong.",
+        "answer": 2
+      },
+      {
+        "prompt": "Akun dengan nama dan foto temanmu tiba-tiba minta pinjam uang. Ini kemungkinan...",
+        "options": [
+          "Teman lagi butuh banget",
+          "Akun palsu atau akun yang dibajak",
+          "Promo bank",
+          "Fitur baru medsos"
+        ],
+        "explanation": "Pastikan lewat telepon atau ketemu langsung sebelum ngirim apa pun.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv0-wifi",
+    "level": 0,
+    "title": "Wi-Fi Publik & Hotspot",
+    "summary": "Gratis bukan berarti aman: cara pakai Wi-Fi umum tanpa kebobolan.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Wi-Fi umum itu jalan raya rame",
+        "body": "Di Wi-Fi kafe, bandara, atau mal, kamu satu jaringan sama banyak orang asing. Pengelolanya pun belum tentu ngatur keamanannya dengan benar.\n\nRisikonya:\n- Lalu lintas yang gak terenkripsi bisa diintip\n- Penyerang bisa bikin Wi-Fi palsu dengan nama mirip, misal \"Kafe_Gratis\" vs \"Kafe Gratis\"\n- HP yang otomatis nyambung ke nama Wi-Fi yang pernah dipakai bisa ketipu jaringan palsu",
+        "tip": "Ngobrol di Wi-Fi umum tanpa enkripsi itu kayak ngobrol rahasia di angkot penuh. Siapa aja bisa nguping."
+      },
+      {
+        "title": "HTTPS dan VPN itu pelindungnya",
+        "body": "Kabar baiknya, hampir semua situs dan aplikasi besar sekarang pakai HTTPS. Isinya dienkripsi, jadi orang di jaringan yang sama gak bisa baca password kamu.\n\nTapi tetap hati-hati:\n- Perhatikan peringatan sertifikat di browser. Kalau muncul, jangan dilanjut\n- VPN tepercaya bikin terowongan terenkripsi buat semua lalu lintas, berguna di Wi-Fi umum\n- VPN gratisan sembarangan bisa justru ngintip data kamu",
+        "tip": "HTTPS itu amplop tertutup. Tukang pos tahu alamat tujuannya, tapi gak bisa baca isi suratnya."
+      },
+      {
+        "title": "Kebiasaan aman di Wi-Fi umum",
+        "body": "Checklist singkat:\n- Tanya nama Wi-Fi resmi ke petugas, jangan asal pilih yang paling kenceng\n- Matikan \"sambung otomatis\" untuk Wi-Fi umum\n- Hindari transaksi bank lewat Wi-Fi umum, pakai data seluler kalau bisa\n- Lupakan (forget) jaringan setelah selesai\n- Kalau mau berbagi internet, pakai hotspot HP sendiri dengan password kuat",
+        "tip": "Kayak minum dari gelas di warung: biasanya aman, tapi kalau bisa bawa botol sendiri, itu lebih tenang."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Di kafe ada dua Wi-Fi: \"KopiSenja\" dan \"KopiSenja_Free\". Langkah terbaik?",
+        "options": [
+          "Pilih yang sinyalnya paling kuat",
+          "Tanya petugas mana yang resmi",
+          "Sambung ke dua-duanya",
+          "Pilih yang ada kata Free"
+        ],
+        "explanation": "Penyerang sering bikin Wi-Fi palsu dengan nama mirip. Petugas tahu nama yang asli.",
+        "answer": 1
+      },
+      {
+        "prompt": "HTTPS melindungi kamu di Wi-Fi umum karena...",
+        "options": [
+          "Bikin internet lebih cepat",
+          "Isi komunikasi dienkripsi",
+          "Menyembunyikan nama Wi-Fi",
+          "Memblokir iklan"
+        ],
+        "explanation": "Orang lain di jaringan yang sama gak bisa membaca isi yang terenkripsi.",
+        "answer": 1
+      },
+      {
+        "prompt": "Browser muncul peringatan \"Koneksi tidak aman / sertifikat tidak valid\". Sebaiknya...",
+        "options": [
+          "Lanjutkan aja",
+          "Berhenti dan jangan masukin data apa pun",
+          "Refresh sampai hilang",
+          "Matikan antivirus"
+        ],
+        "explanation": "Peringatan sertifikat bisa jadi tanda ada yang nyegat koneksi kamu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa \"sambung otomatis\" ke Wi-Fi umum sebaiknya dimatikan?",
+        "options": [
+          "Boros baterai doang",
+          "HP bisa nyambung ke Wi-Fi palsu bernama sama",
+          "Bikin kuota habis",
+          "Gak ada alasannya"
+        ],
+        "explanation": "Penyerang bisa bikin jaringan dengan nama yang pernah kamu pakai, dan HP langsung nyambung sendiri.",
+        "answer": 1
+      },
+      {
+        "prompt": "Mau transfer uang pas lagi di bandara. Pilihan paling aman?",
+        "options": [
+          "Wi-Fi bandara",
+          "Data seluler sendiri",
+          "Hotspot orang yang gak dikenal",
+          "Wi-Fi tanpa password"
+        ],
+        "explanation": "Data seluler kamu sendiri gak dibagi sama orang asing di jaringan yang sama.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv0-backup",
+    "level": 0,
+    "title": "Backup & HP Hilang",
+    "summary": "Siapin rencana sebelum HP hilang, rusak, atau kena ransomware.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Aturan 3-2-1",
+        "body": "Data yang cuma ada di satu tempat itu data yang siap hilang. Pakai aturan 3-2-1:\n- 3 salinan data (1 asli + 2 backup)\n- 2 jenis media berbeda (misal HP + laptop/flashdisk)\n- 1 salinan di luar rumah (misal cloud)\n\nBuat HP, cara paling gampang: nyalakan backup otomatis Google/iCloud buat foto, kontak, dan chat penting.",
+        "tip": "Telur jangan ditaruh di satu keranjang. Kalau keranjangnya jatuh, minimal masih ada telur di dapur."
+      },
+      {
+        "title": "Kunci layar & fitur Temukan HP",
+        "body": "Sebelum terjadi apa-apa, siapin ini:\n- Kunci layar pakai PIN minimal 6 digit atau sidik jari, bukan pola gampang\n- Aktifkan Find My Device (Android) atau Find My (iPhone)\n- Catat IMEI HP (ketik *#06#) dan simpan di tempat lain\n- Aktifkan enkripsi bawaan (biasanya otomatis kalau ada kunci layar)\n\nTanpa kunci layar, siapa pun yang nemu HP kamu bisa buka WA, email, dan m-banking.",
+        "tip": "Kunci layar itu gembok laci. Lacinya bisa dicolong, tapi isinya gak gampang dibuka."
+      },
+      {
+        "title": "Kalau HP hilang: langkah 30 menit pertama",
+        "body": "Urutannya:\n- Buka Find My Device dari HP lain atau laptop: lacak, bunyikan, atau kunci HP\n- Kalau gak mungkin balik, hapus data dari jarak jauh\n- Telepon operator buat blokir kartu SIM (cegah penyalahgunaan OTP)\n- Ganti password email dan akun penting, keluarkan sesi dari perangkat yang hilang\n- Kabari bank buat blokir m-banking\n- Lapor polisi dengan IMEI kalau butuh surat kehilangan",
+        "tip": "Sama kayak dompet hilang: yang pertama diblokir kartunya, bukan dicari dompetnya dulu."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Aturan backup 3-2-1 artinya...",
+        "options": [
+          "3 password, 2 email, 1 HP",
+          "3 salinan, 2 jenis media, 1 di luar rumah",
+          "Backup 3 kali sehari",
+          "3 aplikasi backup berbeda"
+        ],
+        "explanation": "Salinan di tempat berbeda melindungi dari rusak, hilang, maupun kebakaran.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kunci layar paling aman di antara ini?",
+        "options": [
+          "Pola huruf L",
+          "PIN 1234",
+          "PIN 6 digit acak atau sidik jari",
+          "Tanpa kunci biar praktis"
+        ],
+        "explanation": "Pola dan PIN gampang ditebak atau diintip. PIN acak yang panjang atau biometrik jauh lebih aman.",
+        "answer": 2
+      },
+      {
+        "prompt": "HP hilang dan kemungkinan gak balik. Langkah yang tepat?",
+        "options": [
+          "Tunggu siapa tahu dibalikin",
+          "Hapus data dari jarak jauh lewat Find My Device",
+          "Beli HP baru aja",
+          "Posting di medsos"
+        ],
+        "explanation": "Hapus jarak jauh mencegah data kamu dibaca orang lain.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa kartu SIM perlu diblokir lewat operator saat HP hilang?",
+        "options": [
+          "Biar pulsa gak kepakai",
+          "Biar OTP gak diterima orang lain",
+          "Biar HP gak bisa dicas",
+          "Gak perlu diblokir"
+        ],
+        "explanation": "Siapa pun yang pegang SIM kamu bisa nerima SMS OTP buat bobol akun.",
+        "answer": 1
+      },
+      {
+        "prompt": "Cara cepat lihat nomor IMEI HP?",
+        "options": [
+          "Ketik *#06#",
+          "Ketik *123#",
+          "Buka galeri",
+          "Restart HP"
+        ],
+        "explanation": "Kode *#06# menampilkan IMEI. Simpan di tempat selain HP itu sendiri.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv0-family",
+    "level": 0,
+    "title": "Keamanan Keluarga",
+    "summary": "Lindungi orang tua dan anak dari modus yang paling sering mengincar mereka.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Modus yang mengincar orang tua",
+        "body": "Orang tua sering jadi sasaran karena belum akrab sama modus digital. Yang paling sering:\n- \"Anak kecelakaan\": telepon panik minta transfer biaya rumah sakit\n- Nomor baru ngaku anak: \"HP rusak, ini nomor baru, tolong transfer\"\n- Hadiah undian atau bansos palsu yang minta biaya admin\n- Tautan atau APK berkedok undangan, tagihan, atau surat dari instansi\n\nSemua punya pola sama: bikin panik atau senang, lalu minta uang atau data dengan cepat.",
+        "tip": "Penipu itu kayak pencopet di terminal: dia nyari orang yang lagi bingung dan buru-buru."
+      },
+      {
+        "title": "Kode keluarga",
+        "body": "Cara sederhana yang ampuh: sepakati kode rahasia keluarga.\n- Pilih satu kata atau pertanyaan yang cuma keluarga yang tahu\n- Jangan pernah ditulis di medsos atau chat grup\n- Kalau ada yang ngaku keluarga minta uang mendadak, tanyain kodenya\n- Biasakan aturan: telepon balik ke nomor lama sebelum transfer\n\nAjarin juga orang tua buat gak ragu menutup telepon. Penipu yang asli akan maksa, keluarga yang asli bakal ngerti.",
+        "tip": "Kode keluarga itu kayak password rumah. Tamu yang ngaku saudara tapi gak tahu kodenya, gak dibukain."
+      },
+      {
+        "title": "Anak dan remaja di internet",
+        "body": "Buat anak, fokusnya pendampingan, bukan cuma larangan:\n- Pakai kontrol orang tua (Google Family Link, Screen Time) sesuai umur\n- Ajarin: jangan pernah kirim foto pribadi atau alamat ke orang yang baru dikenal online\n- Ajarin buat cerita ke orang tua kalau ada yang bikin gak nyaman, tanpa takut dimarahi\n- Waspadai game atau aplikasi \"top up gratis\" yang minta login akun\n- Pasang batas pembelian di Play Store biar gak kebobolan belanja",
+        "tip": "Ngajarin anak aman di internet itu kayak ngajarin nyebrang jalan: bukan dilarang keluar rumah, tapi dikasih tahu caranya."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Ibu dapat telepon: \"Anak Ibu kecelakaan, transfer sekarang buat rumah sakit!\". Langkah pertama?",
+        "options": [
+          "Langsung transfer",
+          "Tutup telepon, hubungi anaknya langsung",
+          "Kirim foto KTP",
+          "Kasih nomor rekening"
+        ],
+        "explanation": "Pastikan dulu lewat nomor anak yang sudah dikenal. Modus ini mengandalkan panik.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kode keluarga sebaiknya...",
+        "options": [
+          "Dipost di grup keluarga biar semua inget",
+          "Cuma diketahui keluarga, gak pernah ditulis online",
+          "Diganti tiap jam",
+          "Pakai tanggal lahir"
+        ],
+        "explanation": "Kode yang pernah ditulis online bisa ketahuan penipu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Ciri umum penipuan yang mengincar orang tua?",
+        "options": [
+          "Pesan sopan dan santai",
+          "Bikin panik atau senang, lalu minta uang cepat",
+          "Selalu dari nomor kantor",
+          "Gak pernah minta apa-apa"
+        ],
+        "explanation": "Panik dan buru-buru bikin orang lupa ngecek.",
+        "answer": 1
+      },
+      {
+        "prompt": "Anak cerita ada teman game online minta foto dan alamat rumah. Respon terbaik?",
+        "options": [
+          "Marahin anaknya",
+          "Puji karena cerita, blokir dan laporkan akunnya",
+          "Biarin aja",
+          "Suruh kirim foto lama"
+        ],
+        "explanation": "Anak yang merasa aman bercerita akan lapor lebih cepat kalau ada bahaya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Cara mencegah anak belanja di Play Store tanpa sengaja?",
+        "options": [
+          "Hapus Play Store",
+          "Pasang batas atau persetujuan pembelian",
+          "Kasih password akun ke anak",
+          "Gak ada caranya"
+        ],
+        "explanation": "Fitur persetujuan pembelian (misal lewat Family Link) bikin tiap pembelian perlu izin orang tua.",
+        "answer": 1
+      }
+    ]
   }
 ]

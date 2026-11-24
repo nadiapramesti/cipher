@@ -1,0 +1,488 @@
+[
+  {
+    "id": "lv1-internet",
+    "level": 1,
+    "title": "Internet Itu Apa",
+    "summary": "Gimana pesan kamu bisa nyampe ke server di belahan dunia lain dalam sekejap.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Jaringan dari jaringan-jaringan",
+        "body": "Internet adalah jaringan raksasa yang nyambungin jutaan jaringan kecil: Wi-Fi rumah, jaringan kantor, operator seluler, sampai pusat data.\n\nPerangkat di internet umumnya berperan sebagai:\n- Client: yang minta (HP kamu buka aplikasi)\n- Server: yang ngasih (komputer yang nyimpen data aplikasinya)\n\nTiap kali kamu buka situs, HP kamu (client) ngirim permintaan, server ngirim balasan.",
+        "tip": "Client itu pembeli di warung, server itu penjualnya. Pembeli minta, penjual nyiapin dan ngasih pesanan."
+      },
+      {
+        "title": "Data dipotong jadi paket",
+        "body": "Data gak dikirim utuh. Foto 2 MB dipotong jadi ribuan paket kecil. Tiap paket punya alamat pengirim dan tujuan.\n\nPaket-paket itu:\n- Bisa lewat jalur berbeda-beda\n- Bisa nyampe gak urut, lalu disusun ulang di tujuan\n- Kalau ada yang hilang, dikirim ulang\n\nRouter di sepanjang jalan bertugas nentuin paket diteruskan ke mana.",
+        "tip": "Kayak kirim lemari pakai ekspedisi: dibongkar jadi papan-papan bernomor, dikirim terpisah, terus dirakit lagi di rumah tujuan."
+      },
+      {
+        "title": "Siapa aja yang ada di jalur",
+        "body": "Perjalanan satu permintaan dari HP kamu:\n- HP → router Wi-Fi rumah atau menara seluler\n- → ISP (penyedia internet, misal operator atau IndiHome)\n- → beberapa router antar-jaringan\n- → server tujuan\n\nArtinya ada banyak pihak di tengah jalan. Itu alasan kenapa enkripsi (HTTPS) penting: pihak di tengah cuma lihat amplop, bukan isinya.",
+        "tip": "Paket kamu itu kayak surat yang dioper banyak kantor pos. Makanya isinya harus disegel."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Saat kamu buka aplikasi berita, HP kamu berperan sebagai...",
+        "options": [
+          "Server",
+          "Client",
+          "Router",
+          "ISP"
+        ],
+        "explanation": "HP yang meminta data disebut client; yang menyediakan data disebut server.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa data dikirim dalam bentuk paket kecil?",
+        "options": [
+          "Biar lebih mahal",
+          "Biar bisa lewat jalur berbeda dan dikirim ulang kalau hilang",
+          "Karena HP gak kuat file besar",
+          "Biar gak bisa dibaca"
+        ],
+        "explanation": "Paket kecil lebih fleksibel dan tahan gangguan dibanding satu kiriman besar.",
+        "answer": 1
+      },
+      {
+        "prompt": "Tugas router adalah...",
+        "options": [
+          "Menyimpan foto",
+          "Meneruskan paket ke arah tujuan",
+          "Mengenkripsi password",
+          "Membuat aplikasi"
+        ],
+        "explanation": "Router membaca alamat tujuan paket dan memilih jalur berikutnya.",
+        "answer": 1
+      },
+      {
+        "prompt": "ISP adalah...",
+        "options": [
+          "Jenis virus",
+          "Penyedia layanan internet",
+          "Bahasa pemrograman",
+          "Aplikasi chat"
+        ],
+        "explanation": "ISP (Internet Service Provider) adalah perusahaan yang menghubungkan kamu ke internet.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa HTTPS penting padahal data lewat banyak pihak?",
+        "options": [
+          "Biar paketnya lebih sedikit",
+          "Pihak di tengah gak bisa baca isinya",
+          "Biar server lebih cepat",
+          "Biar router mati"
+        ],
+        "explanation": "Enkripsi bikin isi tetap rahasia walau melewati banyak router dan jaringan.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-ip",
+    "level": 1,
+    "title": "Alamat IP",
+    "summary": "Alamat rumah tiap perangkat di jaringan: publik, privat, IPv4, dan IPv6.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "IPv4 dan IPv6",
+        "body": "Alamat IP adalah nomor yang ngenalin perangkat di jaringan.\n\n- IPv4: 4 angka 0–255 dipisah titik, contoh 192.168.1.10. Totalnya sekitar 4,3 miliar alamat, dan udah lama kurang\n- IPv6: lebih panjang, pakai heksadesimal dan titik dua, contoh 2001:db8::1. Jumlahnya hampir gak terbatas\n\nHP modern biasanya punya dua-duanya sekaligus.",
+        "tip": "IPv4 itu nomor rumah di kompleks kecil yang udah penuh. IPv6 itu kompleks baru raksasa yang muat buat semua orang."
+      },
+      {
+        "title": "IP privat vs IP publik",
+        "body": "Gak semua alamat bisa dilihat dari internet.\n\n- IP privat: cuma berlaku di jaringan lokal. Rentangnya 10.x.x.x, 172.16–31.x.x, dan 192.168.x.x\n- IP publik: alamat yang kelihatan di internet, biasanya milik router rumah atau operator\n\nRouter pakai NAT buat menerjemahkan banyak IP privat jadi satu IP publik. Makanya HP, laptop, dan TV di rumah keluar ke internet dengan IP publik yang sama.",
+        "tip": "IP privat itu nomor kamar di hotel. IP publik itu alamat hotelnya. Kurir dari luar cuma tahu alamat hotel, resepsionis (NAT) yang nganter ke kamar."
+      },
+      {
+        "title": "Apa yang bisa diketahui dari IP",
+        "body": "IP publik bisa ngasih gambaran kasar:\n- Kota atau wilayah (seringnya meleset)\n- Penyedia internet yang kamu pakai\n\nTapi IP gak nunjukin alamat rumah persis. Hanya ISP yang bisa mencocokkan IP dengan pelanggan, dan biasanya cuma lewat proses hukum.\n\nCoba lihat IP privat HP kamu sendiri di Toolbox → Info Jaringan.",
+        "tip": "IP itu kayak kode pos. Orang bisa nebak kamu di daerah mana, tapi gak tahu rumah kamu yang mana."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Mana yang alamat IPv4 valid?",
+        "options": [
+          "192.168.1.300",
+          "10.0.0.25",
+          "2001:db8::1",
+          "abc.def.1.2"
+        ],
+        "explanation": "Tiap bagian IPv4 bernilai 0–255. 300 terlalu besar, dan 2001:db8::1 itu IPv6.",
+        "answer": 1
+      },
+      {
+        "prompt": "Alamat 192.168.0.5 termasuk...",
+        "options": [
+          "IP publik",
+          "IP privat",
+          "IPv6",
+          "Alamat email"
+        ],
+        "explanation": "Rentang 192.168.x.x khusus jaringan lokal.",
+        "answer": 1
+      },
+      {
+        "prompt": "NAT di router berfungsi untuk...",
+        "options": [
+          "Memblokir semua situs",
+          "Menerjemahkan banyak IP privat jadi satu IP publik",
+          "Mempercepat baterai",
+          "Mengganti password Wi-Fi"
+        ],
+        "explanation": "NAT memungkinkan banyak perangkat berbagi satu IP publik.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa IPv6 dibuat?",
+        "options": [
+          "Biar alamatnya lebih pendek",
+          "Karena alamat IPv4 udah gak cukup",
+          "Biar internet gratis",
+          "Biar gak bisa diretas"
+        ],
+        "explanation": "IPv4 cuma sekitar 4,3 miliar alamat, kurang buat semua perangkat di dunia.",
+        "answer": 1
+      },
+      {
+        "prompt": "Dari IP publik seseorang, orang lain biasanya bisa tahu...",
+        "options": [
+          "Alamat rumah persis",
+          "Perkiraan wilayah dan nama ISP",
+          "Password Wi-Fi",
+          "Isi chat"
+        ],
+        "explanation": "IP cuma ngasih gambaran kasar. Data pelanggan ada di ISP.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-subnet",
+    "level": 1,
+    "title": "Subnet Tanpa Pusing",
+    "summary": "Baca /24 dan /16, bedain bagian jaringan dan bagian perangkat.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Dua bagian dalam satu IP",
+        "body": "Alamat IP terdiri dari dua bagian:\n- Bagian jaringan: nunjukin \"kompleks\"-nya\n- Bagian host: nunjukin \"rumah\" atau perangkat di dalamnya\n\nSubnet mask atau notasi CIDR (/angka) nunjukin berapa bit di depan yang jadi bagian jaringan. IPv4 total 32 bit.\n\nContoh 192.168.1.10/24: 24 bit pertama (192.168.1) adalah jaringannya, sisa 8 bit (.10) adalah perangkatnya.",
+        "tip": "Kayak alamat \"Jl. Melati Blok C no. 10\": \"Blok C\" itu jaringannya, \"no. 10\" itu rumahnya."
+      },
+      {
+        "title": "Ngitung jumlah alamat",
+        "body": "Rumusnya: jumlah alamat = 2 pangkat (32 dikurangi angka CIDR).\n\n- /24 → 2^8 = 256 alamat\n- /16 → 2^16 = 65.536 alamat\n- /30 → 2^2 = 4 alamat\n\nDi tiap subnet, 2 alamat dipakai khusus:\n- Alamat pertama = alamat jaringan (misal 192.168.1.0)\n- Alamat terakhir = broadcast (misal 192.168.1.255)\n\nJadi /24 punya 254 alamat yang bisa dipakai perangkat.",
+        "tip": "Satu blok perumahan isi 256 kavling, tapi kavling pertama buat gapura dan yang terakhir buat pos ronda. Sisanya 254 buat rumah."
+      },
+      {
+        "title": "Kenapa subnet penting buat keamanan",
+        "body": "Subnet bukan cuma urusan ngitung. Di dunia keamanan, subnet dipakai buat misahin jaringan:\n- Wi-Fi tamu dipisah dari jaringan kantor\n- Kamera CCTV dan perangkat pintar dipisah dari laptop kerja\n- Server penting di subnet sendiri dengan aturan firewall ketat\n\nKalau satu perangkat kena malware, penyebarannya lebih susah karena gak satu \"kompleks\" sama yang lain. Ini disebut segmentasi.",
+        "tip": "Kayak kapal yang punya sekat-sekat. Satu ruangan bocor, kapalnya gak langsung tenggelam."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Berapa total alamat di subnet /24?",
+        "options": [
+          "24",
+          "128",
+          "256",
+          "65.536"
+        ],
+        "explanation": "2^(32-24) = 2^8 = 256 alamat.",
+        "answer": 2
+      },
+      {
+        "prompt": "Berapa alamat yang bisa dipakai perangkat di /24?",
+        "options": [
+          "256",
+          "255",
+          "254",
+          "24"
+        ],
+        "explanation": "256 dikurangi alamat jaringan dan broadcast = 254.",
+        "answer": 2
+      },
+      {
+        "prompt": "Pada 10.0.5.20/16, bagian jaringannya adalah...",
+        "options": [
+          "10",
+          "10.0",
+          "10.0.5",
+          "10.0.5.20"
+        ],
+        "explanation": "/16 artinya 16 bit pertama, yaitu dua angka pertama: 10.0.",
+        "answer": 1
+      },
+      {
+        "prompt": "Subnet /30 punya berapa alamat total?",
+        "options": [
+          "2",
+          "4",
+          "8",
+          "30"
+        ],
+        "explanation": "2^(32-30) = 2^2 = 4 alamat (2 yang bisa dipakai).",
+        "answer": 1
+      },
+      {
+        "prompt": "Memisahkan Wi-Fi tamu dari jaringan kantor disebut...",
+        "options": [
+          "Enkripsi",
+          "Segmentasi",
+          "Phishing",
+          "Backup"
+        ],
+        "explanation": "Segmentasi membatasi penyebaran serangan antarbagian jaringan.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-dns",
+    "level": 1,
+    "title": "DNS: Buku Telepon Internet",
+    "summary": "Dari nama domain ke alamat IP, plus cara DNS bisa diakali.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Nama gampang, angka susah",
+        "body": "Manusia gampang inget wikipedia.org, tapi komputer butuh alamat IP. DNS (Domain Name System) menerjemahkan nama domain jadi IP.\n\nAlurnya singkat:\n- HP nanya ke resolver DNS (biasanya milik ISP atau layanan seperti 1.1.1.1)\n- Resolver nanya berantai ke server DNS yang berwenang\n- Jawabannya (IP) dikirim balik dan disimpan sementara (cache)\n\nCoba sendiri di Toolbox → Info Jaringan → Coba DNS.",
+        "tip": "DNS itu buku kontak. Kamu cari nama \"Ibu\", HP yang tahu nomornya."
+      },
+      {
+        "title": "Jenis-jenis record DNS",
+        "body": "Satu domain bisa punya beberapa jenis record:\n- A: nama → alamat IPv4\n- AAAA: nama → alamat IPv6\n- CNAME: nama alias yang nunjuk ke nama lain\n- MX: server penerima email domain itu\n- TXT: catatan teks, sering dipakai buat verifikasi dan anti-spam email (SPF, DMARC)\n\nPentester dan analis sering ngecek record ini buat memetakan layanan sebuah organisasi.",
+        "tip": "Record DNS itu kayak papan petunjuk di gedung: lantai berapa kantor, di mana kotak surat, apa nama lain gedungnya."
+      },
+      {
+        "title": "Saat DNS diakali",
+        "body": "Karena hampir semua koneksi dimulai dari DNS, penyerang suka ngincer di sini:\n- DNS spoofing: jawaban palsu yang ngarahin kamu ke situs tiruan\n- Router rumah dibobol lalu setelan DNS-nya diganti\n- Domain mirip (typosquatting) yang sengaja didaftarkan penipu\n\nPertahanannya: ganti password admin router, pakai resolver DNS tepercaya, perhatikan HTTPS dan alamat situs, dan aktifkan Private DNS di Android kalau perlu.",
+        "tip": "Kalau buku kontakmu diganti orang jahil, kamu nelpon \"Ibu\" tapi nyambungnya ke penipu."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Fungsi utama DNS adalah...",
+        "options": [
+          "Mengenkripsi data",
+          "Menerjemahkan nama domain jadi alamat IP",
+          "Memblokir virus",
+          "Mempercepat baterai"
+        ],
+        "explanation": "DNS menjawab pertanyaan \"nama ini IP-nya berapa?\".",
+        "answer": 1
+      },
+      {
+        "prompt": "Record DNS yang menunjukkan server email sebuah domain adalah...",
+        "options": [
+          "A",
+          "AAAA",
+          "MX",
+          "CNAME"
+        ],
+        "explanation": "MX (Mail Exchange) menunjuk server penerima email.",
+        "answer": 2
+      },
+      {
+        "prompt": "Record AAAA berisi...",
+        "options": [
+          "Alamat IPv4",
+          "Alamat IPv6",
+          "Teks verifikasi",
+          "Nama alias"
+        ],
+        "explanation": "A untuk IPv4, AAAA untuk IPv6.",
+        "answer": 1
+      },
+      {
+        "prompt": "Penyerang mengubah setelan DNS router rumah kamu. Dampaknya?",
+        "options": [
+          "Wi-Fi jadi lebih cepat",
+          "Kamu bisa diarahkan ke situs palsu",
+          "Baterai HP awet",
+          "Gak ada dampak"
+        ],
+        "explanation": "DNS palsu bisa mengarahkan nama situs asli ke server penipu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Langkah sederhana melindungi router dari pembajakan DNS?",
+        "options": [
+          "Biarkan password admin bawaan",
+          "Ganti password admin router",
+          "Matikan Wi-Fi selamanya",
+          "Pakai nama Wi-Fi lucu"
+        ],
+        "explanation": "Banyak router dibobol karena password admin bawaan gak pernah diganti.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-ports",
+    "level": 1,
+    "title": "Port & Protokol",
+    "summary": "Satu IP banyak pintu: port, TCP vs UDP, dan layanan yang umum.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Port: pintu-pintu di satu alamat",
+        "body": "Satu server bisa jalanin banyak layanan sekaligus: web, email, remote login. Biar gak ketuker, tiap layanan \"dengerin\" di nomor port berbeda (0–65535).\n\nAlamat lengkap tujuan = IP + port, contoh 93.184.216.34:443.\n\nDi sisi HP kamu, sistem juga milih port acak sementara buat tiap koneksi keluar.",
+        "tip": "IP itu alamat gedung, port itu nomor loketnya. Loket 443 layanan web aman, loket 25 urusan surat."
+      },
+      {
+        "title": "Port yang wajib kenal",
+        "body": "Hafalin beberapa yang paling sering muncul:\n- 22: SSH, remote login terenkripsi\n- 53: DNS\n- 80: HTTP (web tanpa enkripsi)\n- 443: HTTPS (web terenkripsi)\n- 25 / 587: kirim email (SMTP)\n- 3389: Remote Desktop Windows\n\nPort yang kebuka ke internet tanpa perlu = celah. Penyerang rajin nyari server dengan port 22 atau 3389 yang pakai password lemah.",
+        "tip": "Tiap pintu yang kebuka itu kesempatan buat maling nyoba masuk. Pintu yang gak dipakai, kunci aja."
+      },
+      {
+        "title": "TCP vs UDP",
+        "body": "Dua cara utama ngirim data:\n- TCP: pakai \"jabat tangan\" dulu, cek tiap paket nyampe, kirim ulang yang hilang. Dipakai web, email, chat\n- UDP: langsung kirim tanpa ngecek. Lebih cepat, tapi bisa ada yang hilang. Dipakai DNS, video call, game online\n\nPilihan protokol tergantung butuhnya: akurat (TCP) atau cepat (UDP).",
+        "tip": "TCP itu kirim paket pakai kurir yang minta tanda tangan. UDP itu lempar brosur: cepat, tapi gak dicek nyampe atau enggak."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Port 443 biasanya dipakai untuk...",
+        "options": [
+          "Email masuk",
+          "HTTPS",
+          "Remote Desktop",
+          "DNS"
+        ],
+        "explanation": "443 adalah port standar web terenkripsi (HTTPS).",
+        "answer": 1
+      },
+      {
+        "prompt": "Layanan apa yang biasanya ada di port 22?",
+        "options": [
+          "SSH",
+          "HTTP",
+          "Game",
+          "Printer"
+        ],
+        "explanation": "Port 22 dipakai SSH untuk login jarak jauh yang terenkripsi.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa port yang gak dipakai sebaiknya ditutup?",
+        "options": [
+          "Biar internet gratis",
+          "Mengurangi celah yang bisa diserang",
+          "Biar IP berubah",
+          "Supaya DNS jalan"
+        ],
+        "explanation": "Setiap layanan yang terbuka adalah pintu tambahan buat penyerang.",
+        "answer": 1
+      },
+      {
+        "prompt": "Protokol yang mengecek tiap paket sampai dan mengirim ulang yang hilang adalah...",
+        "options": [
+          "UDP",
+          "TCP",
+          "DNS",
+          "IP"
+        ],
+        "explanation": "TCP menjamin data sampai utuh dan berurutan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Video call lebih cocok pakai UDP karena...",
+        "options": [
+          "Lebih aman",
+          "Lebih cepat; sedikit data hilang gak masalah",
+          "Bisa nyimpen video",
+          "Gak butuh internet"
+        ],
+        "explanation": "Untuk panggilan langsung, telat lebih ganggu daripada satu dua frame hilang.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv1-linux",
+    "level": 1,
+    "title": "Linux & Terminal Dasar",
+    "summary": "Kenalan sama terminal: folder, file, izin akses, dan root.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Kenapa Linux penting di cyber security",
+        "body": "Mayoritas server di internet jalan di Linux, Android juga dibangun di atas kernel Linux, dan hampir semua alat keamanan dirancang buat Linux.\n\nDi Linux, kerja paling efisien lewat terminal: kamu ngetik perintah, sistem jalanin. Kedengarannya jadul, tapi justru ini yang bikin admin dan analis keamanan bisa kerja cepat dan teliti.",
+        "tip": "GUI itu nyetir mobil matic, terminal itu manual. Awalnya ribet, tapi kontrolnya penuh."
+      },
+      {
+        "title": "Perintah dasar",
+        "body": "Yang paling sering dipakai:\n- pwd: lagi di folder mana\n- ls: lihat isi folder (ls -a buat file tersembunyi)\n- cd nama: pindah folder (cd .. buat naik satu tingkat)\n- cat file: baca isi file\n- grep kata file: cari baris yang mengandung kata\n\nFile atau folder yang namanya diawali titik (.) disembunyikan. Sering dipakai buat file setelan, dan kadang buat nyimpen hal yang \"gak mau kelihatan\".",
+        "tip": "pwd itu lihat papan \"Anda di sini\", ls itu lihat isi lemari, cd itu pindah ruangan, cat itu buka dan baca surat."
+      },
+      {
+        "title": "Izin akses & root",
+        "body": "Tiap file punya izin buat tiga kelompok: pemilik, grup, dan orang lain. Tiap kelompok bisa punya:\n- r (read): baca\n- w (write): ubah\n- x (execute): jalankan\n\nContoh -rw-r--r-- artinya pemilik bisa baca-ubah, yang lain cuma baca.\n\nRoot adalah akun super yang bisa apa aja. Karena itu, kerja harian pakai akun biasa, dan sudo cuma buat yang benar-benar perlu. Prinsip ini namanya least privilege.\n\nLatihan: buka Toolbox → Terminal Simulasi dan cari flag yang disembunyikan.",
+        "tip": "Root itu kunci master gedung. Satpam gak bawa kunci master tiap hari, cuma pas darurat."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Perintah buat lihat file tersembunyi adalah...",
+        "options": [
+          "ls",
+          "ls -a",
+          "pwd",
+          "cd .."
+        ],
+        "explanation": "Opsi -a (all) menampilkan juga file yang diawali titik.",
+        "answer": 1
+      },
+      {
+        "prompt": "Perintah pwd menampilkan...",
+        "options": [
+          "Password",
+          "Folder tempat kamu sekarang",
+          "Isi file",
+          "Daftar pengguna"
+        ],
+        "explanation": "pwd = print working directory.",
+        "answer": 1
+      },
+      {
+        "prompt": "Izin -rw-r--r-- artinya...",
+        "options": [
+          "Semua orang bisa ubah file",
+          "Pemilik bisa baca-ubah, yang lain cuma baca",
+          "Gak ada yang bisa baca",
+          "File bisa dijalankan semua orang"
+        ],
+        "explanation": "Tiga huruf pertama untuk pemilik (rw-), lalu grup (r--), lalu lainnya (r--).",
+        "answer": 1
+      },
+      {
+        "prompt": "Prinsip least privilege artinya...",
+        "options": [
+          "Selalu pakai root biar praktis",
+          "Kasih akses seminimal yang dibutuhkan",
+          "Hapus semua izin",
+          "Bagi password ke tim"
+        ],
+        "explanation": "Akses minimal membatasi kerusakan kalau akun disalahgunakan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Perintah buat mencari baris berisi kata \"error\" di file log.txt?",
+        "options": [
+          "cat error",
+          "grep error log.txt",
+          "cd log.txt",
+          "ls error"
+        ],
+        "explanation": "grep mencari pola teks di dalam file.",
+        "answer": 1
+      }
+    ]
+  }
+]

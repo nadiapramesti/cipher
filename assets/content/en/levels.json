@@ -9,7 +9,7 @@
     "index": 1,
     "title": "Foundations",
     "tagline": "How the internet works: IP, DNS, ports, and Linux basics.",
-    "moduleFile": null
+    "moduleFile": "lv1.json"
   },
   {
     "index": 2,
