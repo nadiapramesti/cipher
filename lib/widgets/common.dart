@@ -1,6 +1,114 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../app/theme.dart';
+
+/// Tombol "tebal" ala tombol fisik: ada sisi bawah yang kelihatan,
+/// dan pas ditekan mukanya turun + HP getar halus.
+class ChunkyButton extends StatefulWidget {
+  const ChunkyButton({super.key, required this.onPressed, required this.child})
+      : outline = false;
+
+  const ChunkyButton.outline({
+    super.key,
+    required this.onPressed,
+    required this.child,
+  }) : outline = true;
+
+  final VoidCallback? onPressed;
+  final Widget child;
+  final bool outline;
+
+  @override
+  State<ChunkyButton> createState() => _ChunkyButtonState();
+}
+
+class _ChunkyButtonState extends State<ChunkyButton> {
+  static const double _height = 54;
+  static const double _depth = 5;
+  bool _down = false;
+
+  void _set(bool v) {
+    if (_down != v) setState(() => _down = v);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final enabled = widget.onPressed != null;
+    final outline = widget.outline;
+    final radius = BorderRadius.circular(14);
+
+    final face = outline ? C.surface : (enabled ? C.accent : C.line);
+    final edge = outline ? C.bgDeep : (enabled ? C.accentDeep : C.surface);
+    final fg = outline ? C.accent : (enabled ? C.onAccent : C.muted);
+
+    return Semantics(
+      button: true,
+      enabled: enabled,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTapDown: enabled ? (_) => _set(true) : null,
+        onTapUp: enabled ? (_) => _set(false) : null,
+        onTapCancel: () => _set(false),
+        onTap: enabled
+            ? () {
+                HapticFeedback.lightImpact();
+                widget.onPressed!();
+              }
+            : null,
+        child: SizedBox(
+          width: double.infinity,
+          height: _height + _depth,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                height: _height,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: edge, borderRadius: radius),
+                ),
+              ),
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 70),
+                curve: Curves.easeOut,
+                left: 0,
+                right: 0,
+                top: _down ? _depth - 1 : 0,
+                height: _height,
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: face,
+                    borderRadius: radius,
+                    border: outline
+                        ? Border.all(color: C.accent.withValues(alpha: 0.55), width: 1.2)
+                        : null,
+                  ),
+                  child: DefaultTextStyle(
+                    style: TextStyle(
+                      color: fg,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                      letterSpacing: 0.2,
+                    ),
+                    textAlign: TextAlign.center,
+                    child: IconTheme(
+                      data: IconThemeData(color: fg, size: 20),
+                      child: widget.child,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 /// Kartu dasar Cipher. Kalau [onTap] diisi, kartu bisa ditekan (ada ripple).
 class Panel extends StatelessWidget {
@@ -65,7 +173,7 @@ class MonoTag extends StatelessWidget {
 }
 
 class ProgressLine extends StatelessWidget {
-  const ProgressLine({super.key, required this.value, this.color = C.amber});
+  const ProgressLine({super.key, required this.value, this.color = C.accent});
 
   final double value;
   final Color color;
@@ -171,15 +279,15 @@ class OptionTile extends StatelessWidget {
         switch (state) {
       OptionState.idle => (C.line, C.surface, C.muted, null),
       OptionState.selected => (
-          C.amber,
-          C.amber.withValues(alpha: 0.10),
-          C.amber,
+          C.accent,
+          C.accent.withValues(alpha: 0.10),
+          C.accent,
           null
         ),
       OptionState.correct => (
-          C.teal,
-          C.teal.withValues(alpha: 0.12),
-          C.teal,
+          C.ok,
+          C.ok.withValues(alpha: 0.12),
+          C.ok,
           Icons.check_rounded
         ),
       OptionState.wrong => (

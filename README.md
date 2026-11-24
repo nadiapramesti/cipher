@@ -19,6 +19,7 @@ Aplikasi Android buat belajar cyber security dari nol, buat umum dan berbasis le
 - XP dan streak harian
 - Toolbox yang kebuka sesuai level, sekarang ada **Cek Kekuatan Password** (entropi, estimasi waktu dibobol, checklist, saran)
 - Kamus 22 istilah dengan pencarian dan analogi
+- Tampilan **Violet Vault** + elemen 3D: brankas kubus berputar di onboarding, peta level isometrik, kartu materi yang miring, tombol tebal yang bisa "ditekan"
 
 ## Struktur
 
@@ -44,6 +45,10 @@ test/             unit test logika kuis & password
 2. Isi `moduleFile` di level terkait pada `assets/content/levels.json`
 3. Jalankan ulang app
 
+## Download APK
+
+Tiap push ke `main` otomatis nge-build APK lewat GitHub Actions. Ambil file `.apk` terbaru di halaman **Releases** repo ini, buka di HP Android, lalu install.
+
 ## Menjalankan
 
 ```bash
@@ -55,6 +60,10 @@ flutter run
 ```
 
 Perintah `flutter create .` cuma dibutuhkan sekali buat bikin folder `android/`, dan gak nimpa `lib/`.
+
+## Font
+
+JetBrains Mono dan Space Grotesk, keduanya berlisensi SIL Open Font License (lihat `assets/fonts/OFL-*.txt`).
 
 ## Prinsip
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
+import '../../widgets/scene3d.dart';
 import '../quiz/quiz_screen.dart';
 
 class ModuleScreen extends StatefulWidget {
@@ -79,7 +80,7 @@ class _ModuleScreenState extends State<ModuleScreen> {
           children: [
             if (_page > 0) ...[
               Expanded(
-                child: OutlinedButton(
+                child: ChunkyButton.outline(
                   onPressed: () => _go(-1),
                   child: const Text('Balik'),
                 ),
@@ -88,7 +89,7 @@ class _ModuleScreenState extends State<ModuleScreen> {
             ],
             Expanded(
               flex: 2,
-              child: FilledButton(
+              child: ChunkyButton(
                 onPressed: _isLast ? _startQuiz : () => _go(1),
                 child: Text(_isLast ? 'Mulai Kuis' : 'Lanjut'),
               ),
@@ -109,28 +110,35 @@ class _LessonView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.fromLTRB(22, 24, 22, 32),
+      padding: const EdgeInsets.fromLTRB(22, 4, 22, 32),
       children: [
-        MonoTag(label, color: C.amber),
-        const SizedBox(height: 10),
-        Text(page.title,
-            style: const TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.w800,
-              height: 1.2,
-              letterSpacing: -0.3,
-            )),
+        TiltDeck(
+          height: 150,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MonoTag(label, color: C.accent),
+              const Spacer(),
+              Text(page.title, style: display(size: 26)),
+            ],
+          ),
+        ),
         const SizedBox(height: 16),
         RichBody(text: page.body),
         if (page.tip != null) ...[
           const SizedBox(height: 20),
-          Panel(
-            color: C.teal.withValues(alpha: 0.07),
-            borderColor: C.teal.withValues(alpha: 0.4),
+          Container(
+            decoration: BoxDecoration(
+              color: C.okTint,
+              borderRadius: BorderRadius.circular(18),
+              border: Border.all(color: C.okDeep),
+              boxShadow: const [BoxShadow(color: Color(0xFF11170A), offset: Offset(0, 6))],
+            ),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MonoTag('ANALOGI', color: C.teal),
+                const MonoTag('ANALOGI', color: C.ok),
                 const SizedBox(height: 8),
                 Text(page.tip!, style: const TextStyle(height: 1.5)),
               ],
@@ -165,7 +173,7 @@ class RichBody extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 3, right: 10),
-                child: Text('>', style: mono(size: 13, color: C.amber, weight: FontWeight.w800)),
+                child: Text('>', style: mono(size: 13, color: C.accent, weight: FontWeight.w800)),
               ),
               Expanded(child: Text(t.substring(2), style: style)),
             ],

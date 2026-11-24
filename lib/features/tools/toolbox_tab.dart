@@ -99,7 +99,7 @@ class _ToolCard extends StatelessWidget {
 
     return Panel(
       color: ready ? C.surface : C.bg,
-      borderColor: ready ? C.amber.withValues(alpha: 0.35) : C.line,
+      borderColor: ready ? C.accent.withValues(alpha: 0.35) : C.line,
       onTap: () {
         if (!unlocked) {
           showInfo(context, 'Tool ini kebuka setelah kamu sampai $code.');
@@ -115,10 +115,10 @@ class _ToolCard extends StatelessWidget {
             width: 46,
             height: 46,
             decoration: BoxDecoration(
-              color: (ready ? C.amber : C.muted).withValues(alpha: 0.12),
+              color: (ready ? C.accent : C.muted).withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(tool.icon, color: ready ? C.amber : C.muted),
+            child: Icon(tool.icon, color: ready ? C.accent : C.muted),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -142,7 +142,7 @@ class _ToolCard extends StatelessWidget {
           else if (tool.builder == null)
             const MonoTag('SOON', filled: true)
           else
-            const Icon(Icons.chevron_right_rounded, color: C.amber),
+            const Icon(Icons.chevron_right_rounded, color: C.accent),
         ],
       ),
     );

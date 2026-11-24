@@ -33,8 +33,8 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
         StrengthLevel.kosong => C.line,
         StrengthLevel.sangatLemah => C.red,
         StrengthLevel.lemah => C.orange,
-        StrengthLevel.lumayan => C.amber,
-        StrengthLevel.kuat => C.teal,
+        StrengthLevel.lumayan => C.yellow,
+        StrengthLevel.kuat => C.ok,
         StrengthLevel.sangatKuat => C.mint,
       };
 
@@ -51,12 +51,12 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
         children: [
           Row(
             children: [
-              const Icon(Icons.shield_outlined, size: 16, color: C.teal),
+              const Icon(Icons.shield_outlined, size: 16, color: C.ok),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
                   'Dicek langsung di HP kamu. Gak disimpan, gak dikirim ke mana-mana.',
-                  style: mono(size: 11, color: C.teal, spacing: 0.2),
+                  style: mono(size: 11, color: C.ok, spacing: 0.2),
                 ),
               ),
             ],
@@ -148,7 +148,7 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
                           Icon(
                             c.ok ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded,
                             size: 18,
-                            color: c.ok ? C.teal : C.muted,
+                            color: c.ok ? C.ok : C.muted,
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -164,12 +164,12 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
             if (r.tips.isNotEmpty) ...[
               const SizedBox(height: 14),
               Panel(
-                color: C.amber.withValues(alpha: 0.06),
-                borderColor: C.amber.withValues(alpha: 0.35),
+                color: C.accent.withValues(alpha: 0.06),
+                borderColor: C.accent.withValues(alpha: 0.35),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const MonoTag('SARAN', color: C.amber),
+                    const MonoTag('SARAN', color: C.accent),
                     const SizedBox(height: 8),
                     for (final t in r.tips)
                       Padding(
@@ -186,7 +186,7 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
       bottomNavigationBar: empty
           ? null
           : BottomActions(children: [
-              OutlinedButton(onPressed: _clear, child: const Text('Kosongkan')),
+              ChunkyButton.outline(onPressed: _clear, child: const Text('Kosongkan')),
             ]),
     );
   }

@@ -104,7 +104,7 @@ class _TermCardState extends State<_TermCard> {
     final t = widget.term;
     return Panel(
       onTap: () => setState(() => _open = !_open),
-      borderColor: _open ? C.amber.withValues(alpha: 0.45) : C.line,
+      borderColor: _open ? C.accent.withValues(alpha: 0.45) : C.line,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -112,7 +112,7 @@ class _TermCardState extends State<_TermCard> {
             children: [
               Expanded(
                 child: Text(t.term,
-                    style: mono(size: 15, color: C.amber, weight: FontWeight.w800, spacing: 0.3)),
+                    style: mono(size: 15, color: C.accent, weight: FontWeight.w800, spacing: 0.3)),
               ),
               AnimatedRotation(
                 turns: _open ? 0.5 : 0,
@@ -134,14 +134,14 @@ class _TermCardState extends State<_TermCard> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: C.teal.withValues(alpha: 0.07),
+                        color: C.ok.withValues(alpha: 0.07),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: C.teal.withValues(alpha: 0.35)),
+                        border: Border.all(color: C.ok.withValues(alpha: 0.35)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const MonoTag('ANALOGI', color: C.teal),
+                          const MonoTag('ANALOGI', color: C.ok),
                           const SizedBox(height: 6),
                           Text(t.analogy, style: const TextStyle(height: 1.5)),
                         ],

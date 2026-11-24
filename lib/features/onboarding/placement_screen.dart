@@ -72,7 +72,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
             child: Center(
               child: Text(
                 '${(_index + 1).toString().padLeft(2, '0')}/${questions.length.toString().padLeft(2, '0')}',
-                style: mono(color: C.amber),
+                style: mono(color: C.accent),
               ),
             ),
           ),
@@ -109,11 +109,11 @@ class _PlacementScreenState extends State<PlacementScreen> {
         ],
       ),
       bottomNavigationBar: BottomActions(children: [
-        FilledButton(
+        ChunkyButton(
           onPressed: _selected == null ? null : () => _commit(_selected),
           child: Text(last ? 'Lihat Hasil' : 'Berikutnya'),
         ),
-        OutlinedButton(
+        ChunkyButton.outline(
           onPressed: () => _commit(null),
           child: const Text('Belum tau, lewati soal'),
         ),
@@ -164,12 +164,12 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
         children: [
           Panel(
-            borderColor: C.amber.withValues(alpha: 0.5),
+            borderColor: C.accent.withValues(alpha: 0.5),
             padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MonoTag('${widget.correct}/${widget.total} benar', color: C.amber, filled: true),
+                MonoTag('${widget.correct}/${widget.total} benar', color: C.accent, filled: true),
                 const SizedBox(height: 14),
                 const Text('Saran kami, mulai dari',
                     style: TextStyle(color: C.muted)),
@@ -194,16 +194,16 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
               padding: const EdgeInsets.only(bottom: 10),
               child: Panel(
                 onTap: () => setState(() => _chosen = level.index),
-                borderColor: _chosen == level.index ? C.amber : C.line,
+                borderColor: _chosen == level.index ? C.accent : C.line,
                 color: _chosen == level.index
-                    ? C.amber.withValues(alpha: 0.08)
+                    ? C.accent.withValues(alpha: 0.08)
                     : C.surface,
                 child: Row(
                   children: [
                     Text(level.code,
                         style: mono(
                             size: 13,
-                            color: _chosen == level.index ? C.amber : C.muted,
+                            color: _chosen == level.index ? C.accent : C.muted,
                             weight: FontWeight.w800)),
                     const SizedBox(width: 14),
                     Expanded(
@@ -225,7 +225,7 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
                       _chosen == level.index
                           ? Icons.radio_button_checked_rounded
                           : Icons.radio_button_off_rounded,
-                      color: _chosen == level.index ? C.amber : C.muted,
+                      color: _chosen == level.index ? C.accent : C.muted,
                     ),
                   ],
                 ),
@@ -234,7 +234,7 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
         ],
       ),
       bottomNavigationBar: BottomActions(children: [
-        FilledButton(
+        ChunkyButton(
           onPressed: _saving ? null : _start,
           child: Text('Mulai di ${chosen?.code ?? 'LV.00'}'),
         ),

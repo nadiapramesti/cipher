@@ -61,9 +61,9 @@ class _ModuleTile extends StatelessWidget {
     final best = state.bestScores[module.id];
 
     final (IconData icon, Color color) = done
-        ? (Icons.check_circle_rounded, C.teal)
+        ? (Icons.check_circle_rounded, C.ok)
         : unlocked
-            ? (Icons.play_circle_fill_rounded, C.amber)
+            ? (Icons.play_circle_fill_rounded, C.accent)
             : (Icons.lock_outline_rounded, C.muted);
 
     return Panel(
@@ -81,7 +81,7 @@ class _ModuleTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(number.toString().padLeft(2, '0'),
-              style: mono(size: 20, color: unlocked ? C.amber : C.muted, weight: FontWeight.w800)),
+              style: mono(size: 20, color: unlocked ? C.accent : C.muted, weight: FontWeight.w800)),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
@@ -104,7 +104,7 @@ class _ModuleTile extends StatelessWidget {
                     MonoTag('${module.quiz.length} soal'),
                     if (best != null) ...[
                       const SizedBox(width: 10),
-                      MonoTag('skor $best%', color: done ? C.teal : C.orange),
+                      MonoTag('skor $best%', color: done ? C.ok : C.orange),
                     ],
                   ],
                 ),

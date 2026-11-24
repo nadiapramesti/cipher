@@ -89,14 +89,14 @@ class _Splash extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('CIPHER_',
-                style: mono(size: 26, color: C.amber, weight: FontWeight.w800, spacing: 4)),
+                style: mono(size: 26, color: C.accent, weight: FontWeight.w800, spacing: 4)),
             const SizedBox(height: 18),
             const SizedBox(
               width: 120,
               child: LinearProgressIndicator(
                 minHeight: 3,
                 backgroundColor: C.line,
-                valueColor: AlwaysStoppedAnimation(C.amber),
+                valueColor: AlwaysStoppedAnimation(C.accent),
               ),
             ),
           ],
@@ -129,7 +129,7 @@ class _BootError extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomActions(children: [
-        FilledButton(onPressed: onRetry, child: const Text('Coba Lagi')),
+        ChunkyButton(onPressed: onRetry, child: const Text('Coba Lagi')),
       ]),
     );
   }

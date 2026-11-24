@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 
-/// Palet Cipher: hitam tinta hangat + amber sinyal + teal buat status aman.
-/// Sengaja gak pakai "hijau hacker" biar gak klise dan tetap ramah orang awam.
+/// Palet Cipher "Violet Vault": tinta ungu gelap + violet + hijau limau.
+/// Violet buat aksi & identitas, limau buat status benar/aman/progres.
 class C {
-  static const bg = Color(0xFF0E0D0B);
-  static const surface = Color(0xFF17150F);
-  static const surface2 = Color(0xFF1F1C14);
-  static const line = Color(0xFF2E2A1E);
-  static const amber = Color(0xFFF5B83D);
-  static const onAmber = Color(0xFF1A1405);
-  static const teal = Color(0xFF7FD1C7);
-  static const mint = Color(0xFF9BE58B);
+  static const bg = Color(0xFF0F0B19);
+  static const bgDeep = Color(0xFF07050D);
+  static const surface = Color(0xFF181229);
+  static const surface2 = Color(0xFF211A36);
+  static const line = Color(0xFF2C2245);
+  static const lineStrong = Color(0xFF3A2F5C);
+  static const accent = Color(0xFFB79CFF);
+  static const accentSoft = Color(0xFFD4C4FF);
+  static const accentDeep = Color(0xFF5E4A9E);
+  static const accentTint = Color(0xFF2D2452);
+  static const onAccent = Color(0xFF150C2B);
+  static const ok = Color(0xFFC6F36B);
+  static const okDeep = Color(0xFF4D6128);
+  static const okTint = Color(0xFF1A2210);
+  static const mint = Color(0xFFE4FFA8);
+  static const yellow = Color(0xFFFFD166);
   static const orange = Color(0xFFFF9F43);
   static const red = Color(0xFFFF6B5B);
-  static const text = Color(0xFFF3EEE2);
-  static const muted = Color(0xFF9C9482);
+  static const text = Color(0xFFF1ECFF);
+  static const textSoft = Color(0xFFCFC6E6);
+  static const muted = Color(0xFFA89CC4);
 }
 
-const String kMono = 'monospace';
+const String kMono = 'JetBrainsMono';
+const String kDisplay = 'SpaceGrotesk';
 
 TextStyle mono({
   double size = 12,
   Color color = C.muted,
-  FontWeight weight = FontWeight.w600,
-  double spacing = 0.6,
+  FontWeight weight = FontWeight.w500,
+  double spacing = 0.4,
 }) =>
     TextStyle(
       fontFamily: kMono,
@@ -33,16 +43,31 @@ TextStyle mono({
       letterSpacing: spacing,
     );
 
+TextStyle display({
+  double size = 26,
+  Color color = C.text,
+  FontWeight weight = FontWeight.w700,
+  double height = 1.15,
+}) =>
+    TextStyle(
+      fontFamily: kDisplay,
+      fontSize: size,
+      color: color,
+      fontWeight: weight,
+      height: height,
+      letterSpacing: -0.4,
+    );
+
 ThemeData buildTheme() {
   final base = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: C.bg,
     colorScheme: const ColorScheme.dark(
-      primary: C.amber,
-      onPrimary: C.onAmber,
-      secondary: C.teal,
-      onSecondary: C.onAmber,
+      primary: C.accent,
+      onPrimary: C.onAccent,
+      secondary: C.ok,
+      onSecondary: C.onAccent,
       surface: C.surface,
       onSurface: C.text,
       error: C.red,
@@ -65,38 +90,14 @@ ThemeData buildTheme() {
         fontSize: 15,
         fontWeight: FontWeight.w700,
         color: C.text,
-        letterSpacing: 0.4,
-      ),
-    ),
-    filledButtonTheme: FilledButtonThemeData(
-      style: FilledButton.styleFrom(
-        backgroundColor: C.amber,
-        foregroundColor: C.onAmber,
-        disabledBackgroundColor: C.line,
-        disabledForegroundColor: C.muted,
-        minimumSize: const Size.fromHeight(54),
-        shape: RoundedRectangleBorder(borderRadius: radius),
-        textStyle: const TextStyle(
-          fontWeight: FontWeight.w800,
-          fontSize: 16,
-          letterSpacing: 0.2,
-        ),
-      ),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: C.amber,
-        backgroundColor: C.surface,
-        minimumSize: const Size.fromHeight(54),
-        side: BorderSide(color: C.amber.withValues(alpha: 0.55), width: 1.2),
-        shape: RoundedRectangleBorder(borderRadius: radius),
-        textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+        letterSpacing: 0.3,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: C.surface2,
-      hintStyle: TextStyle(color: C.muted.withValues(alpha: 0.75)),
+      hintStyle: const TextStyle(color: Color(0xFF8E82AE)),
+      labelStyle: const TextStyle(color: C.textSoft),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       border: OutlineInputBorder(
         borderRadius: radius,
@@ -108,23 +109,23 @@ ThemeData buildTheme() {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: radius,
-        borderSide: const BorderSide(color: C.amber, width: 1.5),
+        borderSide: const BorderSide(color: C.accent, width: 1.5),
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: C.surface,
-      indicatorColor: C.amber.withValues(alpha: 0.18),
-      height: 68,
+      indicatorColor: C.accentTint,
+      height: 70,
       labelTextStyle: WidgetStateProperty.resolveWith(
         (s) => TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w700,
-          color: s.contains(WidgetState.selected) ? C.amber : C.muted,
+          color: s.contains(WidgetState.selected) ? C.accent : C.muted,
         ),
       ),
       iconTheme: WidgetStateProperty.resolveWith(
         (s) => IconThemeData(
-          color: s.contains(WidgetState.selected) ? C.amber : C.muted,
+          color: s.contains(WidgetState.selected) ? C.accent : C.muted,
         ),
       ),
     ),

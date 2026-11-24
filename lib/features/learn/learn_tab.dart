@@ -4,6 +4,7 @@ import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
+import '../../widgets/scene3d.dart';
 import 'level_screen.dart';
 import 'module_screen.dart';
 
@@ -23,7 +24,7 @@ class LearnTab extends StatelessWidget {
           children: [
             Text('CIPHER',
                 style: mono(size: 18, color: C.text, weight: FontWeight.w800, spacing: 4)),
-            Text('_', style: mono(size: 18, color: C.amber, weight: FontWeight.w800)),
+            Text('_', style: mono(size: 18, color: C.accent, weight: FontWeight.w800)),
             const Spacer(),
             _Stat(icon: Icons.bolt_rounded, value: '${state.xp}', label: 'XP'),
             const SizedBox(width: 8),
@@ -35,33 +36,54 @@ class LearnTab extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 22),
+        const SizedBox(height: 14),
+        const MonoTag('// peta kota digital'),
+        SizedBox(
+          height: 300,
+          child: IsoMap(
+            tiles: [
+              for (final level in state.content.levels)
+                IsoTile(
+                  label: level.available && state.isLevelUnlocked(level)
+                      ? '${level.code} · ${state.levelProgress(level)}/${level.moduleIds.length}'
+                      : level.code,
+                  state: _tileState(state, level),
+                ),
+            ],
+            onTap: (i) => openLevel(context, state.content.levels[i]),
+          ),
+        ),
+        const SizedBox(height: 4),
         if (next != null)
           Panel(
-            borderColor: C.amber.withValues(alpha: 0.55),
+            borderColor: C.accent.withValues(alpha: 0.55),
             padding: const EdgeInsets.all(18),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    const MonoTag('// lanjutkan', color: C.amber),
-                    const Spacer(),
-                    MonoTag('${nextLevel?.code ?? ''} · ${next.minutes} mnt'),
+                    Expanded(
+                      child: MonoTag(
+                        '// distrik ${nextLevel?.code ?? ''} · ${nextLevel?.title ?? ''}',
+                        color: C.accent,
+                      ),
+                    ),
+                    MonoTag('${next.minutes} mnt'),
                   ],
                 ),
                 const SizedBox(height: 10),
                 Text(next.title,
-                    style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800, height: 1.2)),
+                    style: display(size: 21)),
                 const SizedBox(height: 6),
                 Text(next.summary,
                     style: const TextStyle(color: C.muted, height: 1.45)),
                 const SizedBox(height: 16),
-                FilledButton(
+                ChunkyButton(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => ModuleScreen(module: next)),
                   ),
-                  child: const Text('Lanjut Belajar'),
+                  child: const Text('Masuk Modul'),
                 ),
               ],
             ),
@@ -69,12 +91,12 @@ class LearnTab extends StatelessWidget {
         else
           const StateMessage(
             glyph: '[ok]',
-            color: C.teal,
+            color: C.ok,
             title: 'Semua modul yang ada udah kelar',
             body: 'Mantap! Materi level berikutnya lagi disiapin. Sambil nunggu, coba Toolbox atau baca Kamus.',
           ),
         const SizedBox(height: 28),
-        const MonoTag('// jalur belajar'),
+        const MonoTag('// semua level'),
         const SizedBox(height: 12),
         for (final level in state.content.levels)
           Padding(
@@ -86,12 +108,34 @@ class LearnTab extends StatelessWidget {
   }
 }
 
+IsoTileState _tileState(AppState state, Level level) {
+  if (!level.available) return IsoTileState.soon;
+  if (!state.isLevelUnlocked(level)) return IsoTileState.locked;
+  final total = level.moduleIds.length;
+  if (total > 0 && state.levelProgress(level) == total) return IsoTileState.done;
+  return IsoTileState.active;
+}
+
+void openLevel(BuildContext context, Level level) {
+  final state = AppScope.read(context);
+  if (!level.available) {
+    showInfo(context, 'Distrik ${level.code} lagi dibangun. Segera hadir!');
+  } else if (!state.isLevelUnlocked(level)) {
+    final prev = state.content.levelAt(level.index - 1);
+    showInfo(context, 'Selesaikan ${prev?.code ?? 'level sebelumnya'} dulu buat buka ${level.code}.');
+  } else {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => LevelScreen(level: level)),
+    );
+  }
+}
+
 class _Stat extends StatelessWidget {
   const _Stat({
     required this.icon,
     required this.value,
     required this.label,
-    this.color = C.amber,
+    this.color = C.accent,
   });
 
   final IconData icon;
@@ -133,23 +177,10 @@ class _LevelCard extends StatelessWidget {
     final total = level.moduleIds.length;
     final done = state.levelProgress(level);
     final active = unlocked && level.available;
-    final accent = active ? C.amber : C.muted;
-
-    void onTap() {
-      if (!level.available) {
-        showInfo(context, 'Materi ${level.code} lagi disiapin. Segera hadir!');
-      } else if (!unlocked) {
-        final prev = state.content.levelAt(level.index - 1);
-        showInfo(context, 'Selesaikan ${prev?.code ?? 'level sebelumnya'} dulu buat buka ${level.code}.');
-      } else {
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => LevelScreen(level: level)),
-        );
-      }
-    }
+    final accent = active ? C.accent : C.muted;
 
     return Panel(
-      onTap: onTap,
+      onTap: () => openLevel(context, level),
       color: active ? C.surface : C.bg,
       padding: const EdgeInsets.fromLTRB(16, 16, 14, 16),
       child: Row(
@@ -182,7 +213,7 @@ class _LevelCard extends StatelessWidget {
                   const SizedBox(height: 10),
                   ProgressLine(
                     value: total == 0 ? 0 : done / total,
-                    color: done == total ? C.teal : C.amber,
+                    color: done == total ? C.ok : C.accent,
                   ),
                   const SizedBox(height: 6),
                   Text('$done/$total modul', style: mono(size: 11)),
@@ -196,7 +227,7 @@ class _LevelCard extends StatelessWidget {
           else if (!unlocked)
             const Icon(Icons.lock_outline_rounded, color: C.muted)
           else
-            const Icon(Icons.chevron_right_rounded, color: C.amber),
+            const Icon(Icons.chevron_right_rounded, color: C.accent),
         ],
       ),
     );

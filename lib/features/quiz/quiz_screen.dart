@@ -96,7 +96,7 @@ class _QuizScreenState extends State<QuizScreen> {
             child: Center(
               child: Text(
                 '${_index + 1}/${_qs.length}',
-                style: mono(color: C.amber),
+                style: mono(color: C.accent),
               ),
             ),
           ),
@@ -132,8 +132,8 @@ class _QuizScreenState extends State<QuizScreen> {
                 : Padding(
                     padding: const EdgeInsets.only(top: 6),
                     child: Panel(
-                      color: (right ? C.teal : C.red).withValues(alpha: 0.07),
-                      borderColor: (right ? C.teal : C.red).withValues(alpha: 0.45),
+                      color: (right ? C.ok : C.red).withValues(alpha: 0.07),
+                      borderColor: (right ? C.ok : C.red).withValues(alpha: 0.45),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -141,7 +141,7 @@ class _QuizScreenState extends State<QuizScreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 16,
-                                color: right ? C.teal : C.red,
+                                color: right ? C.ok : C.red,
                               )),
                           if (q.explanation.isNotEmpty) ...[
                             const SizedBox(height: 6),
@@ -156,12 +156,12 @@ class _QuizScreenState extends State<QuizScreen> {
       ),
       bottomNavigationBar: BottomActions(children: [
         if (!_revealed)
-          FilledButton(
+          ChunkyButton(
             onPressed: _selected == null ? null : _check,
             child: const Text('Cek Jawaban'),
           )
         else
-          FilledButton(
+          ChunkyButton(
             onPressed: _saving ? null : _next,
             child: Text(last ? 'Lihat Hasil' : 'Soal Berikutnya'),
           ),
@@ -189,7 +189,7 @@ class QuizResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final passed = isPassed(percent);
-    final color = passed ? C.teal : C.orange;
+    final color = passed ? C.ok : C.orange;
     final streak = AppScope.of(context).streak;
 
     return Scaffold(
@@ -223,7 +223,7 @@ class QuizResultScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: _Reward(icon: Icons.bolt_rounded, value: '+$xpGained', label: 'XP', color: C.amber),
+                child: _Reward(icon: Icons.bolt_rounded, value: '+$xpGained', label: 'XP', color: C.accent),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -240,18 +240,18 @@ class QuizResultScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomActions(children: [
         if (passed)
-          FilledButton(
+          ChunkyButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text('Kembali ke Daftar Modul'),
           )
         else ...[
-          FilledButton(
+          ChunkyButton(
             onPressed: () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (_) => QuizScreen(module: module)),
             ),
             child: const Text('Coba Kuis Lagi'),
           ),
-          OutlinedButton(
+          ChunkyButton.outline(
             onPressed: () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (_) => ModuleScreen(module: module)),
             ),
