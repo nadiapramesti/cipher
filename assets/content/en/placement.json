@@ -1,0 +1,90 @@
+[
+  {
+    "level": 0,
+    "prompt": "Someone calls claiming to be from your bank and asks for your OTP code. That's...",
+    "options": [
+      "Normal bank procedure",
+      "Almost certainly a scam",
+      "Safe if they sound polite",
+      "Safe if the number starts with 021"
+    ],
+    "answer": 1
+  },
+  {
+    "level": 0,
+    "prompt": "Which password is the strongest?",
+    "options": [
+      "Jakarta2024!",
+      "admin12345",
+      "hujan-gerimis-di-atap-seng",
+      "Qwerty!@#"
+    ],
+    "answer": 2
+  },
+  {
+    "level": 1,
+    "prompt": "What does DNS do?",
+    "options": [
+      "Saves battery",
+      "Translates domain names into IP addresses",
+      "Encrypts all data",
+      "Blocks ads automatically"
+    ],
+    "answer": 1
+  },
+  {
+    "level": 1,
+    "prompt": "Port 443 is usually used for...",
+    "options": [
+      "HTTPS",
+      "Incoming email",
+      "Remote desktop",
+      "FTP"
+    ],
+    "answer": 0
+  },
+  {
+    "level": 2,
+    "prompt": "Injecting a script into a web page so it runs in the victim's browser is called...",
+    "options": [
+      "SQL Injection",
+      "XSS",
+      "DDoS",
+      "Brute force"
+    ],
+    "answer": 1
+  },
+  {
+    "level": 2,
+    "prompt": "Typing ' OR '1'='1 into a login form is an attempt at...",
+    "options": [
+      "XSS",
+      "Phishing",
+      "SQL Injection",
+      "CSRF"
+    ],
+    "answer": 2
+  },
+  {
+    "level": 3,
+    "prompt": "Hashing differs from encryption because a hash...",
+    "options": [
+      "Can be reversed with a key",
+      "Is one-way and not designed to be reversed",
+      "Is always longer than the original",
+      "Can only be used for images"
+    ],
+    "answer": 1
+  },
+  {
+    "level": 3,
+    "prompt": "\"SGFsbw==\" is most likely...",
+    "options": [
+      "A SHA-256 hash",
+      "Base64-encoded text",
+      "An AES-encrypted password",
+      "An IP address"
+    ],
+    "answer": 1
+  }
+]

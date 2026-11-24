@@ -1,15 +1,17 @@
 import 'dart:math' as math;
 
+import '../../l10n/strings.dart';
+
 enum StrengthLevel { kosong, sangatLemah, lemah, lumayan, kuat, sangatKuat }
 
 extension StrengthLabel on StrengthLevel {
   String get label => switch (this) {
         StrengthLevel.kosong => '-',
-        StrengthLevel.sangatLemah => 'Sangat lemah',
-        StrengthLevel.lemah => 'Lemah',
-        StrengthLevel.lumayan => 'Lumayan',
-        StrengthLevel.kuat => 'Kuat',
-        StrengthLevel.sangatKuat => 'Sangat kuat',
+        StrengthLevel.sangatLemah => tr('st_very_weak'),
+        StrengthLevel.lemah => tr('st_weak'),
+        StrengthLevel.lumayan => tr('st_fair'),
+        StrengthLevel.kuat => tr('st_strong'),
+        StrengthLevel.sangatKuat => tr('st_very_strong'),
       };
 
   /// 0..5, dipakai buat ngisi bar meter.
@@ -120,26 +122,21 @@ PasswordReport analyzePassword(String pw) {
   final seconds = math.pow(2, bits) / 2 / guessesPerSecond;
 
   final checks = [
-    CheckItem('Minimal 12 karakter', pw.length >= 12),
-    CheckItem('Ada huruf kecil', hasLower),
-    CheckItem('Ada huruf besar', hasUpper),
-    CheckItem('Ada angka', hasDigit),
-    CheckItem('Ada simbol atau spasi', hasSymbol),
-    CheckItem('Bukan password pasaran', !common),
-    CheckItem('Gak ada pola berulang / urutan', !repeat && !sequence),
+    CheckItem(tr('ck_len'), pw.length >= 12),
+    CheckItem(tr('ck_lower'), hasLower),
+    CheckItem(tr('ck_upper'), hasUpper),
+    CheckItem(tr('ck_digit'), hasDigit),
+    CheckItem(tr('ck_symbol'), hasSymbol),
+    CheckItem(tr('ck_common'), !common),
+    CheckItem(tr('ck_pattern'), !repeat && !sequence),
   ];
 
   final tips = <String>[
-    if (common)
-      'Ini termasuk password pasaran. Penyerang biasanya nyoba daftar kayak gini duluan.',
-    if (pw.length < 12)
-      'Panjangin. Gabungan 4 kata acak (contoh: kucing-oren-makan-tahu) lebih kuat dan gampang diinget.',
-    if (repeat || sequence)
-      'Hindari pola kayak "aaa", "1234", atau "qwerty", karena gampang ditebak.',
-    if (!hasSymbol && pw.length < 16)
-      'Tambahin simbol atau pemisah kayak "-" di antara kata.',
-    if (level.index >= StrengthLevel.kuat.index)
-      'Udah mantap. Pastiin password ini cuma dipakai di satu akun aja ya.',
+    if (common) tr('tip_common'),
+    if (pw.length < 12) tr('tip_len'),
+    if (repeat || sequence) tr('tip_pattern'),
+    if (!hasSymbol && pw.length < 16) tr('tip_symbol'),
+    if (level.index >= StrengthLevel.kuat.index) tr('tip_good'),
   ];
 
   return PasswordReport(
@@ -153,18 +150,19 @@ PasswordReport analyzePassword(String pw) {
 
 String formatDuration(double seconds) {
   if (seconds.isNaN) return '-';
-  if (seconds < 1) return 'kurang dari 1 detik';
-  if (seconds < 60) return '${seconds.round()} detik';
+  String n(num v) => '${v.round()}';
+  if (seconds < 1) return tr('dur_lt1');
+  if (seconds < 60) return tr('dur_sec', {'n': n(seconds)});
   final minutes = seconds / 60;
-  if (minutes < 60) return '${minutes.round()} menit';
+  if (minutes < 60) return tr('dur_min', {'n': n(minutes)});
   final hours = minutes / 60;
-  if (hours < 24) return '${hours.round()} jam';
+  if (hours < 24) return tr('dur_hour', {'n': n(hours)});
   final days = hours / 24;
-  if (days < 30) return '${days.round()} hari';
-  if (days < 365) return '${(days / 30).round()} bulan';
+  if (days < 30) return tr('dur_day', {'n': n(days)});
+  if (days < 365) return tr('dur_month', {'n': n(days / 30)});
   final years = days / 365;
-  if (years < 1000) return '${years.round()} tahun';
-  if (years < 1e6) return '${(years / 1000).round()} ribu tahun';
-  if (years < 1e9) return '${(years / 1e6).round()} juta tahun';
-  return 'miliaran tahun lebih';
+  if (years < 1000) return tr('dur_year', {'n': n(years)});
+  if (years < 1e6) return tr('dur_ky', {'n': n(years / 1000)});
+  if (years < 1e9) return tr('dur_my', {'n': n(years / 1e6)});
+  return tr('dur_inf');
 }

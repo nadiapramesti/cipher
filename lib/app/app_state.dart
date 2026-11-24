@@ -1,11 +1,15 @@
 import 'dart:convert';
 
+import 'dart:ui' show PlatformDispatcher;
+
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/content_repository.dart';
 import '../core/models.dart';
 import '../features/quiz/quiz_logic.dart';
+import '../l10n/strings.dart';
+import 'theme.dart';
 
 /// Progres user disimpan lokal di HP. Gak ada akun, gak ada server.
 class AppState extends ChangeNotifier {
@@ -14,7 +18,44 @@ class AppState extends ChangeNotifier {
   }
 
   final SharedPreferences _prefs;
-  final Content content;
+  Content content;
+
+  static const _kLang = 'lang';
+  static const _kAccent = 'theme_accent';
+  static const _kMode = 'theme_mode';
+
+  /// Bahasa awal: pilihan tersimpan, kalau belum ada ikut bahasa HP.
+  static AppLang initialLang(SharedPreferences prefs) {
+    final saved = prefs.getString(_kLang);
+    if (saved == 'en') return AppLang.en;
+    if (saved == 'id') return AppLang.id;
+    final device = PlatformDispatcher.instance.locale.languageCode;
+    return device == 'id' || device == 'in' ? AppLang.id : AppLang.en;
+  }
+
+  ThemeAccent accent = ThemeAccent.violet;
+  AppThemeMode themeMode = AppThemeMode.dark;
+  AppLang get lang => L.lang;
+
+  Future<void> setAccent(ThemeAccent a) async {
+    accent = a;
+    await _prefs.setString(_kAccent, a.name);
+    notifyListeners();
+  }
+
+  Future<void> setThemeMode(AppThemeMode m) async {
+    themeMode = m;
+    await _prefs.setString(_kMode, m.name);
+    notifyListeners();
+  }
+
+  Future<void> setLang(AppLang l) async {
+    if (l == L.lang) return;
+    content = await Content.load(l.name);
+    L.lang = l;
+    await _prefs.setString(_kLang, l.name);
+    notifyListeners();
+  }
 
   static const _kOnboarding = 'onboarding_done';
   static const _kStartLevel = 'start_level';
@@ -31,6 +72,8 @@ class AppState extends ChangeNotifier {
   Map<String, int> bestScores = {};
 
   void _load() {
+    accent = ThemeAccent.values.asNameMap()[_prefs.getString(_kAccent)] ?? ThemeAccent.violet;
+    themeMode = AppThemeMode.values.asNameMap()[_prefs.getString(_kMode)] ?? AppThemeMode.dark;
     onboardingDone = _prefs.getBool(_kOnboarding) ?? false;
     startLevel = _prefs.getInt(_kStartLevel) ?? 0;
     xp = _prefs.getInt(_kXp) ?? 0;

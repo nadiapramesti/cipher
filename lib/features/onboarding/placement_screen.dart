@@ -5,6 +5,7 @@ import '../../app/theme.dart';
 import '../../widgets/common.dart';
 import '../home/home_screen.dart';
 import '../quiz/quiz_logic.dart';
+import '../../l10n/strings.dart';
 
 class PlacementScreen extends StatefulWidget {
   const PlacementScreen({super.key});
@@ -49,13 +50,13 @@ class _PlacementScreenState extends State<PlacementScreen> {
     final questions = AppScope.of(context).content.placement;
     if (questions.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Tes Penempatan')),
-        body: const Padding(
+        appBar: AppBar(title: Text(tr('pl_title'))),
+        body: Padding(
           padding: EdgeInsets.all(20),
           child: StateMessage(
             glyph: '[ ]',
-            title: 'Soal belum tersedia',
-            body: 'Kamu bisa langsung mulai dari LV.00.',
+            title: tr('pl_empty_title'),
+            body: tr('pl_empty_body'),
           ),
         ),
       );
@@ -65,7 +66,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tes Penempatan'),
+        title: Text(tr('pl_title')),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
@@ -88,7 +89,7 @@ class _PlacementScreenState extends State<PlacementScreen> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
         children: [
-          const MonoTag('// jawab sejujurnya, gak ada nilai merah'),
+          MonoTag(tr('pl_honest')),
           const SizedBox(height: 10),
           Text(
             q.prompt,
@@ -111,11 +112,11 @@ class _PlacementScreenState extends State<PlacementScreen> {
       bottomNavigationBar: BottomActions(children: [
         ChunkyButton(
           onPressed: _selected == null ? null : () => _commit(_selected),
-          child: Text(last ? 'Lihat Hasil' : 'Berikutnya'),
+          child: Text(last ? tr('see_result') : tr('pl_next')),
         ),
         ChunkyButton.outline(
           onPressed: () => _commit(null),
-          child: const Text('Belum tau, lewati soal'),
+          child: Text(tr('pl_skip')),
         ),
       ]),
     );
@@ -159,7 +160,7 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
     final chosen = content.levelAt(_chosen);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Hasil Tes')),
+      appBar: AppBar(title: Text(tr('pl_result_title'))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
         children: [
@@ -169,9 +170,9 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MonoTag('${widget.correct}/${widget.total} benar', color: C.accent, filled: true),
+                MonoTag(tr('pl_correct', {'c': widget.correct, 't': widget.total}), color: C.accent, filled: true),
                 const SizedBox(height: 14),
-                const Text('Saran kami, mulai dari',
+                Text(tr('pl_suggest'),
                     style: TextStyle(color: C.muted)),
                 const SizedBox(height: 4),
                 Text(
@@ -179,15 +180,15 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
                   style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Level di bawahnya tetap kebuka, jadi kamu bisa balik kapan aja buat ngulang dasar.',
+                Text(
+                  tr('pl_note'),
                   style: TextStyle(color: C.muted, height: 1.45),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 24),
-          const MonoTag('// atau pilih sendiri'),
+          MonoTag(tr('pl_or_pick')),
           const SizedBox(height: 10),
           for (final level in content.levels)
             Padding(
@@ -213,9 +214,9 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
                           Text(level.title,
                               style: const TextStyle(fontWeight: FontWeight.w700)),
                           if (!level.available)
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.only(top: 2),
-                              child: Text('Materi segera hadir',
+                              child: Text(tr('coming_soon'),
                                   style: TextStyle(color: C.muted, fontSize: 12.5)),
                             ),
                         ],
@@ -236,7 +237,7 @@ class _PlacementResultScreenState extends State<PlacementResultScreen> {
       bottomNavigationBar: BottomActions(children: [
         ChunkyButton(
           onPressed: _saving ? null : _start,
-          child: Text('Mulai di ${chosen?.code ?? 'LV.00'}'),
+          child: Text(tr('pl_start_at', {'code': chosen?.code ?? 'LV.00'})),
         ),
       ]),
     );

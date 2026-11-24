@@ -8,10 +8,10 @@ import '../app/theme.dart';
 /// cincin orbit, lantai grid berperspektif, dan paket data melayang.
 /// Semua digambar pakai CustomPainter, tanpa package 3D.
 class VaultScene extends StatefulWidget {
-  const VaultScene({super.key, this.accent = C.accent, this.ring = C.ok});
+  const VaultScene({super.key, this.accent, this.ring});
 
-  final Color accent;
-  final Color ring;
+  final Color? accent;
+  final Color? ring;
 
   @override
   State<VaultScene> createState() => _VaultSceneState();
@@ -46,8 +46,8 @@ class _VaultSceneState extends State<VaultScene>
         builder: (context, _) => CustomPaint(
           painter: _VaultPainter(
             t: _c.value,
-            accent: widget.accent,
-            ring: widget.ring,
+            accent: widget.accent ?? C.accent,
+            ring: widget.ring ?? C.ok,
           ),
           size: Size.infinite,
         ),
@@ -276,10 +276,10 @@ class _VaultPainter extends CustomPainter {
     canvas.drawRect(
       fade,
       Paint()
-        ..shader = const LinearGradient(
+        ..shader = LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [C.bg, Color(0x000F0B19)],
+          colors: [C.bg, C.bg.withValues(alpha: 0)],
         ).createShader(fade),
     );
   }
@@ -656,18 +656,18 @@ class _TiltDeckState extends State<TiltDeck> with SingleTickerProviderStateMixin
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  _back(-30, 0.88, const Color(0xFF120E1F), C.line),
-                  _back(-15, 0.94, const Color(0xFF171126), C.lineStrong),
+                  _back(-30, 0.88, Color.lerp(C.bg, C.surface, 0.35)!, C.line),
+                  _back(-15, 0.94, Color.lerp(C.bg, C.surface, 0.7)!, C.lineStrong),
                   Container(
                     height: widget.height,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1D1631),
+                      color: C.surface2,
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(color: C.accentDeep),
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
-                          color: Color(0xCC000000),
+                          color: Color(C.isDark ? 0xCC000000 : 0x33000000),
                           blurRadius: 30,
                           offset: Offset(0, 18),
                           spreadRadius: -12,

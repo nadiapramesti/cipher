@@ -5,6 +5,7 @@ import '../../core/models.dart';
 import '../../widgets/common.dart';
 import '../../widgets/scene3d.dart';
 import '../quiz/quiz_screen.dart';
+import '../../l10n/strings.dart';
 
 class ModuleScreen extends StatefulWidget {
   const ModuleScreen({super.key, required this.module});
@@ -58,12 +59,12 @@ class _ModuleScreenState extends State<ModuleScreen> {
         ),
       ),
       body: pages.isEmpty
-          ? const Padding(
+          ? Padding(
               padding: EdgeInsets.all(20),
               child: StateMessage(
                 glyph: '[ ]',
-                title: 'Materinya kosong',
-                body: 'Langsung ke kuis aja.',
+                title: tr('mod_empty_title'),
+                body: tr('mod_empty_body'),
               ),
             )
           : PageView.builder(
@@ -72,7 +73,7 @@ class _ModuleScreenState extends State<ModuleScreen> {
               onPageChanged: (i) => setState(() => _page = i),
               itemBuilder: (_, i) => _LessonView(
                 page: pages[i],
-                label: '// bagian ${i + 1} dari ${pages.length}',
+                label: tr('part', {'i': i + 1, 'n': pages.length}),
               ),
             ),
       bottomNavigationBar: BottomActions(children: [
@@ -82,7 +83,7 @@ class _ModuleScreenState extends State<ModuleScreen> {
               Expanded(
                 child: ChunkyButton.outline(
                   onPressed: () => _go(-1),
-                  child: const Text('Balik'),
+                  child: Text(tr('back')),
                 ),
               ),
               const SizedBox(width: 10),
@@ -91,7 +92,7 @@ class _ModuleScreenState extends State<ModuleScreen> {
               flex: 2,
               child: ChunkyButton(
                 onPressed: _isLast ? _startQuiz : () => _go(1),
-                child: Text(_isLast ? 'Mulai Kuis' : 'Lanjut'),
+                child: Text(_isLast ? tr('start_quiz') : tr('next')),
               ),
             ),
           ],
@@ -132,13 +133,13 @@ class _LessonView extends StatelessWidget {
               color: C.okTint,
               borderRadius: BorderRadius.circular(18),
               border: Border.all(color: C.okDeep),
-              boxShadow: const [BoxShadow(color: Color(0xFF11170A), offset: Offset(0, 6))],
+              boxShadow: [BoxShadow(color: C.okDeep.withValues(alpha: 0.5), offset: const Offset(0, 6))],
             ),
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MonoTag('ANALOGI', color: C.ok),
+                MonoTag(tr('analogy'), color: C.ok),
                 const SizedBox(height: 8),
                 Text(page.tip!, style: const TextStyle(height: 1.5)),
               ],
@@ -159,7 +160,7 @@ class RichBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const style = TextStyle(fontSize: 15.5, height: 1.6, color: C.text);
+    final style = TextStyle(fontSize: 15.5, height: 1.6, color: C.text);
     final widgets = <Widget>[];
     for (final line in text.split('\n')) {
       final t = line.trimRight();

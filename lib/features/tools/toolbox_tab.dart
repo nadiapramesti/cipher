@@ -4,6 +4,7 @@ import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../widgets/common.dart';
 import 'password_checker_screen.dart';
+import '../../l10n/strings.dart';
 
 class _Tool {
   const _Tool({
@@ -21,35 +22,35 @@ class _Tool {
   final WidgetBuilder? builder;
 }
 
-final _tools = <_Tool>[
+List<_Tool> get _tools => <_Tool>[
   _Tool(
-    title: 'Cek Kekuatan Password',
-    desc: 'Lihat seberapa lama password kamu bisa dibobol, plus saran biar makin kuat.',
+    title: tr('tool_pw_title'),
+    desc: tr('tool_pw_desc'),
     level: 0,
     icon: Icons.password_rounded,
     builder: (_) => const PasswordCheckerScreen(),
   ),
-  const _Tool(
-    title: 'Info Jaringan',
-    desc: 'Intip IP, DNS, dan tipe koneksi HP kamu sendiri.',
+  _Tool(
+    title: tr('tool_net_title'),
+    desc: tr('tool_net_desc'),
     level: 1,
     icon: Icons.lan_outlined,
   ),
-  const _Tool(
-    title: 'Inspektor URL',
-    desc: 'Bongkar struktur link dan deteksi domain tiruan (look-alike).',
+  _Tool(
+    title: tr('tool_url_title'),
+    desc: tr('tool_url_desc'),
     level: 2,
     icon: Icons.link_rounded,
   ),
-  const _Tool(
-    title: 'Hash & Encode',
-    desc: 'SHA-256, MD5, Base64, Hex. Lihat bedanya encoding sama hashing.',
+  _Tool(
+    title: tr('tool_hash_title'),
+    desc: tr('tool_hash_desc'),
     level: 3,
     icon: Icons.tag_rounded,
   ),
-  const _Tool(
-    title: 'Cipher Klasik',
-    desc: 'Main-main Caesar & Vigenère, nenek moyang enkripsi modern.',
+  _Tool(
+    title: tr('tool_cipher_title'),
+    desc: tr('tool_cipher_desc'),
     level: 3,
     icon: Icons.key_rounded,
   ),
@@ -65,11 +66,11 @@ class ToolboxTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
       children: [
-        const Text('Toolbox',
+        Text(tr('tb_title'),
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, letterSpacing: -0.3)),
         const SizedBox(height: 6),
-        const Text(
-          'Alat praktek yang kebuka seiring level kamu naik. Semua jalan offline dan cuma ngolah input kamu sendiri.',
+        Text(
+          tr('tb_sub'),
           style: TextStyle(color: C.muted, height: 1.45),
         ),
         const SizedBox(height: 20),
@@ -102,9 +103,9 @@ class _ToolCard extends StatelessWidget {
       borderColor: ready ? C.accent.withValues(alpha: 0.35) : C.line,
       onTap: () {
         if (!unlocked) {
-          showInfo(context, 'Tool ini kebuka setelah kamu sampai $code.');
+          showInfo(context, tr('tb_locked', {'code': code}));
         } else if (tool.builder == null) {
-          showInfo(context, '${tool.title} lagi dibikin. Segera hadir!');
+          showInfo(context, tr('tb_soon', {'t': tool.title}));
         } else {
           Navigator.of(context).push(MaterialPageRoute(builder: tool.builder!));
         }
@@ -132,7 +133,7 @@ class _ToolCard extends StatelessWidget {
                     )),
                 const SizedBox(height: 3),
                 Text(tool.desc,
-                    style: const TextStyle(color: C.muted, fontSize: 13, height: 1.4)),
+                    style: TextStyle(color: C.muted, fontSize: 13, height: 1.4)),
               ],
             ),
           ),
@@ -142,7 +143,7 @@ class _ToolCard extends StatelessWidget {
           else if (tool.builder == null)
             const MonoTag('SOON', filled: true)
           else
-            const Icon(Icons.chevron_right_rounded, color: C.accent),
+            Icon(Icons.chevron_right_rounded, color: C.accent),
         ],
       ),
     );

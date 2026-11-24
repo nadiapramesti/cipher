@@ -21,6 +21,13 @@ Aplikasi Android buat belajar cyber security dari nol, buat umum dan berbasis le
 - Kamus 22 istilah dengan pencarian dan analogi
 - Tampilan **Violet Vault** + elemen 3D: brankas kubus berputar di onboarding, peta level isometrik, kartu materi yang miring, tombol tebal yang bisa "ditekan"
 
+## Tema & bahasa
+
+- 4 tema warna: **Violet Vault**, **Amber Terminal**, **Neon Malam**, **Sakura**
+- Tiap tema punya mode **gelap** dan **terang**, plus opsi **ikut HP**
+- Dua bahasa: **Indonesia** dan **English**. Bahasa awal ikut bahasa HP
+- Semua bisa diganti di **Pengaturan** (tombol di pojok kanan atas beranda)
+
 ## Struktur
 
 ```
@@ -35,14 +42,14 @@ lib/
     quiz/         kuis + logika skor/streak
     tools/        toolbox + password checker
     glossary/     kamus
-assets/content/   materi dalam JSON (tambah modul cukup edit di sini)
+assets/content/   materi dalam JSON: id/ (Indonesia) dan en/ (Inggris)
 test/             unit test logika kuis & password
 ```
 
 ## Nambah materi
 
-1. Bikin file `assets/content/lv1.json` dengan format sama kayak `lv0.json`
-2. Isi `moduleFile` di level terkait pada `assets/content/levels.json`
+1. Bikin `lv1.json` di **dua** folder: `assets/content/id/` dan `assets/content/en/` (id modul & kunci jawaban harus sama)
+2. Isi `moduleFile` (`"lv1.json"`) di `levels.json` kedua bahasa
 3. Jalankan ulang app
 
 ## Download APK

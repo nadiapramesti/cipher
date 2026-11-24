@@ -1,0 +1,112 @@
+[
+  {
+    "term": "Phishing",
+    "short": "A scam that impersonates a trusted party to lure victims into handing over data or clicking malicious links.",
+    "analogy": "Like a fisherman using bait that looks like real food. The fish in a hurry bites right away."
+  },
+  {
+    "term": "Malware",
+    "short": "Malicious software: viruses, trojans, spyware, ransomware, and the like.",
+    "analogy": "A guest disguised as a repairman who's actually there to steal."
+  },
+  {
+    "term": "Ransomware",
+    "short": "Malware that locks or encrypts the victim's files and demands a ransom.",
+    "analogy": "A thief who padlocks every cupboard in your house and charges you for the keys."
+  },
+  {
+    "term": "2FA",
+    "short": "Two-Factor Authentication: logging in requires two kinds of proof, e.g. a password + a code from your phone.",
+    "analogy": "An ATM needs both the card and the PIN. One alone isn't enough."
+  },
+  {
+    "term": "OTP",
+    "short": "One-Time Password: a single-use code that's valid for a short time.",
+    "analogy": "An entry ticket that expires the moment it's used."
+  },
+  {
+    "term": "Password Manager",
+    "short": "An app that creates and stores strong passwords, encrypted.",
+    "analogy": "A key safe: you only need to remember the safe's combination."
+  },
+  {
+    "term": "Encryption",
+    "short": "Scrambling data so only someone with the key can read it.",
+    "analogy": "A letter written in a secret code only you and your friend understand."
+  },
+  {
+    "term": "Hash",
+    "short": "A digital fingerprint of data. One-way and not designed to be reversed.",
+    "analogy": "A blender: fruit becomes juice, but juice can't turn back into fruit."
+  },
+  {
+    "term": "Encoding",
+    "short": "Changing data's format so other systems can send or read it, e.g. Base64. Not a security measure.",
+    "analogy": "Translating text into Morse code. Anyone who knows Morse can read it."
+  },
+  {
+    "term": "IP Address",
+    "short": "A device's unique address on a network or the internet.",
+    "analogy": "A home address so packages can reach the right place."
+  },
+  {
+    "term": "DNS",
+    "short": "The system that translates domain names (google.com) into IP addresses.",
+    "analogy": "A contact list: you look up a name, it gives you the number."
+  },
+  {
+    "term": "Port",
+    "short": "A numbered \"door\" on a device for a specific service, e.g. 443 for HTTPS.",
+    "analogy": "One building (IP) has many counters (ports), each offering a different service."
+  },
+  {
+    "term": "Firewall",
+    "short": "A filter for network traffic based on set rules.",
+    "analogy": "A gate guard checking who can come in and go out."
+  },
+  {
+    "term": "VPN",
+    "short": "An encrypted tunnel between your device and a VPN server.",
+    "analogy": "A covered tunnel: people on the street can't see what passes through."
+  },
+  {
+    "term": "HTTPS",
+    "short": "The version of HTTP whose connection is encrypted with TLS.",
+    "analogy": "Talking in a closed room instead of shouting in a market."
+  },
+  {
+    "term": "Cookie",
+    "short": "A small piece of data a browser stores so a site remembers you, e.g. that you're logged in.",
+    "analogy": "A concert wristband: shows you've paid without queueing again."
+  },
+  {
+    "term": "XSS",
+    "short": "Cross-Site Scripting: injecting a malicious script into a web page so it runs in the victim's browser.",
+    "analogy": "Pinning a fake flyer on an official notice board. Whoever reads it gets fooled."
+  },
+  {
+    "term": "SQL Injection",
+    "short": "Slipping SQL commands in through input so the database runs the attacker's commands.",
+    "analogy": "Filling an order form with \"and give me everything in the warehouse\", and the clerk obeys."
+  },
+  {
+    "term": "Brute Force",
+    "short": "Guessing a password by automatically trying every combination.",
+    "analogy": "Trying every key on the keyring one by one until the padlock opens."
+  },
+  {
+    "term": "Social Engineering",
+    "short": "Manipulating people (not systems) into giving access or information.",
+    "analogy": "A thief who doesn't break the door, but pretends to be from the power company to get let in."
+  },
+  {
+    "term": "SIM Swap",
+    "short": "Moving a victim's phone number to a scammer's SIM card to intercept SMS and OTPs.",
+    "analogy": "A scammer pretends to be you at the post office and redirects all your mail to their address."
+  },
+  {
+    "term": "CTF",
+    "short": "Capture The Flag: a security exercise or competition to find hidden \"flags\" through challenges.",
+    "analogy": "A treasure hunt where the clues are security puzzles."
+  }
+]

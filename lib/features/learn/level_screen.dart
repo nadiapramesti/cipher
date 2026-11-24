@@ -5,6 +5,7 @@ import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
 import 'module_screen.dart';
+import '../../l10n/strings.dart';
 
 class LevelScreen extends StatelessWidget {
   const LevelScreen({super.key, required this.level});
@@ -19,12 +20,12 @@ class LevelScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('${level.code}  ${level.title}')),
       body: modules.isEmpty
-          ? const Padding(
+          ? Padding(
               padding: EdgeInsets.all(20),
               child: StateMessage(
                 glyph: '[..]',
-                title: 'Materi lagi disiapin',
-                body: 'Level ini belum ada modulnya. Cek lagi nanti ya.',
+                title: tr('lvl_empty_title'),
+                body: tr('lvl_empty_body'),
               ),
             )
           : ListView.separated(
@@ -36,7 +37,7 @@ class LevelScreen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(level.tagline,
-                        style: const TextStyle(color: C.muted, height: 1.45)),
+                        style: TextStyle(color: C.muted, height: 1.45)),
                   );
                 }
                 final m = modules[i - 1];
@@ -69,7 +70,7 @@ class _ModuleTile extends StatelessWidget {
     return Panel(
       onTap: () {
         if (!unlocked) {
-          showInfo(context, 'Lulusin modul sebelumnya dulu ya.');
+          showInfo(context, tr('mod_locked'));
           return;
         }
         Navigator.of(context).push(
@@ -95,16 +96,16 @@ class _ModuleTile extends StatelessWidget {
                     )),
                 const SizedBox(height: 4),
                 Text(module.summary,
-                    style: const TextStyle(color: C.muted, fontSize: 13, height: 1.4)),
+                    style: TextStyle(color: C.muted, fontSize: 13, height: 1.4)),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    MonoTag('${module.minutes} mnt'),
+                    MonoTag(tr('min', {'n': module.minutes})),
                     const SizedBox(width: 10),
-                    MonoTag('${module.quiz.length} soal'),
+                    MonoTag(tr('n_questions', {'n': module.quiz.length})),
                     if (best != null) ...[
                       const SizedBox(width: 10),
-                      MonoTag('skor $best%', color: done ? C.ok : C.orange),
+                      MonoTag(tr('score', {'n': best}), color: done ? C.ok : C.orange),
                     ],
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/app_state.dart';
@@ -7,6 +8,7 @@ import 'core/content_repository.dart';
 import 'features/home/home_screen.dart';
 import 'features/onboarding/onboarding_screen.dart';
 import 'widgets/common.dart';
+import 'l10n/strings.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +34,8 @@ class _CipherBootState extends State<CipherBoot> {
 
   Future<AppState> _init() async {
     final prefs = await SharedPreferences.getInstance();
-    final content = await Content.load();
+    L.lang = AppState.initialLang(prefs);
+    final content = await Content.load(L.code);
     return AppState(prefs, content);
   }
 
@@ -44,7 +47,7 @@ class _CipherBootState extends State<CipherBoot> {
         if (snap.hasData) return CipherApp(state: snap.data!);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: buildTheme(),
+          theme: buildTheme(C.palette),
           home: snap.hasError
               ? _BootError(
                   error: '${snap.error}',
@@ -57,22 +60,81 @@ class _CipherBootState extends State<CipherBoot> {
   }
 }
 
-class CipherApp extends StatelessWidget {
+/// Root app. Dengerin perubahan tema / mode / bahasa, terus gambar ulang
+/// semua layar tanpa ngereset navigasi.
+class CipherApp extends StatefulWidget {
   const CipherApp({super.key, required this.state});
 
   final AppState state;
 
   @override
+  State<CipherApp> createState() => _CipherAppState();
+}
+
+class _CipherAppState extends State<CipherApp> with WidgetsBindingObserver {
+  late String _look = _lookKey();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    widget.state.addListener(_onStateChanged);
+    _applyPalette();
+  }
+
+  @override
+  void dispose() {
+    widget.state.removeListener(_onStateChanged);
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  bool get _dark => switch (widget.state.themeMode) {
+        AppThemeMode.dark => true,
+        AppThemeMode.light => false,
+        AppThemeMode.system =>
+          WidgetsBinding.instance.platformDispatcher.platformBrightness == Brightness.dark,
+      };
+
+  String _lookKey() => '${widget.state.accent.name}-$_dark-${L.code}';
+
+  void _applyPalette() => C.use(paletteFor(widget.state.accent, dark: _dark));
+
+  void _refreshIfLookChanged() {
+    final key = _lookKey();
+    if (key == _look) return;
+    _look = key;
+    _applyPalette();
+    setState(() {});
+    // warna & teks dibaca langsung dari C / tr(), jadi semua elemen ditandai
+    // buat digambar ulang supaya ikut berubah.
+    void mark(Element e) {
+      e.markNeedsBuild();
+      e.visitChildren(mark);
+    }
+
+    (context as Element).visitChildren(mark);
+  }
+
+  void _onStateChanged() => _refreshIfLookChanged();
+
+  @override
+  void didChangePlatformBrightness() => _refreshIfLookChanged();
+
+  @override
   Widget build(BuildContext context) {
     return AppScope(
-      state: state,
+      state: widget.state,
       child: MaterialApp(
         title: 'Cipher',
         debugShowCheckedModeBanner: false,
-        theme: buildTheme(),
-        home: state.onboardingDone
-            ? const HomeScreen()
-            : const OnboardingScreen(),
+        theme: buildTheme(C.palette),
+        // ikon status bar ikut terang/gelap sesuai tema
+        builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
+          value: C.isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
+          child: child ?? const SizedBox.shrink(),
+        ),
+        home: widget.state.onboardingDone ? const HomeScreen() : const OnboardingScreen(),
       ),
     );
   }
@@ -91,7 +153,7 @@ class _Splash extends StatelessWidget {
             Text('CIPHER_',
                 style: mono(size: 26, color: C.accent, weight: FontWeight.w800, spacing: 4)),
             const SizedBox(height: 18),
-            const SizedBox(
+            SizedBox(
               width: 120,
               child: LinearProgressIndicator(
                 minHeight: 3,
@@ -122,14 +184,14 @@ class _BootError extends StatelessWidget {
             child: StateMessage(
               glyph: '!! ERR',
               color: C.red,
-              title: 'Materi gagal dimuat',
-              body: 'Coba buka ulang. Kalau masih gagal, kemungkinan file materi rusak.\n\n$error',
+              title: tr('err_title'),
+              body: '${tr('err_body')}\n\n$error',
             ),
           ),
         ),
       ),
       bottomNavigationBar: BottomActions(children: [
-        ChunkyButton(onPressed: onRetry, child: const Text('Coba Lagi')),
+        ChunkyButton(onPressed: onRetry, child: Text(tr('retry'))),
       ]),
     );
   }

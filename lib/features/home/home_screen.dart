@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../glossary/glossary_tab.dart';
 import '../learn/learn_tab.dart';
 import '../tools/toolbox_tab.dart';
+import '../../l10n/strings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,21 +28,21 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: NavigationBar(
         selectedIndex: _tab,
         onDestinationSelected: (i) => setState(() => _tab = i),
-        destinations: const [
+        destinations: [
           NavigationDestination(
             icon: Icon(Icons.school_outlined),
             selectedIcon: Icon(Icons.school_rounded),
-            label: 'Belajar',
+            label: tr('nav_learn'),
           ),
           NavigationDestination(
             icon: Icon(Icons.handyman_outlined),
             selectedIcon: Icon(Icons.handyman_rounded),
-            label: 'Toolbox',
+            label: tr('nav_toolbox'),
           ),
           NavigationDestination(
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book_rounded),
-            label: 'Kamus',
+            label: tr('nav_glossary'),
           ),
         ],
       ),

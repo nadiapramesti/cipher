@@ -34,8 +34,10 @@ class Content {
   static Future<dynamic> _json(String path) async =>
       jsonDecode(await rootBundle.loadString(path));
 
-  static Future<Content> load() async {
-    final levelsRaw = await _json('assets/content/levels.json') as List;
+  /// [lang] = 'id' atau 'en'. Materi tiap bahasa ada di assets/content/<lang>/.
+  static Future<Content> load([String lang = 'id']) async {
+    final dir = 'assets/content/$lang';
+    final levelsRaw = await _json('$dir/levels.json') as List;
     final levels = <Level>[];
     final modules = <String, LearnModule>{};
 
@@ -44,7 +46,7 @@ class Content {
       final file = map['moduleFile'] as String?;
       final ids = <String>[];
       if (file != null) {
-        final list = await _json(file) as List;
+        final list = await _json('$dir/$file') as List;
         for (final m in list) {
           final module = LearnModule.fromJson(m as Map<String, dynamic>);
           modules[module.id] = module;
@@ -55,11 +57,11 @@ class Content {
     }
     levels.sort((a, b) => a.index.compareTo(b.index));
 
-    final placement = (await _json('assets/content/placement.json') as List)
+    final placement = (await _json('$dir/placement.json') as List)
         .map((e) => QuizQuestion.fromJson(e as Map<String, dynamic>))
         .toList();
 
-    final glossary = (await _json('assets/content/glossary.json') as List)
+    final glossary = (await _json('$dir/glossary.json') as List)
         .map((e) => GlossaryTerm.fromJson(e as Map<String, dynamic>))
         .toList()
       ..sort((a, b) => a.term.toLowerCase().compareTo(b.term.toLowerCase()));

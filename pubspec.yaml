@@ -1,7 +1,7 @@
 name: cipher
 description: "Cipher — belajar cyber security dari nol, offline, berbasis level."
 publish_to: 'none'
-version: 0.2.1+3
+version: 0.3.0+4
 
 environment:
   sdk: ^3.6.0
@@ -20,7 +20,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/content/
+    - assets/content/id/
+    - assets/content/en/
   fonts:
     - family: ChakraPetch
       fonts:

@@ -4,6 +4,7 @@ import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
+import '../../l10n/strings.dart';
 
 class GlossaryTab extends StatefulWidget {
   const GlossaryTab({super.key});
@@ -39,15 +40,15 @@ class _GlossaryTabState extends State<GlossaryTab> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const Expanded(
-              child: Text('Kamus',
+            Expanded(
+              child: Text(tr('gl_title'),
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.w800, letterSpacing: -0.3)),
             ),
-            MonoTag('${all.length} istilah'),
+            MonoTag(tr('gl_count', {'n': all.length})),
           ],
         ),
         const SizedBox(height: 6),
-        const Text('Istilah cyber security dijelasin pakai bahasa manusia.',
+        Text(tr('gl_sub'),
             style: TextStyle(color: C.muted)),
         const SizedBox(height: 16),
         TextField(
@@ -55,12 +56,12 @@ class _GlossaryTabState extends State<GlossaryTab> {
           onChanged: (v) => setState(() => _query = v),
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
-            hintText: 'contoh: phishing',
-            prefixIcon: const Icon(Icons.search_rounded, color: C.muted),
+            hintText: tr('gl_hint'),
+            prefixIcon: Icon(Icons.search_rounded, color: C.muted),
             suffixIcon: _query.isEmpty
                 ? null
                 : IconButton(
-                    tooltip: 'Hapus pencarian',
+                    tooltip: tr('gl_clear'),
                     icon: const Icon(Icons.close_rounded),
                     onPressed: () {
                       _search.clear();
@@ -73,8 +74,8 @@ class _GlossaryTabState extends State<GlossaryTab> {
         if (items.isEmpty)
           StateMessage(
             glyph: '?_',
-            title: 'Gak ketemu "${_query.trim()}"',
-            body: 'Coba kata lain, atau pakai istilah bahasa Inggrisnya.',
+            title: tr('gl_none_title', {'q': _query.trim()}),
+            body: tr('gl_none_body'),
           )
         else
           for (final t in items)
@@ -117,7 +118,7 @@ class _TermCardState extends State<_TermCard> {
               AnimatedRotation(
                 turns: _open ? 0.5 : 0,
                 duration: const Duration(milliseconds: 200),
-                child: const Icon(Icons.expand_more_rounded, color: C.muted),
+                child: Icon(Icons.expand_more_rounded, color: C.muted),
               ),
             ],
           ),
@@ -141,7 +142,7 @@ class _TermCardState extends State<_TermCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const MonoTag('ANALOGI', color: C.ok),
+                          MonoTag(tr('analogy'), color: C.ok),
                           const SizedBox(height: 6),
                           Text(t.analogy, style: const TextStyle(height: 1.5)),
                         ],

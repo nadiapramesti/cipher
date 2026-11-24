@@ -1,0 +1,331 @@
+[
+  {
+    "id": "lv0-password",
+    "level": 0,
+    "title": "Passwords That Are Hard to Guess",
+    "summary": "Why length beats complexity, and how to manage lots of passwords.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "A password is your house key",
+        "body": "Your email, chat apps, and digital banking are all guarded by passwords. If the key is easy to guess, someone can walk in without breaking the door.\n\nAttackers rarely guess one by one by hand. They use programs that try billions of combinations per second, starting with lists of the most common passwords.\n\nPasswords that leak most often:\n- 123456, 12345678, qwerty\n- password, admin, iloveyou\n- your name + date of birth",
+        "tip": "A common password is like a padlock key sold identically in every store. A thief only needs that one key to try many houses."
+      },
+      {
+        "title": "Length beats complexity",
+        "body": "\"P@ssw0rd!\" looks complicated, but cracking programs already know the trick of swapping letters for symbols.\n\nWhat makes a password hard to crack is its length. Every extra character multiplies the number of combinations.\n\nUse a passphrase made of 4 random words:\n- orange-cat-eats-tofu\n- blue-umbrella-in-fridge-27\n\nEasy to remember, yet it would take thousands of years to guess.",
+        "tip": "A 3-digit combination lock has only 1,000 combinations. Make it 10 digits and there are 10 billion. Every extra digit multiplies the thief's work."
+      },
+      {
+        "title": "One account, one password",
+        "body": "If one site leaks and you reuse that password everywhere, every account opens with it. This is called credential stuffing: leaked passwords are tried automatically on many other sites.\n\nThe fix is a password manager (e.g. Bitwarden, or the one built into Google/Apple). Remember one strong master password; the app creates and remembers the rest.\n\nDon't keep passwords in plain notes or gallery screenshots.",
+        "tip": "One key for your house, motorbike, office, and safe is convenient. But lose it once and everything opens at the same time."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Which password is the strongest?",
+        "options": [
+          "P@ssw0rd!",
+          "Andi1999",
+          "kucing-oren-makan-tahu-27",
+          "qwerty123456"
+        ],
+        "answer": 2,
+        "explanation": "A long passphrase of random words is far harder to guess than a short password with letters swapped for symbols."
+      },
+      {
+        "prompt": "Why is \"123456\" dangerous even if your account isn't important?",
+        "options": [
+          "It's too short to type",
+          "It's at the top of the lists attackers try first",
+          "Phones can't store it",
+          "It's not dangerous if the account isn't important"
+        ],
+        "answer": 1,
+        "explanation": "Attack programs always start with lists of common passwords. An \"unimportant\" account can still be used to scam your friends."
+      },
+      {
+        "prompt": "What is credential stuffing?",
+        "options": [
+          "Filling forms with fake data",
+          "Trying passwords leaked from one site on many other sites",
+          "Keeping passwords in the fridge",
+          "Deleting old accounts"
+        ],
+        "answer": 1,
+        "explanation": "If you reuse the same password everywhere, a single leak can open all your accounts."
+      },
+      {
+        "prompt": "What's the safest way to manage many passwords?",
+        "options": [
+          "Write them in your phone notes",
+          "Use one password for every account",
+          "Use a password manager",
+          "Screenshot them into your gallery"
+        ],
+        "answer": 2,
+        "explanation": "A password manager stores passwords encrypted, so you only need to remember one strong master password."
+      },
+      {
+        "prompt": "What makes a password hardest to crack?",
+        "options": [
+          "Its length",
+          "Including your birth date",
+          "Capitalizing the first letter",
+          "Including your pet's name"
+        ],
+        "answer": 0,
+        "explanation": "Every extra character multiplies the number of combinations. Personal details like birth dates are easy to guess."
+      }
+    ]
+  },
+  {
+    "id": "lv0-2fa",
+    "level": 0,
+    "title": "2FA: The Second Key",
+    "summary": "An extra layer so your account stays safe even if your password leaks.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "One key isn't enough",
+        "body": "Passwords can leak: from hacked sites, from phishing, or from someone peeking. Two-Factor Authentication (2FA) adds a second check when you log in.\n\nThe factors can be:\n- Something you know: a password or PIN\n- Something you have: your phone or a security key\n- Something you are: a fingerprint or your face\n\n2FA means at least two different kinds.",
+        "tip": "ATMs have always used 2FA: the card (something you have) + the PIN (something you know). A stolen card alone isn't enough to withdraw money."
+      },
+      {
+        "title": "Types of 2FA",
+        "body": "From decent to strongest:\n- SMS codes: better than nothing, but can be intercepted through SIM swapping\n- Authenticator apps (Google Authenticator, Authy, etc.): codes change every 30 seconds and work offline\n- Passkeys / security keys: log in with your fingerprint or face, resistant to phishing\n\nTurn on 2FA at least for your email, WhatsApp (two-step verification), and finance apps.",
+        "tip": "An SMS code is like leaving a spare key with the security guard. Usually safe, but if the guard gets fooled, the key goes to someone else."
+      },
+      {
+        "title": "Your OTP is top secret",
+        "body": "The most common scam: someone pretends to be from the bank, a courier, or customer service and asks you to read out an OTP code that was \"sent by mistake\".\n\nThe rules are simple:\n- Never give an OTP to anyone, including people who claim to be official staff\n- Banks and official apps never ask for OTPs by phone or chat\n- If you get an OTP while you're not logging in, someone is trying to get in. Change your password right away",
+        "tip": "An OTP is a one-time key to your front door. Whoever asks for it, no matter who they are, is standing right at your door."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Which of these is 2FA?",
+        "options": [
+          "Password + PIN",
+          "Password + code from an authenticator app",
+          "Two different passwords",
+          "Username + password"
+        ],
+        "answer": 1,
+        "explanation": "2FA needs two different kinds of factors. A password and a PIN are both \"something you know\"."
+      },
+      {
+        "prompt": "Someone calls claiming to be bank support and asks for your OTP. You should...",
+        "options": [
+          "Give it, it's the bank",
+          "Give half of it",
+          "Refuse and hang up",
+          "Ask them to resend it"
+        ],
+        "answer": 2,
+        "explanation": "Banks never ask for OTPs. Anyone asking for one is almost certainly a scammer."
+      },
+      {
+        "prompt": "Which type of 2FA resists phishing best?",
+        "options": [
+          "SMS codes",
+          "Security questions",
+          "Passkeys / security keys",
+          "Email confirmation"
+        ],
+        "answer": 2,
+        "explanation": "Passkeys are tied to the real site, so they can't be used on a fake one."
+      },
+      {
+        "prompt": "You get an OTP by SMS while you're not logging in. What does it mean?",
+        "options": [
+          "A bonus from your carrier",
+          "Someone knows your password and is trying to log in",
+          "Your phone is glitching",
+          "Nothing"
+        ],
+        "answer": 1,
+        "explanation": "OTPs are only sent when someone tries to log in. Change that account's password right away."
+      },
+      {
+        "prompt": "The weakness of SMS-based 2FA is...",
+        "options": [
+          "It doesn't work on Android",
+          "It can be intercepted through SIM swapping",
+          "The codes are too long",
+          "You pay per SMS"
+        ],
+        "answer": 1,
+        "explanation": "With a SIM swap, scammers move your number to their SIM card, so your SMS OTPs go to them."
+      }
+    ]
+  },
+  {
+    "id": "lv0-phishing",
+    "level": 0,
+    "title": "Phishing & Chat/SMS Scams",
+    "summary": "Spot the bait: fake links, APK files, and messages designed to make you panic.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Phishing means fishing",
+        "body": "Phishing is a trick to get people to hand over data (passwords, OTPs, card numbers) or install malicious apps. It can arrive by email, SMS, chat, or even a phone call.\n\nThe pattern is always similar:\n- Create panic: \"your account is blocked\", \"your package is held\"\n- Create desire: \"congratulations, you won a prize\"\n- Demand quick action: \"click within 24 hours\"",
+        "tip": "A fisherman doesn't chase the fish, he just sets tempting bait and waits for a bite. Panic and hurry make us more likely to bite."
+      },
+      {
+        "title": "Beware of .APK files in chats",
+        "body": "A popular scam: files like \"Wedding Invitation.apk\", \"Package Photo.apk\", or \"Traffic Ticket.apk\".\n\nAn .APK file is an app, not a photo or document. Once installed, it can:\n- Read all your SMS, including OTPs\n- Take over your digital banking\n- Spread itself to your contacts\n\nReal invitations come as images or PDFs. Never install an APK sent over chat, even from a contact you know (their account may have been hijacked).",
+        "tip": "It's like receiving a gift box with a person hiding inside. Once you open the door and let them in, they can rummage through your whole house."
+      },
+      {
+        "title": "Check the link before you tap",
+        "body": "Fake sites often use addresses that look almost identical to the real ones:\n- bca.co.id (real) vs bca-co.id or bcaa.co.id (fake)\n- tokopedia.com vs tokopedia.com.promo-hadiah.xyz\n\nLook at the domain name right before the first slash. In the second example, the real domain is promo-hadiah.xyz, not tokopedia.\n\nIf in doubt, don't tap. Open the official app directly or type the address yourself.",
+        "tip": "Scammers put up a shop sign that looks nearly the same, like \"Indomaret\" becoming \"Indomarett\". If you're not careful, you're already shopping at the fake store."
+      },
+      {
+        "title": "If it already happened",
+        "body": "Don't be embarrassed, act right away:\n- Cut your phone's internet if you installed a strange APK, then uninstall it\n- Change important passwords from another device\n- Contact your bank through the official number on your card or in the app\n- Warn your contacts if your chat account was hijacked\n- Report it through official channels, such as patrolisiber.id\n\nThe faster you act, the smaller the loss.",
+        "tip": "Just like losing your house key: the sooner you change the lock, the less chance a thief gets in."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "You receive a chat with a file named \"Wedding Invitation.apk\". What should you do?",
+        "options": [
+          "Open it, it might be a real invitation",
+          "Don't open or install it, delete it, and check with the sender another way",
+          "Forward it to a group to warn others",
+          "Install it on another phone"
+        ],
+        "answer": 1,
+        "explanation": "Real invitations aren't APK files. An APK is an app that can steal your SMS and OTPs."
+      },
+      {
+        "prompt": "Which address really belongs to Tokopedia?",
+        "options": [
+          "tokopedia.com.promo-hadiah.xyz",
+          "tokopedia-promo.com",
+          "www.tokopedia.com/promo",
+          "tokoped1a.com"
+        ],
+        "answer": 2,
+        "explanation": "Look at the domain right before the first slash. Only the third option's domain is tokopedia.com."
+      },
+      {
+        "prompt": "A typical sign of a phishing message is...",
+        "options": [
+          "Casual language",
+          "It creates panic and demands quick action",
+          "It's sent during office hours",
+          "It has the company's logo"
+        ],
+        "answer": 1,
+        "explanation": "Scammers create panic so you don't have time to think. Logos are very easy to fake."
+      },
+      {
+        "prompt": "A close friend suddenly asks to borrow money over chat, in a hurry. You should...",
+        "options": [
+          "Transfer right away, they're a friend",
+          "Call them directly to confirm",
+          "Ask for a photo of their ID",
+          "Transfer half first"
+        ],
+        "answer": 1,
+        "explanation": "Chat accounts can be hijacked. Confirm by phone or in person before sending money."
+      },
+      {
+        "prompt": "You already installed a suspicious APK. What should you do first?",
+        "options": [
+          "Ignore it",
+          "Turn off the internet, uninstall the app, then change passwords from another device",
+          "Restart your phone many times",
+          "Install an antivirus from an ad link"
+        ],
+        "answer": 1,
+        "explanation": "Cutting the internet stops data from being sent. Change passwords from another device because your phone may still be compromised."
+      }
+    ]
+  },
+  {
+    "id": "lv0-update",
+    "level": 0,
+    "title": "Updates & App Permissions",
+    "summary": "Why updates matter and how to filter apps that ask for too much.",
+    "minutes": 4,
+    "pages": [
+      {
+        "title": "Updates patch the leaks",
+        "body": "Every app and operating system has weaknesses. Once a weakness is found, the maker releases an update to patch it.\n\nThe catch: after the update is out, the weakness becomes public. Attackers immediately target phones that haven't updated.\n\nSafe habits:\n- Turn on automatic updates in the Play Store\n- Install system updates (Android/iOS) as soon as possible\n- Phones that no longer get security updates shouldn't be used for mobile banking",
+        "tip": "An update is like a repairman fixing a leaky roof. The longer you put it off, the longer your house gets rained on."
+      },
+      {
+        "title": "Install from official sources",
+        "body": "The Play Store and App Store aren't perfect, but apps are checked before they go live.\n\nApps from links, Telegram groups, or \"free premium/modded APK\" sites are often packed with malware. You pay for \"free\" with your data.\n\nOn Android, keep \"Install unknown apps\" turned off and enable Play Protect.",
+        "tip": "Buying food at a restaurant inspected by the health department vs from a stranger on the street claiming to be a great chef. Both might taste good, but the risks are very different."
+      },
+      {
+        "title": "Permissions that make sense",
+        "body": "Every app asks for permissions: camera, location, contacts, SMS, and more. Ask yourself: does this permission fit what the app does?\n\nReasonable examples:\n- A camera app asking for camera access\n- A map app asking for location\n\nSuspicious examples:\n- A flashlight app asking for contacts and SMS\n- A game asking for Accessibility permission\n\nAccessibility and SMS access are the most dangerous, because they can be used to read your screen and steal OTPs. Check and revoke permissions in Settings > Apps > Permissions.",
+        "tip": "A plumber asking to enter your bathroom is reasonable. A plumber asking for your wardrobe key and bank book? Show them the door."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Why are phones that update late more at risk?",
+        "options": [
+          "The battery drains faster",
+          "Publicly announced weaknesses can be exploited right away",
+          "Apps get slower",
+          "There's no difference"
+        ],
+        "answer": 1,
+        "explanation": "After an update is released, the weakness becomes public. Phones that haven't updated become easy targets."
+      },
+      {
+        "prompt": "A flashlight app asks for permission to read SMS. You should...",
+        "options": [
+          "Allow it so the light is brighter",
+          "Deny it and consider uninstalling the app",
+          "Allow it just once",
+          "Restart your phone"
+        ],
+        "answer": 1,
+        "explanation": "A flashlight doesn't need SMS. A permission that doesn't match the app's purpose is a red flag."
+      },
+      {
+        "prompt": "Which permission is most dangerous to give an unknown app?",
+        "options": [
+          "Vibration",
+          "Accessibility",
+          "Flashlight",
+          "Wallpaper"
+        ],
+        "answer": 1,
+        "explanation": "Accessibility permission can read and control your screen, including copying OTPs."
+      },
+      {
+        "prompt": "What's the safest source for installing apps?",
+        "options": [
+          "Links from Telegram groups",
+          "Free premium/modded APK sites",
+          "The official Play Store / App Store",
+          "Files sent by friends over chat"
+        ],
+        "answer": 2,
+        "explanation": "Official stores check apps before they go live. Other sources often hide malware."
+      },
+      {
+        "prompt": "The \"Install unknown apps\" setting should be...",
+        "options": [
+          "Always on",
+          "Left off",
+          "On only at night",
+          "It doesn't matter"
+        ],
+        "answer": 1,
+        "explanation": "With this setting off, APKs from outside the official store can't be installed directly."
+      }
+    ]
+  }
+]

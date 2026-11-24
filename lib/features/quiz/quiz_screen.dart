@@ -6,6 +6,7 @@ import '../../core/models.dart';
 import '../../widgets/common.dart';
 import '../learn/module_screen.dart';
 import 'quiz_logic.dart';
+import '../../l10n/strings.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key, required this.module});
@@ -71,13 +72,13 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     if (_qs.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Kuis')),
-        body: const Padding(
+        appBar: AppBar(title: Text(tr('quiz'))),
+        body: Padding(
           padding: EdgeInsets.all(20),
           child: StateMessage(
             glyph: '[ ]',
-            title: 'Kuis belum tersedia',
-            body: 'Modul ini belum punya soal.',
+            title: tr('quiz_empty_title'),
+            body: tr('quiz_empty_body'),
           ),
         ),
       );
@@ -89,7 +90,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kuis'),
+        title: Text(tr('quiz')),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
@@ -137,7 +138,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(right ? 'Benar!' : 'Belum tepat',
+                          Text(right ? tr('correct') : tr('not_quite'),
                               style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 16,
@@ -158,12 +159,12 @@ class _QuizScreenState extends State<QuizScreen> {
         if (!_revealed)
           ChunkyButton(
             onPressed: _selected == null ? null : _check,
-            child: const Text('Cek Jawaban'),
+            child: Text(tr('check_answer')),
           )
         else
           ChunkyButton(
             onPressed: _saving ? null : _next,
-            child: Text(last ? 'Lihat Hasil' : 'Soal Berikutnya'),
+            child: Text(last ? tr('see_result') : tr('next_question')),
           ),
       ]),
     );
@@ -193,7 +194,7 @@ class QuizResultScreen extends StatelessWidget {
     final streak = AppScope.of(context).streak;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Hasil Kuis')),
+      appBar: AppBar(title: Text(tr('quiz_result'))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
         children: [
@@ -203,17 +204,17 @@ class QuizResultScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MonoTag(passed ? 'LULUS' : 'BELUM LULUS', color: color, filled: true),
+                MonoTag(passed ? tr('passed') : tr('not_passed'), color: color, filled: true),
                 const SizedBox(height: 16),
                 Text('$percent%',
                     style: mono(size: 64, color: color, weight: FontWeight.w800, spacing: -1)),
-                Text('$correct dari $total jawaban benar',
-                    style: const TextStyle(color: C.muted)),
+                Text(tr('right_of', {'c': correct, 't': total}),
+                    style: TextStyle(color: C.muted)),
                 const SizedBox(height: 16),
                 Text(
                   passed
-                      ? 'Modul "${module.title}" kelar. Modul berikutnya udah kebuka.'
-                      : 'Butuh minimal $passThreshold% buat lulus. Baca ulang materinya bentar, terus coba lagi.',
+                      ? tr('pass_msg', {'m': module.title})
+                      : tr('fail_msg', {'p': passThreshold}),
                   style: const TextStyle(height: 1.5, fontSize: 15),
                 ),
               ],
@@ -223,14 +224,14 @@ class QuizResultScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: _Reward(icon: Icons.bolt_rounded, value: '+$xpGained', label: 'XP', color: C.accent),
+                child: _Reward(icon: Icons.bolt_rounded, value: '+$xpGained', label: tr('xp'), color: C.accent),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _Reward(
                   icon: Icons.local_fire_department_rounded,
                   value: '$streak',
-                  label: 'hari beruntun',
+                  label: tr('streak_days'),
                   color: C.orange,
                 ),
               ),
@@ -242,20 +243,20 @@ class QuizResultScreen extends StatelessWidget {
         if (passed)
           ChunkyButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Kembali ke Daftar Modul'),
+            child: Text(tr('back_to_modules')),
           )
         else ...[
           ChunkyButton(
             onPressed: () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (_) => QuizScreen(module: module)),
             ),
-            child: const Text('Coba Kuis Lagi'),
+            child: Text(tr('retry_quiz')),
           ),
           ChunkyButton.outline(
             onPressed: () => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (_) => ModuleScreen(module: module)),
             ),
-            child: const Text('Baca Ulang Materi'),
+            child: Text(tr('reread')),
           ),
         ],
       ]),

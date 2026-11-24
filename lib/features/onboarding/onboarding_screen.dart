@@ -6,6 +6,7 @@ import '../../widgets/common.dart';
 import '../../widgets/scene3d.dart';
 import '../home/home_screen.dart';
 import 'placement_screen.dart';
+import '../../l10n/strings.dart';
 
 class _Slide {
   const _Slide(this.command, this.result, this.title, this.body);
@@ -15,24 +16,24 @@ class _Slide {
   final String body;
 }
 
-const _slides = [
+List<_Slide> get _slides => [
   _Slide(
     r'$ cipher --masuk',
-    'membuka brankas data ... ok',
-    'Masuk ke kota digital.',
-    'Internet itu kota besar: ada taman, pasar, juga copet. Tiap level adalah satu distrik yang kamu jelajahi tanpa kecopetan.',
+    tr('ob1_res'),
+    tr('ob1_title'),
+    tr('ob1_body'),
   ),
   _Slide(
     r'$ cipher --level',
-    'LV.00 → LV.04 terdeteksi',
-    'Naik level pelan-pelan.',
-    'Mulai dari aman digital sehari-hari, lanjut ke jaringan, web, sampai kriptografi. Tiap modul cuma beberapa menit dan ada kuisnya.',
+    tr('ob2_res'),
+    tr('ob2_title'),
+    tr('ob2_body'),
   ),
   _Slide(
     r'$ cipher --toolbox',
-    'mode offline ... aktif',
-    'Praktek, bukan hafalan.',
-    'Toolbox kebuka seiring naik level. Semuanya jalan offline di HP kamu sendiri, gak ada data yang dikirim ke mana-mana.',
+    tr('ob3_res'),
+    tr('ob3_title'),
+    tr('ob3_body'),
   ),
 ];
 
@@ -158,12 +159,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       bottomNavigationBar: BottomActions(children: [
         ChunkyButton(
           onPressed: _next,
-          child: Text(_isLast ? 'Mulai Tes Penempatan' : 'Lanjut'),
+          child: Text(_isLast ? tr('ob_start_test') : tr('next')),
         ),
         if (_isLast)
           ChunkyButton.outline(
             onPressed: _skipToZero,
-            child: const Text('Lewati, mulai dari LV.00'),
+            child: Text(tr('ob_skip')),
           ),
       ]),
     );
@@ -186,7 +187,7 @@ class _SlideText extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             slide.body,
-            style: const TextStyle(fontSize: 15.5, color: C.muted, height: 1.55),
+            style: TextStyle(fontSize: 15.5, color: C.muted, height: 1.55),
           ),
         ],
       ),

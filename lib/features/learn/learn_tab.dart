@@ -5,8 +5,10 @@ import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
 import '../../widgets/scene3d.dart';
+import '../settings/settings_screen.dart';
 import 'level_screen.dart';
 import 'module_screen.dart';
+import '../../l10n/strings.dart';
 
 class LearnTab extends StatelessWidget {
   const LearnTab({super.key});
@@ -26,18 +28,40 @@ class LearnTab extends StatelessWidget {
                 style: mono(size: 18, color: C.text, weight: FontWeight.w800, spacing: 4)),
             Text('_', style: mono(size: 18, color: C.accent, weight: FontWeight.w800)),
             const Spacer(),
-            _Stat(icon: Icons.bolt_rounded, value: '${state.xp}', label: 'XP'),
+            _Stat(icon: Icons.bolt_rounded, value: '${state.xp}', label: tr('xp')),
             const SizedBox(width: 8),
             _Stat(
               icon: Icons.local_fire_department_rounded,
               value: '${state.streak}',
-              label: 'hari',
+              label: tr('days'),
               color: state.streak > 0 ? C.orange : C.muted,
+            ),
+            const SizedBox(width: 8),
+            Tooltip(
+              message: tr('settings'),
+              child: Material(
+                color: C.surface,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(color: C.lineStrong),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                  ),
+                  child: SizedBox(
+                    width: 40,
+                    height: 34,
+                    child: Icon(Icons.tune_rounded, size: 19, color: C.accent, semanticLabel: tr('settings')),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
         const SizedBox(height: 14),
-        const MonoTag('// peta kota digital'),
+        MonoTag(tr('map_title')),
         SizedBox(
           height: 300,
           child: IsoMap(
@@ -65,11 +89,11 @@ class LearnTab extends StatelessWidget {
                   children: [
                     Expanded(
                       child: MonoTag(
-                        '// distrik ${nextLevel?.code ?? ''} · ${nextLevel?.title ?? ''}',
+                        tr('district', {'code': nextLevel?.code ?? '', 'title': nextLevel?.title ?? ''}),
                         color: C.accent,
                       ),
                     ),
-                    MonoTag('${next.minutes} mnt'),
+                    MonoTag(tr('min', {'n': next.minutes})),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -77,26 +101,26 @@ class LearnTab extends StatelessWidget {
                     style: display(size: 21)),
                 const SizedBox(height: 6),
                 Text(next.summary,
-                    style: const TextStyle(color: C.muted, height: 1.45)),
+                    style: TextStyle(color: C.muted, height: 1.45)),
                 const SizedBox(height: 16),
                 ChunkyButton(
                   onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => ModuleScreen(module: next)),
                   ),
-                  child: const Text('Masuk Modul'),
+                  child: Text(tr('enter_module')),
                 ),
               ],
             ),
           )
         else
-          const StateMessage(
+          StateMessage(
             glyph: '[ok]',
             color: C.ok,
-            title: 'Semua modul yang ada udah kelar',
-            body: 'Mantap! Materi level berikutnya lagi disiapin. Sambil nunggu, coba Toolbox atau baca Kamus.',
+            title: tr('all_done_title'),
+            body: tr('all_done_body'),
           ),
         const SizedBox(height: 28),
-        const MonoTag('// semua level'),
+        MonoTag(tr('all_levels')),
         const SizedBox(height: 12),
         for (final level in state.content.levels)
           Padding(
@@ -119,10 +143,10 @@ IsoTileState _tileState(AppState state, Level level) {
 void openLevel(BuildContext context, Level level) {
   final state = AppScope.read(context);
   if (!level.available) {
-    showInfo(context, 'Distrik ${level.code} lagi dibangun. Segera hadir!');
+    showInfo(context, tr('lvl_soon', {'code': level.code}));
   } else if (!state.isLevelUnlocked(level)) {
     final prev = state.content.levelAt(level.index - 1);
-    showInfo(context, 'Selesaikan ${prev?.code ?? 'level sebelumnya'} dulu buat buka ${level.code}.');
+    showInfo(context, tr('lvl_locked', {'prev': prev?.code ?? tr('lvl_prev'), 'code': level.code}));
   } else {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => LevelScreen(level: level)),
@@ -135,16 +159,17 @@ class _Stat extends StatelessWidget {
     required this.icon,
     required this.value,
     required this.label,
-    this.color = C.accent,
+    this.color,
   });
 
   final IconData icon;
   final String value;
   final String label;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
+    final color = this.color ?? C.accent;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
@@ -208,7 +233,7 @@ class _LevelCard extends StatelessWidget {
                     )),
                 const SizedBox(height: 3),
                 Text(level.tagline,
-                    style: const TextStyle(color: C.muted, fontSize: 13, height: 1.35)),
+                    style: TextStyle(color: C.muted, fontSize: 13, height: 1.35)),
                 if (level.available) ...[
                   const SizedBox(height: 10),
                   ProgressLine(
@@ -216,7 +241,7 @@ class _LevelCard extends StatelessWidget {
                     color: done == total ? C.ok : C.accent,
                   ),
                   const SizedBox(height: 6),
-                  Text('$done/$total modul', style: mono(size: 11)),
+                  Text(tr('modules_progress', {'done': done, 'total': total}), style: mono(size: 11)),
                 ],
               ],
             ),
@@ -225,9 +250,9 @@ class _LevelCard extends StatelessWidget {
           if (!level.available)
             const MonoTag('SOON', filled: true)
           else if (!unlocked)
-            const Icon(Icons.lock_outline_rounded, color: C.muted)
+            Icon(Icons.lock_outline_rounded, color: C.muted)
           else
-            const Icon(Icons.chevron_right_rounded, color: C.accent),
+            Icon(Icons.chevron_right_rounded, color: C.accent),
         ],
       ),
     );

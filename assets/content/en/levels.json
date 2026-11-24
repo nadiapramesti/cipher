@@ -1,0 +1,32 @@
+[
+  {
+    "index": 0,
+    "title": "Digital Safety",
+    "tagline": "Passwords, 2FA, phishing, and chat/SMS scams. Essential for everyone.",
+    "moduleFile": "lv0.json"
+  },
+  {
+    "index": 1,
+    "title": "Foundations",
+    "tagline": "How the internet works: IP, DNS, ports, and Linux basics.",
+    "moduleFile": null
+  },
+  {
+    "index": 2,
+    "title": "Web",
+    "tagline": "HTTP, cookies, XSS, SQL injection, and the OWASP Top 10.",
+    "moduleFile": null
+  },
+  {
+    "index": 3,
+    "title": "Cryptography",
+    "tagline": "Encoding vs hashing vs encryption, all the way to classic ciphers.",
+    "moduleFile": null
+  },
+  {
+    "index": 4,
+    "title": "Practice",
+    "tagline": "Offline mini CTF: find the flags hidden inside the app.",
+    "moduleFile": null
+  }
+]

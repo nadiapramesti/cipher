@@ -150,14 +150,15 @@ class Panel extends StatelessWidget {
 
 /// Label kecil gaya terminal, contoh: `// modul 01`
 class MonoTag extends StatelessWidget {
-  const MonoTag(this.text, {super.key, this.color = C.muted, this.filled = false});
+  const MonoTag(this.text, {super.key, this.color, this.filled = false});
 
   final String text;
-  final Color color;
+  final Color? color;
   final bool filled;
 
   @override
   Widget build(BuildContext context) {
+    final color = this.color ?? C.muted;
     final label = Text(text, style: mono(size: 11, color: color));
     if (!filled) return label;
     return Container(
@@ -173,13 +174,14 @@ class MonoTag extends StatelessWidget {
 }
 
 class ProgressLine extends StatelessWidget {
-  const ProgressLine({super.key, required this.value, this.color = C.accent});
+  const ProgressLine({super.key, required this.value, this.color});
 
   final double value;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
+    final color = this.color ?? C.accent;
     return ClipRRect(
       borderRadius: BorderRadius.circular(4),
       child: LinearProgressIndicator(
@@ -201,7 +203,7 @@ class BottomActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: C.bg,
         border: Border(top: BorderSide(color: C.line)),
       ),
@@ -348,16 +350,17 @@ class StateMessage extends StatelessWidget {
     required this.glyph,
     required this.title,
     required this.body,
-    this.color = C.muted,
+    this.color,
   });
 
   final String glyph;
   final String title;
   final String body;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
+    final color = this.color ?? C.muted;
     return Panel(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -368,7 +371,7 @@ class StateMessage extends StatelessWidget {
           Text(title,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
           const SizedBox(height: 6),
-          Text(body, style: const TextStyle(color: C.muted, height: 1.45)),
+          Text(body, style: TextStyle(color: C.muted, height: 1.45)),
         ],
       ),
     );

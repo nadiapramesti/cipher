@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import '../../widgets/common.dart';
 import 'password_strength.dart';
+import '../../l10n/strings.dart';
 
 class PasswordCheckerScreen extends StatefulWidget {
   const PasswordCheckerScreen({super.key});
@@ -45,17 +46,17 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
     final empty = r.level == StrengthLevel.kosong;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Cek Kekuatan Password')),
+      appBar: AppBar(title: Text(tr('pw_title'))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
         children: [
           Row(
             children: [
-              const Icon(Icons.shield_outlined, size: 16, color: C.ok),
+              Icon(Icons.shield_outlined, size: 16, color: C.ok),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  'Dicek langsung di HP kamu. Gak disimpan, gak dikirim ke mana-mana.',
+                  tr('pw_private'),
                   style: mono(size: 11, color: C.ok, spacing: 0.2),
                 ),
               ),
@@ -75,10 +76,10 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
               fontVariations: [FontVariation('wght', 500)],
             ),
             decoration: InputDecoration(
-              labelText: 'Password yang mau dicek',
-              hintText: 'contoh: kucing-oren-makan-tahu-27',
+              labelText: tr('pw_label'),
+              hintText: tr('pw_hint'),
               suffixIcon: IconButton(
-                tooltip: _hidden ? 'Tampilkan' : 'Sembunyikan',
+                tooltip: _hidden ? tr('show') : tr('hide'),
                 onPressed: () => setState(() => _hidden = !_hidden),
                 icon: Icon(_hidden ? Icons.visibility_outlined : Icons.visibility_off_outlined),
               ),
@@ -86,10 +87,10 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
           ),
           const SizedBox(height: 18),
           if (empty)
-            const StateMessage(
+            StateMessage(
               glyph: '> _',
-              title: 'Ketik password buat dicek',
-              body: 'Pakai contoh di atas atau password karanganmu sendiri. Saran: jangan ketik password asli yang lagi kamu pakai, cukup yang mirip polanya.',
+              title: tr('pw_empty_title'),
+              body: tr('pw_empty_body'),
             )
           else ...[
             Panel(
@@ -127,13 +128,13 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
                     ],
                   ),
                   const SizedBox(height: 14),
-                  const Text('Perkiraan waktu dibobol komputer kencang',
+                  Text(tr('pw_crack'),
                       style: TextStyle(color: C.muted, fontSize: 13)),
                   const SizedBox(height: 2),
                   Text(r.crackTime,
                       style: mono(size: 20, color: C.text, weight: FontWeight.w800, spacing: 0)),
                   const SizedBox(height: 2),
-                  Text('asumsi 10 miliar tebakan per detik', style: mono(size: 10)),
+                  Text(tr('pw_assume'), style: mono(size: 10)),
                 ],
               ),
             ),
@@ -142,7 +143,7 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const MonoTag('// checklist'),
+                  MonoTag(tr('checklist')),
                   const SizedBox(height: 10),
                   for (final c in r.checks)
                     Padding(
@@ -173,7 +174,7 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const MonoTag('SARAN', color: C.accent),
+                    MonoTag(tr('tips'), color: C.accent),
                     const SizedBox(height: 8),
                     for (final t in r.tips)
                       Padding(
@@ -190,7 +191,7 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
       bottomNavigationBar: empty
           ? null
           : BottomActions(children: [
-              ChunkyButton.outline(onPressed: _clear, child: const Text('Kosongkan')),
+              ChunkyButton.outline(onPressed: _clear, child: Text(tr('clear'))),
             ]),
     );
   }
