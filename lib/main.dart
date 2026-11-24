@@ -6,6 +6,7 @@ import 'app/app_state.dart';
 import 'app/theme.dart';
 import 'core/content_repository.dart';
 import 'features/home/home_screen.dart';
+import 'features/pro/pro_service.dart';
 import 'features/onboarding/onboarding_screen.dart';
 import 'widgets/common.dart';
 import 'l10n/strings.dart';
@@ -80,6 +81,8 @@ class _CipherAppState extends State<CipherApp> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     widget.state.addListener(_onStateChanged);
     _applyPalette();
+    // Play Billing: cek status Pro & dengerin pembelian
+    ProService.instance.init(widget.state);
   }
 
   @override

@@ -7,6 +7,7 @@ import '../../core/models.dart';
 import '../../widgets/common.dart';
 import '../../widgets/scene3d.dart';
 import '../ctf/flags.dart';
+import '../pro/paywall_screen.dart';
 import '../review/review_screen.dart';
 import '../search/search_screen.dart';
 import '../settings/settings_screen.dart';
@@ -237,6 +238,12 @@ IsoTileState _tileState(AppState state, Level level) {
 
 void openLevel(BuildContext context, Level level) {
   final state = AppScope.read(context);
+  if (AppState.isProLevel(level.index) && !state.isPro) {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (_) => const PaywallScreen(reasonKey: 'pw_reason_level'),
+    ));
+    return;
+  }
   if (!level.available) {
     showInfo(context, tr('lvl_soon', {'code': level.code}));
   } else if (!state.isLevelUnlocked(level)) {
@@ -342,7 +349,9 @@ class _LevelCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          if (!level.available)
+          if (AppState.isProLevel(level.index) && !state.isPro)
+            MonoTag('PRO', color: C.accent, filled: true)
+          else if (!level.available)
             const MonoTag('SOON', filled: true)
           else if (!unlocked)
             Icon(Icons.lock_outline_rounded, color: C.muted)

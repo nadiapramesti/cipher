@@ -4,6 +4,7 @@ import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../widgets/common.dart';
 import '../ctf/ctf_screen.dart';
+import '../pro/paywall_screen.dart';
 import '../sim/scam_sort_screen.dart';
 import '../sim/terminal_screen.dart';
 import 'network_info_screen.dart';
@@ -128,7 +129,11 @@ class _ToolCard extends StatelessWidget {
       color: ready ? C.surface : C.bg,
       borderColor: ready ? C.accent.withValues(alpha: 0.35) : C.line,
       onTap: () {
-        if (!unlocked) {
+        if (AppState.isProLevel(tool.level) && !AppScope.read(context).isPro) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => const PaywallScreen(reasonKey: 'pw_reason_tool'),
+          ));
+        } else if (!unlocked) {
           showInfo(context, tr('tb_locked', {'code': code}));
         } else if (tool.builder == null) {
           showInfo(context, tr('tb_soon', {'t': tool.title}));

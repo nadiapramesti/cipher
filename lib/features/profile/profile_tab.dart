@@ -5,6 +5,8 @@ import '../../app/theme.dart';
 import '../../core/badges.dart';
 import '../../l10n/strings.dart';
 import '../../widgets/common.dart';
+import '../pro/certificate_screen.dart';
+import '../pro/paywall_screen.dart';
 import '../review/review_screen.dart';
 
 class ProfileTab extends StatelessWidget {
@@ -62,6 +64,32 @@ class ProfileTab extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 10),
+        Panel(
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const PaywallScreen())),
+          color: s.isPro ? C.okTint : C.accentTint,
+          borderColor: s.isPro ? C.okDeep : C.accent,
+          child: Row(
+            children: [
+              Icon(s.isPro ? Icons.verified_rounded : Icons.workspace_premium_rounded,
+                  color: s.isPro ? C.ok : C.accent),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(s.isPro ? tr('pf_pro_on') : tr('pf_pro_off'),
+                        style: TextStyle(fontWeight: FontWeight.w800, color: C.text)),
+                    const SizedBox(height: 2),
+                    Text(s.isPro ? tr('pf_pro_on_d') : tr('pf_pro_off_d'),
+                        style: TextStyle(fontSize: 12.5, color: C.muted, height: 1.35)),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right_rounded, color: C.accent),
+            ],
+          ),
+        ),
         const SizedBox(height: 26),
         Row(
           children: [
@@ -81,6 +109,50 @@ class ProfileTab extends StatelessWidget {
             for (final b in badges) _BadgeTile(def: b, earned: b.earned(s)),
           ],
         ),
+        const SizedBox(height: 26),
+        Text(tr('pf_certs'), style: display(size: 20)),
+        const SizedBox(height: 4),
+        Text(tr('pf_certs_d'), style: TextStyle(fontSize: 13, color: C.muted, height: 1.4)),
+        const SizedBox(height: 12),
+        for (final level in s.content.levels.where((l) => l.available))
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Builder(builder: (context) {
+              final done = level.moduleIds.every(s.isModuleDone);
+              return Panel(
+                onTap: () {
+                  if (!done) {
+                    showInfo(context, tr('pf_cert_locked', {'l': level.code}));
+                  } else if (!s.isPro) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const PaywallScreen(reasonKey: 'pw_reason_cert'),
+                    ));
+                  } else {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => CertificateScreen(level: level),
+                    ));
+                  }
+                },
+                color: done ? C.surface : C.bg,
+                child: Row(
+                  children: [
+                    Icon(Icons.workspace_premium_outlined, color: done ? C.accent : C.muted),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text('${level.code} · ${level.title}',
+                          style: TextStyle(fontWeight: FontWeight.w700, color: done ? C.text : C.muted)),
+                    ),
+                    if (!done)
+                      Icon(Icons.lock_outline_rounded, color: C.muted, size: 20)
+                    else if (!s.isPro)
+                      MonoTag('PRO', color: C.accent, filled: true)
+                    else
+                      Icon(Icons.chevron_right_rounded, color: C.accent),
+                  ],
+                ),
+              );
+            }),
+          ),
       ],
     );
   }
