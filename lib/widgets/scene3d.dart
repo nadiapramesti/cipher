@@ -331,43 +331,63 @@ class IsoTile {
 
 /// Hitung posisi platform di layar. Dipakai painter & tombol chip.
 class IsoLayout {
+  /// Ukuran peta dihitung supaya muat di LEBAR dan TINGGI kotaknya,
+  /// jadi gak pernah nutupin header atau kartu di bawahnya.
   IsoLayout(this.size, this.count) {
     final n = math.max(count, 1);
-    // ukuran platform menyesuaikan lebar layar
-    final stepPlane = size.width / (n * 0.72 + 0.9);
-    tile = stepPlane * 0.72;
-    step = stepPlane;
-    rise = tile * 0.32;
-    thick = tile * 0.16;
-
-    final raw = <List<Offset>>[];
-    for (var i = 0; i < n; i++) {
-      raw.add(_top(i, Offset.zero));
-    }
-    final all = raw.expand((e) => e).toList();
-    final minX = all.map((p) => p.dx).reduce(math.min);
-    final maxX = all.map((p) => p.dx).reduce(math.max);
-    final minY = all.map((p) => p.dy).reduce(math.min);
-    final maxY = all.map((p) => p.dy).reduce(math.max) + thick * 0.9;
+    _scale(1);
+    var b = _bounds(n, Offset.zero);
+    final fit = math.min(
+      (size.width - 16 - chipSpace) / b.width,
+      (size.height - 24) / b.height,
+    );
+    _scale(math.min(fit, maxTile));
+    b = _bounds(n, Offset.zero);
+    final usedW = b.width + chipSpace;
     origin = Offset(
-      (size.width - (maxX - minX)) / 2 - minX,
-      (size.height - (maxY - minY)) / 2 - minY + 18,
+      (size.width - usedW) / 2 + chipSpace - b.left,
+      12 + (size.height - 24 - b.height) / 2 - b.top,
     );
   }
 
+  /// Lebar chip label yang ditaruh di kiri tiap platform (+ jarak).
+  static const double chipW = 100;
+  static const double chipSpace = chipW + 8;
+
+  /// Batas ukuran platform biar di tablet gak raksasa.
+  static const double maxTile = 84;
+
   final Size size;
   final int count;
-  late final double tile, step, rise, thick;
-  late final Offset origin;
+  double tile = 1, step = 1, rise = 0, thick = 0;
+  Offset origin = Offset.zero;
 
   static const _k = 0.70710678;
+
+  void _scale(double t) {
+    tile = t;
+    step = t / 0.72;
+    rise = t * 0.32;
+    thick = t * 0.16;
+  }
+
+  Rect _bounds(int n, Offset o) {
+    final pts = <Offset>[
+      for (var i = 0; i < n; i++) ...[..._quad(i, 0, o), ..._quad(i, -thick, o)],
+    ];
+    var r = Rect.fromLTRB(pts.first.dx, pts.first.dy, pts.first.dx, pts.first.dy);
+    for (final p in pts) {
+      r = r.expandToInclude(Rect.fromLTWH(p.dx, p.dy, 0, 0));
+    }
+    return r;
+  }
 
   Offset _iso(double px, double py, double pz, Offset o) =>
       o + Offset((px + py) * _k, (py - px) * _k * 0.5 - pz * 0.866);
 
-  List<Offset> _top(int i, Offset o) {
+  List<Offset> _quad(int i, double dz, Offset o) {
     final x0 = i * step;
-    final z = i * rise;
+    final z = i * rise + dz;
     return [
       _iso(x0, 0, z, o),
       _iso(x0 + tile, 0, z, o),
@@ -376,23 +396,17 @@ class IsoLayout {
     ];
   }
 
-  List<Offset> top(int i) => _top(i, origin);
+  List<Offset> top(int i) => _quad(i, 0, origin);
 
-  List<Offset> bottom(int i) {
-    final x0 = i * step;
-    final z = i * rise - thick;
-    return [
-      _iso(x0, 0, z, origin),
-      _iso(x0 + tile, 0, z, origin),
-      _iso(x0 + tile, tile, z, origin),
-      _iso(x0, tile, z, origin),
-    ];
-  }
+  List<Offset> bottom(int i) => _quad(i, -thick, origin);
 
   Offset center(int i) {
     final q = top(i);
     return (q[0] + q[2]) / 2;
   }
+
+  /// Sudut kiri diamond platform ke-i.
+  Offset leftCorner(int i) => top(i)[0];
 }
 
 class IsoMap extends StatefulWidget {
@@ -423,8 +437,8 @@ class _IsoMapState extends State<IsoMap> with SingleTickerProviderStateMixin {
       builder: (context, box) {
         final size = Size(box.maxWidth, box.maxHeight);
         final layout = IsoLayout(size, widget.tiles.length);
-        return Stack(
-          clipBehavior: Clip.none,
+        return ClipRect(
+          child: Stack(
           children: [
             Positioned.fill(
               child: RepaintBoundary(
@@ -439,6 +453,7 @@ class _IsoMapState extends State<IsoMap> with SingleTickerProviderStateMixin {
             for (var i = 0; i < widget.tiles.length; i++)
               _chip(layout, i),
           ],
+          ),
         );
       },
     );
@@ -452,12 +467,14 @@ class _IsoMapState extends State<IsoMap> with SingleTickerProviderStateMixin {
     final bg = active ? C.accent : (done ? C.okTint : C.surface);
     final fg = active ? C.onAccent : (done ? C.ok : C.muted);
     final border = active ? C.accentSoft : (done ? C.okDeep : C.lineStrong);
+    final corner = layout.leftCorner(i);
     return Positioned(
-      left: c.dx - 60,
-      top: c.dy - layout.tile * 0.62 - 26,
-      width: 120,
+      left: corner.dx - IsoLayout.chipSpace,
+      top: c.dy - 22,
+      width: IsoLayout.chipW,
       height: 44,
-      child: Center(
+      child: Align(
+        alignment: Alignment.centerRight,
         child: Material(
           color: bg,
           shape: RoundedRectangleBorder(
@@ -468,10 +485,11 @@ class _IsoMapState extends State<IsoMap> with SingleTickerProviderStateMixin {
             borderRadius: BorderRadius.circular(9),
             onTap: () => widget.onTap(i),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Text(
                 tile.label,
-                style: mono(size: 11.5, color: fg, weight: FontWeight.w800),
+                maxLines: 1,
+                style: mono(size: 10.5, color: fg, weight: FontWeight.w800, spacing: 0),
               ),
             ),
           ),
@@ -625,15 +643,16 @@ class _TiltDeckState extends State<TiltDeck> with SingleTickerProviderStateMixin
         child: widget.child,
         builder: (context, child) {
           final v = reduce ? 0.5 : Curves.easeInOut.transform(_c.value);
+          // miring tipis aja: kerasa ada kedalaman, tapi teks tetap lurus & gak kepotong
           final m = Matrix4.identity()
-            ..setEntry(3, 2, 0.0014)
-            ..rotateX(0.22 - v * 0.08)
-            ..rotateY(-0.14 + v * 0.28);
+            ..setEntry(3, 2, 0.0008)
+            ..rotateX(0.07 - v * 0.03)
+            ..rotateY(-0.025 + v * 0.05);
           return Transform(
             alignment: Alignment.center,
             transform: m,
             child: Padding(
-              padding: const EdgeInsets.only(top: 34),
+              padding: const EdgeInsets.fromLTRB(6, 34, 6, 0),
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [

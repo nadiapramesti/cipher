@@ -113,7 +113,7 @@ class _LessonView extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(22, 4, 22, 32),
       children: [
         TiltDeck(
-          height: 150,
+          height: 132,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
