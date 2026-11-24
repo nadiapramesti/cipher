@@ -28,6 +28,12 @@ Aplikasi Android buat belajar cyber security dari nol, buat umum dan berbasis le
 - Dua bahasa: **Indonesia** dan **English**. Bahasa awal ikut bahasa HP
 - Semua bisa diganti di **Pengaturan** (tombol di pojok kanan atas beranda)
 
+## Progres & backup
+
+- Progres ikut **Auto Backup Android** (Google), jadi balik sendiri pas ganti HP dengan akun Google yang sama
+- **Simpan Progres** di Pengaturan bikin kode `CIPHER1.…` buat dipindah manual ke HP lain lewat **Pulihkan Progres**
+- Tanpa akun dan tanpa server, sesuai prinsip offline Cipher
+
 ## Struktur
 
 ```

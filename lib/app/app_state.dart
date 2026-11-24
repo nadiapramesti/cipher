@@ -5,6 +5,7 @@ import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core/backup.dart';
 import '../core/content_repository.dart';
 import '../core/models.dart';
 import '../features/quiz/quiz_logic.dart';
@@ -85,6 +86,56 @@ class AppState extends ChangeNotifier {
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
       bestScores = decoded.map((k, v) => MapEntry(k, v as int));
     }
+  }
+
+  /// Kode backup progres (buat dipindah ke HP lain).
+  String exportBackup() => encodeBackup(BackupData(
+        onboardingDone: onboardingDone,
+        startLevel: startLevel,
+        xp: xp,
+        streak: _streak,
+        lastActive: lastActive,
+        bestScores: Map.of(bestScores),
+        accent: accent.name,
+        themeMode: themeMode.name,
+        lang: L.code,
+      ));
+
+  /// Pulihkan dari kode backup. Lempar [FormatException] kalau kodenya gak valid.
+  Future<void> importBackup(String code) async {
+    final d = decodeBackup(code);
+    onboardingDone = d.onboardingDone;
+    startLevel = d.startLevel;
+    xp = d.xp;
+    _streak = d.streak;
+    lastActive = d.lastActive;
+    bestScores = Map.of(d.bestScores);
+    await _prefs.setBool(_kOnboarding, onboardingDone);
+    await _prefs.setInt(_kStartLevel, startLevel);
+    await _prefs.setInt(_kXp, xp);
+    await _prefs.setInt(_kStreak, _streak);
+    if (lastActive != null) {
+      await _prefs.setString(_kLastActive, lastActive!.toIso8601String());
+    } else {
+      await _prefs.remove(_kLastActive);
+    }
+    await _prefs.setString(_kScores, jsonEncode(bestScores));
+    final a = ThemeAccent.values.asNameMap()[d.accent];
+    if (a != null) {
+      accent = a;
+      await _prefs.setString(_kAccent, a.name);
+    }
+    final m = AppThemeMode.values.asNameMap()[d.themeMode];
+    if (m != null) {
+      themeMode = m;
+      await _prefs.setString(_kMode, m.name);
+    }
+    final l = AppLang.values.asNameMap()[d.lang];
+    if (l != null && l != L.lang) {
+      await setLang(l); // ini sekalian notifyListeners
+      return;
+    }
+    notifyListeners();
   }
 
   int get streak =>

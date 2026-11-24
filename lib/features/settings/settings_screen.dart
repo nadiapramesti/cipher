@@ -4,6 +4,7 @@ import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../l10n/strings.dart';
 import '../../widgets/common.dart';
+import 'backup_screens.dart';
 
 /// Pengaturan tampilan & bahasa. Semua pilihan langsung kepakai dan tersimpan.
 class SettingsScreen extends StatelessWidget {
@@ -82,6 +83,34 @@ class SettingsScreen extends StatelessWidget {
                 ),
             ],
           ),
+          const SizedBox(height: 26),
+          _SectionTitle(tr('set_progress')),
+          _ActionRow(
+            icon: Icons.upload_rounded,
+            title: tr('bk_export_title'),
+            desc: tr('bk_export_desc'),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ExportBackupScreen()),
+            ),
+          ),
+          const SizedBox(height: 10),
+          _ActionRow(
+            icon: Icons.download_rounded,
+            title: tr('bk_import_title'),
+            desc: tr('bk_import_desc'),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const ImportBackupScreen()),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.cloud_done_outlined, size: 16, color: C.ok),
+              const SizedBox(width: 6),
+              Expanded(child: Text(tr('set_auto_backup'), style: TextStyle(fontSize: 12.5, height: 1.45, color: C.muted))),
+            ],
+          ),
           const SizedBox(height: 18),
           Row(
             children: [
@@ -98,6 +127,44 @@ class SettingsScreen extends StatelessWidget {
           child: Text(tr('done')),
         ),
       ]),
+    );
+  }
+}
+
+class _ActionRow extends StatelessWidget {
+  const _ActionRow({required this.icon, required this.title, required this.desc, required this.onTap});
+
+  final IconData icon;
+  final String title;
+  final String desc;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Panel(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(color: C.accentTint, borderRadius: BorderRadius.circular(12)),
+            child: Icon(icon, color: C.accent),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: TextStyle(fontWeight: FontWeight.w800, color: C.text)),
+                const SizedBox(height: 2),
+                Text(desc, style: TextStyle(fontSize: 12.5, color: C.muted, height: 1.35)),
+              ],
+            ),
+          ),
+          Icon(Icons.chevron_right_rounded, color: C.accent),
+        ],
+      ),
     );
   }
 }
