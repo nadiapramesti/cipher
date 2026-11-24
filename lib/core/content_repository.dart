@@ -34,7 +34,7 @@ class Content {
   static Future<dynamic> _json(String path) async =>
       jsonDecode(await rootBundle.loadString(path));
 
-  /// [lang] = 'id' atau 'en'. Materi tiap bahasa ada di assets/content/<lang>/.
+  /// [lang] = 'id' atau 'en'. Materi tiap bahasa ada di `assets/content/<lang>/`.
   static Future<Content> load([String lang = 'id']) async {
     final dir = 'assets/content/$lang';
     final levelsRaw = await _json('$dir/levels.json') as List;
