@@ -95,7 +95,14 @@
       {
         "title": "OSINT: intelijen sumber terbuka",
         "body": "OSINT (Open Source Intelligence) adalah info dari sumber publik:\n- Mesin pencari dan arsip web\n- Media sosial dan profil profesional\n- Record DNS dan data pendaftaran domain\n- Metadata foto (lokasi GPS, tipe kamera)\n- Data bocoran yang udah tersebar publik\n\nOSINT dipakai jurnalis, peneliti, tim keamanan, dan sayangnya juga penipu. Dari beberapa postingan, orang bisa tahu tempat kerja, rutinitas, bahkan alamat seseorang.",
-        "tip": "OSINT itu ngerangkai potongan koran bekas jadi cerita utuh. Tiap potongan publik, tapi gabungannya bisa sangat pribadi."
+        "tip": "OSINT itu ngerangkai potongan koran bekas jadi cerita utuh. Tiap potongan publik, tapi gabungannya bisa sangat pribadi.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "!",
+            "OSINT"
+          ]
+        }
       },
       {
         "title": "Batas etis dan lindungi dirimu",
@@ -176,12 +183,30 @@
       {
         "title": "Pola yang mencurigakan",
         "body": "Hal yang biasa dicari analis (blue team / SOC):\n- Banyak login gagal lalu satu berhasil: tebakan password yang akhirnya tembus\n- Login dari negara atau jam yang gak biasa\n- Request berisi pola aneh seperti ' OR 1=1 atau <script>\n- Lonjakan traffic besar dari banyak IP: kemungkinan DDoS\n- Akun biasa tiba-tiba mengakses data admin\n\nAlat bernama SIEM membantu mengumpulkan log dari banyak sistem dan memberi peringatan otomatis.",
-        "tip": "Satpam yang bagus bukan yang nonton semua rekaman, tapi yang tahu momen mana yang perlu diputar ulang."
+        "tip": "Satpam yang bagus bukan yang nonton semua rekaman, tapi yang tahu momen mana yang perlu diputar ulang.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "401 x1000",
+            "SIEM"
+          ]
+        }
       },
       {
         "title": "Langkah respons insiden",
         "body": "Kalau insiden terjadi, tim mengikuti alur umum:\n1. Persiapan: punya rencana, kontak, dan backup sebelum kejadian\n2. Deteksi & analisis: pastikan ini insiden beneran dan seberapa luas\n3. Penahanan: isolasi sistem yang kena biar gak menyebar\n4. Pembersihan: hapus akses penyerang, tambal celahnya\n5. Pemulihan: kembalikan layanan dari backup yang bersih\n6. Evaluasi: catat pelajaran supaya gak terulang\n\nBuat akun pribadi juga sama: kunci (ganti password), cek kerusakan, pulihkan, dan perkuat (2FA).",
-        "tip": "Kayak penanganan kebakaran: padamkan biar gak merembet, cari penyebabnya, perbaiki, lalu pasang alarm yang lebih baik."
+        "tip": "Kayak penanganan kebakaran: padamkan biar gak merembet, cari penyebabnya, perbaiki, lalu pasang alarm yang lebih baik.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Persiapan",
+            "Deteksi",
+            "Tahan",
+            "Bersihkan",
+            "Pulihkan",
+            "Evaluasi"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -257,7 +282,16 @@
       {
         "title": "Peran di cyber security",
         "body": "Dunia cyber security luas, gak cuma \"hacker\":\n- Red team / pentester: menguji sistem dengan cara menyerang, dengan izin\n- Blue team / SOC analyst: memantau, mendeteksi, dan merespons serangan\n- Security engineer: membangun sistem dan infrastruktur yang aman\n- AppSec: mengamankan kode aplikasi, cocok buat yang suka ngoding\n- GRC: kebijakan, audit, dan kepatuhan\n- Digital forensics: menyelidiki bukti setelah insiden\n\nBanyak orang masuk lewat IT support, jaringan, atau developer, lalu pindah ke keamanan.",
-        "tip": "Kayak rumah sakit: ada dokter bedah, dokter jaga, apoteker, sampai manajemen. Semua penting."
+        "tip": "Kayak rumah sakit: ada dokter bedah, dokter jaga, apoteker, sampai manajemen. Semua penting.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Dasar IT",
+            "Jaringan & Linux",
+            "Blue / Red team",
+            "Spesialis"
+          ]
+        }
       },
       {
         "title": "Rencana belajar berikutnya",

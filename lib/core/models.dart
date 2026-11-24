@@ -1,14 +1,39 @@
+/// Spesifikasi adegan 3D di halaman materi: `{"kind": "packets", "labels": [...]}`.
+class SceneSpec {
+  const SceneSpec(this.kind, [this.labels = const []]);
+  final String kind;
+  final List<String> labels;
+
+  static SceneSpec? fromJson(Object? j) {
+    if (j is! Map) return null;
+    final kind = j['kind'];
+    if (kind is! String || !kinds.contains(kind)) return null;
+    return SceneSpec(kind, ((j['labels'] as List?) ?? const []).cast<String>());
+  }
+
+  static const kinds = {
+    'packets', 'layers', 'vault', 'wheel', 'hash', 'subnet', 'firewall', 'tree', 'scan', 'keys', 'botnet',
+  };
+
+  String label(int i, String fallback) => i < labels.length ? labels[i] : fallback;
+}
+
+
 class LessonPage {
-  const LessonPage({required this.title, required this.body, this.tip});
+  const LessonPage({required this.title, required this.body, this.tip, this.visual});
 
   final String title;
   final String body;
   final String? tip;
 
+  /// Adegan 3D opsional di atas teks.
+  final SceneSpec? visual;
+
   factory LessonPage.fromJson(Map<String, dynamic> j) => LessonPage(
         title: j['title'] as String,
         body: j['body'] as String,
         tip: j['tip'] as String?,
+        visual: SceneSpec.fromJson(j['visual']),
       );
 }
 

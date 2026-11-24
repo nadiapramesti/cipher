@@ -28,5 +28,23 @@
     "title": "Praktek",
     "tagline": "Etika, OSINT, baca log, respons insiden, CTF, dan jalan karier.",
     "moduleFile": "lv4.json"
+  },
+  {
+    "index": 5,
+    "title": "Malware & Ancaman",
+    "tagline": "Virus, ransomware, APK jahat, botnet, sampai serangan rantai pasok.",
+    "moduleFile": "lv5.json"
+  },
+  {
+    "index": 6,
+    "title": "Pertahanan",
+    "tagline": "Firewall, VPN, zero trust, hardening, passkey, dan pertahanan berlapis.",
+    "moduleFile": "lv6.json"
+  },
+  {
+    "index": 7,
+    "title": "Forensik, Cloud & AI",
+    "tagline": "Forensik digital, keamanan cloud, deepfake, dan rencana keamanan pribadimu.",
+    "moduleFile": "lv7.json"
   }
 ]

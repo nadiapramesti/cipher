@@ -9,12 +9,30 @@
       {
         "title": "A network of networks",
         "body": "The internet is a giant network connecting millions of smaller networks: home Wi-Fi, office networks, mobile carriers, and data centers.\n\nDevices on the internet usually act as:\n- Client: the one asking (your phone opening an app)\n- Server: the one answering (the computer holding the app's data)\n\nEvery time you open a site, your phone (the client) sends a request and the server sends a response.",
-        "tip": "The client is a shopper, the server is the shopkeeper. The shopper asks; the shopkeeper prepares and hands over the order."
+        "tip": "The client is a shopper, the server is the shopkeeper. The shopper asks; the shopkeeper prepares and hands over the order.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Client",
+            "Router",
+            "ISP",
+            "Server"
+          ]
+        }
       },
       {
         "title": "Data is split into packets",
         "body": "Data isn't sent in one piece. A 2 MB photo is cut into thousands of small packets, each with a sender and destination address.\n\nThose packets:\n- Can take different routes\n- Can arrive out of order and get reassembled at the destination\n- Get resent if any go missing\n\nRouters along the way decide where to forward each packet.",
-        "tip": "Like shipping a wardrobe: it's taken apart into numbered boards, sent separately, then reassembled at the destination."
+        "tip": "Like shipping a wardrobe: it's taken apart into numbered boards, sent separately, then reassembled at the destination.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "2 MB photo",
+            "Router",
+            "Router",
+            "Destination"
+          ]
+        }
       },
       {
         "title": "Who's along the route",
@@ -95,7 +113,16 @@
       {
         "title": "Private vs public IP",
         "body": "Not every address is visible from the internet.\n\n- Private IP: only valid on a local network. The ranges are 10.x.x.x, 172.16–31.x.x, and 192.168.x.x\n- Public IP: the address seen on the internet, usually belonging to your home router or carrier\n\nRouters use NAT to translate many private IPs into one public IP. That's why the phone, laptop, and TV at home reach the internet with the same public IP.",
-        "tip": "A private IP is a hotel room number. The public IP is the hotel's address. Couriers only know the hotel; the receptionist (NAT) delivers to the room."
+        "tip": "A private IP is a hotel room number. The public IP is the hotel's address. Couriers only know the hotel; the receptionist (NAT) delivers to the room.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "192.168.1.x",
+            "192.168.1.x",
+            "192.168.1.x",
+            "public IP"
+          ]
+        }
       },
       {
         "title": "What an IP reveals",
@@ -171,7 +198,16 @@
       {
         "title": "Two parts in one IP",
         "body": "An IP address has two parts:\n- Network part: identifies the \"neighborhood\"\n- Host part: identifies the \"house\" or device inside it\n\nA subnet mask or CIDR notation (/number) tells how many leading bits belong to the network. IPv4 has 32 bits in total.\n\nExample 192.168.1.10/24: the first 24 bits (192.168.1) are the network, the remaining 8 bits (.10) are the device.",
-        "tip": "Like the address \"Jasmine St, Block C, No. 10\": \"Block C\" is the network, \"No. 10\" is the house."
+        "tip": "Like the address \"Jasmine St, Block C, No. 10\": \"Block C\" is the network, \"No. 10\" is the house.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "192.168.1.0/24",
+            "192.168.2.0/24",
+            "10.0.0.0/24",
+            "router"
+          ]
+        }
       },
       {
         "title": "Counting addresses",
@@ -181,7 +217,16 @@
       {
         "title": "Why subnets matter for security",
         "body": "Subnets aren't just about counting. In security, they're used to separate networks:\n- Guest Wi-Fi is kept apart from the office network\n- CCTV cameras and smart devices are separated from work laptops\n- Critical servers sit in their own subnet with strict firewall rules\n\nIf one device gets malware, spreading is harder because it's not in the same \"neighborhood\" as the others. This is called segmentation.",
-        "tip": "Like a ship with watertight compartments. One room floods, but the ship doesn't sink right away."
+        "tip": "Like a ship with watertight compartments. One room floods, but the ship doesn't sink right away.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "Guest Wi-Fi",
+            "Office",
+            "CCTV",
+            "firewall"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -252,7 +297,19 @@
       {
         "title": "Easy names, hard numbers",
         "body": "Humans remember wikipedia.org easily, but computers need an IP address. DNS (Domain Name System) translates domain names into IPs.\n\nThe short version:\n- Your phone asks a DNS resolver (usually your ISP's or a service like 1.1.1.1)\n- The resolver asks a chain of servers up to the authoritative one\n- The answer (an IP) comes back and is cached for a while\n\nTry it yourself in Toolbox → Network Info → Try DNS.",
-        "tip": "DNS is your contact list. You look up \"Mom\"; the phone knows the number."
+        "tip": "DNS is your contact list. You look up \"Mom\"; the phone knows the number.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            ". (root)",
+            ".id",
+            ".com",
+            "co.id",
+            "go.id",
+            "google",
+            "wikipedia"
+          ]
+        }
       },
       {
         "title": "Types of DNS records",
@@ -333,7 +390,15 @@
       {
         "title": "Ports: doors on one address",
         "body": "One server can run many services at once: web, email, remote login. To keep them apart, each service \"listens\" on a different port number (0–65535).\n\nA full destination = IP + port, e.g. 93.184.216.34:443.\n\nOn your phone's side, the system also picks a temporary random port for each outgoing connection.",
-        "tip": "The IP is the building's address; the port is the counter number. Counter 443 handles secure web, counter 25 handles mail."
+        "tip": "The IP is the building's address; the port is the counter number. Counter 443 handles secure web, counter 25 handles mail.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            ":443 :22 :80",
+            "internet",
+            "server"
+          ]
+        }
       },
       {
         "title": "Ports worth knowing",
@@ -343,7 +408,16 @@
       {
         "title": "TCP vs UDP",
         "body": "The two main ways to send data:\n- TCP: does a \"handshake\" first, checks every packet arrives, and resends missing ones. Used for web, email, chat\n- UDP: sends right away without checking. Faster, but some may be lost. Used for DNS, video calls, online games\n\nThe choice depends on the need: accuracy (TCP) or speed (UDP).",
-        "tip": "TCP is shipping with a courier who needs a signature. UDP is tossing flyers: fast, but nobody checks they arrived."
+        "tip": "TCP is shipping with a courier who needs a signature. UDP is tossing flyers: fast, but nobody checks they arrived.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "You",
+            "TCP: check",
+            "UDP: send",
+            "Server"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -424,7 +498,16 @@
       {
         "title": "Permissions & root",
         "body": "Every file has permissions for three groups: owner, group, and others. Each can have:\n- r (read)\n- w (write)\n- x (execute)\n\nFor example, -rw-r--r-- means the owner can read and write, everyone else can only read.\n\nRoot is the super account that can do anything. That's why daily work uses a normal account, and sudo only when truly needed. This principle is called least privilege.\n\nPractice: open Toolbox → Terminal Simulator and find the hidden flag.",
-        "tip": "Root is the building's master key. Guards don't carry it every day, only in emergencies."
+        "tip": "Root is the building's master key. Guards don't carry it every day, only in emergencies.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "others",
+            "group",
+            "owner",
+            "root"
+          ]
+        }
       }
     ],
     "quiz": [

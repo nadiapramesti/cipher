@@ -1,0 +1,367 @@
+[
+  {
+    "id": "lv7-forensics",
+    "level": 7,
+    "title": "Digital Forensics",
+    "summary": "Finding traces after an incident without damaging the evidence.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Every action leaves a trace",
+        "body": "Digital forensics is the science of collecting, preserving, and analyzing digital evidence so it can be trusted, including in court.\n\nCommonly sought traces:\n- System and login logs\n- Browser history and recently opened files\n- File metadata (when created, modified, by whom)\n- Deleted files, which can often still be recovered\n- Memory (RAM) contents at the time of the incident",
+        "tip": "Like a crime scene team: everything is logged and photographed before it's touched.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "trace",
+            "forensics"
+          ]
+        }
+      },
+      {
+        "title": "Evidence integrity",
+        "body": "Digital evidence changes easily, even just by being opened. So analysts:\n- Make an identical copy (disk image) and work on the copy\n- Compute hashes (e.g. SHA-256) of the original and copy; if they match, the contents are identical\n- Record the chain of custody: who held the evidence, when, and why\n\nWithout this, evidence may be ruled invalid because no one can prove it wasn't tampered with.",
+        "tip": "An evidence hash is the numbered seal on an evidence bag. If the seal differs, someone opened it.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "SHA-256",
+            "disk image",
+            "evidence hash"
+          ]
+        }
+      },
+      {
+        "title": "Don't erase your own evidence",
+        "body": "If you're a victim (hijacked account, scammed, threatened):\n- Don't rush to delete chats or accounts\n- Take full screenshots with dates, numbers, and URLs\n- Keep the original files, not just screenshots, if possible\n- Write down the timeline while you remember it\n- Report to the platform, your bank, and if needed the police\n\nOrganized evidence makes reports far easier to act on.",
+        "tip": "Cleaning up a crime scene before police arrive is well-meant, but it destroys the clues."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Why do forensic analysts work on a copy, not the original?",
+        "options": [
+          "For speed",
+          "So the original evidence doesn't change",
+          "The original is broken",
+          "To save power"
+        ],
+        "explanation": "Even opening it can change evidence metadata.",
+        "answer": 1
+      },
+      {
+        "prompt": "Hashes are used in forensics to...",
+        "options": [
+          "Encrypt evidence",
+          "Prove a copy is identical to the original",
+          "Erase traces",
+          "Speed up analysis"
+        ],
+        "explanation": "Same hash = exactly the same content.",
+        "answer": 1
+      },
+      {
+        "prompt": "Chain of custody is...",
+        "options": [
+          "A bike chain",
+          "A record of who held evidence, when, and why",
+          "A malware type",
+          "A network cable"
+        ],
+        "explanation": "It proves evidence wasn't tampered with during handling.",
+        "answer": 1
+      },
+      {
+        "prompt": "Your account was hijacked and the attacker threatens you. The right move?",
+        "options": [
+          "Delete all chats for peace of mind",
+          "Keep evidence (screenshots, files, timeline) then report",
+          "Threaten back",
+          "Do nothing"
+        ],
+        "explanation": "Organized evidence helps platforms and authorities act.",
+        "answer": 1
+      },
+      {
+        "prompt": "A normally deleted file...",
+        "options": [
+          "Is surely gone forever",
+          "Can often still be recovered",
+          "Turns into a virus",
+          "Moves to the cloud"
+        ],
+        "explanation": "Normal deletion just marks the space as free.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv7-cloud",
+    "level": 7,
+    "title": "Cloud Security",
+    "summary": "Who's responsible for what, and why so many leaks come from misconfiguration.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Shared responsibility",
+        "body": "In the cloud (AWS, Google Cloud, Azure, Google Drive, etc.), security is shared:\n- The provider: buildings, physical servers, core network, and base services\n- You: data, accounts, who gets access, and service settings\n\nMany people assume \"it's in the cloud = it's safe\". But if you make a folder public, the provider won't stop you.",
+        "tip": "Renting an apartment: the building and guards are the manager's job, but locking your unit is yours.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Data & accounts (you)",
+            "Apps",
+            "Servers (provider)",
+            "Buildings (provider)"
+          ]
+        }
+      },
+      {
+        "title": "The most common mistakes",
+        "body": "Most cloud leaks aren't sophisticated hacks, but:\n- Storage (buckets, Drive folders) set to \"anyone with the link\"\n- API keys or passwords written in code pushed to public GitHub\n- Admin accounts without 2FA\n- Excess permissions: everyone is an admin\n- Forgotten test servers or databases left open to the internet\n\nBots constantly scan the internet for mistakes like these.",
+        "tip": "The safest warehouse is useless if its door is left open with a \"come in\" sign."
+      },
+      {
+        "title": "Safe cloud habits",
+        "body": "For individuals and small teams:\n- Regularly review files shared with \"anyone with the link\" and restrict them to specific people\n- 2FA on all cloud accounts, especially admins\n- Keep secrets in a secret manager or environment variables, not in code\n- Grant minimal access, and revoke it when someone is no longer involved\n- Turn on login and suspicious-activity alerts\n\nIf an API key leaks: revoke it immediately and create a new one. Deleting the commit isn't enough.",
+        "tip": "If someone photographed your house key, change the lock. Don't just delete the photo."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "In the shared responsibility model, data access settings are the responsibility of...",
+        "options": [
+          "The cloud provider",
+          "The user/you",
+          "The government",
+          "No one"
+        ],
+        "explanation": "The provider guards infrastructure; you guard data and access.",
+        "answer": 1
+      },
+      {
+        "prompt": "The most common cause of cloud leaks is...",
+        "options": [
+          "Super-sophisticated attacks",
+          "Misconfiguration, e.g. public folders",
+          "Earthquakes",
+          "Servers that are too fast"
+        ],
+        "explanation": "Misconfiguration is far more common than complex hacking.",
+        "answer": 1
+      },
+      {
+        "prompt": "An API key was pushed to public GitHub. The right step?",
+        "options": [
+          "Just delete the commit",
+          "Revoke the key and create a new one",
+          "Rename the repo",
+          "Leave it"
+        ],
+        "explanation": "Bots can copy it within minutes; the old key must be disabled.",
+        "answer": 1
+      },
+      {
+        "prompt": "Where should app secrets be stored?",
+        "options": [
+          "In source code",
+          "In a secret manager / environment variables",
+          "In the README",
+          "In file names"
+        ],
+        "explanation": "Secrets in code easily leak through repos.",
+        "answer": 1
+      },
+      {
+        "prompt": "The riskiest Google Drive sharing setting is...",
+        "options": [
+          "Only me",
+          "Specific people",
+          "Anyone with the link",
+          "Family group"
+        ],
+        "explanation": "Links can be forwarded and opened by anyone.",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "lv7-ai",
+    "level": 7,
+    "title": "AI, Deepfakes & New Scams",
+    "summary": "Convincing fake voices and faces, and how not to fall for them.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Scams, AI edition",
+        "body": "AI makes old scams far more convincing:\n- Voice clones from a few seconds of social media video, then a call from your \"child\" or \"boss\" asking for a transfer\n- Deepfake videos of celebrities promoting bogus investments\n- Video calls with fake faces\n- Phishing messages with no typos, in polished language\n\nThe old sign \"the writing is sloppy\" can't be relied on anymore.",
+        "tip": "Scammers used to wear cheap masks. Now the masks look almost exactly like the real face."
+      },
+      {
+        "title": "How to spot them",
+        "body": "Deepfakes keep getting smoother, so focus on context, not just looks:\n- Urgent requests for money or secrets, especially \"don't tell anyone\"\n- A new number or account, \"my old phone broke\"\n- Video calls cut short, glitches when the face turns or a hand passes over it\n- \"Guaranteed profit\" investment promos from celebrities\n\nAsking the other person to do something spontaneous (turn their head, say the family code word) can help.",
+        "tip": "Don't just look at the visitor's face. Ask why they showed up at midnight asking for the safe key.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "deepfake",
+            "check"
+          ]
+        }
+      },
+      {
+        "title": "Using AI safely",
+        "body": "AI is also a useful tool, if used wisely:\n- Don't paste secrets (passwords, customer data, internal documents) into public chatbots\n- Double-check AI answers on important matters; AI can be confidently wrong\n- Be wary of \"free AI\" extensions or apps that ask for broad access\n- Limit public posts of your voice and face if you worry about cloning\n\nAnd the family code word from LV.00 matters even more in the AI era.",
+        "tip": "AI is a smart assistant that sometimes makes things up. Give it work, check it, and never hand it the safe key."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A voice clone can be made from...",
+        "options": [
+          "Hours of recordings",
+          "A few seconds of audio, e.g. a social media video",
+          "Only a photo",
+          "A phone number"
+        ],
+        "explanation": "Today's tech needs only a short sample.",
+        "answer": 1
+      },
+      {
+        "prompt": "A call in your boss's exact voice asks for an urgent, secret transfer. You should...",
+        "options": [
+          "Transfer immediately",
+          "Verify through another channel before acting",
+          "Send the OTP",
+          "Turn off your phone forever"
+        ],
+        "explanation": "Voices can be faked; verify through a known number.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why is \"sloppy writing\" no longer a reliable phishing sign?",
+        "options": [
+          "Scammers stopped",
+          "AI can write cleanly",
+          "Email was abolished",
+          "Censorship"
+        ],
+        "explanation": "Focus on context and the request, not language polish.",
+        "answer": 1
+      },
+      {
+        "prompt": "What data shouldn't be pasted into a public AI chatbot?",
+        "options": [
+          "Recipe questions",
+          "Passwords and customer data",
+          "Cat name ideas",
+          "Math practice problems"
+        ],
+        "explanation": "Data you send may be stored outside your control.",
+        "answer": 1
+      },
+      {
+        "prompt": "A celebrity video ad promises \"guaranteed 10% daily profit\". It's probably...",
+        "options": [
+          "A golden opportunity",
+          "A deepfake and a bogus investment",
+          "A government program",
+          "A YouTube feature"
+        ],
+        "explanation": "Guaranteed high returns are a classic scam sign.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv7-plan",
+    "level": 7,
+    "title": "Your Personal Security Plan",
+    "summary": "Turning every level into a real plan you can start this week.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Threat modeling: know yourself",
+        "body": "Before adding protection, answer four questions:\n- What's most valuable? (bank accounts, photos, work accounts, phone number)\n- Who might target it? (random scammers, people close to you, competitors)\n- How? (phishing, APKs, a stolen phone, leaked passwords)\n- How bad would it be?\n\nThose answers are your threat model. They tell you what to prioritize.",
+        "tip": "A village home and a city gold shop need different security. Start by knowing which one you are.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Password manager",
+            "2FA",
+            "Updates",
+            "Backup",
+            "Stay alert"
+          ]
+        }
+      },
+      {
+        "title": "A 7-day plan",
+        "body": "One small step a day:\n- Day 1: install a password manager, secure your main email\n- Day 2: enable 2FA or passkeys on email, banking, e-wallets, social media\n- Day 3: update your phone and laptop, remove unused apps\n- Day 4: review app permissions and Accessibility\n- Day 5: turn on automatic backups and Find My Device\n- Day 6: tidy social media privacy, check your email on haveibeenpwned\n- Day 7: agree on a family code word and teach your parents about APK scams",
+        "tip": "Climbing a mountain starts with one step too. Just keep walking."
+      },
+      {
+        "title": "Be a protector for others",
+        "body": "What you learned in Cipher is most useful when shared:\n- Help parents and family check their phone settings\n- When a scam link lands in a group chat, kindly explain why it's dangerous\n- Report scam accounts and numbers to platforms\n- Keep learning: threats change, good habits stay\n\nCongratulations, you've reached the edge of the Cipher map. You're not just safer now; you can make the people around you safer too.",
+        "tip": "One person in the family who understands security is like one person who knows first aid: small, but life-saving."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A threat model helps you...",
+        "options": [
+          "Buy the priciest antivirus",
+          "Decide what most needs protecting, and from what",
+          "Delete all accounts",
+          "Speed up the internet"
+        ],
+        "explanation": "Security priorities differ for each person.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why secure your main email first?",
+        "options": [
+          "It's rarely used",
+          "It can reset other accounts' passwords",
+          "It's free",
+          "It's the smallest"
+        ],
+        "explanation": "Whoever controls your email can take over many other accounts.",
+        "answer": 1
+      },
+      {
+        "prompt": "What best protects parents from APK scams?",
+        "options": [
+          "Banning phones",
+          "Teaching them never to install files from chats, plus a family code word",
+          "Disabling WhatsApp",
+          "Changing their wallpaper"
+        ],
+        "explanation": "Education and verification habits beat bans.",
+        "answer": 1
+      },
+      {
+        "prompt": "When a scam link appears in the family group, you should...",
+        "options": [
+          "Stay quiet",
+          "Kindly explain why it's dangerous",
+          "Click it to check",
+          "Leave the group"
+        ],
+        "explanation": "One explanation can protect many people in the group.",
+        "answer": 1
+      },
+      {
+        "prompt": "Cipher's key to long-term security is...",
+        "options": [
+          "One magic app",
+          "Consistent good habits and continuous learning",
+          "Avoiding the internet",
+          "A new phone every month"
+        ],
+        "explanation": "Threats change; good habits keep protecting you.",
+        "answer": 1
+      }
+    ]
+  }
+]

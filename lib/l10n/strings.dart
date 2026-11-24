@@ -448,6 +448,7 @@ const _id = <String, String>{
   'cp_brute': 'Coba semua geseran',
   'cp_brute_hide': 'Tutup brute force',
   'cp_brute_head': 'Brute force: 25 kemungkinan',
+  'scene_drag': 'geser buat muter',
 };
 
 const _en = <String, String>{
@@ -868,4 +869,5 @@ const _en = <String, String>{
   'cp_brute': 'Try every shift',
   'cp_brute_hide': 'Hide brute force',
   'cp_brute_head': 'Brute force: 25 possibilities',
+  'scene_drag': 'drag to rotate',
 };

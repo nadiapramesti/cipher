@@ -9,7 +9,14 @@
       {
         "title": "Password itu kunci rumah",
         "body": "Akun email, WA, bank digital, semuanya dijaga sama password. Kalau kuncinya gampang ditebak, orang lain bisa masuk tanpa perlu jebol pintu.\n\nPenyerang jarang nebak satu-satu pakai tangan. Mereka pakai program yang bisa nyoba miliaran kombinasi per detik, dimulai dari daftar password paling pasaran.\n\nPassword yang paling sering bocor:\n- 123456, 12345678, qwerty\n- password, admin, iloveyou\n- nama sendiri + tanggal lahir",
-        "tip": "Password pasaran itu kayak kunci gembok yang dijual sama di semua toko. Maling cukup bawa satu kunci itu buat nyoba ke banyak rumah."
+        "tip": "Password pasaran itu kayak kunci gembok yang dijual sama di semua toko. Maling cukup bawa satu kunci itu buat nyoba ke banyak rumah.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "AKUN",
+            "PASSWORD"
+          ]
+        }
       },
       {
         "title": "Panjang ngalahin ribet",
@@ -90,7 +97,15 @@
       {
         "title": "Satu kunci gak cukup",
         "body": "Password bisa bocor: dari situs yang kebobolan, dari phishing, atau karena diintip. Two-Factor Authentication (2FA) nambahin pengecekan kedua saat login.\n\nFaktornya bisa:\n- Sesuatu yang kamu tahu: password, PIN\n- Sesuatu yang kamu punya: HP, kunci keamanan\n- Sesuatu yang ada di dirimu: sidik jari, wajah\n\n2FA artinya minimal dua jenis yang berbeda.",
-        "tip": "ATM pakai 2FA dari dulu: kartunya (yang kamu punya) + PIN (yang kamu tahu). Kartu dicuri doang gak cukup buat narik duit."
+        "tip": "ATM pakai 2FA dari dulu: kartunya (yang kamu punya) + PIN (yang kamu tahu). Kartu dicuri doang gak cukup buat narik duit.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Password",
+            "Kode OTP",
+            "Sidik jari"
+          ]
+        }
       },
       {
         "title": "Jenis-jenis 2FA",
@@ -181,7 +196,19 @@
       {
         "title": "Cek link sebelum klik",
         "body": "Situs palsu sering pakai alamat yang mirip banget sama aslinya:\n- bca.co.id (asli) vs bca-co.id atau bcaa.co.id (palsu)\n- tokopedia.com vs tokopedia.com.promo-hadiah.xyz\n\nYang dilihat itu nama domain tepat sebelum garis miring pertama. Di contoh kedua, domain aslinya promo-hadiah.xyz, bukan tokopedia.\n\nKalau ragu, jangan klik. Buka aplikasi resminya langsung atau ketik alamatnya sendiri.",
-        "tip": "Penipu bikin papan nama toko yang mirip, misal \"Indomaret\" jadi \"Indomarett\". Kalau gak teliti, kamu udah belanja di toko palsu."
+        "tip": "Penipu bikin papan nama toko yang mirip, misal \"Indomaret\" jadi \"Indomarett\". Kalau gak teliti, kamu udah belanja di toko palsu.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            ".",
+            ".id",
+            ".xyz",
+            "bca.co.id",
+            "go.id",
+            "bca-hadiah",
+            "klaim"
+          ]
+        }
       },
       {
         "title": "Kalau udah terlanjur",
@@ -257,7 +284,15 @@
       {
         "title": "Update itu tambal bocor",
         "body": "Tiap aplikasi dan sistem operasi pasti punya celah. Begitu celahnya ketemu, pembuatnya ngeluarin update buat nambal.\n\nMasalahnya, setelah update rilis, celahnya jadi diketahui publik. Penyerang langsung ngincer HP yang belum update.\n\nKebiasaan yang aman:\n- Nyalakan update otomatis di Play Store\n- Install update sistem (Android/iOS) secepatnya\n- HP yang udah gak dapet update keamanan sebaiknya gak dipakai buat m-banking",
-        "tip": "Update itu kayak tukang yang benerin genteng bocor. Makin lama ditunda, makin lama juga rumahmu kehujanan."
+        "tip": "Update itu kayak tukang yang benerin genteng bocor. Makin lama ditunda, makin lama juga rumahmu kehujanan.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            "PATCH",
+            "celah",
+            "HP"
+          ]
+        }
       },
       {
         "title": "Install dari sumber resmi",
@@ -343,7 +378,14 @@
       {
         "title": "Social engineering: nipu orangnya, bukan sistemnya",
         "body": "Banyak serangan gak butuh hacking canggih. Penyerang cukup riset profil kamu, terus pura-pura jadi teman, atasan, atau petugas.\n\nContoh polanya:\n- Akun palsu pakai foto dan nama teman kamu, lalu pinjam uang\n- \"HRD\" yang tahu tempat kerja kamu dari LinkedIn, lalu minta data\n- Kuis \"nama artis kamu = nama hewan pertama + nama jalan\" yang sebenarnya mancing jawaban pertanyaan keamanan",
-        "tip": "Maling yang pinter gak jebol pintu. Dia cari tahu nama satpamnya, terus nyapa sok akrab biar dibukain."
+        "tip": "Maling yang pinter gak jebol pintu. Dia cari tahu nama satpamnya, terus nyapa sok akrab biar dibukain.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "!",
+            "riset"
+          ]
+        }
       },
       {
         "title": "Rapikan setelan privasimu",
@@ -419,12 +461,28 @@
       {
         "title": "Wi-Fi umum itu jalan raya rame",
         "body": "Di Wi-Fi kafe, bandara, atau mal, kamu satu jaringan sama banyak orang asing. Pengelolanya pun belum tentu ngatur keamanannya dengan benar.\n\nRisikonya:\n- Lalu lintas yang gak terenkripsi bisa diintip\n- Penyerang bisa bikin Wi-Fi palsu dengan nama mirip, misal \"Kafe_Gratis\" vs \"Kafe Gratis\"\n- HP yang otomatis nyambung ke nama Wi-Fi yang pernah dipakai bisa ketipu jaringan palsu",
-        "tip": "Ngobrol di Wi-Fi umum tanpa enkripsi itu kayak ngobrol rahasia di angkot penuh. Siapa aja bisa nguping."
+        "tip": "Ngobrol di Wi-Fi umum tanpa enkripsi itu kayak ngobrol rahasia di angkot penuh. Siapa aja bisa nguping.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "HP kamu",
+            "Wi-Fi kafe",
+            "penyadap?",
+            "Server"
+          ]
+        }
       },
       {
         "title": "HTTPS dan VPN itu pelindungnya",
         "body": "Kabar baiknya, hampir semua situs dan aplikasi besar sekarang pakai HTTPS. Isinya dienkripsi, jadi orang di jaringan yang sama gak bisa baca password kamu.\n\nTapi tetap hati-hati:\n- Perhatikan peringatan sertifikat di browser. Kalau muncul, jangan dilanjut\n- VPN tepercaya bikin terowongan terenkripsi buat semua lalu lintas, berguna di Wi-Fi umum\n- VPN gratisan sembarangan bisa justru ngintip data kamu",
-        "tip": "HTTPS itu amplop tertutup. Tukang pos tahu alamat tujuannya, tapi gak bisa baca isi suratnya."
+        "tip": "HTTPS itu amplop tertutup. Tukang pos tahu alamat tujuannya, tapi gak bisa baca isi suratnya.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "HTTPS",
+            "KUNCI SESI"
+          ]
+        }
       },
       {
         "title": "Kebiasaan aman di Wi-Fi umum",
@@ -500,7 +558,15 @@
       {
         "title": "Aturan 3-2-1",
         "body": "Data yang cuma ada di satu tempat itu data yang siap hilang. Pakai aturan 3-2-1:\n- 3 salinan data (1 asli + 2 backup)\n- 2 jenis media berbeda (misal HP + laptop/flashdisk)\n- 1 salinan di luar rumah (misal cloud)\n\nBuat HP, cara paling gampang: nyalakan backup otomatis Google/iCloud buat foto, kontak, dan chat penting.",
-        "tip": "Telur jangan ditaruh di satu keranjang. Kalau keranjangnya jatuh, minimal masih ada telur di dapur."
+        "tip": "Telur jangan ditaruh di satu keranjang. Kalau keranjangnya jatuh, minimal masih ada telur di dapur.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "HP (asli)",
+            "Laptop",
+            "Cloud"
+          ]
+        }
       },
       {
         "title": "Kunci layar & fitur Temukan HP",
@@ -586,7 +652,14 @@
       {
         "title": "Kode keluarga",
         "body": "Cara sederhana yang ampuh: sepakati kode rahasia keluarga.\n- Pilih satu kata atau pertanyaan yang cuma keluarga yang tahu\n- Jangan pernah ditulis di medsos atau chat grup\n- Kalau ada yang ngaku keluarga minta uang mendadak, tanyain kodenya\n- Biasakan aturan: telepon balik ke nomor lama sebelum transfer\n\nAjarin juga orang tua buat gak ragu menutup telepon. Penipu yang asli akan maksa, keluarga yang asli bakal ngerti.",
-        "tip": "Kode keluarga itu kayak password rumah. Tamu yang ngaku saudara tapi gak tahu kodenya, gak dibukain."
+        "tip": "Kode keluarga itu kayak password rumah. Tamu yang ngaku saudara tapi gak tahu kodenya, gak dibukain.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "KELUARGA",
+            "KODE"
+          ]
+        }
       },
       {
         "title": "Anak dan remaja di internet",

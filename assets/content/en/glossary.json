@@ -108,5 +108,125 @@
     "term": "CTF",
     "short": "Capture The Flag: a security exercise or competition to find hidden \"flags\" through challenges.",
     "analogy": "A treasure hunt where the clues are security puzzles."
+  },
+  {
+    "term": "Subnet",
+    "short": "A division of a network into smaller blocks, written like 192.168.1.0/24.",
+    "analogy": "Like a housing estate split into blocks A, B, and C."
+  },
+  {
+    "term": "NAT",
+    "short": "A router feature that lets many devices share one public IP.",
+    "analogy": "A hotel receptionist delivering mail from one hotel address to each room."
+  },
+  {
+    "term": "TCP / UDP",
+    "short": "Two ways to send data: TCP checks every packet arrives, UDP sends without checking.",
+    "analogy": "TCP is a courier needing a signature; UDP is tossing flyers."
+  },
+  {
+    "term": "IDOR",
+    "short": "A flaw where changing an ID in the URL opens someone else's data because the server skips the ownership check.",
+    "analogy": "Changing the room number on a key card and someone else's door opens."
+  },
+  {
+    "term": "OWASP Top 10",
+    "short": "The OWASP community's list of the 10 most important web app security risks.",
+    "analogy": "A list of the 10 most common causes of fire, to check first."
+  },
+  {
+    "term": "Salt",
+    "short": "Unique random data added to a password before hashing.",
+    "analogy": "A different secret seasoning in each bowl, so identical soups taste different."
+  },
+  {
+    "term": "Public / Private Key",
+    "short": "A key pair: the public one can be shared, the private one is kept secret.",
+    "analogy": "A mailbox slot: anyone can drop mail in, only the key holder can open it."
+  },
+  {
+    "term": "SSL/TLS Certificate",
+    "short": "A digital document proving a site controls its domain, signed by a CA.",
+    "analogy": "A website's ID card, issued by a trusted authority."
+  },
+  {
+    "term": "OSINT",
+    "short": "Intelligence from open sources: social media, search engines, public data.",
+    "analogy": "Piecing old newspaper clippings into a full story."
+  },
+  {
+    "term": "SIEM",
+    "short": "A system that gathers logs from many places and raises automatic alerts.",
+    "analogy": "A CCTV control room that sounds the alarm on odd movement."
+  },
+  {
+    "term": "Trojan",
+    "short": "Malware disguised as a useful app.",
+    "analogy": "The Trojan Horse: a gift with soldiers inside."
+  },
+  {
+    "term": "Botnet",
+    "short": "A collection of hijacked devices controlled by one attacker.",
+    "analogy": "Thousands of puppets with one puppeteer."
+  },
+  {
+    "term": "DDoS",
+    "short": "An attack that floods a service with traffic from many sources until it falls over.",
+    "analogy": "Thousands of people pretending to queue at a till without buying."
+  },
+  {
+    "term": "Supply Chain Attack",
+    "short": "An attack through a vendor, library, or update the victim trusts.",
+    "analogy": "A contaminated water supply hits every connected home."
+  },
+  {
+    "term": "IDS / IPS",
+    "short": "Intrusion detection (IDS) and prevention (IPS) systems on a network.",
+    "analogy": "A burglar alarm, and an alarm that also locks the doors."
+  },
+  {
+    "term": "Zero Trust",
+    "short": "A security principle: never trust automatically, verify every access.",
+    "analogy": "A building where every door needs a card tap."
+  },
+  {
+    "term": "Passkey",
+    "short": "Passwordless login using a cryptographic key pair on your device.",
+    "analogy": "A personal stamp: the server only keeps a sample impression."
+  },
+  {
+    "term": "Hardening",
+    "short": "Shrinking the attack surface by disabling what's unneeded and tightening settings.",
+    "analogy": "Closing unused windows and locking the doors you use."
+  },
+  {
+    "term": "Defense in Depth",
+    "short": "Stacking layers of protection so one failure isn't fatal.",
+    "analogy": "Stacked Swiss cheese slices: the holes rarely line up."
+  },
+  {
+    "term": "Chain of Custody",
+    "short": "A record of who held digital evidence, when, and why.",
+    "analogy": "Numbered seals and a hand-over log for evidence."
+  },
+  {
+    "term": "Shared Responsibility",
+    "short": "The cloud model: the provider guards infrastructure, you guard data and access.",
+    "analogy": "An apartment: the building is the manager's job, your door lock is yours."
+  },
+  {
+    "term": "Deepfake",
+    "short": "AI-made fake video, photo, or audio imitating a real person.",
+    "analogy": "A mask that looks almost exactly like the real face."
+  },
+  {
+    "term": "Threat Model",
+    "short": "An analysis of what to protect, from whom, and how bad the risk is.",
+    "analogy": "A village home and a gold shop need different security."
+  },
+  {
+    "term": "Least Privilege",
+    "short": "The principle of granting only the access that's needed.",
+    "analogy": "Guards don't carry the master key every day."
   }
 ]

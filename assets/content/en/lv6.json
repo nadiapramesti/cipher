@@ -1,0 +1,467 @@
+[
+  {
+    "id": "lv6-firewall",
+    "level": 6,
+    "title": "Firewalls, IDS & IPS",
+    "summary": "The network's gatekeeper and the alarms that ring for intruders.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Firewall: the traffic guard",
+        "body": "A firewall inspects incoming and outgoing traffic and decides to allow or block it based on rules: IP address, port, protocol, or application.\n\nHealthy rules usually:\n- Deny all inbound by default\n- Open only the ports actually used, e.g. 443 for web\n- Restrict admin access (SSH, remote desktop) to specific addresses\n\nHome routers and Windows have built-in firewalls too. Keep them on.",
+        "tip": "A firewall is the neighborhood gate guard with a guest list. Not on the list, not getting in.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            "FIREWALL",
+            "internet",
+            "your network"
+          ]
+        }
+      },
+      {
+        "title": "Next-gen firewalls & WAFs",
+        "body": "Classic firewalls only look at addresses and ports. Modern (next-gen) firewalls recognize applications and traffic content.\n\nA WAF (Web Application Firewall) specifically protects web apps. It can block requests that look like SQL injection or XSS before they reach the app.\n\nBut a WAF doesn't replace secure code. Treat it as an extra layer.",
+        "tip": "A regular guard checks ID cards. A sharp guard also checks bags."
+      },
+      {
+        "title": "IDS and IPS",
+        "body": "- IDS (Intrusion Detection System): monitors and raises alerts on attack patterns, but doesn't block\n- IPS (Intrusion Prevention System): like an IDS, but blocks suspicious traffic immediately\n\nBoth recognize attacks via:\n- Signatures: known attack patterns\n- Anomalies: behavior that deviates from normal\n\nThe challenge: too many false positives make teams careless.",
+        "tip": "An IDS is a burglar alarm. An IPS is an alarm that also locks the doors automatically.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "attack",
+            "IDS"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A healthy firewall rule for inbound traffic is...",
+        "options": [
+          "Allow everything",
+          "Deny everything except what's needed",
+          "Turn the firewall off",
+          "Open all ports"
+        ],
+        "explanation": "Default deny minimizes open doors.",
+        "answer": 1
+      },
+      {
+        "prompt": "A WAF specifically protects...",
+        "options": [
+          "Printers",
+          "Web applications",
+          "Batteries",
+          "Cables"
+        ],
+        "explanation": "A WAF filters malicious requests to web apps.",
+        "answer": 1
+      },
+      {
+        "prompt": "The difference between IDS and IPS?",
+        "options": [
+          "They're the same",
+          "IDS alerts; IPS also blocks immediately",
+          "IDS blocks; IPS only alerts",
+          "Both are antivirus"
+        ],
+        "explanation": "Prevention means actively stopping it.",
+        "answer": 1
+      },
+      {
+        "prompt": "Signature-based detection recognizes...",
+        "options": [
+          "Known attack patterns",
+          "Every new attack",
+          "Packet colors",
+          "Usernames"
+        ],
+        "explanation": "Brand-new attacks need anomaly detection.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why are too many false positives dangerous?",
+        "options": [
+          "They speed up servers",
+          "Teams get careless and miss real alerts",
+          "They aren't",
+          "They lose data"
+        ],
+        "explanation": "When alarms ring constantly, people stop paying attention.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv6-vpn",
+    "level": 6,
+    "title": "VPN & Zero Trust",
+    "summary": "Encrypted tunnels, and why \"inside the network\" doesn't mean safe.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "VPN: an encrypted tunnel",
+        "body": "A VPN wraps all your traffic in an encrypted tunnel to a VPN server, which then forwards it to the internet.\n\nBenefits:\n- People on the same Wi-Fi can't snoop\n- Employees can reach the office network safely from home\n\nWhat to understand: the VPN provider can now see your traffic. So choose a trusted one, not a free VPN with an unknown owner.",
+        "tip": "A VPN is a covered toll road. Bystanders can't see your car, but the toll operator knows you passed.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Phone",
+            "VPN tunnel",
+            "VPN server",
+            "Site"
+          ]
+        }
+      },
+      {
+        "title": "VPN myths",
+        "body": "A VPN isn't an invisibility cloak:\n- It doesn't make you fully anonymous; logging into accounts still identifies you\n- It doesn't protect against phishing or malware\n- It doesn't make fake sites safe\n\nVPNs are most useful on public Wi-Fi, for reaching office networks, and for hiding activity from the local network.",
+        "tip": "A raincoat keeps you dry, but it doesn't make you immune to traffic accidents."
+      },
+      {
+        "title": "Zero Trust",
+        "body": "The old model: \"inside the office network = trusted\". The problem: once an attacker gets in, they roam freely.\n\nZero Trust flips that: never trust automatically, always verify.\n- Every access checks identity (usually with MFA)\n- The device is checked for health\n- Access rights are minimal\n- Activity is continuously monitored\n\nMany companies are moving from office VPNs to this model.",
+        "tip": "Zero Trust is a building where every door needs a card tap, not just the front door.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Identity",
+            "Device",
+            "Least access",
+            "Keep monitoring"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A VPN works by...",
+        "options": [
+          "Removing ads",
+          "Wrapping traffic in an encrypted tunnel",
+          "Boosting battery",
+          "Changing passwords"
+        ],
+        "explanation": "Traffic is encrypted up to the VPN server.",
+        "answer": 1
+      },
+      {
+        "prompt": "Who can see your traffic when using a VPN?",
+        "options": [
+          "Nobody at all",
+          "The VPN provider",
+          "People on the same Wi-Fi",
+          "Everyone"
+        ],
+        "explanation": "Trust shifts to the VPN provider.",
+        "answer": 1
+      },
+      {
+        "prompt": "Does a VPN protect against phishing?",
+        "options": [
+          "Yes, completely",
+          "No; fake sites can still fool you",
+          "Only on Mondays",
+          "Yes if free"
+        ],
+        "explanation": "A VPN protects the path, not your decision to enter data.",
+        "answer": 1
+      },
+      {
+        "prompt": "Zero Trust's core principle is...",
+        "options": [
+          "Trust everything inside the network",
+          "Never trust automatically, always verify",
+          "Disable all logins",
+          "Use one shared password"
+        ],
+        "explanation": "Network location doesn't grant trust by itself.",
+        "answer": 1
+      },
+      {
+        "prompt": "The weakness of the old \"inside = safe\" model is...",
+        "options": [
+          "Too strict",
+          "An attacker inside can move freely",
+          "Too expensive",
+          "None"
+        ],
+        "explanation": "This is called lateral movement.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv6-hardening",
+    "level": 6,
+    "title": "Device Hardening",
+    "summary": "Tightening your phone and laptop so they're hard to break into.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "What hardening is",
+        "body": "Hardening means shrinking the attack surface by switching off what's unnecessary and strengthening what's used.\n\nPrinciples:\n- Unused: remove or disable it\n- Used: update it and configure it securely\n- Access: grant as little as possible\n\nThe fewer doors, the fewer there are to guard.",
+        "tip": "A house with two doors is easier to guard than one with ten open windows.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Updates",
+            "Screen lock",
+            "App permissions",
+            "Encryption",
+            "Backup"
+          ]
+        }
+      },
+      {
+        "title": "Android phone checklist",
+        "body": "- Automatic system and app updates\n- Screen lock with a 6+ digit PIN or biometrics, short screen timeout\n- Remove unused apps\n- Review permissions: location, microphone, camera, SMS, Accessibility\n- Play Protect on, \"unknown apps\" off\n- Private DNS (e.g. dns.adguard.com or one.one.one.one) for extra filtering\n- Turn off Bluetooth and NFC when unused\n- Enable Find My Device",
+        "tip": "Like tidying a room: toss what you don't use, lock the valuable drawers."
+      },
+      {
+        "title": "Laptop checklist",
+        "body": "- Update the OS and browser\n- Daily account without admin rights\n- Built-in firewall and antivirus (Windows Defender) on\n- Disk encryption: BitLocker (Windows) or FileVault (Mac)\n- Auto screen lock when you step away (Windows + L)\n- Remove unused software and browser extensions\n- Avoid pirated software; it's one of the biggest malware sources\n- Regular backups to a drive you unplug afterwards",
+        "tip": "An encrypted, locked laptop is like a stolen safe: heavy, but the contents stay protected."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Hardening means...",
+        "options": [
+          "Making the phone heavier",
+          "Shrinking the attack surface and tightening settings",
+          "Fitting a hard case",
+          "Overclocking the CPU"
+        ],
+        "explanation": "A smaller attack surface is harder to attack.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why remove apps you don't use?",
+        "options": [
+          "For a tidy wallpaper",
+          "Fewer weaknesses and open permissions",
+          "To drain battery",
+          "No need"
+        ],
+        "explanation": "Abandoned apps can carry flaws and excess permissions.",
+        "answer": 1
+      },
+      {
+        "prompt": "Windows' built-in disk encryption is...",
+        "options": [
+          "BitLocker",
+          "Paint",
+          "Notepad",
+          "Excel"
+        ],
+        "explanation": "BitLocker encrypts the whole disk.",
+        "answer": 0
+      },
+      {
+        "prompt": "The quick shortcut to lock a Windows screen?",
+        "options": [
+          "Ctrl + C",
+          "Windows + L",
+          "Alt + F4",
+          "Shift + Tab"
+        ],
+        "explanation": "Make it a habit whenever you step away.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why shouldn't your daily account be an admin?",
+        "options": [
+          "So you can't game",
+          "Malware running under it is limited too",
+          "Faster internet",
+          "No difference"
+        ],
+        "explanation": "Least privilege limits damage.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv6-passkey",
+    "level": 6,
+    "title": "Passkeys & Password Managers",
+    "summary": "The future of logging in without stealable passwords.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Password managers",
+        "body": "Nobody can remember dozens of long, unique passwords. A password manager stores them in an encrypted vault opened with one master password (plus 2FA).\n\nBenefits:\n- Generates long random passwords automatically\n- Autofills only on the correct domain, which helps reject phishing sites\n- Alerts you if a password has leaked\n\nExamples: Bitwarden, Google Password Manager, iCloud Keychain.",
+        "tip": "A password manager is one safe for all your keys. You only need to guard the safe's key very well."
+      },
+      {
+        "title": "Passkeys: logging in with public keys",
+        "body": "Passkeys replace passwords with a cryptographic key pair:\n- The private key stays safely on your phone or laptop, never sent\n- The server stores only the public key\n- Logging in = your phone signs a challenge from the server, unlocked with fingerprint or PIN\n\nSince no secret is typed or sent, passkeys can't be phished and are useless to attackers if the server's database leaks.",
+        "tip": "A passkey is like a personal stamp. The server only keeps a sample impression to compare; the stamp stays in your hand.",
+        "visual": {
+          "kind": "keys",
+          "labels": [
+            "public key (server)",
+            "private key (phone)"
+          ]
+        }
+      },
+      {
+        "title": "Getting started",
+        "body": "Practical steps:\n- Turn on passkeys for accounts that support them: Google, Apple, Microsoft, GitHub, and more every month\n- Use a password manager for accounts without passkey support\n- Secure your main account (email) first, since it's the key to resetting every other account\n- Store recovery codes somewhere safe and offline\n\nPriority order: email, Google/Apple account, banks & e-wallets, social media.",
+        "tip": "The most important key is the one that can copy all your other keys: your email."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Why does a password manager help against phishing?",
+        "options": [
+          "It blocks all email",
+          "It only autofills on the correct domain",
+          "It deletes fake sites",
+          "It doesn't"
+        ],
+        "explanation": "If autofill doesn't appear, the domain is different.",
+        "answer": 1
+      },
+      {
+        "prompt": "With passkeys, the server stores...",
+        "options": [
+          "The private key",
+          "The public key",
+          "Your fingerprint",
+          "Your actual password"
+        ],
+        "explanation": "The private key never leaves your device.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why are passkeys phishing-resistant?",
+        "options": [
+          "They're long",
+          "No secret is typed or sent to the site",
+          "Different colors",
+          "They're free"
+        ],
+        "explanation": "A fake site can't fish for something you never type.",
+        "answer": 1
+      },
+      {
+        "prompt": "The first account to secure is...",
+        "options": [
+          "Gaming account",
+          "Main email",
+          "An old forum account",
+          "Streaming account"
+        ],
+        "explanation": "Email is used to reset other accounts' passwords.",
+        "answer": 1
+      },
+      {
+        "prompt": "Recovery codes should be kept...",
+        "options": [
+          "In an unlocked phone note",
+          "Somewhere safe and offline",
+          "Sent to the family group",
+          "Posted on social media"
+        ],
+        "explanation": "Backup codes can open the account without 2FA.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv6-defense",
+    "level": 6,
+    "title": "Defense in Depth & Awareness",
+    "summary": "No single tool is perfect, so stack them. And people are the key layer.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Defense in depth",
+        "body": "Every safeguard has gaps. Defense in depth stacks many layers so if one fails, others still hold:\n- People: training and safe habits\n- Devices: updates, antivirus, encryption\n- Apps: secure code, WAF\n- Network: firewalls, segmentation\n- Data: encryption, backups, access rights\n\nAn attacker has to get through every layer, not just one.",
+        "tip": "Like slices of Swiss cheese: each has holes, but stacked up, the holes rarely line up.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "People",
+            "Devices",
+            "Apps",
+            "Network",
+            "Data"
+          ]
+        }
+      },
+      {
+        "title": "People: the strongest or weakest layer",
+        "body": "Most incidents involve a human factor: clicking phishing links, weak passwords, misconfigurations, or falling for fake calls.\n\nBut trained people are also the best detectors. An employee who gets suspicious and reports it can stop an attack faster than any tool.\n\nA healthy culture: report without fear of punishment. People afraid of being scolded tend to hide mistakes.",
+        "tip": "The best guard still loses to an employee who holds the door for an unknown \"courier\"."
+      },
+      {
+        "title": "Small habits, big impact",
+        "body": "The five habits that save the most people:\n- Pause 10 seconds before clicking, transferring, or sharing a code\n- Verify through another channel (call the official number, meet in person)\n- One account, one password, using a password manager\n- 2FA or passkeys on important accounts\n- Regular updates and backups\n\nSecurity isn't about paranoia; it's about habits.",
+        "tip": "Wearing a helmet doesn't make you afraid of riding. It lets you ride with peace of mind."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Defense in depth means...",
+        "options": [
+          "One very expensive security tool",
+          "Stacking many layers of protection",
+          "An underground firewall",
+          "A very long password"
+        ],
+        "explanation": "If one layer fails, others still protect.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why does a \"report without fear\" culture matter?",
+        "options": [
+          "Livelier offices",
+          "People report sooner, so attacks stop sooner",
+          "Less work",
+          "It doesn't"
+        ],
+        "explanation": "Fear makes people hide mistakes.",
+        "answer": 1
+      },
+      {
+        "prompt": "The simplest habit before transferring due to an urgent message?",
+        "options": [
+          "Transfer immediately",
+          "Pause and verify through another channel",
+          "Screenshot it to a group",
+          "Turn off your phone"
+        ],
+        "explanation": "Urgency is a scammer's main weapon.",
+        "answer": 1
+      },
+      {
+        "prompt": "The Swiss cheese analogy describes...",
+        "options": [
+          "Healthy food",
+          "Stacked holey layers rarely having aligned holes",
+          "An encryption type",
+          "Internet speed"
+        ],
+        "explanation": "A well-known model for explaining layered defense.",
+        "answer": 1
+      },
+      {
+        "prompt": "The \"data\" layer is protected with...",
+        "options": [
+          "Wallpaper",
+          "Encryption, backups, and access rights",
+          "A new mouse",
+          "A big monitor"
+        ],
+        "explanation": "Data is what attackers ultimately want.",
+        "answer": 1
+      }
+    ]
+  }
+]

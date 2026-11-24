@@ -14,12 +14,27 @@
       {
         "title": "Hashing: a one-way fingerprint",
         "body": "A hash turns any data into a fixed-length string, e.g. SHA-256 is always 64 hex characters.\n\nProperties:\n- One-way: it can't be reversed into the original data\n- Change one letter and the result changes completely\n- The same data always gives the same hash\n\nUsed to store passwords and to check files haven't changed (download checksums).",
-        "tip": "A hash is a fingerprint. You can take a print from a finger, but you can't rebuild the finger from the print."
+        "tip": "A hash is a fingerprint. You can take a print from a finger, but you can't rebuild the finger from the print.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "SHA-256",
+            "any data",
+            "64 chars"
+          ]
+        }
       },
       {
         "title": "Encryption: secrets with a key",
         "body": "Encryption scrambles data with a key, and only someone with the key can restore it (decryption).\n\nCompared with the other two:\n- Encoding: reversible by anyone, no key\n- Hashing: not reversible at all\n- Encryption: reversible, but only with the key\n\nExamples: WhatsApp end-to-end chats, HTTPS, and phone storage encryption.",
-        "tip": "Encryption is a safe. You can get the contents back, but only with the key."
+        "tip": "Encryption is a safe. You can get the contents back, but only with the key.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "DATA",
+            "KEY"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -90,12 +105,24 @@
       {
         "title": "The Caesar cipher",
         "body": "One of the oldest ciphers. Every letter shifts a fixed number of places. With a shift of 3: A→D, B→E, ... X→A.\n\n\"HELLO\" becomes \"KHOOR\".\n\nIts weakness: there are only 25 possible shifts. A computer, or even a patient human, can try them all in seconds. This is called brute force.",
-        "tip": "Caesar is a one-digit combination lock. At most 25 tries and it opens."
+        "tip": "Caesar is a one-digit combination lock. At most 25 tries and it opens.",
+        "visual": {
+          "kind": "wheel",
+          "labels": [
+            "3"
+          ]
+        }
       },
       {
         "title": "Vigenère: shifting shifts",
         "body": "Vigenère uses a keyword. Each key letter sets the shift for the matching message letter. The key \"KEY\" means shift 10, 4, 24, then repeat.\n\nThat way the same letter doesn't always become the same letter, making it harder to guess. For centuries it was called \"the unbreakable cipher\".\n\nBut because the key repeats, patterns can still be analyzed, and computers now break it easily.",
-        "tip": "Vigenère is a lock whose combination changes every letter, but the combinations cycle in the same order forever."
+        "tip": "Vigenère is a lock whose combination changes every letter, but the combinations cycle in the same order forever.",
+        "visual": {
+          "kind": "wheel",
+          "labels": [
+            "10"
+          ]
+        }
       },
       {
         "title": "Frequency analysis",
@@ -176,7 +203,15 @@
       {
         "title": "Salt: a unique seasoning per user",
         "body": "A salt is random, unique data added to a password before hashing, then stored alongside the hash.\n\nBenefits:\n- Two people with the same password get different hashes\n- Rainbow tables become useless, since they'd have to be rebuilt per salt\n\nA salt isn't secret. Its job is to make mass guessing expensive.",
-        "tip": "Two identical bowls of soup taste different because each gets a different secret seasoning."
+        "tip": "Two identical bowls of soup taste different because each gets a different secret seasoning.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "Argon2",
+            "password + salt",
+            "unique hash"
+          ]
+        }
       },
       {
         "title": "Why it must be slow",
@@ -257,12 +292,26 @@
       {
         "title": "Asymmetric: public and private keys",
         "body": "Asymmetric encryption uses a linked pair of keys:\n- Public key: can be shared with anyone\n- Private key: kept to yourself, must never leak\n\nA message locked with the public key can only be opened by its matching private key. So anyone can send you a secret message without exchanging keys first. Examples: RSA and elliptic curves (ECC).",
-        "tip": "A public key is a mailbox with a slot. Anyone can drop in a letter, but only the key holder can open the box."
+        "tip": "A public key is a mailbox with a slot. Anyone can drop in a letter, but only the key holder can open the box.",
+        "visual": {
+          "kind": "keys",
+          "labels": [
+            "public key",
+            "private key"
+          ]
+        }
       },
       {
         "title": "Used together",
         "body": "Asymmetric is safe for exchanging keys but slow. Symmetric is fast but hard to share. The answer: combine them.\n\n- Use asymmetric to agree on or send a symmetric key safely\n- Then encrypt all data with that symmetric key\n\nThis pattern powers HTTPS, WhatsApp, and VPNs. Private keys are also used for digital signatures, covered in the next module.",
-        "tip": "Send the safe's key through a secure mailbox, then keep everything in the fast-opening safe."
+        "tip": "Send the safe's key through a secure mailbox, then keep everything in the fast-opening safe.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "DATA (AES)",
+            "session key"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -338,7 +387,19 @@
       {
         "title": "Certificates and Certificate Authorities",
         "body": "When you open an HTTPS site, the server sends a certificate containing its public key and domain name. The certificate is signed by a Certificate Authority (CA), an organization trusted by browsers and operating systems.\n\nThe browser checks:\n- The CA signature is valid\n- The domain name matches\n- The certificate hasn't expired\n\nIf anything fails, a red warning appears. That's why certificate warnings must never be skipped.",
-        "tip": "A certificate is a site's ID card; the CA is the government office. The browser trusts the ID because it trusts the issuer."
+        "tip": "A certificate is a site's ID card; the CA is the government office. The browser trusts the ID because it trusts the issuer.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "Root CA",
+            "Intermediate CA",
+            "Other CA",
+            "bank.co.id",
+            "shop.id",
+            "site",
+            "site"
+          ]
+        }
       },
       {
         "title": "What the padlock really means",

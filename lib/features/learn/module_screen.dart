@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
+import '../../widgets/lesson_scene.dart';
 import '../../widgets/scene3d.dart';
 import '../quiz/quiz_screen.dart';
 import '../../l10n/strings.dart';
@@ -129,6 +130,10 @@ class _LessonView extends StatelessWidget {
             ],
           ),
         ),
+        if (page.visual != null) ...[
+          const SizedBox(height: 14),
+          LessonScene(spec: page.visual!),
+        ],
         const SizedBox(height: 16),
         RichBody(text: page.body),
         if (page.tip != null) ...[

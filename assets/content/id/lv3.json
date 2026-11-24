@@ -14,12 +14,27 @@
       {
         "title": "Hashing: sidik jari satu arah",
         "body": "Hash mengubah data apa pun jadi deretan karakter panjang tetap, misal SHA-256 selalu 64 karakter hex.\n\nSifatnya:\n- Satu arah: gak bisa dibalik jadi data asli\n- Beda satu huruf, hasilnya beda total\n- Data sama selalu menghasilkan hash sama\n\nDipakai buat nyimpen password dan ngecek file gak berubah (checksum saat download).",
-        "tip": "Hash itu sidik jari. Dari jari bisa dapet sidiknya, tapi dari sidik gak bisa bikin ulang jarinya."
+        "tip": "Hash itu sidik jari. Dari jari bisa dapet sidiknya, tapi dari sidik gak bisa bikin ulang jarinya.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "SHA-256",
+            "data apa aja",
+            "64 karakter"
+          ]
+        }
       },
       {
         "title": "Enkripsi: rahasia pakai kunci",
         "body": "Enkripsi mengacak data pakai kunci, dan cuma yang punya kunci yang bisa mengembalikannya (dekripsi).\n\nBedanya dengan dua yang lain:\n- Encoding: bisa dibalik siapa aja, tanpa kunci\n- Hashing: gak bisa dibalik sama sekali\n- Enkripsi: bisa dibalik, tapi cuma dengan kunci\n\nContoh: chat end-to-end WhatsApp, HTTPS, dan enkripsi penyimpanan HP.",
-        "tip": "Enkripsi itu brankas. Isinya bisa diambil lagi, tapi harus punya kuncinya."
+        "tip": "Enkripsi itu brankas. Isinya bisa diambil lagi, tapi harus punya kuncinya.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "DATA",
+            "KUNCI"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -90,12 +105,24 @@
       {
         "title": "Caesar cipher",
         "body": "Salah satu cipher tertua. Tiap huruf digeser sejumlah langkah tetap. Dengan geser 3: A→D, B→E, ... X→A.\n\n\"HALO\" jadi \"KDOR\".\n\nKelemahannya: cuma ada 25 kemungkinan geseran. Komputer, bahkan manusia yang sabar, bisa nyoba semuanya dalam hitungan detik. Ini disebut brute force.",
-        "tip": "Caesar itu gembok angka satu digit. Paling banyak 25 kali coba, pasti kebuka."
+        "tip": "Caesar itu gembok angka satu digit. Paling banyak 25 kali coba, pasti kebuka.",
+        "visual": {
+          "kind": "wheel",
+          "labels": [
+            "3"
+          ]
+        }
       },
       {
         "title": "Vigenère: geseran yang berubah-ubah",
         "body": "Vigenère pakai kata kunci. Tiap huruf kunci menentukan geseran buat huruf pesan yang sejajar. Kunci \"KEY\" berarti geser 10, 4, 24, lalu berulang.\n\nIni bikin huruf yang sama gak selalu jadi huruf yang sama, jadi lebih susah ditebak. Ratusan tahun dijuluki \"cipher yang gak bisa dipecahkan\".\n\nTapi karena kuncinya berulang, polanya tetap bisa dianalisis dan sekarang mudah dipecahkan komputer.",
-        "tip": "Vigenère itu kayak gembok yang kombinasinya ganti tiap huruf, tapi kombinasinya muter terus dalam urutan yang sama."
+        "tip": "Vigenère itu kayak gembok yang kombinasinya ganti tiap huruf, tapi kombinasinya muter terus dalam urutan yang sama.",
+        "visual": {
+          "kind": "wheel",
+          "labels": [
+            "10"
+          ]
+        }
       },
       {
         "title": "Analisis frekuensi",
@@ -176,7 +203,15 @@
       {
         "title": "Salt: bumbu unik tiap pengguna",
         "body": "Salt adalah data acak unik yang ditambahkan ke password sebelum di-hash, lalu disimpan bareng hash-nya.\n\nManfaatnya:\n- Dua orang dengan password sama punya hash berbeda\n- Rainbow table jadi gak berguna, karena harus dibuat ulang per salt\n\nSalt bukan rahasia. Fungsinya bikin tebakan massal jadi mahal.",
-        "tip": "Dua mangkok sup yang sama rasanya jadi beda karena tiap mangkok dikasih bumbu rahasia berbeda."
+        "tip": "Dua mangkok sup yang sama rasanya jadi beda karena tiap mangkok dikasih bumbu rahasia berbeda.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "Argon2",
+            "password + salt",
+            "hash unik"
+          ]
+        }
       },
       {
         "title": "Kenapa harus lambat",
@@ -257,12 +292,26 @@
       {
         "title": "Asimetris: kunci publik dan privat",
         "body": "Enkripsi asimetris pakai sepasang kunci yang saling terhubung:\n- Kunci publik: boleh disebar ke siapa aja\n- Kunci privat: disimpan sendiri, gak boleh bocor\n\nPesan yang dikunci pakai kunci publik cuma bisa dibuka pakai kunci privat pasangannya. Jadi siapa pun bisa ngirim pesan rahasia ke kamu tanpa harus tukeran kunci dulu. Contoh: RSA dan kurva eliptik (ECC).",
-        "tip": "Kunci publik itu kotak surat dengan lubang. Siapa aja bisa masukin surat, tapi cuma pemilik kunci yang bisa buka kotaknya."
+        "tip": "Kunci publik itu kotak surat dengan lubang. Siapa aja bisa masukin surat, tapi cuma pemilik kunci yang bisa buka kotaknya.",
+        "visual": {
+          "kind": "keys",
+          "labels": [
+            "kunci publik",
+            "kunci privat"
+          ]
+        }
       },
       {
         "title": "Dipakai bareng",
         "body": "Asimetris aman buat tukar kunci tapi lambat. Simetris cepat tapi susah bagi kunci. Solusinya: gabung keduanya.\n\n- Pakai asimetris buat sepakat atau ngirim kunci simetris secara aman\n- Lalu semua data dienkripsi pakai kunci simetris itu\n\nPola ini dipakai di HTTPS, WhatsApp, dan VPN. Kunci privat juga dipakai buat tanda tangan digital, dibahas di modul berikutnya.",
-        "tip": "Kirim kunci brankas lewat kotak surat yang aman, abis itu semua barang disimpen di brankas yang cepat dibuka."
+        "tip": "Kirim kunci brankas lewat kotak surat yang aman, abis itu semua barang disimpen di brankas yang cepat dibuka.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "DATA (AES)",
+            "kunci sesi"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -338,7 +387,19 @@
       {
         "title": "Sertifikat dan Certificate Authority",
         "body": "Waktu buka situs HTTPS, server ngirim sertifikat yang berisi kunci publik dan nama domain. Sertifikat itu ditandatangani Certificate Authority (CA), lembaga yang dipercaya browser dan sistem operasi.\n\nBrowser ngecek:\n- Tanda tangan CA valid\n- Nama domain cocok\n- Sertifikat belum kedaluwarsa\n\nKalau ada yang gak cocok, muncul peringatan merah. Itu alasan peringatan sertifikat gak boleh di-skip.",
-        "tip": "Sertifikat itu KTP situs, CA itu Dukcapil. Browser percaya KTP-nya karena percaya yang nerbitin."
+        "tip": "Sertifikat itu KTP situs, CA itu Dukcapil. Browser percaya KTP-nya karena percaya yang nerbitin.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "Root CA",
+            "CA perantara",
+            "CA lain",
+            "bank.co.id",
+            "toko.id",
+            "situs",
+            "situs"
+          ]
+        }
       },
       {
         "title": "Arti gembok yang sebenarnya",

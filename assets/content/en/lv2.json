@@ -9,7 +9,16 @@
       {
         "title": "Requests and responses",
         "body": "Every time you open a page, the browser sends an HTTP request to the server, and the server replies with a response.\n\nA request contains:\n- Method: what to do (GET, POST, etc.)\n- Path: the page requested, e.g. /login\n- Headers: extra info (browser type, cookies, language)\n- Body: data being sent, e.g. form contents\n\nA response contains a status code, headers, and the content (HTML, images, JSON).",
-        "tip": "A request is the order slip at a restaurant; the response is the food that arrives with the receipt."
+        "tip": "A request is the order slip at a restaurant; the response is the food that arrives with the receipt.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Browser",
+            "GET /login",
+            "200 OK",
+            "Server"
+          ]
+        }
       },
       {
         "title": "Common methods",
@@ -95,7 +104,14 @@
       {
         "title": "Session hijacking",
         "body": "Since a session cookie proves you're logged in, anyone who gets it can enter as you without your password, even bypassing 2FA.\n\nHow cookies get stolen:\n- Malware or malicious browser extensions that siphon cookies\n- XSS that reads cookies through JavaScript\n- Logging in on a public computer and forgetting to log out\n\nThat's why \"open this file\" scams often turn out to be cookie stealers used to hijack YouTube, Instagram, and Facebook accounts.",
-        "tip": "If someone takes your wristband and wears it, the guard still lets them in."
+        "tip": "If someone takes your wristband and wears it, the guard still lets them in.",
+        "visual": {
+          "kind": "keys",
+          "labels": [
+            "session cookie",
+            "attacker"
+          ]
+        }
       },
       {
         "title": "Secure cookie attributes",
@@ -176,7 +192,14 @@
       {
         "title": "Types and impact",
         "body": "Three main types:\n- Stored: the script is saved in the database (comments, profiles) and hits every visitor\n- Reflected: the script is in a link and hits whoever clicks it\n- DOM-based: the page's own JavaScript mishandles input\n\nThe impact: stealing session cookies, swapping page content for a fake login form, or performing actions as the victim.",
-        "tip": "Stored is a trap set in the floor. Reflected is a trap wrapped as a gift and sent out."
+        "tip": "Stored is a trap set in the floor. Reflected is a trap wrapped as a gift and sent out.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "<script>",
+            "comments"
+          ]
+        }
       },
       {
         "title": "How to prevent it",
@@ -257,7 +280,15 @@
       {
         "title": "How injection happens",
         "body": "If input is glued in raw, a quote mark from the user can \"close\" the text early and the rest is read as a command. The classic example: ' OR '1'='1 makes the condition always true, so login succeeds without the right password.\n\nSQL injection can be severe:\n- Logging in without a password\n- Reading all user data\n- Modifying or deleting data\n\nMany major data breaches began with this flaw.",
-        "tip": "Like a guest writing on the order slip: \"1 fried rice, and give me the cash drawer.\" If the cook just obeys, trouble."
+        "tip": "Like a guest writing on the order slip: \"1 fried rice, and give me the cash drawer.\" If the cook just obeys, trouble.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "DATABASE",
+            "' OR '1'='1",
+            "all data"
+          ]
+        }
       },
       {
         "title": "The fix: parameterized queries",
@@ -333,7 +364,15 @@
       {
         "title": "Broken access control",
         "body": "Login proves who you are (authentication). Access control decides what you may do (authorization). The most common web flaws live right here.\n\nIDOR example: your invoice page is /invoice?id=1042. If changing it to 1043 shows someone else's invoice, the server forgot to check \"whose invoice is this\".\n\nThe fix: the server must always check ownership and role on every request, and never trust anything the browser sends.",
-        "tip": "An office access card proves you're an employee, not that you may enter the director's room."
+        "tip": "An office access card proves you're an employee, not that you may enter the director's room.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Login",
+            "Role check",
+            "Ownership check"
+          ]
+        }
       },
       {
         "title": "The OWASP Top 10",

@@ -11,8 +11,14 @@ Aplikasi Android buat belajar cyber security dari nol, buat umum dan berbasis le
 | LV.02 Web | HTTP, cookie & sesi, XSS, SQL injection, kontrol akses & OWASP Top 10 | ✅ 5 modul |
 | LV.03 Kriptografi | Encoding/hash/enkripsi, cipher klasik, penyimpanan password, kunci simetris & asimetris, HTTPS & sertifikat | ✅ 5 modul |
 | LV.04 Praktek | Etika & hukum, recon & OSINT, baca log & respons insiden, CTF & karier | ✅ 4 modul |
+| LV.05 Malware & Ancaman | Jenis malware, ransomware, APK jahat di Android, botnet & DDoS, serangan rantai pasok | ✅ 5 modul |
+| LV.06 Pertahanan | Firewall/IDS/IPS, VPN & zero trust, hardening, passkey & password manager, pertahanan berlapis | ✅ 5 modul |
+| LV.07 Forensik, Cloud & AI | Forensik digital, keamanan cloud, deepfake & penipuan AI, rencana keamanan pribadi | ✅ 4 modul |
 
 ## Fitur
+- **42 modul di 8 level**, ID & EN, tiap modul ada analogi dan 5 soal berpembahasan
+- **Adegan 3D interaktif** di 50+ halaman materi (paket data, lapisan pertahanan, brankas, roda Caesar, pohon DNS, botnet, dll.) yang bisa diputer pakai jari
+- **Kamus 46 istilah** lengkap dengan analogi
 
 - Onboarding + tes penempatan 8 soal yang ngasih rekomendasi level
 - Modul: materi singkat + analogi, kuis dengan pembahasan, lulus minimal 70% buat buka modul berikutnya

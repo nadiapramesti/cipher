@@ -9,7 +9,16 @@
       {
         "title": "Request dan response",
         "body": "Tiap kali buka halaman, browser ngirim request HTTP ke server, lalu server bales pakai response.\n\nRequest berisi:\n- Method: mau ngapain (GET, POST, dll.)\n- Path: halaman yang diminta, misal /login\n- Header: info tambahan (browser apa, cookie, bahasa)\n- Body: data yang dikirim, misal isi form\n\nResponse berisi status code, header, dan isi halaman (HTML, gambar, JSON).",
-        "tip": "Request itu kertas pesanan di restoran, response itu makanan yang dateng plus struknya."
+        "tip": "Request itu kertas pesanan di restoran, response itu makanan yang dateng plus struknya.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Browser",
+            "GET /login",
+            "200 OK",
+            "Server"
+          ]
+        }
       },
       {
         "title": "Method yang sering dipakai",
@@ -95,7 +104,14 @@
       {
         "title": "Pembajakan sesi",
         "body": "Karena cookie sesi = bukti login, siapa pun yang dapet cookie itu bisa masuk sebagai kamu tanpa password, bahkan tanpa 2FA.\n\nCara cookie dicuri:\n- Malware atau ekstensi browser jahat yang nyedot cookie\n- XSS yang membaca cookie lewat JavaScript\n- Login di komputer umum lalu lupa logout\n\nIni sebabnya ada modus \"kirim file ini\" yang ternyata pencuri cookie buat bajak akun YouTube, Instagram, dan Facebook.",
-        "tip": "Gelang tiket yang dicopot dan dipakai orang lain, satpamnya tetep ngizinin masuk."
+        "tip": "Gelang tiket yang dicopot dan dipakai orang lain, satpamnya tetep ngizinin masuk.",
+        "visual": {
+          "kind": "keys",
+          "labels": [
+            "cookie sesi",
+            "penyerang"
+          ]
+        }
       },
       {
         "title": "Atribut cookie yang aman",
@@ -176,7 +192,14 @@
       {
         "title": "Jenis dan dampaknya",
         "body": "Tiga jenis utama:\n- Stored: script kesimpen di database (komentar, profil), nyerang tiap pengunjung\n- Reflected: script ada di link, nyerang orang yang ngeklik link itu\n- DOM-based: JavaScript di halaman sendiri yang salah ngolah input\n\nDampaknya: nyuri cookie sesi, ganti isi halaman jadi form login palsu, atau ngelakuin aksi atas nama korban.",
-        "tip": "Stored itu jebakan yang dipasang di lantai. Reflected itu jebakan yang dibungkus jadi kado buat dikirim."
+        "tip": "Stored itu jebakan yang dipasang di lantai. Reflected itu jebakan yang dibungkus jadi kado buat dikirim.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "<script>",
+            "komentar"
+          ]
+        }
       },
       {
         "title": "Cara mencegahnya",
@@ -257,7 +280,15 @@
       {
         "title": "Gimana injeksinya terjadi",
         "body": "Kalau input disambung mentah, tanda kutip dari pengguna bisa \"menutup\" teks lebih awal dan sisanya dibaca sebagai perintah. Contoh klasik: isian ' OR '1'='1 bikin kondisi selalu benar, jadi login lolos tanpa password yang benar.\n\nDampak SQL injection bisa parah:\n- Login tanpa password\n- Baca seluruh data pengguna\n- Ubah atau hapus data\n\nBanyak kebocoran data besar berawal dari celah ini.",
-        "tip": "Kayak tamu yang nulis di kertas pesanan: \"1 nasi goreng, dan kasih saya isi laci kasir\". Kalau koki nurut aja, bahaya."
+        "tip": "Kayak tamu yang nulis di kertas pesanan: \"1 nasi goreng, dan kasih saya isi laci kasir\". Kalau koki nurut aja, bahaya.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "DATABASE",
+            "' OR '1'='1",
+            "semua data"
+          ]
+        }
       },
       {
         "title": "Pencegahannya: parameterized query",
@@ -333,7 +364,15 @@
       {
         "title": "Kontrol akses yang bolong",
         "body": "Login membuktikan siapa kamu (autentikasi). Kontrol akses menentukan apa yang boleh kamu lakukan (otorisasi). Celah paling umum di web justru ada di sini.\n\nContoh IDOR: halaman invoice kamu di /invoice?id=1042. Kalau diganti jadi 1043 dan muncul invoice orang lain, server lupa ngecek \"invoice ini punya siapa\".\n\nPerbaikannya: server harus selalu ngecek kepemilikan dan peran di tiap request, jangan percaya apa pun yang dikirim browser.",
-        "tip": "Kartu akses kantor ngebuktiin kamu karyawan, tapi bukan berarti boleh masuk ruang direktur."
+        "tip": "Kartu akses kantor ngebuktiin kamu karyawan, tapi bukan berarti boleh masuk ruang direktur.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Login",
+            "Cek peran",
+            "Cek pemilik data"
+          ]
+        }
       },
       {
         "title": "OWASP Top 10",

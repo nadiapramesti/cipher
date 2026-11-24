@@ -1,0 +1,467 @@
+[
+  {
+    "id": "lv6-firewall",
+    "level": 6,
+    "title": "Firewall, IDS & IPS",
+    "summary": "Penjaga gerbang jaringan dan alarm yang nyala saat ada penyusup.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Firewall: satpam lalu lintas",
+        "body": "Firewall memeriksa lalu lintas yang masuk dan keluar, lalu memutuskan diizinkan atau diblokir berdasarkan aturan: alamat IP, port, protokol, atau aplikasi.\n\nAturan yang sehat biasanya:\n- Default tolak semua yang masuk\n- Buka cuma port yang memang dipakai, misal 443 buat web\n- Batasi akses admin (SSH, remote desktop) cuma dari alamat tertentu\n\nRouter rumah dan Windows juga punya firewall bawaan. Biarkan menyala.",
+        "tip": "Firewall itu satpam gerbang perumahan yang punya daftar tamu. Gak ada di daftar, gak boleh masuk.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            "FIREWALL",
+            "internet",
+            "jaringan kamu"
+          ]
+        }
+      },
+      {
+        "title": "Firewall generasi baru & WAF",
+        "body": "Firewall klasik cuma lihat alamat dan port. Firewall modern (next-gen) bisa mengenali aplikasi dan isi lalu lintas.\n\nWAF (Web Application Firewall) khusus melindungi aplikasi web. Dia bisa memblokir request yang mirip serangan SQL injection atau XSS sebelum sampai ke aplikasi.\n\nTapi WAF bukan pengganti kode yang aman. Anggap dia lapisan tambahan.",
+        "tip": "Satpam biasa ngecek KTP. Satpam canggih juga ngecek isi tas."
+      },
+      {
+        "title": "IDS dan IPS",
+        "body": "- IDS (Intrusion Detection System): memantau dan memberi alarm kalau ada pola serangan, tapi gak memblokir\n- IPS (Intrusion Prevention System): seperti IDS, tapi langsung memblokir lalu lintas yang mencurigakan\n\nKeduanya mengenali serangan lewat:\n- Tanda tangan (signature): pola serangan yang udah dikenal\n- Anomali: perilaku yang menyimpang dari kebiasaan\n\nTantangannya: alarm palsu (false positive) yang terlalu banyak bikin tim lengah.",
+        "tip": "IDS itu alarm maling. IPS itu alarm yang sekalian ngunci pintu otomatis.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "serangan",
+            "IDS"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Aturan firewall yang sehat untuk lalu lintas masuk adalah...",
+        "options": [
+          "Izinkan semua",
+          "Tolak semua kecuali yang memang dibutuhkan",
+          "Matikan firewall",
+          "Buka semua port"
+        ],
+        "explanation": "Default deny meminimalkan pintu yang terbuka.",
+        "answer": 1
+      },
+      {
+        "prompt": "WAF khusus melindungi...",
+        "options": [
+          "Printer",
+          "Aplikasi web",
+          "Baterai",
+          "Kabel"
+        ],
+        "explanation": "WAF menyaring request berbahaya ke aplikasi web.",
+        "answer": 1
+      },
+      {
+        "prompt": "Beda IDS dan IPS?",
+        "options": [
+          "Sama aja",
+          "IDS memberi alarm, IPS juga langsung memblokir",
+          "IDS memblokir, IPS cuma alarm",
+          "Dua-duanya antivirus"
+        ],
+        "explanation": "Prevention = mencegah aktif.",
+        "answer": 1
+      },
+      {
+        "prompt": "Deteksi berbasis signature mengenali...",
+        "options": [
+          "Pola serangan yang udah dikenal",
+          "Semua serangan baru",
+          "Warna paket",
+          "Nama pengguna"
+        ],
+        "explanation": "Serangan yang benar-benar baru butuh deteksi anomali.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa terlalu banyak false positive berbahaya?",
+        "options": [
+          "Bikin server cepat",
+          "Tim jadi lengah dan alarm asli terlewat",
+          "Gak berbahaya",
+          "Bikin data hilang"
+        ],
+        "explanation": "Kalau alarm bunyi terus, orang berhenti memperhatikan.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv6-vpn",
+    "level": 6,
+    "title": "VPN & Zero Trust",
+    "summary": "Terowongan terenkripsi, dan kenapa \"di dalam jaringan\" bukan berarti aman.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "VPN: terowongan terenkripsi",
+        "body": "VPN membungkus semua lalu lintas kamu dalam terowongan terenkripsi menuju server VPN, baru dari sana diteruskan ke internet.\n\nManfaatnya:\n- Pihak di Wi-Fi yang sama gak bisa ngintip\n- Karyawan bisa akses jaringan kantor dari rumah dengan aman\n\nYang perlu dipahami: penyedia VPN sekarang yang bisa lihat lalu lintasmu. Jadi pilih yang tepercaya, bukan VPN gratis yang gak jelas pemiliknya.",
+        "tip": "VPN itu jalan tol tertutup. Orang di pinggir jalan gak lihat mobilmu, tapi pengelola tol tahu kamu lewat.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "HP",
+            "terowongan VPN",
+            "server VPN",
+            "Situs"
+          ]
+        }
+      },
+      {
+        "title": "Mitos VPN",
+        "body": "VPN bukan jubah gaib:\n- Gak bikin kamu anonim total; login ke akun tetap ketahuan itu kamu\n- Gak melindungi dari phishing atau malware\n- Gak bikin situs palsu jadi aman\n\nVPN paling berguna di Wi-Fi publik, buat akses jaringan kantor, dan buat menyembunyikan aktivitas dari jaringan lokal.",
+        "tip": "Pakai jas hujan bikin kamu gak basah, tapi gak bikin kamu kebal ditabrak."
+      },
+      {
+        "title": "Zero Trust",
+        "body": "Model lama: \"di dalam jaringan kantor = dipercaya\". Masalahnya, sekali penyerang masuk, dia bebas jalan-jalan.\n\nZero Trust membalik prinsip itu: jangan pernah percaya otomatis, selalu verifikasi.\n- Tiap akses dicek identitasnya (biasanya dengan MFA)\n- Perangkatnya dicek sehat atau enggak\n- Hak akses seminimal mungkin\n- Aktivitas terus dipantau\n\nBanyak perusahaan sekarang beralih dari VPN kantor ke model ini.",
+        "tip": "Zero Trust itu gedung yang tiap pintunya butuh tap kartu, bukan cuma pintu depan.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Identitas",
+            "Perangkat",
+            "Akses minimal",
+            "Pantau terus"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "VPN bekerja dengan cara...",
+        "options": [
+          "Menghapus iklan",
+          "Membungkus lalu lintas dalam terowongan terenkripsi",
+          "Mempercepat baterai",
+          "Mengganti password"
+        ],
+        "explanation": "Lalu lintas dienkripsi sampai server VPN.",
+        "answer": 1
+      },
+      {
+        "prompt": "Siapa yang bisa melihat lalu lintasmu saat pakai VPN?",
+        "options": [
+          "Gak ada sama sekali",
+          "Penyedia VPN",
+          "Orang di Wi-Fi yang sama",
+          "Semua orang"
+        ],
+        "explanation": "Kepercayaan berpindah ke penyedia VPN.",
+        "answer": 1
+      },
+      {
+        "prompt": "Apakah VPN melindungi dari phishing?",
+        "options": [
+          "Ya, sepenuhnya",
+          "Tidak; situs palsu tetap bisa nipu",
+          "Cuma di hari Senin",
+          "Ya kalau gratis"
+        ],
+        "explanation": "VPN melindungi jalur, bukan keputusan kamu memasukkan data.",
+        "answer": 1
+      },
+      {
+        "prompt": "Prinsip utama Zero Trust adalah...",
+        "options": [
+          "Percaya semua yang di dalam jaringan",
+          "Jangan percaya otomatis, selalu verifikasi",
+          "Matikan semua login",
+          "Pakai satu password bersama"
+        ],
+        "explanation": "Lokasi di jaringan gak otomatis memberi kepercayaan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kelemahan model lama \"dalam jaringan = aman\" adalah...",
+        "options": [
+          "Terlalu ketat",
+          "Penyerang yang masuk bisa bebas bergerak",
+          "Terlalu mahal",
+          "Gak ada kelemahan"
+        ],
+        "explanation": "Ini disebut lateral movement.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv6-hardening",
+    "level": 6,
+    "title": "Hardening Perangkat",
+    "summary": "Ngencengin HP dan laptop biar gak gampang dibobol.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Apa itu hardening",
+        "body": "Hardening adalah mengurangi celah serangan (attack surface) dengan mematikan yang gak perlu dan menguatkan yang dipakai.\n\nPrinsipnya:\n- Yang gak dipakai: hapus atau matikan\n- Yang dipakai: update dan atur seaman mungkin\n- Akses: kasih seminimal mungkin\n\nMakin sedikit pintu, makin sedikit yang perlu dijaga.",
+        "tip": "Rumah dengan dua pintu lebih gampang dijaga daripada rumah dengan sepuluh jendela yang kebuka.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Update",
+            "Kunci layar",
+            "Izin app",
+            "Enkripsi",
+            "Backup"
+          ]
+        }
+      },
+      {
+        "title": "Checklist HP Android",
+        "body": "- Update sistem dan aplikasi otomatis\n- Kunci layar PIN 6+ digit atau biometrik, layar mati cepat\n- Hapus aplikasi yang gak dipakai\n- Cek izin: lokasi, mikrofon, kamera, SMS, Aksesibilitas\n- Play Protect nyala, \"aplikasi tidak dikenal\" mati\n- Private DNS (misal dns.adguard.com atau one.one.one.one) buat filter tambahan\n- Matikan Bluetooth dan NFC kalau gak dipakai\n- Aktifkan Find My Device",
+        "tip": "Kayak beres-beres kamar: buang yang gak dipakai, kunci laci yang berharga."
+      },
+      {
+        "title": "Checklist laptop",
+        "body": "- Update OS dan browser\n- Akun sehari-hari tanpa hak admin\n- Firewall dan antivirus bawaan (Windows Defender) menyala\n- Enkripsi disk: BitLocker (Windows) atau FileVault (Mac)\n- Kunci layar otomatis saat ditinggal (Windows + L)\n- Hapus software dan ekstensi browser yang gak dipakai\n- Jangan pakai software bajakan; itu salah satu sumber malware terbesar\n- Backup rutin ke drive yang dicabut setelahnya",
+        "tip": "Laptop yang terenkripsi dan terkunci itu kayak brankas yang dicuri: berat, tapi isinya tetap aman."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Hardening artinya...",
+        "options": [
+          "Membuat HP lebih berat",
+          "Mengurangi celah serangan dan menguatkan setelan",
+          "Memasang casing keras",
+          "Overclock prosesor"
+        ],
+        "explanation": "Attack surface makin kecil, makin sulit diserang.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa aplikasi yang gak dipakai sebaiknya dihapus?",
+        "options": [
+          "Biar wallpaper rapi",
+          "Mengurangi celah dan izin yang terbuka",
+          "Biar baterai bocor",
+          "Gak perlu dihapus"
+        ],
+        "explanation": "Aplikasi terbengkalai bisa punya celah dan izin berlebih.",
+        "answer": 1
+      },
+      {
+        "prompt": "Fitur enkripsi disk bawaan Windows adalah...",
+        "options": [
+          "BitLocker",
+          "Paint",
+          "Notepad",
+          "Excel"
+        ],
+        "explanation": "BitLocker mengenkripsi seluruh disk.",
+        "answer": 0
+      },
+      {
+        "prompt": "Shortcut cepat mengunci layar Windows?",
+        "options": [
+          "Ctrl + C",
+          "Windows + L",
+          "Alt + F4",
+          "Shift + Tab"
+        ],
+        "explanation": "Biasakan setiap meninggalkan laptop.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa akun sehari-hari sebaiknya bukan admin?",
+        "options": [
+          "Biar gak bisa main game",
+          "Malware yang jalan ikut terbatas haknya",
+          "Biar internet cepat",
+          "Gak ada bedanya"
+        ],
+        "explanation": "Least privilege membatasi kerusakan.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv6-passkey",
+    "level": 6,
+    "title": "Passkey & Password Manager",
+    "summary": "Masa depan login tanpa password yang bisa dicuri.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Password manager",
+        "body": "Manusia gak mungkin hafal puluhan password panjang dan unik. Password manager menyimpannya di brankas terenkripsi yang dibuka satu master password (plus 2FA).\n\nManfaatnya:\n- Bikin password acak panjang otomatis\n- Isi otomatis cuma di domain yang benar, jadi bantu nolak situs phishing\n- Ngasih tahu kalau password kamu pernah bocor\n\nContoh: Bitwarden, Google Password Manager, iCloud Keychain.",
+        "tip": "Password manager itu satu brankas buat semua kunci. Kamu cukup jaga satu kunci brankasnya dengan sangat baik."
+      },
+      {
+        "title": "Passkey: login pakai kunci publik",
+        "body": "Passkey menggantikan password dengan pasangan kunci kriptografi:\n- Kunci privat disimpan aman di HP atau laptop, gak pernah dikirim\n- Server cuma nyimpen kunci publik\n- Login = HP kamu menandatangani tantangan dari server, dibuka dengan sidik jari atau PIN\n\nKarena gak ada rahasia yang diketik atau dikirim, passkey gak bisa dicuri lewat phishing dan gak ada gunanya kalau database server bocor.",
+        "tip": "Passkey itu kayak cap stempel pribadi. Server cuma nyimpen contoh capnya buat dicocokkan, stempelnya tetap di tanganmu.",
+        "visual": {
+          "kind": "keys",
+          "labels": [
+            "kunci publik (server)",
+            "kunci privat (HP)"
+          ]
+        }
+      },
+      {
+        "title": "Mulai pakai",
+        "body": "Langkah praktis:\n- Aktifkan passkey di akun yang sudah mendukung: Google, Apple, Microsoft, GitHub, dan makin banyak lagi\n- Pakai password manager buat akun yang belum mendukung passkey\n- Amankan akun utama (email) paling dulu, karena dia kunci buat reset semua akun lain\n- Simpan kode cadangan (recovery codes) di tempat aman offline\n\nUrutan prioritas: email, akun Google/Apple, bank & e-wallet, medsos.",
+        "tip": "Kunci paling penting itu kunci yang bisa bikin duplikat kunci lain, yaitu email kamu."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kenapa password manager membantu melawan phishing?",
+        "options": [
+          "Karena memblokir semua email",
+          "Karena cuma mengisi otomatis di domain yang benar",
+          "Karena menghapus situs palsu",
+          "Gak membantu"
+        ],
+        "explanation": "Kalau autofill gak muncul, itu tanda domainnya beda.",
+        "answer": 1
+      },
+      {
+        "prompt": "Di sistem passkey, server menyimpan...",
+        "options": [
+          "Kunci privat",
+          "Kunci publik",
+          "Sidik jari kamu",
+          "Password asli"
+        ],
+        "explanation": "Kunci privat gak pernah meninggalkan perangkatmu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa passkey tahan phishing?",
+        "options": [
+          "Karena panjang",
+          "Gak ada rahasia yang diketik atau dikirim ke situs",
+          "Karena warnanya beda",
+          "Karena gratis"
+        ],
+        "explanation": "Situs palsu gak bisa memancing sesuatu yang gak pernah kamu ketik.",
+        "answer": 1
+      },
+      {
+        "prompt": "Akun yang paling pertama harus diamankan adalah...",
+        "options": [
+          "Akun game",
+          "Email utama",
+          "Akun forum lama",
+          "Akun streaming"
+        ],
+        "explanation": "Email dipakai buat reset password akun lain.",
+        "answer": 1
+      },
+      {
+        "prompt": "Recovery codes sebaiknya disimpan...",
+        "options": [
+          "Di catatan HP tanpa kunci",
+          "Di tempat aman, offline",
+          "Dikirim ke grup keluarga",
+          "Dipost di medsos"
+        ],
+        "explanation": "Kode cadangan bisa membuka akun tanpa 2FA.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv6-defense",
+    "level": 6,
+    "title": "Pertahanan Berlapis & Kesadaran",
+    "summary": "Gak ada satu alat yang sempurna, makanya ditumpuk. Dan manusia lapisan terpenting.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Defense in depth",
+        "body": "Setiap pengaman pasti punya celah. Defense in depth menumpuk banyak lapisan supaya kalau satu jebol, yang lain masih nahan:\n- Manusia: pelatihan dan kebiasaan aman\n- Perangkat: update, antivirus, enkripsi\n- Aplikasi: kode aman, WAF\n- Jaringan: firewall, segmentasi\n- Data: enkripsi, backup, hak akses\n\nPenyerang harus berhasil menembus semua lapisan, bukan cuma satu.",
+        "tip": "Kayak irisan keju Swiss: tiap irisan berlubang, tapi kalau ditumpuk, lubangnya jarang sejajar.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Manusia",
+            "Perangkat",
+            "Aplikasi",
+            "Jaringan",
+            "Data"
+          ]
+        }
+      },
+      {
+        "title": "Manusia: lapisan terkuat atau terlemah",
+        "body": "Sebagian besar insiden melibatkan faktor manusia: klik link phishing, password lemah, salah setelan, atau tertipu telepon palsu.\n\nTapi manusia yang terlatih juga detektor terbaik. Karyawan yang curiga dan melapor bisa menghentikan serangan lebih cepat dari alat mana pun.\n\nBudaya yang sehat: lapor tanpa takut dihukum. Orang yang takut dimarahi cenderung menyembunyikan kesalahan.",
+        "tip": "Satpam paling canggih tetap kalah sama karyawan yang nahan pintu buat \"kurir\" yang gak dikenal."
+      },
+      {
+        "title": "Kebiasaan kecil, dampak besar",
+        "body": "Lima kebiasaan yang nyelametin paling banyak orang:\n- Berhenti 10 detik sebelum klik, transfer, atau ngasih kode\n- Verifikasi lewat jalur lain (telepon nomor resmi, ketemu langsung)\n- Satu akun, satu password, pakai password manager\n- 2FA atau passkey di akun penting\n- Update rutin dan backup\n\nKeamanan itu bukan soal paranoid, tapi soal kebiasaan.",
+        "tip": "Pakai helm gak bikin kamu takut naik motor. Justru bikin kamu tenang di jalan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Defense in depth artinya...",
+        "options": [
+          "Satu alat keamanan yang sangat mahal",
+          "Menumpuk banyak lapisan pengaman",
+          "Firewall di bawah tanah",
+          "Password sangat panjang"
+        ],
+        "explanation": "Kalau satu lapisan jebol, lapisan lain masih melindungi.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa budaya \"lapor tanpa takut dihukum\" penting?",
+        "options": [
+          "Biar kantor ramai",
+          "Orang lebih cepat melapor, serangan lebih cepat dihentikan",
+          "Biar gak ada kerjaan",
+          "Gak penting"
+        ],
+        "explanation": "Ketakutan bikin kesalahan disembunyikan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kebiasaan paling sederhana sebelum transfer karena pesan mendesak?",
+        "options": [
+          "Langsung transfer",
+          "Berhenti sejenak dan verifikasi lewat jalur lain",
+          "Kirim screenshot ke grup",
+          "Matikan HP"
+        ],
+        "explanation": "Rasa mendesak adalah senjata utama penipu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Analogi keju Swiss menggambarkan...",
+        "options": [
+          "Makanan sehat",
+          "Lapisan berlubang yang ditumpuk jarang punya lubang sejajar",
+          "Jenis enkripsi",
+          "Kecepatan internet"
+        ],
+        "explanation": "Model terkenal untuk menjelaskan pertahanan berlapis.",
+        "answer": 1
+      },
+      {
+        "prompt": "Lapisan \"data\" dilindungi dengan...",
+        "options": [
+          "Wallpaper",
+          "Enkripsi, backup, dan hak akses",
+          "Mouse baru",
+          "Monitor besar"
+        ],
+        "explanation": "Data adalah yang akhirnya diincar penyerang.",
+        "answer": 1
+      }
+    ]
+  }
+]

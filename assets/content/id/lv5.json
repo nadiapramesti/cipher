@@ -1,0 +1,458 @@
+[
+  {
+    "id": "lv5-malware",
+    "level": 5,
+    "title": "Kenalan Sama Malware",
+    "summary": "Virus, worm, trojan, spyware: beda cara masuk, beda bahayanya.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Malware itu payung besar",
+        "body": "Malware (malicious software) adalah program yang sengaja dibuat buat merugikan. Jenis yang paling sering:\n- Virus: nempel ke file lain, nyebar saat file itu dibuka\n- Worm: nyebar sendiri lewat jaringan tanpa perlu dibuka orang\n- Trojan: nyamar jadi aplikasi berguna, padahal isinya jahat\n- Spyware: diam-diam ngintip aktivitas, password, atau chat\n- Adware: banjirin iklan, kadang sambil nyuri data\n- Keylogger: nyatet semua yang kamu ketik",
+        "tip": "Malware itu kayak \"penyakit\" buat perangkat. Virus, worm, dan trojan itu jenis-jenis penyakitnya, cara nularnya beda-beda.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "malware",
+            "antivirus"
+          ]
+        }
+      },
+      {
+        "title": "Pintu masuknya",
+        "body": "Malware jarang masuk sendiri. Biasanya dibantu korban:\n- Lampiran email atau WhatsApp (.apk, .exe, dokumen dengan makro)\n- Aplikasi bajakan, cheat game, atau \"mod premium gratis\"\n- Iklan palsu \"HP kamu kena virus, install pembersih ini\"\n- Flashdisk yang dicolok sembarangan\n- Software usang yang celahnya belum ditambal\n\nPola umumnya: ada iming-iming gratis atau ancaman yang bikin panik.",
+        "tip": "Kuda Troya gak jebol tembok kota. Warganya sendiri yang narik masuk karena kirain hadiah."
+      },
+      {
+        "title": "Tanda-tanda dan pertolongan pertama",
+        "body": "Curigai kalau:\n- Baterai dan kuota tiba-tiba boros\n- Muncul iklan di luar aplikasi atau di layar kunci\n- Ada aplikasi yang gak kamu pasang, atau ikonnya hilang sendiri\n- Teman dapet pesan aneh \"dari kamu\"\n\nLangkahnya:\n- Putus internet dulu\n- Cek dan hapus aplikasi mencurigakan, cabut izin Aksesibilitas dan admin perangkat\n- Pindai pakai Play Protect atau antivirus tepercaya\n- Ganti password penting dari perangkat lain yang bersih\n- Kalau parah: backup data penting, lalu reset pabrik",
+        "tip": "Kayak keracunan makanan: berhenti makan yang dicurigai dulu, baru diobati."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Malware yang nyebar sendiri lewat jaringan tanpa dibuka orang disebut...",
+        "options": [
+          "Virus",
+          "Worm",
+          "Adware",
+          "Cookie"
+        ],
+        "explanation": "Worm menyebar otomatis dengan memanfaatkan celah jaringan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Aplikasi \"senter gratis\" yang diam-diam nyuri data termasuk...",
+        "options": [
+          "Trojan",
+          "Firewall",
+          "Patch",
+          "VPN"
+        ],
+        "explanation": "Trojan nyamar jadi aplikasi berguna.",
+        "answer": 0
+      },
+      {
+        "prompt": "Program yang mencatat semua ketikan disebut...",
+        "options": [
+          "Keylogger",
+          "Router",
+          "Compiler",
+          "Hash"
+        ],
+        "explanation": "Keylogger bisa merekam password yang kamu ketik.",
+        "answer": 0
+      },
+      {
+        "prompt": "Muncul pop-up \"HP kamu kena 5 virus! Install pembersih ini\". Ini biasanya...",
+        "options": [
+          "Peringatan resmi Google",
+          "Iklan palsu yang mancing install malware",
+          "Fitur bawaan Android",
+          "Pesan dari operator"
+        ],
+        "explanation": "Taktik menakut-nakuti (scareware) buat bikin kamu buru-buru install.",
+        "answer": 1
+      },
+      {
+        "prompt": "Langkah pertama saat curiga HP kena malware?",
+        "options": [
+          "Lanjut transaksi bank",
+          "Putus internet",
+          "Install 5 antivirus sekaligus",
+          "Kirim pesan ke semua kontak"
+        ],
+        "explanation": "Memutus internet menghentikan malware mengirim data atau menerima perintah.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv5-ransomware",
+    "level": 5,
+    "title": "Ransomware",
+    "summary": "Saat file kamu dikunci dan penjahat minta tebusan.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Gimana ransomware bekerja",
+        "body": "Ransomware mengenkripsi file korban, lalu minta tebusan (biasanya kripto) buat kunci pembukanya. Versi modern juga nyuri data dulu, lalu ngancem nyebarin kalau gak bayar (double extortion).\n\nSasarannya bukan cuma perusahaan besar. Rumah sakit, sekolah, kantor pemerintah, sampai laptop pribadi pernah kena. Indonesia juga pernah ngalamin serangan besar ke layanan publik.",
+        "tip": "Ransomware itu kayak orang yang nggembok semua lemari di rumahmu, terus naruh surat \"bayar kalau mau kuncinya\".",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "FILE KAMU",
+            "KUNCI PENJAHAT"
+          ]
+        }
+      },
+      {
+        "title": "Bayar atau enggak?",
+        "body": "Bayar tebusan itu berisiko:\n- Gak ada jaminan kuncinya dikasih atau berfungsi\n- Datanya bisa tetap disebar\n- Bayar = ngedanain kejahatan berikutnya, dan korban yang bayar sering diincer lagi\n\nYang jauh lebih ampuh: punya backup yang gak ikut terenkripsi. Kalau backup aman, kamu tinggal hapus, pasang ulang, dan pulihkan.",
+        "tip": "Bayar penculik gak menjamin sandera pulang. Lebih baik dari awal sandera gak bisa diculik."
+      },
+      {
+        "title": "Pertahanan berlapis",
+        "body": "Kombinasi yang paling efektif:\n- Backup offline atau yang gak bisa diubah, dan rutin dites pemulihannya\n- Update sistem dan aplikasi\n- Akun sehari-hari tanpa hak admin\n- Waspada lampiran dan link, terutama yang bikin buru-buru\n- 2FA buat akses jarak jauh (remote desktop, VPN)\n\nBackup yang selalu tersambung ke komputer bisa ikut terenkripsi. Cabut setelah selesai backup.",
+        "tip": "Simpan salinan kunci rumah di rumah saudara, bukan di laci yang sama.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Backup offline",
+            "Update",
+            "Akses minimal",
+            "Waspada lampiran"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Ransomware biasanya...",
+        "options": [
+          "Mempercepat komputer",
+          "Mengenkripsi file lalu minta tebusan",
+          "Menghapus iklan",
+          "Memperbarui aplikasi"
+        ],
+        "explanation": "Inti ransomware: file dikunci dan pemerasan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Double extortion artinya...",
+        "options": [
+          "Minta tebusan dua kali lipat",
+          "Data dicuri dan diancam disebar, selain dienkripsi",
+          "Dua virus sekaligus",
+          "Dua password"
+        ],
+        "explanation": "Walau korban punya backup, ancaman bocor tetap ada.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pertahanan terbaik buat bisa pulih dari ransomware?",
+        "options": [
+          "Bayar tebusan",
+          "Backup offline yang rutin dites",
+          "Matikan monitor",
+          "Ganti wallpaper"
+        ],
+        "explanation": "Backup yang aman bikin kamu gak tergantung penjahat.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa harddisk backup sebaiknya dicabut setelah dipakai?",
+        "options": [
+          "Biar awet",
+          "Biar gak ikut terenkripsi kalau komputer kena",
+          "Biar lebih cepat",
+          "Gak ada alasannya"
+        ],
+        "explanation": "Ransomware mengenkripsi semua drive yang tersambung.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa bayar tebusan berisiko?",
+        "options": [
+          "Kuncinya pasti berfungsi",
+          "Gak ada jaminan, dan bisa jadi sasaran lagi",
+          "Datanya pasti dihapus penjahat",
+          "Bisa dapet diskon"
+        ],
+        "explanation": "Penjahat gak terikat janji, dan korban yang bayar menarik buat diserang ulang.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv5-mobile",
+    "level": 5,
+    "title": "Malware di HP Android",
+    "summary": "Modus APK undangan, izin Aksesibilitas, dan pencuri OTP.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Kenapa HP jadi sasaran utama",
+        "body": "Buat banyak orang, HP adalah dompet, KTP, dan kantor sekaligus: m-banking, e-wallet, WhatsApp, email, dan OTP semua di satu tempat.\n\nDi Indonesia, modus yang paling sering adalah file .APK yang dikirim lewat WhatsApp dengan nama yang bikin penasaran: undangan nikah, surat tilang, tagihan, resi paket, atau \"lihat foto ini\".",
+        "tip": "Kalau dompet, KTP, dan kunci rumah disatuin di satu tas, tas itu yang diincer copet."
+      },
+      {
+        "title": "Rantai serangannya",
+        "body": "Alurnya biasanya begini:\n- Korban install APK dari chat, padahal Android udah ngasih peringatan \"sumber tidak dikenal\"\n- Aplikasi minta izin Aksesibilitas atau baca SMS dengan alasan dibuat-buat\n- Dengan izin itu, malware bisa baca layar, nyalin OTP dari SMS, bahkan nekan tombol sendiri\n- Data dikirim ke penipu, lalu rekening atau akun dikuras\n\nIzin Aksesibilitas itu sangat kuat. Aplikasi normal jarang butuh izin ini.",
+        "tip": "Izin Aksesibilitas itu kayak ngasih orang asing remote TV, kunci rumah, dan hak tanda tangan sekaligus.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "undangan.apk",
+            "Aksesibilitas",
+            "baca SMS OTP",
+            "Penipu"
+          ]
+        }
+      },
+      {
+        "title": "Kebal dari modus APK",
+        "body": "Aturan simpel:\n- Jangan pernah install .APK dari chat, siapa pun pengirimnya. Undangan dan tagihan asli itu PDF atau gambar, bukan aplikasi\n- Biarkan \"Install aplikasi tidak dikenal\" mati\n- Nyalakan Google Play Protect\n- Cek Setelan → Aksesibilitas dan Aplikasi admin perangkat secara berkala\n- Kalau terlanjur install: putus internet, hapus aplikasinya, telepon bank lewat nomor resmi buat blokir, ganti password",
+        "tip": "Surat undangan gak pernah butuh kunci rumahmu. Kalau minta, itu bukan undangan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Teman ngirim \"Undangan Pernikahan.apk\" di WhatsApp. Sebaiknya...",
+        "options": [
+          "Install biar sopan",
+          "Jangan install; undangan asli bukan aplikasi",
+          "Install terus hapus",
+          "Teruskan ke grup"
+        ],
+        "explanation": "File .apk dari chat adalah modus utama malware HP di Indonesia.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa izin Aksesibilitas berbahaya kalau dikasih ke aplikasi jahat?",
+        "options": [
+          "Bikin layar redup",
+          "Bisa baca layar dan nekan tombol sendiri",
+          "Bikin HP lebih cepat",
+          "Gak berbahaya"
+        ],
+        "explanation": "Malware bisa membaca OTP dan melakukan transaksi atas nama kamu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Setelan Android yang sebaiknya tetap mati?",
+        "options": [
+          "Install aplikasi tidak dikenal",
+          "Google Play Protect",
+          "Kunci layar",
+          "Update sistem"
+        ],
+        "explanation": "Mematikannya mencegah APK dari luar Play Store terpasang.",
+        "answer": 0
+      },
+      {
+        "prompt": "Terlanjur install APK mencurigakan. Setelah putus internet dan hapus aplikasinya, langkah penting berikutnya?",
+        "options": [
+          "Tidur",
+          "Hubungi bank lewat nomor resmi dan ganti password",
+          "Install ulang APK-nya",
+          "Posting di medsos"
+        ],
+        "explanation": "Blokir akses keuangan secepatnya sebelum sempat dikuras.",
+        "answer": 1
+      },
+      {
+        "prompt": "Malware HP pencuri OTP biasanya minta izin...",
+        "options": [
+          "Kamera",
+          "Baca SMS / Aksesibilitas",
+          "Senter",
+          "Kalender"
+        ],
+        "explanation": "OTP dikirim lewat SMS atau tampil di layar.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv5-botnet",
+    "level": 5,
+    "title": "Botnet & DDoS",
+    "summary": "Ribuan perangkat yang dibajak buat nyerang bareng-bareng.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Pasukan zombie",
+        "body": "Botnet adalah kumpulan perangkat yang udah dibobol dan dikendalikan dari jarak jauh oleh satu penyerang (lewat server command & control).\n\nAnggotanya bisa komputer, HP, router rumah, kamera CCTV, sampai TV pintar, terutama yang masih pakai password bawaan dan gak pernah diupdate. Pemiliknya sering gak sadar perangkatnya jadi \"zombie\".",
+        "tip": "Botnet itu kayak ribuan boneka yang talinya dipegang satu dalang.",
+        "visual": {
+          "kind": "botnet",
+          "labels": [
+            "situs",
+            "bot"
+          ]
+        }
+      },
+      {
+        "title": "Serangan DDoS",
+        "body": "DDoS (Distributed Denial of Service) adalah serangan yang bikin layanan tumbang dengan membanjiri lalu lintas dari banyak sumber sekaligus.\n\nServer cuma bisa melayani sekian permintaan. Kalau dibanjiri jutaan permintaan palsu, pengguna asli gak kebagian. Situs jadi lemot atau mati total.\n\nSelain DDoS, botnet juga dipakai buat kirim spam, nebak password massal, dan nambang kripto.",
+        "tip": "DDoS itu kayak ribuan orang pura-pura antre di kasir tanpa beli apa-apa. Pembeli beneran gak bisa bayar."
+      },
+      {
+        "title": "Jangan jadi bagian botnet",
+        "body": "Yang bisa kamu lakukan:\n- Ganti password bawaan router, CCTV, dan perangkat pintar\n- Update firmware router secara berkala\n- Matikan fitur remote yang gak dipakai (UPnP, akses admin dari internet)\n- Jangan pasang aplikasi bajakan atau \"booster\"\n\nBuat pemilik situs: layanan CDN dan anti-DDoS (misal Cloudflare) bisa menyaring lalu lintas jahat sebelum sampai ke server.",
+        "tip": "Gembok pagar yang masih pakai kombinasi pabrik \"0000\" itu bukan gembok, cuma hiasan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Botnet adalah...",
+        "options": [
+          "Aplikasi chat",
+          "Kumpulan perangkat yang dibajak dan dikendalikan penyerang",
+          "Jenis kabel jaringan",
+          "Antivirus"
+        ],
+        "explanation": "Perangkat \"zombie\" yang menerima perintah dari server command & control.",
+        "answer": 1
+      },
+      {
+        "prompt": "Tujuan serangan DDoS adalah...",
+        "options": [
+          "Mencuri password",
+          "Membuat layanan gak bisa diakses",
+          "Mempercepat situs",
+          "Mengenkripsi file"
+        ],
+        "explanation": "DDoS membanjiri server sampai pengguna asli gak terlayani.",
+        "answer": 1
+      },
+      {
+        "prompt": "Perangkat yang paling sering jadi anggota botnet adalah...",
+        "options": [
+          "Yang pakai password bawaan dan jarang update",
+          "Yang selalu diupdate",
+          "Yang dimatikan",
+          "Yang gak punya internet"
+        ],
+        "explanation": "Password pabrik gampang ditebak otomatis oleh malware.",
+        "answer": 0
+      },
+      {
+        "prompt": "Langkah sederhana mengamankan router rumah?",
+        "options": [
+          "Biarkan setelan pabrik",
+          "Ganti password admin dan update firmware",
+          "Taruh di lemari",
+          "Matikan lampunya"
+        ],
+        "explanation": "Dua langkah ini menutup jalan masuk paling umum.",
+        "answer": 1
+      },
+      {
+        "prompt": "Layanan yang membantu situs bertahan dari DDoS adalah...",
+        "options": [
+          "CDN / anti-DDoS seperti Cloudflare",
+          "Aplikasi kalkulator",
+          "Base64",
+          "Spreadsheet"
+        ],
+        "explanation": "CDN menyaring dan menyebar lalu lintas sebelum sampai ke server.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv5-supply",
+    "level": 5,
+    "title": "Serangan Rantai Pasok",
+    "summary": "Saat yang dibobol bukan kamu, tapi alat atau pemasok yang kamu percaya.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Nyerang lewat pintu belakang yang dipercaya",
+        "body": "Aplikasi modern dibangun dari ratusan library buatan orang lain. Perusahaan juga bergantung pada vendor software, penyedia cloud, dan kontraktor.\n\nSerangan rantai pasok terjadi ketika penyerang membobol salah satu mata rantai itu. Begitu library atau update resmi disusupi, ribuan korban kena sekaligus, karena semua percaya sumbernya.",
+        "tip": "Kalau air PDAM-nya yang tercemar, semua rumah yang nyambung ikut kena, sebersih apa pun dapurnya.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "Aplikasi",
+            "Library A",
+            "Library B",
+            "lib A1",
+            "lib A2",
+            "lib B1",
+            "lib disusupi"
+          ]
+        }
+      },
+      {
+        "title": "Contoh polanya",
+        "body": "Pola yang pernah terjadi di dunia nyata:\n- Update resmi sebuah software manajemen IT disusupi, lalu terpasang di ribuan organisasi\n- Pengelola library open-source diambil alih lewat social engineering bertahun-tahun, lalu menyisipkan pintu belakang\n- Paket palsu dengan nama mirip (typosquatting) diunggah ke npm atau PyPI, berharap developer salah ketik\n- Ekstensi browser populer dijual ke pihak baru yang lalu menambahkan pencuri data",
+        "tip": "Penyusup paling sabar gak maksa masuk. Dia melamar kerja jadi satpam, kerja bagus bertahun-tahun, baru beraksi."
+      },
+      {
+        "title": "Mengurangi risikonya",
+        "body": "Buat developer:\n- Pakai library seperlunya, cek reputasi dan aktivitas pengelolanya\n- Kunci versi (lockfile) dan cek perubahan saat update\n- Jalankan pemindai kerentanan dependency\n- Periksa ejaan nama paket sebelum install\n\nBuat pengguna:\n- Pasang aplikasi dan ekstensi seperlunya, hapus yang gak dipakai\n- Perhatikan kalau ekstensi tiba-tiba minta izin baru",
+        "tip": "Makin sedikit pintu yang kunci duplikatnya dipegang orang lain, makin kecil risikonya."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Serangan rantai pasok menyerang...",
+        "options": [
+          "Langsung ke korban akhir",
+          "Pemasok, library, atau update yang dipercaya korban",
+          "Kabel listrik",
+          "Monitor"
+        ],
+        "explanation": "Satu mata rantai yang dibobol bisa mengenai ribuan korban.",
+        "answer": 1
+      },
+      {
+        "prompt": "Typosquatting di npm/PyPI artinya...",
+        "options": [
+          "Paket dengan nama mirip paket populer buat jebak salah ketik",
+          "Paket yang terlalu besar",
+          "Paket tanpa dokumentasi",
+          "Paket berbayar"
+        ],
+        "explanation": "Salah satu huruf beda, isinya berbahaya.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa serangan rantai pasok sangat berbahaya?",
+        "options": [
+          "Karena lambat",
+          "Karena korban percaya sumbernya, dan dampaknya massal",
+          "Karena butuh internet",
+          "Karena mudah dideteksi"
+        ],
+        "explanation": "Update resmi biasanya dipasang tanpa curiga.",
+        "answer": 1
+      },
+      {
+        "prompt": "Lockfile di project berguna buat...",
+        "options": [
+          "Mengunci versi dependency yang dipakai",
+          "Mengenkripsi kode",
+          "Menyimpan password",
+          "Mempercepat Wi-Fi"
+        ],
+        "explanation": "Versi terkunci mencegah update tak terduga masuk diam-diam.",
+        "answer": 0
+      },
+      {
+        "prompt": "Ekstensi browser lama tiba-tiba minta izin \"baca semua data di semua situs\". Sebaiknya...",
+        "options": [
+          "Setujui aja",
+          "Curigai, cek, atau hapus ekstensinya",
+          "Install ekstensi lain",
+          "Restart HP"
+        ],
+        "explanation": "Ekstensi bisa berpindah pemilik dan berubah jadi jahat.",
+        "answer": 1
+      }
+    ]
+  }
+]

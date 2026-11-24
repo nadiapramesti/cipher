@@ -95,7 +95,14 @@
       {
         "title": "OSINT: open source intelligence",
         "body": "OSINT (Open Source Intelligence) is info from public sources:\n- Search engines and web archives\n- Social media and professional profiles\n- DNS records and domain registration data\n- Photo metadata (GPS location, camera model)\n- Leaked data already circulating publicly\n\nOSINT is used by journalists, researchers, security teams, and sadly scammers too. From a few posts, someone can learn a person's workplace, routine, even address.",
-        "tip": "OSINT is piecing old newspaper clippings into a full story. Each clipping is public, but together they can be very personal."
+        "tip": "OSINT is piecing old newspaper clippings into a full story. Each clipping is public, but together they can be very personal.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "!",
+            "OSINT"
+          ]
+        }
       },
       {
         "title": "Ethical limits and protecting yourself",
@@ -176,12 +183,30 @@
       {
         "title": "Suspicious patterns",
         "body": "What analysts (blue team / SOC) usually hunt for:\n- Many failed logins then one success: a password guess that finally worked\n- Logins from unusual countries or hours\n- Requests with odd patterns like ' OR 1=1 or <script>\n- Huge traffic spikes from many IPs: possibly DDoS\n- A regular account suddenly accessing admin data\n\nTools called SIEMs gather logs from many systems and raise alerts automatically.",
-        "tip": "A good guard doesn't watch every recording, but knows which moments to replay."
+        "tip": "A good guard doesn't watch every recording, but knows which moments to replay.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "401 x1000",
+            "SIEM"
+          ]
+        }
       },
       {
         "title": "Incident response steps",
         "body": "When an incident happens, teams follow a common flow:\n1. Preparation: have a plan, contacts, and backups before anything happens\n2. Detection & analysis: confirm it's real and how wide it is\n3. Containment: isolate affected systems so it doesn't spread\n4. Eradication: remove the attacker's access and patch the flaw\n5. Recovery: restore services from clean backups\n6. Lessons learned: record what to improve so it doesn't recur\n\nPersonal accounts work the same way: lock (change password), check damage, recover, and harden (2FA).",
-        "tip": "Like firefighting: contain the fire so it doesn't spread, find the cause, repair, then install better alarms."
+        "tip": "Like firefighting: contain the fire so it doesn't spread, find the cause, repair, then install better alarms.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Prepare",
+            "Detect",
+            "Contain",
+            "Eradicate",
+            "Recover",
+            "Learn"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -257,7 +282,16 @@
       {
         "title": "Roles in cyber security",
         "body": "Cyber security is broad, not just \"hackers\":\n- Red team / pentester: tests systems by attacking them, with permission\n- Blue team / SOC analyst: monitors, detects, and responds to attacks\n- Security engineer: builds secure systems and infrastructure\n- AppSec: secures application code, great for people who like coding\n- GRC: policy, audits, and compliance\n- Digital forensics: investigates evidence after incidents\n\nMany people start in IT support, networking, or development, then move into security.",
-        "tip": "Like a hospital: surgeons, on-call doctors, pharmacists, management. All essential."
+        "tip": "Like a hospital: surgeons, on-call doctors, pharmacists, management. All essential.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "IT basics",
+            "Networking & Linux",
+            "Blue / Red team",
+            "Specialist"
+          ]
+        }
       },
       {
         "title": "Your next learning plan",

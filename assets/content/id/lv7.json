@@ -1,0 +1,367 @@
+[
+  {
+    "id": "lv7-forensics",
+    "level": 7,
+    "title": "Forensik Digital",
+    "summary": "Nyari jejak setelah insiden tanpa merusak buktinya.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Setiap aksi meninggalkan jejak",
+        "body": "Forensik digital adalah ilmu mengumpulkan, menjaga, dan menganalisis bukti digital supaya bisa dipercaya, termasuk di pengadilan.\n\nJejak yang sering dicari:\n- Log sistem dan login\n- Riwayat browser dan file yang baru dibuka\n- Metadata file (kapan dibuat, diubah, oleh siapa)\n- File yang dihapus, yang sering masih bisa dipulihkan\n- Isi memori (RAM) saat insiden",
+        "tip": "Kayak tim forensik di TKP: semua dicatat dan difoto dulu sebelum disentuh.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "jejak",
+            "forensik"
+          ]
+        }
+      },
+      {
+        "title": "Integritas bukti",
+        "body": "Bukti digital gampang berubah, bahkan cuma karena dibuka. Makanya analis:\n- Bikin salinan identik (disk image), lalu kerja di salinannya\n- Menghitung hash (misal SHA-256) bukti asli dan salinan; kalau sama, isinya identik\n- Mencatat chain of custody: siapa memegang bukti, kapan, dan buat apa\n\nTanpa ini, bukti bisa dianggap gak sah karena gak bisa dibuktikan gak diutak-atik.",
+        "tip": "Hash bukti itu segel plastik bernomor di kantong barang bukti. Kalau segelnya beda, ada yang ngebuka.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "SHA-256",
+            "salinan disk",
+            "hash bukti"
+          ]
+        }
+      },
+      {
+        "title": "Jangan hapus jejak sendiri",
+        "body": "Kalau kamu jadi korban (akun dibajak, ditipu, diancam):\n- Jangan buru-buru hapus chat atau akun\n- Screenshot lengkap dengan tanggal, nomor, dan URL\n- Simpan file asli, bukan cuma screenshot, kalau bisa\n- Catat kronologi selagi masih ingat\n- Laporkan ke platform, bank, dan kalau perlu ke polisi (patrolisiber.id)\n\nBukti yang rapi bikin laporan jauh lebih mudah ditindaklanjuti.",
+        "tip": "Membersihkan TKP sebelum polisi datang itu niatnya baik, tapi justru menghilangkan petunjuk."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kenapa analis forensik kerja di salinan, bukan bukti asli?",
+        "options": [
+          "Biar cepat",
+          "Supaya bukti asli gak berubah",
+          "Karena bukti asli rusak",
+          "Biar hemat listrik"
+        ],
+        "explanation": "Membuka saja bisa mengubah metadata bukti.",
+        "answer": 1
+      },
+      {
+        "prompt": "Hash dipakai di forensik untuk...",
+        "options": [
+          "Mengenkripsi bukti",
+          "Membuktikan salinan identik dengan aslinya",
+          "Menghapus jejak",
+          "Mempercepat analisis"
+        ],
+        "explanation": "Hash sama = isi sama persis.",
+        "answer": 1
+      },
+      {
+        "prompt": "Chain of custody adalah...",
+        "options": [
+          "Rantai sepeda",
+          "Catatan siapa memegang bukti, kapan, dan buat apa",
+          "Jenis malware",
+          "Kabel jaringan"
+        ],
+        "explanation": "Membuktikan bukti gak diutak-atik selama penanganan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Akun kamu dibajak dan pelaku ngancem. Langkah yang tepat?",
+        "options": [
+          "Hapus semua chat biar tenang",
+          "Simpan bukti (screenshot, file, kronologi) lalu laporkan",
+          "Bales ngancem",
+          "Diam aja"
+        ],
+        "explanation": "Bukti yang rapi memudahkan platform dan aparat bertindak.",
+        "answer": 1
+      },
+      {
+        "prompt": "File yang dihapus biasa...",
+        "options": [
+          "Pasti hilang selamanya",
+          "Sering masih bisa dipulihkan",
+          "Berubah jadi virus",
+          "Pindah ke cloud"
+        ],
+        "explanation": "Penghapusan biasa cuma menandai ruangnya kosong.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv7-cloud",
+    "level": 7,
+    "title": "Keamanan Cloud",
+    "summary": "Siapa tanggung jawab apa, dan kenapa banyak kebocoran gara-gara salah setelan.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Shared responsibility",
+        "body": "Di cloud (AWS, Google Cloud, Azure, Google Drive, dll.), keamanan dibagi:\n- Penyedia: gedung, server fisik, jaringan inti, dan layanan dasarnya\n- Kamu: data, akun, siapa yang dikasih akses, dan setelan layanan\n\nBanyak orang mengira \"udah di cloud = pasti aman\". Padahal kalau kamu bikin folder publik, penyedianya gak akan melarang.",
+        "tip": "Nyewa apartemen: gedung dan satpam urusan pengelola, tapi ngunci pintu unitmu urusan kamu.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Data & akun (kamu)",
+            "Aplikasi",
+            "Server (penyedia)",
+            "Gedung (penyedia)"
+          ]
+        }
+      },
+      {
+        "title": "Kesalahan paling umum",
+        "body": "Kebocoran cloud paling sering bukan karena dibobol canggih, tapi karena:\n- Storage (bucket, folder Drive) disetel \"siapa pun yang punya link\"\n- API key atau password ketulis di kode yang di-upload ke GitHub publik\n- Akun admin tanpa 2FA\n- Hak akses berlebih: semua orang jadi admin\n- Lupa mematikan server atau database uji coba yang terbuka ke internet\n\nBot terus memindai internet nyari kesalahan kayak gini.",
+        "tip": "Gudang paling aman pun percuma kalau pintunya dibiarkan kebuka dengan papan \"silakan masuk\"."
+      },
+      {
+        "title": "Kebiasaan aman di cloud",
+        "body": "Buat pribadi dan tim kecil:\n- Cek berkala file yang dibagikan \"siapa pun dengan link\", ubah ke orang tertentu\n- 2FA di semua akun cloud, terutama admin\n- Simpan rahasia di secret manager atau environment variable, jangan di kode\n- Kasih akses seminimal mungkin, cabut kalau orangnya udah gak terlibat\n- Aktifkan notifikasi login dan aktivitas mencurigakan\n\nKalau API key terlanjur bocor: langsung cabut (revoke) dan bikin baru. Menghapus commit aja gak cukup.",
+        "tip": "Kalau kunci rumah pernah difoto orang, ganti gemboknya. Jangan cuma hapus fotonya."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Dalam model shared responsibility, setelan akses data adalah tanggung jawab...",
+        "options": [
+          "Penyedia cloud",
+          "Pengguna/kamu",
+          "Pemerintah",
+          "Gak ada"
+        ],
+        "explanation": "Penyedia menjaga infrastruktur, kamu menjaga data dan akses.",
+        "answer": 1
+      },
+      {
+        "prompt": "Penyebab paling umum kebocoran cloud adalah...",
+        "options": [
+          "Serangan super canggih",
+          "Salah setelan, misal folder publik",
+          "Gempa bumi",
+          "Server terlalu cepat"
+        ],
+        "explanation": "Konfigurasi yang keliru jauh lebih sering dari peretasan rumit.",
+        "answer": 1
+      },
+      {
+        "prompt": "API key terlanjur ke-push ke GitHub publik. Langkah yang benar?",
+        "options": [
+          "Hapus commit-nya aja",
+          "Cabut (revoke) key itu dan bikin yang baru",
+          "Ganti nama repo",
+          "Biarkan"
+        ],
+        "explanation": "Bot bisa menyalinnya dalam hitungan menit; key lama harus dimatikan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Di mana sebaiknya menyimpan rahasia aplikasi?",
+        "options": [
+          "Di kode sumber",
+          "Di secret manager / environment variable",
+          "Di README",
+          "Di nama file"
+        ],
+        "explanation": "Rahasia di kode mudah bocor lewat repo.",
+        "answer": 1
+      },
+      {
+        "prompt": "Setelan berbagi Google Drive yang paling berisiko adalah...",
+        "options": [
+          "Hanya saya",
+          "Orang tertentu",
+          "Siapa pun yang punya link",
+          "Grup keluarga"
+        ],
+        "explanation": "Link bisa diteruskan dan diakses siapa saja.",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "lv7-ai",
+    "level": 7,
+    "title": "AI, Deepfake & Penipuan Baru",
+    "summary": "Suara dan wajah palsu yang meyakinkan, dan cara gak ketipu.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Penipuan versi AI",
+        "body": "AI bikin penipuan lama jadi jauh lebih meyakinkan:\n- Kloning suara dari beberapa detik rekaman video medsos, lalu telepon \"anak\" atau \"atasan\" minta transfer\n- Video deepfake tokoh terkenal promosi investasi bodong\n- Video call dengan wajah palsu\n- Pesan phishing tanpa salah ketik, dalam bahasa yang rapi\n\nCiri lama \"tulisannya berantakan\" udah gak bisa diandalkan lagi.",
+        "tip": "Dulu penipu nyamar pakai topeng murahan. Sekarang topengnya hampir sama persis dengan wajah aslinya."
+      },
+      {
+        "title": "Cara mengenali",
+        "body": "Deepfake makin halus, jadi fokus ke konteks, bukan cuma tampilan:\n- Permintaan mendesak soal uang atau rahasia, apalagi minta jangan cerita ke siapa pun\n- Nomor atau akun baru, \"HP lama rusak\"\n- Video call yang buru-buru diputus, gambar patah-patah saat wajah menoleh atau ditutup tangan\n- Promo investasi \"pasti untung\" dari tokoh terkenal\n\nMinta lawan bicara melakukan hal spontan (menoleh ke samping, sebut kode keluarga) bisa membantu.",
+        "tip": "Jangan cuma lihat wajah tamunya. Perhatikan juga kenapa dia dateng tengah malam minta kunci brankas.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "deepfake",
+            "cek"
+          ]
+        }
+      },
+      {
+        "title": "Pakai AI dengan aman",
+        "body": "AI juga alat yang berguna, asal dipakai bijak:\n- Jangan tempel data rahasia (password, data pelanggan, dokumen internal) ke chatbot publik\n- Cek ulang jawaban AI soal hal penting; AI bisa salah dengan percaya diri\n- Hati-hati ekstensi atau aplikasi \"AI gratis\" yang minta akses luas\n- Batasi rekaman suara dan video wajah yang dipost publik kalau khawatir dikloning\n\nDan kode keluarga dari LV.00 makin relevan di era AI.",
+        "tip": "AI itu asisten pintar yang kadang ngarang. Kasih kerjaan, tapi tetap dicek, dan jangan titip kunci brankas."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kloning suara bisa dibuat dari...",
+        "options": [
+          "Butuh rekaman berjam-jam",
+          "Beberapa detik rekaman, misal video medsos",
+          "Cuma foto",
+          "Nomor HP"
+        ],
+        "explanation": "Teknologi sekarang cuma butuh sampel pendek.",
+        "answer": 1
+      },
+      {
+        "prompt": "Telepon dengan suara persis atasan minta transfer segera dan rahasia. Sebaiknya...",
+        "options": [
+          "Langsung transfer",
+          "Verifikasi lewat jalur lain sebelum bertindak",
+          "Kirim OTP",
+          "Matikan HP selamanya"
+        ],
+        "explanation": "Suara bisa dipalsukan; verifikasi lewat nomor yang sudah dikenal.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa \"tulisan berantakan\" bukan lagi ciri andal phishing?",
+        "options": [
+          "Karena penipu udah berhenti",
+          "Karena AI bisa menulis rapi",
+          "Karena email dihapus",
+          "Karena ada sensor"
+        ],
+        "explanation": "Fokus ke konteks dan permintaannya, bukan kerapian bahasa.",
+        "answer": 1
+      },
+      {
+        "prompt": "Data apa yang gak boleh ditempel ke chatbot AI publik?",
+        "options": [
+          "Pertanyaan resep",
+          "Password dan data pelanggan",
+          "Ide nama kucing",
+          "Soal latihan matematika"
+        ],
+        "explanation": "Data yang dikirim bisa tersimpan di luar kendali kamu.",
+        "answer": 1
+      },
+      {
+        "prompt": "Iklan video tokoh terkenal janji investasi \"pasti untung 10% per hari\". Kemungkinan...",
+        "options": [
+          "Peluang emas",
+          "Deepfake dan investasi bodong",
+          "Program pemerintah",
+          "Fitur YouTube"
+        ],
+        "explanation": "Janji untung pasti dan tinggi adalah ciri klasik penipuan.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv7-plan",
+    "level": 7,
+    "title": "Rencana Keamanan Pribadi",
+    "summary": "Ngerangkum semua level jadi rencana nyata yang bisa kamu jalanin minggu ini.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Threat model: kenali dirimu",
+        "body": "Sebelum pasang pengaman, jawab empat pertanyaan:\n- Apa yang paling berharga? (akun bank, foto, akun kerja, nomor HP)\n- Siapa yang mungkin ngincer? (penipu acak, orang dekat, pesaing)\n- Gimana caranya? (phishing, APK, HP dicuri, password bocor)\n- Seberapa parah kalau kejadian?\n\nJawaban ini namanya threat model. Dari situ kamu tahu mana yang harus diprioritaskan.",
+        "tip": "Rumah di kampung dan toko emas di kota butuh pengamanan beda. Mulai dari tahu kamu yang mana.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Password manager",
+            "2FA",
+            "Update",
+            "Backup",
+            "Waspada"
+          ]
+        }
+      },
+      {
+        "title": "Rencana 7 hari",
+        "body": "Satu langkah kecil per hari:\n- Hari 1: pasang password manager, amankan email utama\n- Hari 2: aktifkan 2FA atau passkey di email, bank, e-wallet, medsos\n- Hari 3: update HP dan laptop, hapus aplikasi yang gak dipakai\n- Hari 4: cek izin aplikasi dan Aksesibilitas\n- Hari 5: nyalakan backup otomatis dan Find My Device\n- Hari 6: rapikan privasi medsos, cek email di haveibeenpwned\n- Hari 7: sepakati kode keluarga dan ajari orang tua soal modus APK",
+        "tip": "Naik gunung juga dimulai dari satu langkah. Yang penting jalan terus."
+      },
+      {
+        "title": "Jadi pelindung buat orang lain",
+        "body": "Ilmu dari Cipher paling berguna kalau dibagi:\n- Bantu orang tua dan keluarga ngecek setelan HP mereka\n- Kalau ada link penipuan di grup, kasih tahu dengan sopan kenapa itu berbahaya\n- Laporkan akun dan nomor penipu ke platform\n- Terus belajar: ancaman berubah, kebiasaan baik tetap\n\nSelamat, kamu udah sampai di ujung peta Cipher. Sekarang kamu bukan cuma lebih aman, tapi bisa bikin orang di sekitarmu lebih aman juga.",
+        "tip": "Satu orang yang ngerti keamanan di keluarga itu kayak satu orang yang bisa P3K: kecil tapi nyelametin."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Threat model membantu kamu...",
+        "options": [
+          "Membeli antivirus termahal",
+          "Menentukan apa yang paling perlu dilindungi dan dari apa",
+          "Menghapus semua akun",
+          "Mempercepat internet"
+        ],
+        "explanation": "Prioritas keamanan beda untuk tiap orang.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa email utama diamankan paling awal?",
+        "options": [
+          "Karena paling jarang dipakai",
+          "Karena bisa dipakai reset password akun lain",
+          "Karena gratis",
+          "Karena paling kecil"
+        ],
+        "explanation": "Siapa yang menguasai email bisa menguasai banyak akun lain.",
+        "answer": 1
+      },
+      {
+        "prompt": "Langkah yang paling melindungi orang tua dari modus APK?",
+        "options": [
+          "Melarang punya HP",
+          "Mengajari jangan install file dari chat dan sepakati kode keluarga",
+          "Mematikan WhatsApp",
+          "Mengganti wallpaper"
+        ],
+        "explanation": "Edukasi dan kebiasaan verifikasi lebih efektif dari larangan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kalau ada link penipuan di grup keluarga, sebaiknya...",
+        "options": [
+          "Diam aja",
+          "Jelaskan dengan sopan kenapa berbahaya",
+          "Ikut klik buat ngecek",
+          "Keluar grup"
+        ],
+        "explanation": "Satu penjelasan bisa menyelamatkan banyak orang di grup.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kunci keamanan jangka panjang menurut Cipher adalah...",
+        "options": [
+          "Satu aplikasi ajaib",
+          "Kebiasaan baik yang konsisten dan terus belajar",
+          "Gak pakai internet",
+          "Ganti HP tiap bulan"
+        ],
+        "explanation": "Ancaman berubah, kebiasaan baik tetap melindungi.",
+        "answer": 1
+      }
+    ]
+  }
+]

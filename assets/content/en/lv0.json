@@ -9,7 +9,14 @@
       {
         "title": "A password is your house key",
         "body": "Your email, chat apps, and digital banking are all guarded by passwords. If the key is easy to guess, someone can walk in without breaking the door.\n\nAttackers rarely guess one by one by hand. They use programs that try billions of combinations per second, starting with lists of the most common passwords.\n\nPasswords that leak most often:\n- 123456, 12345678, qwerty\n- password, admin, iloveyou\n- your name + date of birth",
-        "tip": "A common password is like a padlock key sold identically in every store. A thief only needs that one key to try many houses."
+        "tip": "A common password is like a padlock key sold identically in every store. A thief only needs that one key to try many houses.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "ACCOUNT",
+            "PASSWORD"
+          ]
+        }
       },
       {
         "title": "Length beats complexity",
@@ -90,7 +97,15 @@
       {
         "title": "One key isn't enough",
         "body": "Passwords can leak: from hacked sites, from phishing, or from someone peeking. Two-Factor Authentication (2FA) adds a second check when you log in.\n\nThe factors can be:\n- Something you know: a password or PIN\n- Something you have: your phone or a security key\n- Something you are: a fingerprint or your face\n\n2FA means at least two different kinds.",
-        "tip": "ATMs have always used 2FA: the card (something you have) + the PIN (something you know). A stolen card alone isn't enough to withdraw money."
+        "tip": "ATMs have always used 2FA: the card (something you have) + the PIN (something you know). A stolen card alone isn't enough to withdraw money.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Password",
+            "OTP code",
+            "Fingerprint"
+          ]
+        }
       },
       {
         "title": "Types of 2FA",
@@ -181,7 +196,19 @@
       {
         "title": "Check the link before you tap",
         "body": "Fake sites often use addresses that look almost identical to the real ones:\n- bca.co.id (real) vs bca-co.id or bcaa.co.id (fake)\n- tokopedia.com vs tokopedia.com.promo-hadiah.xyz\n\nLook at the domain name right before the first slash. In the second example, the real domain is promo-hadiah.xyz, not tokopedia.\n\nIf in doubt, don't tap. Open the official app directly or type the address yourself.",
-        "tip": "Scammers put up a shop sign that looks nearly the same, like \"Indomaret\" becoming \"Indomarett\". If you're not careful, you're already shopping at the fake store."
+        "tip": "Scammers put up a shop sign that looks nearly the same, like \"Indomaret\" becoming \"Indomarett\". If you're not careful, you're already shopping at the fake store.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            ".",
+            ".id",
+            ".xyz",
+            "bca.co.id",
+            "go.id",
+            "bca-prize",
+            "claim"
+          ]
+        }
       },
       {
         "title": "If it already happened",
@@ -257,7 +284,15 @@
       {
         "title": "Updates patch the leaks",
         "body": "Every app and operating system has weaknesses. Once a weakness is found, the maker releases an update to patch it.\n\nThe catch: after the update is out, the weakness becomes public. Attackers immediately target phones that haven't updated.\n\nSafe habits:\n- Turn on automatic updates in the Play Store\n- Install system updates (Android/iOS) as soon as possible\n- Phones that no longer get security updates shouldn't be used for mobile banking",
-        "tip": "An update is like a repairman fixing a leaky roof. The longer you put it off, the longer your house gets rained on."
+        "tip": "An update is like a repairman fixing a leaky roof. The longer you put it off, the longer your house gets rained on.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            "PATCH",
+            "exploit",
+            "phone"
+          ]
+        }
       },
       {
         "title": "Install from official sources",
@@ -343,7 +378,14 @@
       {
         "title": "Social engineering: fooling people, not systems",
         "body": "Many attacks need no fancy hacking. The attacker just researches your profile, then pretends to be a friend, boss, or official.\n\nTypical patterns:\n- A fake account using your friend's photo and name, asking to borrow money\n- An \"HR person\" who knows your workplace from LinkedIn and asks for data\n- A quiz like \"your celebrity name = first pet + street name\" that actually fishes for security answers",
-        "tip": "A clever thief doesn't break the door. He learns the guard's name and greets him like an old friend to get let in."
+        "tip": "A clever thief doesn't break the door. He learns the guard's name and greets him like an old friend to get let in.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "!",
+            "research"
+          ]
+        }
       },
       {
         "title": "Tidy up your privacy settings",
@@ -419,12 +461,28 @@
       {
         "title": "Public Wi-Fi is a busy highway",
         "body": "On cafe, airport, or mall Wi-Fi you share a network with many strangers. The operator may not have set up security properly either.\n\nThe risks:\n- Unencrypted traffic can be snooped on\n- Attackers can create a fake Wi-Fi with a similar name, e.g. \"Cafe_Free\" vs \"Cafe Free\"\n- Phones that auto-join previously used network names can be fooled by a fake one",
-        "tip": "Talking over unencrypted public Wi-Fi is like sharing secrets on a crowded bus. Anyone can listen in."
+        "tip": "Talking over unencrypted public Wi-Fi is like sharing secrets on a crowded bus. Anyone can listen in.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Your phone",
+            "Cafe Wi-Fi",
+            "snooper?",
+            "Server"
+          ]
+        }
       },
       {
         "title": "HTTPS and VPNs are your shields",
         "body": "The good news: almost every major site and app now uses HTTPS. The content is encrypted, so people on the same network can't read your password.\n\nStill be careful:\n- Watch for certificate warnings in your browser. If one appears, don't continue\n- A trusted VPN creates an encrypted tunnel for all your traffic, useful on public Wi-Fi\n- Random free VPNs may snoop on your data themselves",
-        "tip": "HTTPS is a sealed envelope. The mail carrier sees the address but can't read the letter."
+        "tip": "HTTPS is a sealed envelope. The mail carrier sees the address but can't read the letter.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "HTTPS",
+            "SESSION KEY"
+          ]
+        }
       },
       {
         "title": "Safe habits on public Wi-Fi",
@@ -500,7 +558,15 @@
       {
         "title": "The 3-2-1 rule",
         "body": "Data that lives in only one place is data waiting to be lost. Use the 3-2-1 rule:\n- 3 copies of your data (1 original + 2 backups)\n- 2 different types of media (e.g. phone + laptop/flash drive)\n- 1 copy off-site (e.g. the cloud)\n\nFor phones, the easiest way: turn on automatic Google/iCloud backup for photos, contacts, and important chats.",
-        "tip": "Don't put all your eggs in one basket. If the basket falls, you still have eggs in the kitchen."
+        "tip": "Don't put all your eggs in one basket. If the basket falls, you still have eggs in the kitchen.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Phone (original)",
+            "Laptop",
+            "Cloud"
+          ]
+        }
       },
       {
         "title": "Screen lock & Find My Phone",
@@ -586,7 +652,14 @@
       {
         "title": "A family code word",
         "body": "A simple trick that works: agree on a secret family code.\n- Pick a word or question only your family knows\n- Never write it on social media or in group chats\n- If someone claiming to be family suddenly asks for money, ask for the code\n- Make it a rule: call back the old number before transferring\n\nAlso teach parents not to hesitate to hang up. A real scammer will pressure them; real family will understand.",
-        "tip": "A family code is like a house password. A \"relative\" who doesn't know it doesn't get let in."
+        "tip": "A family code is like a house password. A \"relative\" who doesn't know it doesn't get let in.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "FAMILY",
+            "CODE"
+          ]
+        }
       },
       {
         "title": "Kids and teens online",

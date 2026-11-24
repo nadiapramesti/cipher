@@ -9,12 +9,30 @@
       {
         "title": "Jaringan dari jaringan-jaringan",
         "body": "Internet adalah jaringan raksasa yang nyambungin jutaan jaringan kecil: Wi-Fi rumah, jaringan kantor, operator seluler, sampai pusat data.\n\nPerangkat di internet umumnya berperan sebagai:\n- Client: yang minta (HP kamu buka aplikasi)\n- Server: yang ngasih (komputer yang nyimpen data aplikasinya)\n\nTiap kali kamu buka situs, HP kamu (client) ngirim permintaan, server ngirim balasan.",
-        "tip": "Client itu pembeli di warung, server itu penjualnya. Pembeli minta, penjual nyiapin dan ngasih pesanan."
+        "tip": "Client itu pembeli di warung, server itu penjualnya. Pembeli minta, penjual nyiapin dan ngasih pesanan.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Client",
+            "Router",
+            "ISP",
+            "Server"
+          ]
+        }
       },
       {
         "title": "Data dipotong jadi paket",
         "body": "Data gak dikirim utuh. Foto 2 MB dipotong jadi ribuan paket kecil. Tiap paket punya alamat pengirim dan tujuan.\n\nPaket-paket itu:\n- Bisa lewat jalur berbeda-beda\n- Bisa nyampe gak urut, lalu disusun ulang di tujuan\n- Kalau ada yang hilang, dikirim ulang\n\nRouter di sepanjang jalan bertugas nentuin paket diteruskan ke mana.",
-        "tip": "Kayak kirim lemari pakai ekspedisi: dibongkar jadi papan-papan bernomor, dikirim terpisah, terus dirakit lagi di rumah tujuan."
+        "tip": "Kayak kirim lemari pakai ekspedisi: dibongkar jadi papan-papan bernomor, dikirim terpisah, terus dirakit lagi di rumah tujuan.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Foto 2 MB",
+            "Router",
+            "Router",
+            "Tujuan"
+          ]
+        }
       },
       {
         "title": "Siapa aja yang ada di jalur",
@@ -95,7 +113,16 @@
       {
         "title": "IP privat vs IP publik",
         "body": "Gak semua alamat bisa dilihat dari internet.\n\n- IP privat: cuma berlaku di jaringan lokal. Rentangnya 10.x.x.x, 172.16–31.x.x, dan 192.168.x.x\n- IP publik: alamat yang kelihatan di internet, biasanya milik router rumah atau operator\n\nRouter pakai NAT buat menerjemahkan banyak IP privat jadi satu IP publik. Makanya HP, laptop, dan TV di rumah keluar ke internet dengan IP publik yang sama.",
-        "tip": "IP privat itu nomor kamar di hotel. IP publik itu alamat hotelnya. Kurir dari luar cuma tahu alamat hotel, resepsionis (NAT) yang nganter ke kamar."
+        "tip": "IP privat itu nomor kamar di hotel. IP publik itu alamat hotelnya. Kurir dari luar cuma tahu alamat hotel, resepsionis (NAT) yang nganter ke kamar.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "192.168.1.x",
+            "192.168.1.x",
+            "192.168.1.x",
+            "IP publik"
+          ]
+        }
       },
       {
         "title": "Apa yang bisa diketahui dari IP",
@@ -171,7 +198,16 @@
       {
         "title": "Dua bagian dalam satu IP",
         "body": "Alamat IP terdiri dari dua bagian:\n- Bagian jaringan: nunjukin \"kompleks\"-nya\n- Bagian host: nunjukin \"rumah\" atau perangkat di dalamnya\n\nSubnet mask atau notasi CIDR (/angka) nunjukin berapa bit di depan yang jadi bagian jaringan. IPv4 total 32 bit.\n\nContoh 192.168.1.10/24: 24 bit pertama (192.168.1) adalah jaringannya, sisa 8 bit (.10) adalah perangkatnya.",
-        "tip": "Kayak alamat \"Jl. Melati Blok C no. 10\": \"Blok C\" itu jaringannya, \"no. 10\" itu rumahnya."
+        "tip": "Kayak alamat \"Jl. Melati Blok C no. 10\": \"Blok C\" itu jaringannya, \"no. 10\" itu rumahnya.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "192.168.1.0/24",
+            "192.168.2.0/24",
+            "10.0.0.0/24",
+            "router"
+          ]
+        }
       },
       {
         "title": "Ngitung jumlah alamat",
@@ -181,7 +217,16 @@
       {
         "title": "Kenapa subnet penting buat keamanan",
         "body": "Subnet bukan cuma urusan ngitung. Di dunia keamanan, subnet dipakai buat misahin jaringan:\n- Wi-Fi tamu dipisah dari jaringan kantor\n- Kamera CCTV dan perangkat pintar dipisah dari laptop kerja\n- Server penting di subnet sendiri dengan aturan firewall ketat\n\nKalau satu perangkat kena malware, penyebarannya lebih susah karena gak satu \"kompleks\" sama yang lain. Ini disebut segmentasi.",
-        "tip": "Kayak kapal yang punya sekat-sekat. Satu ruangan bocor, kapalnya gak langsung tenggelam."
+        "tip": "Kayak kapal yang punya sekat-sekat. Satu ruangan bocor, kapalnya gak langsung tenggelam.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "Wi-Fi tamu",
+            "Kantor",
+            "CCTV",
+            "firewall"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -252,7 +297,19 @@
       {
         "title": "Nama gampang, angka susah",
         "body": "Manusia gampang inget wikipedia.org, tapi komputer butuh alamat IP. DNS (Domain Name System) menerjemahkan nama domain jadi IP.\n\nAlurnya singkat:\n- HP nanya ke resolver DNS (biasanya milik ISP atau layanan seperti 1.1.1.1)\n- Resolver nanya berantai ke server DNS yang berwenang\n- Jawabannya (IP) dikirim balik dan disimpan sementara (cache)\n\nCoba sendiri di Toolbox → Info Jaringan → Coba DNS.",
-        "tip": "DNS itu buku kontak. Kamu cari nama \"Ibu\", HP yang tahu nomornya."
+        "tip": "DNS itu buku kontak. Kamu cari nama \"Ibu\", HP yang tahu nomornya.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            ". (root)",
+            ".id",
+            ".com",
+            "co.id",
+            "go.id",
+            "google",
+            "wikipedia"
+          ]
+        }
       },
       {
         "title": "Jenis-jenis record DNS",
@@ -333,7 +390,15 @@
       {
         "title": "Port: pintu-pintu di satu alamat",
         "body": "Satu server bisa jalanin banyak layanan sekaligus: web, email, remote login. Biar gak ketuker, tiap layanan \"dengerin\" di nomor port berbeda (0–65535).\n\nAlamat lengkap tujuan = IP + port, contoh 93.184.216.34:443.\n\nDi sisi HP kamu, sistem juga milih port acak sementara buat tiap koneksi keluar.",
-        "tip": "IP itu alamat gedung, port itu nomor loketnya. Loket 443 layanan web aman, loket 25 urusan surat."
+        "tip": "IP itu alamat gedung, port itu nomor loketnya. Loket 443 layanan web aman, loket 25 urusan surat.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            ":443 :22 :80",
+            "internet",
+            "server"
+          ]
+        }
       },
       {
         "title": "Port yang wajib kenal",
@@ -343,7 +408,16 @@
       {
         "title": "TCP vs UDP",
         "body": "Dua cara utama ngirim data:\n- TCP: pakai \"jabat tangan\" dulu, cek tiap paket nyampe, kirim ulang yang hilang. Dipakai web, email, chat\n- UDP: langsung kirim tanpa ngecek. Lebih cepat, tapi bisa ada yang hilang. Dipakai DNS, video call, game online\n\nPilihan protokol tergantung butuhnya: akurat (TCP) atau cepat (UDP).",
-        "tip": "TCP itu kirim paket pakai kurir yang minta tanda tangan. UDP itu lempar brosur: cepat, tapi gak dicek nyampe atau enggak."
+        "tip": "TCP itu kirim paket pakai kurir yang minta tanda tangan. UDP itu lempar brosur: cepat, tapi gak dicek nyampe atau enggak.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Kamu",
+            "TCP: cek",
+            "UDP: kirim",
+            "Server"
+          ]
+        }
       }
     ],
     "quiz": [
@@ -424,7 +498,16 @@
       {
         "title": "Izin akses & root",
         "body": "Tiap file punya izin buat tiga kelompok: pemilik, grup, dan orang lain. Tiap kelompok bisa punya:\n- r (read): baca\n- w (write): ubah\n- x (execute): jalankan\n\nContoh -rw-r--r-- artinya pemilik bisa baca-ubah, yang lain cuma baca.\n\nRoot adalah akun super yang bisa apa aja. Karena itu, kerja harian pakai akun biasa, dan sudo cuma buat yang benar-benar perlu. Prinsip ini namanya least privilege.\n\nLatihan: buka Toolbox → Terminal Simulasi dan cari flag yang disembunyikan.",
-        "tip": "Root itu kunci master gedung. Satpam gak bawa kunci master tiap hari, cuma pas darurat."
+        "tip": "Root itu kunci master gedung. Satpam gak bawa kunci master tiap hari, cuma pas darurat.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "others",
+            "group",
+            "owner",
+            "root"
+          ]
+        }
       }
     ],
     "quiz": [

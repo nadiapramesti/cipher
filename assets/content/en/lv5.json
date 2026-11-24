@@ -1,0 +1,458 @@
+[
+  {
+    "id": "lv5-malware",
+    "level": 5,
+    "title": "Meet Malware",
+    "summary": "Viruses, worms, trojans, spyware: different ways in, different dangers.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Malware is an umbrella",
+        "body": "Malware (malicious software) is any program built to cause harm. The most common kinds:\n- Virus: attaches to other files and spreads when they're opened\n- Worm: spreads by itself across networks, no one has to open anything\n- Trojan: disguised as a useful app, but malicious inside\n- Spyware: secretly watches activity, passwords, or chats\n- Adware: floods you with ads, sometimes while stealing data\n- Keylogger: records everything you type",
+        "tip": "Malware is like \"disease\" for devices. Viruses, worms, and trojans are different diseases with different ways of spreading.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "malware",
+            "antivirus"
+          ]
+        }
+      },
+      {
+        "title": "How it gets in",
+        "body": "Malware rarely gets in alone. Usually the victim helps:\n- Email or chat attachments (.apk, .exe, documents with macros)\n- Pirated apps, game cheats, or \"free premium mods\"\n- Fake ads saying \"your phone has a virus, install this cleaner\"\n- Random USB drives plugged in\n- Outdated software with unpatched flaws\n\nThe usual pattern: a free lure or a scary threat that causes panic.",
+        "tip": "The Trojan Horse didn't break the city walls. The citizens pulled it in, thinking it was a gift."
+      },
+      {
+        "title": "Signs and first aid",
+        "body": "Be suspicious if:\n- Battery and data suddenly drain fast\n- Ads appear outside apps or on the lock screen\n- Apps you didn't install appear, or icons vanish\n- Friends get weird messages \"from you\"\n\nSteps:\n- Disconnect from the internet first\n- Find and remove suspicious apps; revoke Accessibility and device admin rights\n- Scan with Play Protect or a trusted antivirus\n- Change important passwords from another, clean device\n- If it's bad: back up key data, then factory reset",
+        "tip": "Like food poisoning: stop eating the suspect food first, then treat it."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Malware that spreads by itself across networks without anyone opening it is a...",
+        "options": [
+          "Virus",
+          "Worm",
+          "Adware",
+          "Cookie"
+        ],
+        "explanation": "Worms spread automatically by exploiting network flaws.",
+        "answer": 1
+      },
+      {
+        "prompt": "A \"free flashlight\" app that secretly steals data is a...",
+        "options": [
+          "Trojan",
+          "Firewall",
+          "Patch",
+          "VPN"
+        ],
+        "explanation": "Trojans pose as useful apps.",
+        "answer": 0
+      },
+      {
+        "prompt": "A program that records every keystroke is a...",
+        "options": [
+          "Keylogger",
+          "Router",
+          "Compiler",
+          "Hash"
+        ],
+        "explanation": "Keyloggers can capture the passwords you type.",
+        "answer": 0
+      },
+      {
+        "prompt": "A pop-up says \"Your phone has 5 viruses! Install this cleaner\". It's usually...",
+        "options": [
+          "An official Google warning",
+          "A fake ad luring you into installing malware",
+          "A built-in Android feature",
+          "A carrier message"
+        ],
+        "explanation": "It's a scare tactic (scareware) to rush you into installing.",
+        "answer": 1
+      },
+      {
+        "prompt": "First step when you suspect malware on your phone?",
+        "options": [
+          "Keep banking",
+          "Disconnect from the internet",
+          "Install 5 antivirus apps",
+          "Message all contacts"
+        ],
+        "explanation": "Disconnecting stops malware from sending data or receiving commands.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv5-ransomware",
+    "level": 5,
+    "title": "Ransomware",
+    "summary": "When your files are locked and criminals demand a ransom.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "How ransomware works",
+        "body": "Ransomware encrypts the victim's files, then demands a ransom (usually crypto) for the decryption key. Modern versions also steal data first and threaten to leak it if you don't pay (double extortion).\n\nTargets aren't only big companies. Hospitals, schools, government offices, and personal laptops have all been hit. Major public services in Indonesia have suffered big attacks too.",
+        "tip": "Ransomware is like someone padlocking every cupboard in your house and leaving a note: \"pay if you want the keys\".",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "YOUR FILES",
+            "CRIMINAL'S KEY"
+          ]
+        }
+      },
+      {
+        "title": "Pay or not?",
+        "body": "Paying the ransom is risky:\n- There's no guarantee you'll get a working key\n- The data may be leaked anyway\n- Paying funds the next crime, and victims who pay often get targeted again\n\nFar more effective: a backup that doesn't get encrypted too. With a safe backup, you just wipe, reinstall, and restore.",
+        "tip": "Paying a kidnapper doesn't guarantee the hostage comes home. Better that the hostage can't be taken."
+      },
+      {
+        "title": "Layered defense",
+        "body": "The most effective combination:\n- Offline or immutable backups, with restores tested regularly\n- System and app updates\n- Daily accounts without admin rights\n- Caution with attachments and links, especially urgent ones\n- 2FA on remote access (remote desktop, VPN)\n\nA backup that stays plugged in can get encrypted too. Unplug it after backing up.",
+        "tip": "Keep a spare house key at a relative's place, not in the same drawer.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Offline backup",
+            "Updates",
+            "Least access",
+            "Wary of attachments"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Ransomware usually...",
+        "options": [
+          "Speeds up your computer",
+          "Encrypts files and demands a ransom",
+          "Removes ads",
+          "Updates apps"
+        ],
+        "explanation": "Ransomware's core: locked files and extortion.",
+        "answer": 1
+      },
+      {
+        "prompt": "Double extortion means...",
+        "options": [
+          "Asking double the ransom",
+          "Data is stolen and leak-threatened as well as encrypted",
+          "Two viruses at once",
+          "Two passwords"
+        ],
+        "explanation": "Even with backups, the leak threat remains.",
+        "answer": 1
+      },
+      {
+        "prompt": "The best defense for recovering from ransomware?",
+        "options": [
+          "Pay the ransom",
+          "Offline backups tested regularly",
+          "Turn off the monitor",
+          "Change the wallpaper"
+        ],
+        "explanation": "Safe backups mean you don't depend on criminals.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why unplug the backup drive after use?",
+        "options": [
+          "So it lasts longer",
+          "So it doesn't get encrypted if the computer is hit",
+          "For speed",
+          "No reason"
+        ],
+        "explanation": "Ransomware encrypts every connected drive.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why is paying the ransom risky?",
+        "options": [
+          "The key surely works",
+          "No guarantee, and you may be targeted again",
+          "Criminals surely delete the data",
+          "You might get a discount"
+        ],
+        "explanation": "Criminals aren't bound by promises, and payers attract repeat attacks.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv5-mobile",
+    "level": 5,
+    "title": "Android Malware",
+    "summary": "Fake invitation APKs, Accessibility abuse, and OTP stealers.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Why phones are the main target",
+        "body": "For many people, the phone is wallet, ID, and office in one: mobile banking, e-wallets, WhatsApp, email, and OTPs all in one place.\n\nIn Indonesia, the most common trick is an .APK file sent over WhatsApp with a tempting name: wedding invitation, traffic ticket, bill, parcel receipt, or \"see this photo\".",
+        "tip": "If your wallet, ID, and house key are all in one bag, that bag is what pickpockets target."
+      },
+      {
+        "title": "The attack chain",
+        "body": "It usually goes like this:\n- The victim installs an APK from a chat, even though Android warns about \"unknown sources\"\n- The app asks for Accessibility or SMS access with a made-up reason\n- With that access, malware can read the screen, copy OTPs from SMS, even tap buttons itself\n- Data goes to the scammer, then accounts are drained\n\nAccessibility permission is extremely powerful. Normal apps rarely need it.",
+        "tip": "Accessibility access is like handing a stranger your TV remote, house key, and signing authority at once.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "invite.apk",
+            "Accessibility",
+            "reads OTP SMS",
+            "Scammer"
+          ]
+        }
+      },
+      {
+        "title": "Immune to APK scams",
+        "body": "Simple rules:\n- Never install an .APK from a chat, whoever sent it. Real invitations and bills are PDFs or images, not apps\n- Keep \"Install unknown apps\" off\n- Turn on Google Play Protect\n- Check Settings → Accessibility and Device admin apps regularly\n- If you already installed one: disconnect, uninstall it, call your bank's official number to block access, change passwords",
+        "tip": "An invitation never needs your house key. If it asks for one, it isn't an invitation."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A friend sends \"Wedding Invitation.apk\" on WhatsApp. You should...",
+        "options": [
+          "Install it to be polite",
+          "Not install it; real invitations aren't apps",
+          "Install then delete",
+          "Forward it to a group"
+        ],
+        "explanation": ".apk files from chats are the main phone malware trick in Indonesia.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why is Accessibility permission dangerous for a malicious app?",
+        "options": [
+          "It dims the screen",
+          "It can read the screen and tap buttons itself",
+          "It speeds up the phone",
+          "It isn't dangerous"
+        ],
+        "explanation": "Malware can read OTPs and make transactions as you.",
+        "answer": 1
+      },
+      {
+        "prompt": "Which Android setting should stay off?",
+        "options": [
+          "Install unknown apps",
+          "Google Play Protect",
+          "Screen lock",
+          "System updates"
+        ],
+        "explanation": "Keeping it off blocks APKs from outside the Play Store.",
+        "answer": 0
+      },
+      {
+        "prompt": "You installed a suspicious APK. After disconnecting and uninstalling, the next key step?",
+        "options": [
+          "Sleep",
+          "Call your bank's official number and change passwords",
+          "Reinstall the APK",
+          "Post on social media"
+        ],
+        "explanation": "Block financial access fast, before accounts can be drained.",
+        "answer": 1
+      },
+      {
+        "prompt": "OTP-stealing phone malware usually asks for...",
+        "options": [
+          "Camera",
+          "SMS reading / Accessibility",
+          "Flashlight",
+          "Calendar"
+        ],
+        "explanation": "OTPs arrive by SMS or appear on screen.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv5-botnet",
+    "level": 5,
+    "title": "Botnets & DDoS",
+    "summary": "Thousands of hijacked devices attacking together.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "A zombie army",
+        "body": "A botnet is a collection of compromised devices remotely controlled by one attacker (through a command & control server).\n\nMembers can be computers, phones, home routers, CCTV cameras, even smart TVs, especially ones still using default passwords and never updated. Owners often don't realize their device is a \"zombie\".",
+        "tip": "A botnet is thousands of puppets with one puppeteer holding the strings.",
+        "visual": {
+          "kind": "botnet",
+          "labels": [
+            "website",
+            "bot"
+          ]
+        }
+      },
+      {
+        "title": "DDoS attacks",
+        "body": "DDoS (Distributed Denial of Service) knocks a service offline by flooding it with traffic from many sources at once.\n\nA server can only handle so many requests. Flood it with millions of fake ones and real users get nothing. The site slows down or dies completely.\n\nBesides DDoS, botnets also send spam, guess passwords en masse, and mine crypto.",
+        "tip": "DDoS is like thousands of people pretending to queue at a cashier without buying anything. Real shoppers can't pay."
+      },
+      {
+        "title": "Don't join a botnet",
+        "body": "What you can do:\n- Change default passwords on routers, CCTV, and smart devices\n- Update router firmware regularly\n- Turn off unused remote features (UPnP, admin access from the internet)\n- Don't install pirated apps or \"boosters\"\n\nFor site owners: CDN and anti-DDoS services (e.g. Cloudflare) can filter malicious traffic before it reaches the server.",
+        "tip": "A gate padlock still set to the factory code \"0000\" isn't a lock, just decoration."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A botnet is...",
+        "options": [
+          "A chat app",
+          "A collection of hijacked devices controlled by an attacker",
+          "A network cable type",
+          "An antivirus"
+        ],
+        "explanation": "\"Zombie\" devices taking orders from a command & control server.",
+        "answer": 1
+      },
+      {
+        "prompt": "The goal of a DDoS attack is to...",
+        "options": [
+          "Steal passwords",
+          "Make a service unreachable",
+          "Speed up a site",
+          "Encrypt files"
+        ],
+        "explanation": "DDoS floods servers until real users can't be served.",
+        "answer": 1
+      },
+      {
+        "prompt": "Devices most often recruited into botnets are...",
+        "options": [
+          "Those with default passwords and rare updates",
+          "Always-updated ones",
+          "Switched-off ones",
+          "Offline ones"
+        ],
+        "explanation": "Factory passwords are easily guessed by malware.",
+        "answer": 0
+      },
+      {
+        "prompt": "A simple step to secure your home router?",
+        "options": [
+          "Keep factory settings",
+          "Change the admin password and update firmware",
+          "Put it in a cupboard",
+          "Turn off its lights"
+        ],
+        "explanation": "These two steps close the most common way in.",
+        "answer": 1
+      },
+      {
+        "prompt": "A service that helps sites survive DDoS is...",
+        "options": [
+          "A CDN / anti-DDoS like Cloudflare",
+          "A calculator app",
+          "Base64",
+          "A spreadsheet"
+        ],
+        "explanation": "CDNs filter and spread traffic before it reaches the server.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv5-supply",
+    "level": 5,
+    "title": "Supply Chain Attacks",
+    "summary": "When the breach isn't you, but a tool or vendor you trust.",
+    "minutes": 5,
+    "pages": [
+      {
+        "title": "Attacking through a trusted back door",
+        "body": "Modern apps are built from hundreds of other people's libraries. Companies also rely on software vendors, cloud providers, and contractors.\n\nA supply chain attack happens when an attacker breaches one link in that chain. Once a library or official update is poisoned, thousands of victims are hit at once, because everyone trusts the source.",
+        "tip": "If the water utility is contaminated, every connected house is affected, however clean its kitchen.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "App",
+            "Library A",
+            "Library B",
+            "lib A1",
+            "lib A2",
+            "lib B1",
+            "poisoned lib"
+          ]
+        }
+      },
+      {
+        "title": "Common patterns",
+        "body": "Patterns seen in the real world:\n- An official update of IT management software was poisoned, then installed in thousands of organizations\n- An open-source library maintainer role was taken over through years of social engineering, then a backdoor was slipped in\n- Fake packages with look-alike names (typosquatting) uploaded to npm or PyPI, hoping developers mistype\n- A popular browser extension sold to a new owner who then added data theft",
+        "tip": "The most patient intruder doesn't force the door. He gets hired as a guard, works well for years, then strikes."
+      },
+      {
+        "title": "Reducing the risk",
+        "body": "For developers:\n- Use only the libraries you need; check their reputation and maintainer activity\n- Pin versions (lockfiles) and review changes when updating\n- Run dependency vulnerability scanners\n- Double-check package name spelling before installing\n\nFor users:\n- Install only the apps and extensions you need; remove unused ones\n- Notice when an extension suddenly asks for new permissions",
+        "tip": "The fewer doors with duplicate keys held by others, the lower the risk."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A supply chain attack targets...",
+        "options": [
+          "The end victim directly",
+          "A vendor, library, or update the victim trusts",
+          "Power cables",
+          "Monitors"
+        ],
+        "explanation": "One breached link can hit thousands of victims.",
+        "answer": 1
+      },
+      {
+        "prompt": "Typosquatting on npm/PyPI means...",
+        "options": [
+          "Packages named like popular ones to catch typos",
+          "Packages that are too big",
+          "Packages without docs",
+          "Paid packages"
+        ],
+        "explanation": "One letter off, malicious inside.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why are supply chain attacks so dangerous?",
+        "options": [
+          "They're slow",
+          "Victims trust the source, and the impact is massive",
+          "They need internet",
+          "They're easy to detect"
+        ],
+        "explanation": "Official updates are usually installed without suspicion.",
+        "answer": 1
+      },
+      {
+        "prompt": "A project lockfile is used to...",
+        "options": [
+          "Pin the dependency versions in use",
+          "Encrypt code",
+          "Store passwords",
+          "Speed up Wi-Fi"
+        ],
+        "explanation": "Pinned versions prevent unexpected updates sneaking in.",
+        "answer": 0
+      },
+      {
+        "prompt": "An old browser extension suddenly asks to \"read all data on all sites\". You should...",
+        "options": [
+          "Just approve it",
+          "Be suspicious, check it, or remove it",
+          "Install another extension",
+          "Restart your phone"
+        ],
+        "explanation": "Extensions can change owners and turn malicious.",
+        "answer": 1
+      }
+    ]
+  }
+]

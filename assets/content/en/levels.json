@@ -28,5 +28,23 @@
     "title": "Practice",
     "tagline": "Ethics, OSINT, reading logs, incident response, CTFs, and career paths.",
     "moduleFile": "lv4.json"
+  },
+  {
+    "index": 5,
+    "title": "Malware & Threats",
+    "tagline": "Viruses, ransomware, malicious APKs, botnets, and supply chain attacks.",
+    "moduleFile": "lv5.json"
+  },
+  {
+    "index": 6,
+    "title": "Defense",
+    "tagline": "Firewalls, VPNs, zero trust, hardening, passkeys, and defense in depth.",
+    "moduleFile": "lv6.json"
+  },
+  {
+    "index": 7,
+    "title": "Forensics, Cloud & AI",
+    "tagline": "Digital forensics, cloud security, deepfakes, and your personal security plan.",
+    "moduleFile": "lv7.json"
   }
 ]

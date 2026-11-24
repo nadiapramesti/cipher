@@ -108,5 +108,125 @@
     "term": "CTF",
     "short": "Capture The Flag: latihan atau lomba keamanan buat nemuin \"flag\" tersembunyi lewat tantangan.",
     "analogy": "Lomba cari harta karun, tapi petunjuknya berupa teka-teki keamanan."
+  },
+  {
+    "term": "Subnet",
+    "short": "Pembagian jaringan jadi blok-blok kecil, ditulis kayak 192.168.1.0/24.",
+    "analogy": "Kayak kompleks perumahan yang dibagi jadi blok A, B, C."
+  },
+  {
+    "term": "NAT",
+    "short": "Fitur router yang bikin banyak perangkat berbagi satu IP publik.",
+    "analogy": "Resepsionis hotel yang nganter surat dari satu alamat hotel ke tiap kamar."
+  },
+  {
+    "term": "TCP / UDP",
+    "short": "Dua cara kirim data: TCP cek tiap paket sampai, UDP langsung kirim tanpa cek.",
+    "analogy": "TCP itu kurir minta tanda tangan, UDP itu lempar brosur."
+  },
+  {
+    "term": "IDOR",
+    "short": "Celah saat ganti ID di URL bisa buka data orang lain karena server gak ngecek pemiliknya.",
+    "analogy": "Ganti nomor kamar di kunci kartu, eh pintu kamar orang ikut kebuka."
+  },
+  {
+    "term": "OWASP Top 10",
+    "short": "Daftar 10 risiko keamanan aplikasi web paling penting dari komunitas OWASP.",
+    "analogy": "Daftar 10 penyebab kebakaran paling sering, buat dicek duluan."
+  },
+  {
+    "term": "Salt",
+    "short": "Data acak unik yang ditambahkan ke password sebelum di-hash.",
+    "analogy": "Bumbu rahasia beda di tiap mangkok, jadi sup yang sama rasanya beda."
+  },
+  {
+    "term": "Kunci Publik / Privat",
+    "short": "Pasangan kunci: yang publik boleh disebar, yang privat disimpan sendiri.",
+    "analogy": "Kotak surat berlubang: siapa aja bisa masukin, cuma pemilik kunci yang bisa buka."
+  },
+  {
+    "term": "Sertifikat SSL/TLS",
+    "short": "Dokumen digital yang membuktikan situs memang pemilik domainnya, ditandatangani CA.",
+    "analogy": "KTP-nya situs, diterbitkan lembaga yang dipercaya."
+  },
+  {
+    "term": "OSINT",
+    "short": "Intelijen dari sumber terbuka: medsos, mesin pencari, data publik.",
+    "analogy": "Ngerangkai potongan koran bekas jadi cerita utuh."
+  },
+  {
+    "term": "SIEM",
+    "short": "Sistem yang mengumpulkan log dari banyak tempat dan memberi peringatan otomatis.",
+    "analogy": "Ruang kontrol CCTV yang nyalain alarm kalau ada gerakan aneh."
+  },
+  {
+    "term": "Trojan",
+    "short": "Malware yang nyamar jadi aplikasi berguna.",
+    "analogy": "Kuda Troya: kado yang ternyata isinya pasukan."
+  },
+  {
+    "term": "Botnet",
+    "short": "Kumpulan perangkat yang dibajak dan dikendalikan satu penyerang.",
+    "analogy": "Ribuan boneka dengan satu dalang."
+  },
+  {
+    "term": "DDoS",
+    "short": "Serangan yang membanjiri layanan dengan lalu lintas dari banyak sumber sampai tumbang.",
+    "analogy": "Ribuan orang pura-pura antre di kasir tanpa belanja."
+  },
+  {
+    "term": "Supply Chain Attack",
+    "short": "Serangan lewat pemasok, library, atau update yang dipercaya korban.",
+    "analogy": "Air PDAM tercemar: semua rumah yang nyambung ikut kena."
+  },
+  {
+    "term": "IDS / IPS",
+    "short": "Sistem pendeteksi (IDS) dan pencegah (IPS) penyusupan di jaringan.",
+    "analogy": "Alarm maling, dan alarm yang sekalian ngunci pintu."
+  },
+  {
+    "term": "Zero Trust",
+    "short": "Prinsip keamanan: jangan percaya otomatis, selalu verifikasi tiap akses.",
+    "analogy": "Gedung yang tiap pintunya wajib tap kartu."
+  },
+  {
+    "term": "Passkey",
+    "short": "Login tanpa password pakai pasangan kunci kriptografi di perangkatmu.",
+    "analogy": "Stempel pribadi: server cuma nyimpen contoh capnya."
+  },
+  {
+    "term": "Hardening",
+    "short": "Mengurangi celah serangan dengan mematikan yang gak perlu dan menguatkan setelan.",
+    "analogy": "Nutup jendela yang gak dipakai, kunci pintu yang dipakai."
+  },
+  {
+    "term": "Defense in Depth",
+    "short": "Menumpuk banyak lapisan pengaman supaya satu yang jebol gak langsung fatal.",
+    "analogy": "Irisan keju Swiss yang ditumpuk: lubangnya jarang sejajar."
+  },
+  {
+    "term": "Chain of Custody",
+    "short": "Catatan siapa memegang bukti digital, kapan, dan buat apa.",
+    "analogy": "Segel bernomor dan buku serah-terima barang bukti."
+  },
+  {
+    "term": "Shared Responsibility",
+    "short": "Model cloud: penyedia jaga infrastruktur, kamu jaga data dan akses.",
+    "analogy": "Apartemen: gedung urusan pengelola, kunci unit urusan penghuni."
+  },
+  {
+    "term": "Deepfake",
+    "short": "Video, foto, atau suara palsu buatan AI yang meniru orang asli.",
+    "analogy": "Topeng yang hampir persis wajah aslinya."
+  },
+  {
+    "term": "Threat Model",
+    "short": "Analisis apa yang perlu dilindungi, dari siapa, dan seberapa parah risikonya.",
+    "analogy": "Rumah di kampung dan toko emas butuh pengamanan beda."
+  },
+  {
+    "term": "Least Privilege",
+    "short": "Prinsip ngasih akses seminimal yang dibutuhkan.",
+    "analogy": "Satpam gak bawa kunci master tiap hari."
   }
 ]
