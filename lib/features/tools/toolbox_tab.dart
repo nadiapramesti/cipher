@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../widgets/common.dart';
+import '../ctf/ctf_screen.dart';
+import '../sim/scam_sort_screen.dart';
+import '../sim/terminal_screen.dart';
+import 'network_info_screen.dart';
 import 'password_checker_screen.dart';
 import '../../l10n/strings.dart';
 
@@ -31,10 +35,32 @@ List<_Tool> get _tools => <_Tool>[
     builder: (_) => const PasswordCheckerScreen(),
   ),
   _Tool(
+    title: tr('ss_title'),
+    desc: tr('ss_desc'),
+    level: 0,
+    icon: Icons.phishing,
+    builder: (_) => const ScamSortScreen(),
+  ),
+  _Tool(
+    title: tr('ctf_title'),
+    desc: tr('ctf_desc'),
+    level: 0,
+    icon: Icons.emoji_flags_outlined,
+    builder: (_) => const CtfScreen(),
+  ),
+  _Tool(
+    title: tr('tm_title'),
+    desc: tr('tm_desc'),
+    level: 1,
+    icon: Icons.terminal,
+    builder: (_) => const TerminalScreen(),
+  ),
+  _Tool(
     title: tr('tool_net_title'),
     desc: tr('tool_net_desc'),
     level: 1,
     icon: Icons.lan_outlined,
+    builder: (_) => const NetworkInfoScreen(),
   ),
   _Tool(
     title: tr('tool_url_title'),

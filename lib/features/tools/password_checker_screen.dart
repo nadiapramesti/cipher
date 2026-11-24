@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
 import '../../widgets/common.dart';
+import '../ctf/flags.dart';
 import 'password_strength.dart';
 import '../../l10n/strings.dart';
 
@@ -166,6 +167,10 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
                 ],
               ),
             ),
+            if (r.level == StrengthLevel.sangatKuat) ...[
+              const SizedBox(height: 14),
+              const FlagBox(flag: Flags.passphrase),
+            ],
             if (r.tips.isNotEmpty) ...[
               const SizedBox(height: 14),
               Panel(

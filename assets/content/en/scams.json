@@ -1,0 +1,58 @@
+[
+  {
+    "channel": "WhatsApp",
+    "sender": "+62 812-xxxx-0917",
+    "text": "Congratulations! Your number won Rp25,000,000 in our bank lottery. Click bit.ly/bank-prize2026 and enter your account details within 24 hours.",
+    "scam": true,
+    "why": "Surprise prize, tight deadline, short link, and a request for account details. Banks don't hand out prizes via personal chats."
+  },
+  {
+    "channel": "SMS",
+    "sender": "COURIER-ID",
+    "text": "Your package is on hold due to an incomplete address. See the package photo: Package_Photo.apk",
+    "scam": true,
+    "why": "An .apk file is an app, not a photo. This is a trick to steal your SMS and OTPs."
+  },
+  {
+    "channel": "SMS",
+    "sender": "Bank",
+    "text": "Your OTP code is 482193. DO NOT share this code with anyone, including bank staff.",
+    "scam": false,
+    "why": "This is a real OTP that appears because you logged in yourself. Signs it's real: it asks for nothing and warns you not to share it."
+  },
+  {
+    "channel": "WhatsApp",
+    "sender": "Mom",
+    "text": "Hi dear, this is mom's new number. My old phone broke. Please transfer 2 million first for a bill, I'll pay you back. Don't call yet, I'm in a meeting.",
+    "scam": true,
+    "why": "New number + asking for money + \"don't call\" is a classic scam pattern. Call mom's old number to check."
+  },
+  {
+    "channel": "Email",
+    "sender": "no-reply@accounts.google.com",
+    "text": "New sign-in to your account from Chrome on Android. If this was you, ignore this. If not, review your activity at myaccount.google.com.",
+    "scam": false,
+    "why": "Official sender domain, no password request, and it tells you to visit the official address yourself. A real security notice."
+  },
+  {
+    "channel": "Email",
+    "sender": "security@g00gle-support.com",
+    "text": "Your account will be deleted today! Verify now by entering your password at g00gle-support.com/verify",
+    "scam": true,
+    "why": "Look-alike domain (with zeros), creates panic, and asks for your password on another site."
+  },
+  {
+    "channel": "SMS",
+    "sender": "Telkomsel",
+    "text": "Your 10GB data quota will run out in 2 days. Check your balance in the MyTelkomsel app or dial *363#.",
+    "scam": false,
+    "why": "A normal carrier notice with no strange links, pointing you to the official app or code."
+  },
+  {
+    "channel": "WhatsApp",
+    "sender": "HR of PT Maju Jaya",
+    "text": "You passed our part-time like & subscribe job, paying Rp500k/day. Please deposit Rp150k first to activate your work account.",
+    "scam": true,
+    "why": "Easy work, big pay, but you must pay a deposit first. Real companies never ask applicants for money."
+  }
+]

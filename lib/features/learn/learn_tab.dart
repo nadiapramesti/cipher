@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../core/models.dart';
 import '../../widgets/common.dart';
 import '../../widgets/scene3d.dart';
+import '../ctf/flags.dart';
 import '../review/review_screen.dart';
 import '../search/search_screen.dart';
 import '../settings/settings_screen.dart';
@@ -26,9 +28,40 @@ class LearnTab extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text('CIPHER',
-                style: mono(size: 18, color: C.text, weight: FontWeight.w800, spacing: 4)),
-            Text('_', style: mono(size: 18, color: C.accent, weight: FontWeight.w800)),
+            // rahasia kecil: tekan lama logo buat nemu flag CTF
+            GestureDetector(
+              onLongPress: () {
+                HapticFeedback.mediumImpact();
+                showModalBottomSheet<void>(
+                  context: context,
+                  backgroundColor: C.surface,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
+                  ),
+                  builder: (ctx) => SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(tr('logo_found'), style: display(size: 20)),
+                          const SizedBox(height: 12),
+                          const FlagBox(flag: Flags.logo),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('CIPHER',
+                      style: mono(size: 18, color: C.text, weight: FontWeight.w800, spacing: 4)),
+                  Text('_', style: mono(size: 18, color: C.accent, weight: FontWeight.w800)),
+                ],
+              ),
+            ),
             const Spacer(),
             _HeaderButton(
               icon: Icons.search_rounded,

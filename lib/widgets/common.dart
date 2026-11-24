@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../app/theme.dart';
+import '../l10n/strings.dart';
 
 /// Tombol "tebal" ala tombol fisik: ada sisi bawah yang kelihatan,
 /// dan pas ditekan mukanya turun + HP getar halus.
@@ -382,4 +383,46 @@ void showInfo(BuildContext context, String message) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(content: Text(message)));
+}
+
+
+/// Kotak flag CTF yang ketemu + tombol salin.
+class FlagBox extends StatelessWidget {
+  const FlagBox({super.key, required this.flag});
+  final String flag;
+
+  @override
+  Widget build(BuildContext context) {
+    return Panel(
+      color: C.okTint,
+      borderColor: C.okDeep,
+      child: Row(
+        children: [
+          Icon(Icons.flag_rounded, color: C.ok),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MonoTag(tr('flag_found'), color: C.ok),
+                const SizedBox(height: 4),
+                SelectableText(flag, style: mono(size: 13, color: C.text, weight: FontWeight.w700, spacing: 0)),
+                const SizedBox(height: 4),
+                Text(tr('flag_hint'), style: TextStyle(fontSize: 12, color: C.muted, height: 1.35)),
+              ],
+            ),
+          ),
+          IconButton(
+            tooltip: tr('flag_copy'),
+            icon: Icon(Icons.copy_rounded, color: C.ok),
+            style: IconButton.styleFrom(side: BorderSide(color: C.okDeep)),
+            onPressed: () async {
+              await Clipboard.setData(ClipboardData(text: flag));
+              if (context.mounted) showInfo(context, tr('flag_copied'));
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }

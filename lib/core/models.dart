@@ -117,3 +117,27 @@ class GlossaryTerm {
         analogy: j['analogy'] as String,
       );
 }
+
+class ScamItem {
+  const ScamItem({
+    required this.channel,
+    required this.sender,
+    required this.text,
+    required this.scam,
+    required this.why,
+  });
+
+  final String channel;
+  final String sender;
+  final String text;
+  final bool scam;
+  final String why;
+
+  factory ScamItem.fromJson(Map<String, dynamic> j) => ScamItem(
+        channel: j['channel'] as String,
+        sender: j['sender'] as String,
+        text: j['text'] as String,
+        scam: j['scam'] as bool,
+        why: j['why'] as String,
+      );
+}

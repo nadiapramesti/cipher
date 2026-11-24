@@ -12,12 +12,14 @@ class Content {
     required this.modules,
     required this.placement,
     required this.glossary,
+    this.scams = const [],
   });
 
   final List<Level> levels;
   final Map<String, LearnModule> modules;
   final List<QuizQuestion> placement;
   final List<GlossaryTerm> glossary;
+  final List<ScamItem> scams;
 
   Level? levelAt(int index) {
     for (final l in levels) {
@@ -66,11 +68,16 @@ class Content {
         .toList()
       ..sort((a, b) => a.term.toLowerCase().compareTo(b.term.toLowerCase()));
 
+    final scams = (await _json('$dir/scams.json') as List)
+        .map((e) => ScamItem.fromJson(e as Map<String, dynamic>))
+        .toList();
+
     return Content(
       levels: levels,
       modules: modules,
       placement: placement,
       glossary: glossary,
+      scams: scams,
     );
   }
 }

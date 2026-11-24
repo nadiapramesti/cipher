@@ -1,0 +1,58 @@
+[
+  {
+    "channel": "WhatsApp",
+    "sender": "+62 812-xxxx-0917",
+    "text": "Selamat! Nomor Anda terpilih dapat hadiah Rp25.000.000 dari undian bank. Klik bit.ly/hadiah-bank2026 dan isi data rekening dalam 1x24 jam.",
+    "scam": true,
+    "why": "Hadiah dadakan, tenggat mepet, link pendek, dan minta data rekening. Bank gak bagi hadiah lewat WA pribadi."
+  },
+  {
+    "channel": "SMS",
+    "sender": "KURIR-ID",
+    "text": "Paket Anda tertahan karena alamat kurang lengkap. Lihat foto paket: Foto_Paket.apk",
+    "scam": true,
+    "why": "File .apk itu aplikasi, bukan foto. Ini modus nyuri SMS dan OTP."
+  },
+  {
+    "channel": "SMS",
+    "sender": "Bank",
+    "text": "Kode OTP Anda 482193. JANGAN berikan kode ini kepada siapa pun, termasuk pihak bank.",
+    "scam": false,
+    "why": "Ini OTP asli yang muncul karena kamu login sendiri. Tanda aslinya: gak minta apa-apa dan justru ngingetin jangan dibagi."
+  },
+  {
+    "channel": "WhatsApp",
+    "sender": "Ibu",
+    "text": "Nak, ini nomor baru ibu. HP lama rusak. Tolong transfer 2 juta dulu ya buat bayar tagihan, nanti ibu ganti. Jangan telpon dulu, ibu lagi rapat.",
+    "scam": true,
+    "why": "Nomor baru + minta uang + larangan nelpon = pola penipuan klasik. Telpon nomor lama ibu buat mastiin."
+  },
+  {
+    "channel": "Email",
+    "sender": "no-reply@accounts.google.com",
+    "text": "Login baru ke akun Anda dari Chrome di Android. Kalau ini Anda, abaikan. Kalau bukan, periksa aktivitas di myaccount.google.com.",
+    "scam": false,
+    "why": "Domain pengirim resmi, gak minta password, dan nyuruh kamu buka sendiri alamat resmi. Ini notifikasi keamanan asli."
+  },
+  {
+    "channel": "Email",
+    "sender": "security@g00gle-support.com",
+    "text": "Akun Anda akan dihapus hari ini! Verifikasi sekarang dengan memasukkan password Anda di g00gle-support.com/verify",
+    "scam": true,
+    "why": "Domainnya tiruan (pakai angka 0), bikin panik, dan minta password di situs lain."
+  },
+  {
+    "channel": "SMS",
+    "sender": "Telkomsel",
+    "text": "Kuota Internet 10GB Anda akan habis dalam 2 hari. Cek sisa kuota lewat aplikasi MyTelkomsel atau *363#.",
+    "scam": false,
+    "why": "Info biasa dari operator, gak ada link aneh, dan nyuruh cek lewat aplikasi atau kode resmi."
+  },
+  {
+    "channel": "WhatsApp",
+    "sender": "HRD PT Maju Jaya",
+    "text": "Anda lolos seleksi kerja part-time like & subscribe, gaji Rp500rb/hari. Deposit Rp150rb dulu untuk aktivasi akun kerja.",
+    "scam": true,
+    "why": "Kerja gampang gaji gede tapi harus bayar deposit dulu. Perusahaan asli gak minta uang ke pelamar."
+  }
+]
