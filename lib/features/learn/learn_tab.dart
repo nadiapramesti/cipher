@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../../app/app_state.dart';
 import '../../app/theme.dart';
 import '../../core/models.dart';
+import '../../widgets/city_map.dart';
 import '../../widgets/common.dart';
 import '../../widgets/scene3d.dart';
 import '../ctf/flags.dart';
@@ -95,21 +96,28 @@ class LearnTab extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 14),
-        MonoTag(tr('map_title')),
-        SizedBox(
-          height: 300,
-          child: IsoMap(
-            tiles: [
-              for (final level in state.content.levels)
-                IsoTile(
-                  label: level.available && state.isLevelUnlocked(level)
-                      ? '${level.code} · ${state.levelProgress(level)}/${level.moduleIds.length}'
-                      : level.code,
-                  state: _tileState(state, level),
-                ),
-            ],
-            onTap: (i) => openLevel(context, state.content.levels[i]),
-          ),
+        Row(
+          children: [
+            Expanded(child: MonoTag(tr('map_title'))),
+            Icon(Icons.swipe_rounded, size: 14, color: C.hint),
+            const SizedBox(width: 4),
+            Text(tr('map_swipe'), style: mono(size: 10, color: C.hint)),
+          ],
+        ),
+        CityMap(
+          nodes: [
+            for (final level in state.content.levels)
+              CityNode(
+                code: level.code,
+                state: _tileState(state, level),
+                tier: TierChip.tierOf(level.index),
+                progress: level.available && state.isLevelUnlocked(level)
+                    ? '${state.levelProgress(level)}/${level.moduleIds.length}'
+                    : null,
+              ),
+          ],
+          current: _currentLevel(state),
+          onTap: (i) => openLevel(context, state.content.levels[i]),
         ),
         const SizedBox(height: 4),
         if (state.dueReviews.isNotEmpty) ...[
@@ -226,6 +234,16 @@ class _HeaderButton extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Level yang lagi dikerjain: level kebuka pertama yang belum tamat.
+int _currentLevel(AppState state) {
+  final levels = state.content.levels;
+  for (var i = 0; i < levels.length; i++) {
+    if (_tileState(state, levels[i]) == IsoTileState.active) return i;
+  }
+  final lastDone = levels.lastIndexWhere((l) => _tileState(state, l) == IsoTileState.done);
+  return lastDone < 0 ? 0 : lastDone;
 }
 
 IsoTileState _tileState(AppState state, Level level) {
