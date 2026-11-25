@@ -327,12 +327,20 @@ class _LevelCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(level.title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800,
-                      color: active ? C.text : C.muted,
-                    )),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Text(level.title,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: active ? C.text : C.muted,
+                          )),
+                    ),
+                    const SizedBox(width: 8),
+                    TierChip(index: level.index),
+                  ],
+                ),
                 const SizedBox(height: 3),
                 Text(level.tagline,
                     style: TextStyle(color: C.muted, fontSize: 13, height: 1.35)),
@@ -359,6 +367,29 @@ class _LevelCard extends StatelessWidget {
             Icon(Icons.chevron_right_rounded, color: C.accent),
         ],
       ),
+    );
+  }
+}
+
+/// Label tingkat kesulitan level: Pemula, Menengah, Lanjut, Hard.
+class TierChip extends StatelessWidget {
+  const TierChip({super.key, required this.index});
+  final int index;
+
+  static int tierOf(int index) => index <= 1 ? 0 : (index <= 5 ? 1 : (index <= 9 ? 2 : 3));
+
+  @override
+  Widget build(BuildContext context) {
+    final t = tierOf(index);
+    final color = [C.ok, C.accent, C.orange, C.red][t];
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.14),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: color.withValues(alpha: 0.55)),
+      ),
+      child: Text(tr('tier_$t'), style: mono(size: 9.5, color: color, weight: FontWeight.w800, spacing: 0.6)),
     );
   }
 }

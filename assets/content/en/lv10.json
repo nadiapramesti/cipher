@@ -1,0 +1,388 @@
+[
+  {
+    "id": "lv10-csrf-ssrf",
+    "level": 10,
+    "title": "CSRF & SSRF",
+    "summary": "When the victim's browser or the server itself is tricked into working for the attacker.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "CSRF: riding the victim's session",
+        "body": "Cross-Site Request Forgery (CSRF) happens when a malicious site makes the victim's browser send a request to another site where the victim is logged in. The browser attaches the session cookie automatically, so the server thinks the victim sent it.\n\nExample: the victim is logged into their bank, then opens a malicious page that silently submits a \"transfer\" form to that bank.\n\nDefenses:\n- A random CSRF token in every form, checked by the server\n- SameSite=Lax or Strict cookies (recall LV.02)\n- Re-confirmation (password/OTP) for sensitive actions",
+        "tip": "CSRF is like slipping a transfer order into a stack of papers you sign without reading.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Victim",
+            "Evil site",
+            "Cookie attached",
+            "Bank"
+          ]
+        }
+      },
+      {
+        "title": "SSRF: making the server attack inward",
+        "body": "Server-Side Request Forgery (SSRF) happens when an app fetches a user-supplied URL, e.g. a \"link preview\" or \"import image from URL\" feature. The attacker supplies an internal address that shouldn't be reachable from outside:\n- An admin panel on localhost\n- Internal services on a 10.x.x.x network\n- The cloud metadata service, which can leak credentials\n\nSince the request comes from the server itself, firewalls often let it through. SSRF has been the entry point for major cloud data breaches.",
+        "tip": "SSRF is like asking the building's receptionist to fetch a \"parcel\" from the secret archive. The guard lets it happen because the receptionist is walking.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Attacker",
+            "App server",
+            "localhost",
+            "Cloud metadata"
+          ]
+        }
+      },
+      {
+        "title": "Closing SSRF",
+        "body": "Layered defenses:\n- Allowlist: permit only specific domains or destinations; don't rely on blocklists (there's always a bypass)\n- Reject private, localhost, and link-local addresses after the domain is resolved\n- Don't follow redirects blindly\n- In the cloud, require the token-based metadata service (e.g. IMDSv2 on AWS)\n- Run fetch features in a separate network with minimal rights\n\nPractice: PortSwigger Academy has Apprentice-level CSRF and SSRF labs.",
+        "tip": "Instead of a never-complete list of forbidden places, keep a list of places you're allowed to go."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "CSRF works because...",
+        "options": [
+          "The server is slow",
+          "Browsers automatically send session cookies to the target site",
+          "Weak passwords",
+          "DNS errors"
+        ],
+        "explanation": "The forged request carries the victim's cookie.",
+        "answer": 1
+      },
+      {
+        "prompt": "The main defense against CSRF is...",
+        "options": [
+          "A random CSRF token checked by the server",
+          "Large fonts",
+          "Disabling HTTPS",
+          "Changing the logo"
+        ],
+        "explanation": "The malicious site can't know the token's value.",
+        "answer": 0
+      },
+      {
+        "prompt": "An \"import image from URL\" feature is vulnerable to...",
+        "options": [
+          "SSRF",
+          "SMS phishing",
+          "Shoulder surfing",
+          "PIN brute force"
+        ],
+        "explanation": "The server can be told to fetch internal addresses.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why is SSRF to the cloud metadata service dangerous?",
+        "options": [
+          "It slows the server",
+          "It can leak cloud access credentials",
+          "It deletes the logo",
+          "It isn't"
+        ],
+        "explanation": "Those credentials can be used to access data in the cloud account.",
+        "answer": 1
+      },
+      {
+        "prompt": "To validate URL destinations, it's safer to use...",
+        "options": [
+          "A blocklist",
+          "An allowlist",
+          "No validation",
+          "Base64"
+        ],
+        "explanation": "Blocklists can almost always be bypassed.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv10-auth",
+    "level": 10,
+    "title": "JWT, OAuth & Modern Login",
+    "summary": "Tokens carried everywhere, and how they get abused.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Anatomy of a JWT",
+        "body": "A JSON Web Token (JWT) is a login token used by many apps and APIs. It has three dot-separated parts:\n| header.payload.signature\n\n- Header: the signing algorithm\n- Payload: data, e.g. user id and role\n- Signature: the server's signature so the contents can't be altered\n\nKey point: the header and payload are only Base64URL, not encryption. Anyone can read them (try Toolbox Hash → Decode). Never store secrets in the payload.",
+        "tip": "A JWT is like a concert wristband with your name and ticket class printed on it, plus an anti-forgery hologram. Anyone can read the text; the hologram makes it valid.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Header",
+            "Payload",
+            "Signature"
+          ]
+        }
+      },
+      {
+        "title": "Classic JWT mistakes",
+        "body": "Flaws found in real apps:\n- The server doesn't actually verify the signature, so the payload can be changed (e.g. role to admin)\n- Accepting the \"none\" algorithm\n- Weak HMAC keys that can be guessed offline\n- Tokens that never expire and can't be revoked\n- Tokens stored in localStorage, where XSS can steal them\n\nThe fix: use mature libraries, pin allowed algorithms on the server, strong keys, short lifetimes plus refresh tokens.",
+        "tip": "A hologram only helps if the guard actually checks it, not just the word \"VIP\"."
+      },
+      {
+        "title": "OAuth & \"Sign in with Google\"",
+        "body": "OAuth lets an app request limited access to your account on another service without knowing your password. \"Sign in with Google\" uses OpenID Connect on top of OAuth.\n\nRisks to understand:\n- Consent phishing: a malicious app asks to \"read all your email\" and the victim clicks Allow\n- Loose redirect URIs can leak authorization codes\n- Leaked access tokens work without a password or 2FA\n\nSafe habits: read the permissions requested, and revoke unused app access in your Google account settings (Security → Third-party connections).",
+        "tip": "OAuth is like giving a workman a spare key to the shed only, not the house master key. But still read which key they're asking for.",
+        "visual": {
+          "kind": "keys",
+          "labels": [
+            "OAuth consent",
+            "access token"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "A JWT payload is...",
+        "options": [
+          "Strongly encrypted",
+          "Just Base64URL, readable by anyone",
+          "Stored in DNS",
+          "An image"
+        ],
+        "explanation": "The signature prevents changes, not reading.",
+        "answer": 1
+      },
+      {
+        "prompt": "A server that doesn't verify JWT signatures lets attackers...",
+        "options": [
+          "Modify the payload, e.g. become admin",
+          "Log in faster",
+          "Change the theme",
+          "Nothing"
+        ],
+        "explanation": "Without verification, token contents can be forged freely.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why is storing a JWT in localStorage risky?",
+        "options": [
+          "It fills up",
+          "XSS can steal it",
+          "It's wiped daily",
+          "It can't be read"
+        ],
+        "explanation": "Malicious JavaScript can read localStorage.",
+        "answer": 1
+      },
+      {
+        "prompt": "Consent phishing is...",
+        "options": [
+          "A malicious app requests broad OAuth access and the victim allows it",
+          "Prize SMS",
+          "Fake calls",
+          "USB viruses"
+        ],
+        "explanation": "No password needed: the victim grants access.",
+        "answer": 0
+      },
+      {
+        "prompt": "A safe step for third-party apps connected to your Google account?",
+        "options": [
+          "Leave them all",
+          "Revoke access you don't use",
+          "Give them your password",
+          "Turn off 2FA"
+        ],
+        "explanation": "Forgotten old access can become a gap.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv10-api",
+    "level": 10,
+    "title": "API Security",
+    "summary": "Mobile apps talk through APIs, and that's where a lot of data leaks.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "APIs are visible back doors",
+        "body": "Modern mobile and web apps talk to servers through APIs (usually REST/JSON). The UI can hide buttons, but the API can still be called directly with Burp or curl.\n\nKey principle: security must live on the server. Anything checked only in the app (hidden buttons, limited inputs) can be bypassed.",
+        "tip": "Hiding a button in the app is like covering a doorway with a curtain. It looks closed, but people can still walk through."
+      },
+      {
+        "title": "The most common API flaws",
+        "body": "OWASP has a dedicated API Security Top 10. The most frequent:\n- BOLA (Broken Object Level Authorization): the API version of IDOR. GET /api/orders/1043 returns someone else's order\n- Broken authentication: weak tokens, no attempt limits\n- Mass assignment: the server accepts fields it shouldn't, e.g. sending \"role\": \"admin\" when updating a profile\n- Excessive data exposure: the API sends everything (including others' phone numbers) and relies on the app to \"filter\"\n- No rate limiting: OTPs can be guessed or millions of users scraped",
+        "tip": "An API that sends all data and hopes the app filters it is like handing over the whole phone book and saying \"please only look at your own name\".",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "/api/orders",
+            "/api/users",
+            "/api/v1 (forgotten)",
+            "API gateway"
+          ]
+        }
+      },
+      {
+        "title": "Building a secure API",
+        "body": "Developer checklist:\n- Check object-level authorization on every endpoint: \"does this user own this data?\"\n- Return only needed fields; never return raw database objects\n- Allowlist the fields users may change\n- Rate-limit login, OTP, and search\n- Use HTTPS, short-lived tokens, and access logs\n- Document every endpoint, including old versions (/v1) that get forgotten\n\nIf you build your own backend (e.g. an API for a Flutter app), apply this from day one.",
+        "tip": "A guard in every room is safer than one guard at the front gate."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Why must API security live on the server, not in the app?",
+        "options": [
+          "To keep the app light",
+          "Because the API can be called directly, bypassing the app",
+          "For nicer colors",
+          "No difference"
+        ],
+        "explanation": "Burp or curl can call the API without the app.",
+        "answer": 1
+      },
+      {
+        "prompt": "BOLA is...",
+        "options": [
+          "The API version of IDOR",
+          "A type of encryption",
+          "A programming language",
+          "A server name"
+        ],
+        "explanation": "Others' objects are accessible because ownership isn't checked.",
+        "answer": 0
+      },
+      {
+        "prompt": "Sending \"role\": \"admin\" in a profile update and having it work is called...",
+        "options": [
+          "Mass assignment",
+          "Phishing",
+          "DDoS",
+          "Backup"
+        ],
+        "explanation": "The server accepted a field users shouldn't change.",
+        "answer": 0
+      },
+      {
+        "prompt": "Without rate limiting on the OTP endpoint, attackers can...",
+        "options": [
+          "Guess OTPs repeatedly",
+          "Change the app's colors",
+          "Speed up the server",
+          "Do nothing"
+        ],
+        "explanation": "A 6-digit OTP has only a million possibilities.",
+        "answer": 0
+      },
+      {
+        "prompt": "Excessive data exposure means...",
+        "options": [
+          "The API sends more data than needed",
+          "The server is down",
+          "Data is encrypted",
+          "Login failed"
+        ],
+        "explanation": "Sensitive data still leaks even if the app doesn't display it.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv10-injection",
+    "level": 10,
+    "title": "Uploads, Path Traversal & Command Injection",
+    "summary": "When a file name or input makes the server do things it shouldn't.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Dangerous file uploads",
+        "body": "Upload features (profile photos, documents) are frequent entry points. If the server accepts any file and stores it in an executable folder, an attacker can upload a script (web shell) and run it from the browser.\n\nDefenses:\n- Allowlist file types and check the contents, not just the extension\n- Rename files with server-generated random names\n- Store them outside the web root or in separate object storage\n- Limit file size\n- Re-encode images so hidden content is stripped",
+        "tip": "Accepting a parcel without checking it could mean accepting a bomb wrapped like a gift."
+      },
+      {
+        "title": "Path traversal",
+        "body": "Path traversal happens when an app uses user input as a file name, e.g. /download?file=report.pdf. With ../ an attacker can climb directories and read other server files, like config files holding database passwords.\n\nDefenses:\n- Never use user input directly as a path\n- Use ids mapped to files on the server\n- Normalize the path and confirm the final result stays inside the allowed folder\n- Give the app account minimal read rights",
+        "tip": "../ is like telling the archive clerk \"grab the folder from the next shelf, then go up to the director's floor\". A good clerk refuses to leave their room.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "/",
+            "var",
+            "etc",
+            "www",
+            "uploads",
+            "passwd",
+            "config"
+          ]
+        }
+      },
+      {
+        "title": "Command injection",
+        "body": "Command injection happens when an app builds a system command from user input, e.g. a \"ping check\" feature that runs ping + the typed address. Characters like ; or && can chain extra commands, letting the attacker run anything on the server.\n\nThe impact can be full server takeover (Remote Code Execution).\n\nDefenses:\n- Avoid calling the shell; use equivalent language functions\n- If you must, pass arguments as a separate list, not one string\n- Strict allowlist validation (e.g. IP format only)\n- Run the app with minimal rights\n\nLegal practice: command injection and file upload labs on PortSwigger Academy or DVWA.",
+        "tip": "Like writing \"1 coffee; and open the safe\" into a machine that executes every word without thinking.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            "; && |",
+            "input",
+            "shell"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Web shells usually get in through...",
+        "options": [
+          "Unvalidated file uploads",
+          "LAN cables",
+          "Phone notifications",
+          "Calendars"
+        ],
+        "explanation": "A script is uploaded, then run from the browser.",
+        "answer": 0
+      },
+      {
+        "prompt": "The characters used in path traversal are...",
+        "options": [
+          "../",
+          "@@",
+          "##",
+          "<>"
+        ],
+        "explanation": "../ means go up one folder.",
+        "answer": 0
+      },
+      {
+        "prompt": "Command injection can lead to...",
+        "options": [
+          "Remote Code Execution / server takeover",
+          "A theme change",
+          "Longer battery",
+          "Nothing"
+        ],
+        "explanation": "The attacker can run any command.",
+        "answer": 0
+      },
+      {
+        "prompt": "A safe way to store uploads is...",
+        "options": [
+          "In the web folder with the original name",
+          "Random names, outside the web root",
+          "On the admin's desktop",
+          "In DNS"
+        ],
+        "explanation": "Prevents files from being executed or overwriting others.",
+        "answer": 1
+      },
+      {
+        "prompt": "The best defense against command injection is...",
+        "options": [
+          "Avoid the shell; use equivalent language functions",
+          "Use a monospace font",
+          "Disable logs",
+          "Use Base64"
+        ],
+        "explanation": "Without a shell, ; and && have no special meaning.",
+        "answer": 0
+      }
+    ]
+  }
+]

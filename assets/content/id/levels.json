@@ -58,5 +58,29 @@
     "title": "Modus Lokal",
     "tagline": "QRIS palsu, telepon CS bank, pinjol ilegal, investasi bodong & kripto.",
     "moduleFile": "lv9.json"
+  },
+  {
+    "index": 10,
+    "title": "Web Lanjut",
+    "tagline": "CSRF & SSRF, JWT & OAuth, keamanan API, upload & command injection.",
+    "moduleFile": "lv10.json"
+  },
+  {
+    "index": 11,
+    "title": "Sistem & Eksploitasi",
+    "tagline": "Buffer overflow, privilege escalation, cracking offline, Wi-Fi lanjut.",
+    "moduleFile": "lv11.json"
+  },
+  {
+    "index": 12,
+    "title": "Blue Team Lanjut",
+    "tagline": "MITRE ATT&CK, threat hunting & Sigma, analisis malware & YARA, respons insiden besar.",
+    "moduleFile": "lv12.json"
+  },
+  {
+    "index": 13,
+    "title": "Final Boss",
+    "tagline": "Serangan cloud & kontainer, keamanan AI, metodologi pentest, studi kasus akhir. Tamat!",
+    "moduleFile": "lv13.json"
   }
 ]

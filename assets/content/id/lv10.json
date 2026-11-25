@@ -1,0 +1,388 @@
+[
+  {
+    "id": "lv10-csrf-ssrf",
+    "level": 10,
+    "title": "CSRF & SSRF",
+    "summary": "Saat browser korban atau server itu sendiri disuruh kerja buat penyerang.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "CSRF: numpang sesi korban",
+        "body": "Cross-Site Request Forgery (CSRF) terjadi saat situs jahat bikin browser korban mengirim request ke situs lain tempat korban lagi login. Browser otomatis ikut ngirim cookie sesi, jadi server mengira request itu dari korban.\n\nContoh: korban login di bank, lalu buka halaman jahat yang diam-diam mengirim form \"transfer\" ke bank itu.\n\nPertahanannya:\n- Token CSRF acak di tiap form yang dicek server\n- Cookie SameSite=Lax atau Strict (ingat LV.02)\n- Konfirmasi ulang (password/OTP) buat aksi sensitif",
+        "tip": "CSRF itu kayak orang yang nyelipin surat perintah transfer di tumpukan berkas yang kamu tanda tangani tanpa dibaca.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Korban",
+            "Situs jahat",
+            "Cookie ikut",
+            "Bank"
+          ]
+        }
+      },
+      {
+        "title": "SSRF: server disuruh nyerang ke dalam",
+        "body": "Server-Side Request Forgery (SSRF) terjadi saat aplikasi mengambil URL yang diberikan pengguna, misal fitur \"pratinjau link\" atau \"impor gambar dari URL\". Penyerang ngasih alamat internal yang seharusnya gak bisa dijangkau dari luar:\n- Panel admin di localhost\n- Layanan internal di jaringan 10.x.x.x\n- Layanan metadata cloud yang bisa membocorkan kredensial\n\nKarena request datang dari server sendiri, firewall sering meloloskannya. SSRF pernah jadi pintu masuk kebocoran data besar di cloud.",
+        "tip": "SSRF itu kayak nyuruh resepsionis gedung ngambilin \"paket\" dari ruang arsip rahasia. Satpam ngizinin karena yang jalan resepsionis.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Penyerang",
+            "Server app",
+            "localhost",
+            "Metadata cloud"
+          ]
+        }
+      },
+      {
+        "title": "Menutup SSRF",
+        "body": "Pertahanan berlapis:\n- Allowlist: cuma izinkan domain atau tujuan tertentu, jangan blocklist (selalu ada cara mengakali)\n- Tolak alamat privat, localhost, dan link-local setelah nama domain di-resolve\n- Jangan ikuti redirect secara buta\n- Di cloud, wajibkan versi layanan metadata yang butuh token (misal IMDSv2 di AWS)\n- Jalankan fitur fetch di jaringan terpisah dengan hak minimal\n\nLatihan: PortSwigger Academy punya lab CSRF dan SSRF tingkat Apprentice.",
+        "tip": "Daripada daftar tempat terlarang yang gak pernah lengkap, lebih aman daftar tempat yang boleh dituju."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "CSRF berhasil karena...",
+        "options": [
+          "Server lambat",
+          "Browser otomatis mengirim cookie sesi ke situs tujuan",
+          "Password lemah",
+          "DNS error"
+        ],
+        "explanation": "Request palsu ikut membawa cookie korban.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pertahanan utama CSRF adalah...",
+        "options": [
+          "Token CSRF acak yang dicek server",
+          "Font besar",
+          "Matikan HTTPS",
+          "Ganti logo"
+        ],
+        "explanation": "Situs jahat gak tahu nilai token itu.",
+        "answer": 0
+      },
+      {
+        "prompt": "Fitur \"impor gambar dari URL\" rentan terhadap...",
+        "options": [
+          "SSRF",
+          "Phishing SMS",
+          "Shoulder surfing",
+          "Brute force PIN"
+        ],
+        "explanation": "Server bisa disuruh mengambil alamat internal.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa SSRF ke layanan metadata cloud berbahaya?",
+        "options": [
+          "Bikin server lambat",
+          "Bisa membocorkan kredensial akses cloud",
+          "Menghapus logo",
+          "Gak berbahaya"
+        ],
+        "explanation": "Kredensial itu bisa dipakai mengakses data di akun cloud.",
+        "answer": 1
+      },
+      {
+        "prompt": "Untuk validasi tujuan URL, lebih aman pakai...",
+        "options": [
+          "Blocklist",
+          "Allowlist",
+          "Gak perlu validasi",
+          "Base64"
+        ],
+        "explanation": "Blocklist hampir selalu bisa diakali.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv10-auth",
+    "level": 10,
+    "title": "JWT, OAuth & Login Modern",
+    "summary": "Token yang dibawa ke mana-mana, dan cara token itu disalahgunakan.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Anatomi JWT",
+        "body": "JSON Web Token (JWT) adalah token login yang banyak dipakai aplikasi dan API. Bentuknya tiga bagian dipisah titik:\n| header.payload.signature\n\n- Header: algoritma tanda tangan\n- Payload: data, misal id pengguna dan peran\n- Signature: tanda tangan server biar isinya gak bisa diubah\n\nPenting: header dan payload cuma Base64URL, bukan enkripsi. Siapa pun bisa membacanya (coba di Toolbox Hash → Decode). Jangan simpan data rahasia di payload.",
+        "tip": "JWT itu kayak gelang konser yang ada tulisan nama dan kelas tiketmu, plus hologram anti-palsu. Tulisannya kebaca semua orang; yang bikin sah itu hologramnya.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Header",
+            "Payload",
+            "Signature"
+          ]
+        }
+      },
+      {
+        "title": "Kesalahan JWT yang klasik",
+        "body": "Celah yang sering ditemukan di aplikasi nyata:\n- Server gak benar-benar memverifikasi signature, jadi payload bisa diubah (misal role jadi admin)\n- Menerima algoritma \"none\"\n- Kunci HMAC lemah yang bisa ditebak offline\n- Token gak pernah kedaluwarsa dan gak bisa dicabut\n- Token disimpan di localStorage, sehingga bisa dicuri lewat XSS\n\nPerbaikannya: pakai library yang matang, tetapkan algoritma yang diizinkan di server, kunci kuat, masa berlaku pendek plus refresh token.",
+        "tip": "Hologram cuma berguna kalau satpamnya beneran ngecek hologram, bukan cuma lihat tulisan \"VIP\"."
+      },
+      {
+        "title": "OAuth & \"Login dengan Google\"",
+        "body": "OAuth memungkinkan aplikasi minta akses terbatas ke akunmu di layanan lain tanpa tahu password-nya. \"Login dengan Google\" memakai OpenID Connect di atas OAuth.\n\nRisiko yang perlu dipahami:\n- Consent phishing: aplikasi jahat minta izin \"baca semua email\" dan korban asal klik Izinkan\n- Redirect URI yang longgar bisa membocorkan kode otorisasi\n- Token akses yang bocor bisa dipakai tanpa password dan tanpa 2FA\n\nKebiasaan aman: baca izin yang diminta, cabut akses aplikasi yang gak dipakai di setelan akun Google (Keamanan → Koneksi pihak ketiga).",
+        "tip": "OAuth itu kayak ngasih kunci cadangan khusus gudang ke tukang, bukan kunci master rumah. Tapi tetap baca dulu kunci apa yang dia minta.",
+        "visual": {
+          "kind": "keys",
+          "labels": [
+            "izin OAuth",
+            "token akses"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Payload JWT itu...",
+        "options": [
+          "Terenkripsi kuat",
+          "Cuma Base64URL, bisa dibaca siapa pun",
+          "Disimpan di DNS",
+          "Berupa gambar"
+        ],
+        "explanation": "Signature mencegah perubahan, bukan pembacaan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Server yang gak memverifikasi signature JWT memungkinkan penyerang...",
+        "options": [
+          "Mengubah payload, misal jadi admin",
+          "Mempercepat login",
+          "Mengganti tema",
+          "Gak ada dampak"
+        ],
+        "explanation": "Tanpa verifikasi, isi token bebas dipalsukan.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa menyimpan JWT di localStorage berisiko?",
+        "options": [
+          "Penuh",
+          "Bisa dicuri lewat XSS",
+          "Hilang tiap hari",
+          "Gak bisa dibaca"
+        ],
+        "explanation": "JavaScript berbahaya bisa membaca localStorage.",
+        "answer": 1
+      },
+      {
+        "prompt": "Consent phishing adalah...",
+        "options": [
+          "Aplikasi jahat minta izin OAuth luas dan korban mengizinkan",
+          "SMS hadiah",
+          "Telepon palsu",
+          "Virus flashdisk"
+        ],
+        "explanation": "Gak perlu password: korban sendiri yang memberi akses.",
+        "answer": 0
+      },
+      {
+        "prompt": "Langkah aman untuk aplikasi pihak ketiga yang terhubung ke akun Google?",
+        "options": [
+          "Biarkan semua",
+          "Cabut akses yang gak dipakai",
+          "Kasih password ke mereka",
+          "Matikan 2FA"
+        ],
+        "explanation": "Akses lama yang terlupa bisa jadi celah.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv10-api",
+    "level": 10,
+    "title": "Keamanan API",
+    "summary": "Aplikasi mobile ngobrol lewat API, dan di situlah banyak data bocor.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "API itu pintu belakang yang kelihatan",
+        "body": "Aplikasi mobile dan web modern berkomunikasi dengan server lewat API (biasanya REST/JSON). Tampilan aplikasi bisa nyembunyiin tombol, tapi API-nya tetap bisa dipanggil langsung pakai Burp atau curl.\n\nPrinsip penting: keamanan harus di server. Apa pun yang dicek cuma di aplikasi (tombol disembunyikan, input dibatasi) bisa dilewati.",
+        "tip": "Nyembunyiin tombol di aplikasi itu kayak nutup pintu pakai tirai. Kelihatan tertutup, tapi orang tetap bisa lewat."
+      },
+      {
+        "title": "Celah API paling umum",
+        "body": "OWASP punya daftar khusus API Security Top 10. Yang paling sering:\n- BOLA (Broken Object Level Authorization): versi API dari IDOR. GET /api/orders/1043 menampilkan pesanan orang lain\n- Broken authentication: token lemah, gak ada batas percobaan\n- Mass assignment: server menerima field yang gak seharusnya, misal mengirim \"role\": \"admin\" saat update profil\n- Excessive data exposure: API ngirim semua data (termasuk nomor HP orang lain) dan aplikasi yang \"menyaring\"\n- Gak ada rate limit: bisa nebak OTP atau scraping data jutaan pengguna",
+        "tip": "API yang ngirim semua data lalu berharap aplikasi nyaring itu kayak ngasih seluruh buku telepon terus bilang \"tolong cuma lihat namamu\".",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "/api/orders",
+            "/api/users",
+            "/api/v1 (lupa)",
+            "API gateway"
+          ]
+        }
+      },
+      {
+        "title": "Membangun API yang aman",
+        "body": "Checklist buat developer:\n- Cek otorisasi tiap objek di tiap endpoint: \"apakah pengguna ini pemilik data ini?\"\n- Kirim cuma field yang dibutuhkan; jangan kembalikan objek database mentah\n- Allowlist field yang boleh diubah pengguna\n- Rate limit di login, OTP, dan pencarian\n- Pakai HTTPS, token berumur pendek, dan log akses\n- Dokumentasikan semua endpoint, termasuk versi lama (/v1) yang sering terlupa\n\nKalau kamu bikin backend sendiri (misal API buat app Flutter), terapkan ini dari awal.",
+        "tip": "Satpam di tiap ruangan lebih aman daripada satu satpam di gerbang depan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Kenapa keamanan API harus di server, bukan di aplikasi?",
+        "options": [
+          "Biar aplikasi ringan",
+          "Karena API bisa dipanggil langsung, melewati aplikasi",
+          "Biar warnanya bagus",
+          "Gak ada bedanya"
+        ],
+        "explanation": "Burp atau curl bisa memanggil API tanpa aplikasi.",
+        "answer": 1
+      },
+      {
+        "prompt": "BOLA adalah...",
+        "options": [
+          "Versi API dari IDOR",
+          "Jenis enkripsi",
+          "Bahasa pemrograman",
+          "Nama server"
+        ],
+        "explanation": "Objek milik orang lain bisa diakses karena kepemilikan gak dicek.",
+        "answer": 0
+      },
+      {
+        "prompt": "Mengirim \"role\": \"admin\" saat update profil dan berhasil disebut...",
+        "options": [
+          "Mass assignment",
+          "Phishing",
+          "DDoS",
+          "Backup"
+        ],
+        "explanation": "Server menerima field yang gak seharusnya bisa diubah.",
+        "answer": 0
+      },
+      {
+        "prompt": "Tanpa rate limit di endpoint OTP, penyerang bisa...",
+        "options": [
+          "Menebak OTP berkali-kali",
+          "Mengganti warna aplikasi",
+          "Mempercepat server",
+          "Gak bisa apa-apa"
+        ],
+        "explanation": "OTP 6 digit cuma 1 juta kemungkinan.",
+        "answer": 0
+      },
+      {
+        "prompt": "Excessive data exposure artinya...",
+        "options": [
+          "API ngirim data lebih dari yang dibutuhkan",
+          "Server mati",
+          "Data dienkripsi",
+          "Login gagal"
+        ],
+        "explanation": "Data sensitif tetap bocor walau gak ditampilkan aplikasi.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv10-injection",
+    "level": 10,
+    "title": "Upload, Path Traversal & Command Injection",
+    "summary": "Saat nama file atau input bikin server jalanin hal yang gak seharusnya.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Upload file yang berbahaya",
+        "body": "Fitur upload (foto profil, dokumen) sering jadi pintu masuk. Kalau server menerima file apa saja dan menyimpannya di folder yang bisa dijalankan, penyerang bisa mengunggah script (web shell) lalu menjalankannya lewat browser.\n\nPertahanannya:\n- Allowlist jenis file dan cek isinya, bukan cuma ekstensi\n- Ganti nama file dengan nama acak dari server\n- Simpan di luar folder web atau di object storage terpisah\n- Batasi ukuran file\n- Proses gambar ulang (re-encode) supaya isi tersembunyi hilang",
+        "tip": "Nerima titipan barang tanpa dicek itu bisa berarti nerima bom yang dibungkus kayak kado."
+      },
+      {
+        "title": "Path traversal",
+        "body": "Path traversal terjadi saat aplikasi memakai input pengguna sebagai nama file, misal /download?file=laporan.pdf. Dengan ../ penyerang bisa naik folder dan membaca file lain di server, seperti file konfigurasi berisi password database.\n\nPertahanannya:\n- Jangan pakai input pengguna langsung sebagai path\n- Pakai id yang dipetakan ke file di server\n- Normalisasi path dan pastikan hasil akhirnya tetap di dalam folder yang diizinkan\n- Akun aplikasi dengan hak baca seminimal mungkin",
+        "tip": "../ itu kayak bilang ke petugas arsip \"ambilin map di rak sebelah, terus naik ke lantai direktur\". Petugas yang baik nolak keluar dari ruangannya.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "/",
+            "var",
+            "etc",
+            "www",
+            "uploads",
+            "passwd",
+            "config"
+          ]
+        }
+      },
+      {
+        "title": "Command injection",
+        "body": "Command injection terjadi saat aplikasi menyusun perintah sistem dari input pengguna, misal fitur \"cek ping\" yang menjalankan ping + alamat yang diketik. Karakter seperti ; atau && bisa menyambung perintah tambahan, sehingga penyerang menjalankan perintah apa pun di server.\n\nDampaknya bisa sampai server diambil alih penuh (Remote Code Execution).\n\nPertahanannya:\n- Hindari memanggil shell; pakai fungsi bahasa pemrograman yang setara\n- Kalau terpaksa, kirim argumen sebagai daftar terpisah, bukan satu string\n- Validasi ketat dengan allowlist (misal cuma format IP)\n- Jalankan aplikasi dengan hak minimal\n\nLatihan legal: lab command injection dan file upload di PortSwigger Academy atau DVWA.",
+        "tip": "Kayak nulis pesanan \"1 kopi; dan buka brankas\" di mesin yang ngejalanin semua kata tanpa mikir.",
+        "visual": {
+          "kind": "firewall",
+          "labels": [
+            "; && |",
+            "input",
+            "shell"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Web shell biasanya masuk lewat...",
+        "options": [
+          "Upload file yang gak divalidasi",
+          "Kabel LAN",
+          "Notifikasi HP",
+          "Kalender"
+        ],
+        "explanation": "Script yang diunggah lalu dijalankan lewat browser.",
+        "answer": 0
+      },
+      {
+        "prompt": "Karakter yang dipakai di path traversal adalah...",
+        "options": [
+          "../",
+          "@@",
+          "##",
+          "<>"
+        ],
+        "explanation": "../ artinya naik satu folder.",
+        "answer": 0
+      },
+      {
+        "prompt": "Command injection bisa berujung pada...",
+        "options": [
+          "Remote Code Execution / server diambil alih",
+          "Tema berubah",
+          "Baterai awet",
+          "Gak ada dampak"
+        ],
+        "explanation": "Penyerang bisa menjalankan perintah apa pun.",
+        "answer": 0
+      },
+      {
+        "prompt": "Cara aman menyimpan file upload adalah...",
+        "options": [
+          "Di folder web dengan nama asli",
+          "Nama acak, di luar folder web",
+          "Di desktop admin",
+          "Di DNS"
+        ],
+        "explanation": "Mencegah file dijalankan atau menimpa file lain.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pertahanan terbaik command injection adalah...",
+        "options": [
+          "Hindari shell, pakai fungsi bahasa yang setara",
+          "Pakai font monospace",
+          "Matikan log",
+          "Pakai Base64"
+        ],
+        "explanation": "Tanpa shell, karakter ; dan && gak punya arti khusus.",
+        "answer": 0
+      }
+    ]
+  }
+]

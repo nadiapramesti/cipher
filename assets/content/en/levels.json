@@ -58,5 +58,29 @@
     "title": "Local Scams",
     "tagline": "Fake QRIS, bank CS calls, illegal loans, bogus investments & crypto.",
     "moduleFile": "lv9.json"
+  },
+  {
+    "index": 10,
+    "title": "Advanced Web",
+    "tagline": "CSRF & SSRF, JWT & OAuth, API security, uploads & command injection.",
+    "moduleFile": "lv10.json"
+  },
+  {
+    "index": 11,
+    "title": "Systems & Exploitation",
+    "tagline": "Buffer overflows, privilege escalation, offline cracking, advanced Wi-Fi.",
+    "moduleFile": "lv11.json"
+  },
+  {
+    "index": 12,
+    "title": "Advanced Blue Team",
+    "tagline": "MITRE ATT&CK, threat hunting & Sigma, malware analysis & YARA, large-scale incident response.",
+    "moduleFile": "lv12.json"
+  },
+  {
+    "index": 13,
+    "title": "Final Boss",
+    "tagline": "Cloud & container attacks, AI security, pentest methodology, final case study. The end!",
+    "moduleFile": "lv13.json"
   }
 ]

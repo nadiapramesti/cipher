@@ -16,12 +16,16 @@ Aplikasi Android buat belajar cyber security dari nol, buat umum dan berbasis le
 | LV.07 Forensik, Cloud & AI | Forensik digital, keamanan cloud, deepfake & penipuan AI, rencana keamanan pribadi | ✅ 4 modul |
 | LV.08 Alat Tempur | Termux, Nmap, Wireshark & PCAPdroid, Burp Suite, CyberChef & alat online, Kali Linux & lab latihan, Python buat cyber, bedah APK | ✅ 8 modul |
 | LV.09 Modus Lokal | QRIS palsu & quishing, telepon "CS bank", pinjol ilegal, investasi bodong & kripto | ✅ 4 modul |
+| LV.10 Web Lanjut | CSRF & SSRF, JWT & OAuth, keamanan API, upload & command injection | ✅ 4 modul |
+| LV.11 Sistem & Eksploitasi | Buffer overflow & mitigasi, privilege escalation, cracking offline, Wi-Fi lanjut | ✅ 4 modul |
+| LV.12 Blue Team Lanjut | MITRE ATT&CK, threat hunting & Sigma, analisis malware & YARA, respons insiden besar | ✅ 4 modul |
+| LV.13 Final Boss | Serangan cloud & kontainer, keamanan AI/LLM, metodologi pentest & laporan, studi kasus akhir | ✅ 4 modul |
 
 ## Fitur
-- **55 modul di 10 level**, ID & EN, tiap modul ada analogi dan 5 soal berpembahasan
-- **Adegan 3D interaktif** di 72 halaman materi (paket data, lapisan pertahanan, brankas, roda Caesar, pohon DNS, botnet, dll.) yang bisa diputer pakai jari
+- **71 modul di 14 level** (Pemula → Menengah → Lanjut → Hard), ID & EN, tiap modul ada analogi dan 5 soal berpembahasan
+- **Adegan 3D interaktif** di 97 halaman materi (paket data, lapisan pertahanan, brankas, roda Caesar, pohon DNS, botnet, dll.) yang bisa diputer pakai jari
 - **Kamus 46 istilah** lengkap dengan analogi
-- **Ujian akhir tiap level** (10 soal acak, lulus 80%) sebagai syarat sertifikat, plus **24 lencana**
+- **Ujian akhir tiap level** (10 soal acak, lulus 80%) sebagai syarat sertifikat, plus **29 lencana** termasuk TAMAT
 
 - Onboarding + tes penempatan 8 soal yang ngasih rekomendasi level
 - Modul: materi singkat + analogi, kuis dengan pembahasan, lulus minimal 70% buat buka modul berikutnya

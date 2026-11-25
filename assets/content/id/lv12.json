@@ -1,0 +1,377 @@
+[
+  {
+    "id": "lv12-attack",
+    "level": 12,
+    "title": "MITRE ATT&CK & Kill Chain",
+    "summary": "Peta perilaku penyerang yang dipakai tim keamanan sedunia.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Cyber Kill Chain",
+        "body": "Kill chain memecah serangan jadi tahap-tahap berurutan:\n1. Reconnaissance: riset target (LV.04)\n2. Weaponization: menyiapkan alat, misal dokumen berisi malware\n3. Delivery: mengirim, misal lewat email phishing\n4. Exploitation: celah dimanfaatkan\n5. Installation: malware menetap\n6. Command & Control: penyerang mengendalikan dari jauh\n7. Actions on objectives: mencuri data, mengenkripsi, dll.\n\nPelajarannya: pertahanan bisa memutus rantai di tahap mana pun. Makin awal diputus, makin kecil kerugiannya.",
+        "tip": "Kayak rantai sepeda: putus satu mata rantai aja, sepedanya udah gak bisa jalan.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Recon",
+            "Weaponize",
+            "Delivery",
+            "Exploit",
+            "Install",
+            "C2"
+          ]
+        }
+      },
+      {
+        "title": "MITRE ATT&CK",
+        "body": "MITRE ATT&CK adalah basis pengetahuan terbuka tentang perilaku penyerang nyata, disusun jadi matriks:\n- Taktik: tujuan penyerang, misal Initial Access, Persistence, Privilege Escalation, Exfiltration\n- Teknik: cara mencapainya, misal Phishing (T1566) atau Valid Accounts (T1078)\n\nTim keamanan memakainya buat:\n- Memetakan deteksi yang sudah ada dan yang masih bolong\n- Bicara dengan bahasa yang sama saat melaporkan insiden\n- Merancang latihan red team dan purple team\n\nSemua isi ATT&CK gratis di attack.mitre.org.",
+        "tip": "ATT&CK itu kayak buku resep lengkap para penyerang. Tim bertahan baca bukunya supaya tahu masakan apa yang bakal dateng.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "ATT&CK",
+            "Initial Access",
+            "Persistence",
+            "T1566",
+            "T1078",
+            "T1053",
+            "T1547"
+          ]
+        }
+      },
+      {
+        "title": "Menerapkannya",
+        "body": "Contoh: dari LV.05, modus APK undangan bisa dipetakan:\n- Initial Access: phishing lewat aplikasi chat\n- Execution: korban memasang APK\n- Credential Access: membaca SMS OTP\n- Exfiltration: mengirim data ke bot Telegram\n\nSetelah dipetakan, tim bisa nanya di tiap tahap: \"apa yang bisa mendeteksi atau memblokir ini?\". Misal edukasi pengguna di tahap awal, Play Protect di tahap eksekusi, dan pemantauan transaksi bank di tahap akhir.",
+        "tip": "Memetakan serangan itu kayak bikin denah rute maling, terus pasang CCTV di tiap belokan."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Inti konsep kill chain adalah...",
+        "options": [
+          "Serangan terjadi sekaligus",
+          "Serangan punya tahap; memutus satu tahap bisa menggagalkan semuanya",
+          "Rantai sepeda",
+          "Jenis malware"
+        ],
+        "explanation": "Makin awal diputus, makin kecil kerugian.",
+        "answer": 1
+      },
+      {
+        "prompt": "Di MITRE ATT&CK, \"Persistence\" adalah...",
+        "options": [
+          "Teknik",
+          "Taktik (tujuan penyerang)",
+          "Alat",
+          "Nama malware"
+        ],
+        "explanation": "Taktik = tujuan, teknik = caranya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kegunaan ATT&CK bagi blue team adalah...",
+        "options": [
+          "Membuat malware",
+          "Memetakan deteksi yang ada dan yang bolong",
+          "Mempercepat Wi-Fi",
+          "Membuat logo"
+        ],
+        "explanation": "Membantu prioritas pertahanan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Tahap mengirim data curian ke luar disebut...",
+        "options": [
+          "Exfiltration",
+          "Reconnaissance",
+          "Weaponization",
+          "Backup"
+        ],
+        "explanation": "Exfiltration = data keluar dari jaringan korban.",
+        "answer": 0
+      },
+      {
+        "prompt": "Tahap paling awal di kill chain adalah...",
+        "options": [
+          "Reconnaissance",
+          "Installation",
+          "Actions on objectives",
+          "Command & Control"
+        ],
+        "explanation": "Riset target selalu duluan.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv12-hunting",
+    "level": 12,
+    "title": "Threat Hunting & Deteksi",
+    "summary": "Nyari penyerang yang lolos alarm, dan nulis aturan deteksi sendiri.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Jangan nunggu alarm",
+        "body": "Threat hunting adalah mencari tanda penyerang secara aktif, dengan asumsi \"mungkin ada yang sudah masuk tapi belum ketahuan\". Hunter mulai dari hipotesis, misal:\n- \"Kalau ada yang memakai password curian, akan ada login sukses dari negara yang gak biasa\"\n- \"Kalau ada malware yang menetap, akan ada scheduled task baru yang aneh\"\n\nLalu hipotesis itu diuji dengan data log. Temuan yang terbukti dijadikan aturan deteksi otomatis.",
+        "tip": "Satpam biasa nunggu alarm bunyi. Hunter keliling ngecek jendela yang kelihatan tertutup tapi gak dikunci."
+      },
+      {
+        "title": "Aturan deteksi: Sigma",
+        "body": "Sigma adalah format aturan deteksi terbuka, mirip \"resep\" yang bisa diterjemahkan ke berbagai SIEM. Contoh sederhana mendeteksi banyak login gagal di Windows:\n| title: Banyak login gagal\n| logsource:\n|   product: windows\n|   service: security\n| detection:\n|   selection:\n|     EventID: 4625\n|   condition: selection | count() > 20\n| level: medium\n\nKomunitas membagikan ribuan aturan Sigma gratis, dan banyak yang sudah dipetakan ke teknik ATT&CK.",
+        "tip": "Aturan deteksi itu kayak ciri-ciri buronan yang ditempel di pos ronda: siapa pun yang cocok, langsung ditandai.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "4625 > 20",
+            "Sigma"
+          ]
+        }
+      },
+      {
+        "title": "Kualitas deteksi",
+        "body": "Aturan deteksi yang bagus seimbang:\n- Terlalu longgar: banyak false positive, tim kelelahan dan mulai mengabaikan alarm (ingat LV.06)\n- Terlalu ketat: penyerang yang sedikit beda caranya lolos (false negative)\n\nPraktik yang sehat:\n- Uji aturan pakai data serangan simulasi (purple teaming)\n- Catat alasan dan cara menindaklanjuti tiap alarm (playbook)\n- Ukur: berapa lama dari kejadian sampai terdeteksi, dan sampai ditangani\n\nLatihan: TryHackMe punya jalur SOC Level 1 untuk analisis log dan deteksi.",
+        "tip": "Alarm yang bunyi tiap ada kucing lewat bakal dicabut kabelnya. Alarm yang gak pernah bunyi juga gak ada gunanya."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Threat hunting dimulai dari...",
+        "options": [
+          "Menunggu alarm",
+          "Hipotesis tentang perilaku penyerang",
+          "Membeli antivirus",
+          "Mematikan log"
+        ],
+        "explanation": "Hipotesis lalu diuji dengan data.",
+        "answer": 1
+      },
+      {
+        "prompt": "Sigma adalah...",
+        "options": [
+          "Antivirus",
+          "Format aturan deteksi terbuka yang bisa diterjemahkan ke banyak SIEM",
+          "Bahasa pemrograman game",
+          "Jenis firewall"
+        ],
+        "explanation": "Satu aturan, banyak platform.",
+        "answer": 1
+      },
+      {
+        "prompt": "Aturan deteksi yang terlalu longgar menyebabkan...",
+        "options": [
+          "False positive berlebihan",
+          "Penyerang pasti tertangkap",
+          "Server lebih cepat",
+          "Gak ada efek"
+        ],
+        "explanation": "Alarm palsu bikin tim lengah.",
+        "answer": 0
+      },
+      {
+        "prompt": "False negative artinya...",
+        "options": [
+          "Alarm bunyi padahal aman",
+          "Serangan nyata yang gak terdeteksi",
+          "Login berhasil",
+          "Backup gagal"
+        ],
+        "explanation": "Ini yang paling berbahaya.",
+        "answer": 1
+      },
+      {
+        "prompt": "Purple teaming adalah...",
+        "options": [
+          "Red dan blue team bekerja sama menguji deteksi",
+          "Tim desain",
+          "Warna tema",
+          "Jenis malware"
+        ],
+        "explanation": "Serangan simulasi dipakai untuk memperbaiki deteksi.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv12-malware",
+    "level": 12,
+    "title": "Analisis Malware",
+    "summary": "Membedah malware dengan aman: statis, dinamis, dan YARA.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Lab yang aman dulu",
+        "body": "Analisis malware wajib di lingkungan terisolasi:\n- Virtual machine khusus, dengan snapshot supaya bisa dikembalikan\n- Jaringan terputus atau dialihkan ke jaringan palsu\n- Gak ada akun pribadi, file penting, atau folder bersama dengan komputer utama\n- Sampel disimpan terkompres berpassword (konvensinya password \"infected\") supaya gak sengaja dijalankan\n\nSalah langkah di sini bisa bikin komputer kamu sendiri yang terinfeksi.",
+        "tip": "Analisis malware itu kayak meneliti virus di laboratorium biosafety: pintunya kedap, bajunya khusus, gak ada yang dibawa pulang.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "SANDBOX",
+            "SAMPEL"
+          ]
+        }
+      },
+      {
+        "title": "Statis vs dinamis",
+        "body": "Analisis statis (tanpa menjalankan):\n- Hash file dan cari di VirusTotal\n- Lihat string di dalamnya: alamat URL, IP, nama file, pesan\n- Periksa header, library yang dipakai, dan izin (seperti bedah APK di LV.08)\n- Decompile atau disassemble dengan alat seperti Ghidra (gratis, dari NSA) untuk program Windows/Linux\n\nAnalisis dinamis (dijalankan di sandbox):\n- Amati proses yang dibuat, file yang diubah, registry, dan koneksi jaringan\n- Sandbox online seperti ANY.RUN atau Hybrid Analysis menampilkan perilakunya\n\nHasilnya berupa Indicator of Compromise (IoC): hash, domain, IP, nama file yang bisa dipakai tim lain untuk deteksi.",
+        "tip": "Statis itu baca resep tanpa masak. Dinamis itu masak di dapur tertutup sambil ngamatin asapnya ke mana."
+      },
+      {
+        "title": "YARA: sidik jari malware",
+        "body": "YARA adalah bahasa aturan untuk mengenali file berdasarkan pola. Contoh mendeteksi APK penipuan yang mengirim data ke bot Telegram:\n| rule APK_Telegram_Exfil {\n|   strings:\n|     $a = \"api.telegram.org/bot\"\n|     $b = \"android.permission.RECEIVE_SMS\"\n|   condition:\n|     all of them\n| }\n\nAturan YARA dipakai antivirus, sandbox, dan tim respons insiden untuk memindai ribuan file sekaligus. Ditulis dari temuan analisis, lalu dibagikan ke komunitas.",
+        "tip": "YARA itu kayak foto buronan yang disebar ke semua pos: begitu ada yang cocok, langsung ketahuan.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "YARA match",
+            "YARA"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Analisis malware sebaiknya dilakukan di...",
+        "options": [
+          "Laptop utama",
+          "VM terisolasi dengan snapshot",
+          "HP pribadi",
+          "Komputer kantor yang tersambung jaringan"
+        ],
+        "explanation": "Isolasi mencegah infeksi menyebar.",
+        "answer": 1
+      },
+      {
+        "prompt": "Analisis statis artinya...",
+        "options": [
+          "Menjalankan malware",
+          "Memeriksa file tanpa menjalankannya",
+          "Menghapus malware",
+          "Mengirim malware ke teman"
+        ],
+        "explanation": "Membaca string, header, dan kode.",
+        "answer": 1
+      },
+      {
+        "prompt": "Indicator of Compromise (IoC) contohnya...",
+        "options": [
+          "Hash file, domain, dan IP berbahaya",
+          "Warna tema",
+          "Nama pengguna kamu",
+          "Jam kerja"
+        ],
+        "explanation": "IoC dipakai untuk deteksi di tempat lain.",
+        "answer": 0
+      },
+      {
+        "prompt": "Ghidra adalah...",
+        "options": [
+          "Alat reverse engineering gratis",
+          "Game",
+          "Antivirus berbayar",
+          "Jenis Wi-Fi"
+        ],
+        "explanation": "Dirilis NSA secara open-source.",
+        "answer": 0
+      },
+      {
+        "prompt": "YARA dipakai untuk...",
+        "options": [
+          "Mengenali file berdasarkan pola",
+          "Mengedit foto",
+          "Membuat password",
+          "Mempercepat internet"
+        ],
+        "explanation": "Aturan YARA memindai banyak file sekaligus.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv12-ir",
+    "level": 12,
+    "title": "Respons Insiden Skala Besar",
+    "summary": "Saat ransomware nyerang kantor: keputusan, komunikasi, dan pemulihan.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Jam-jam pertama",
+        "body": "Skenario: Senin pagi, puluhan komputer kantor menampilkan pesan tebusan. Keputusan di jam pertama sangat menentukan:\n- Isolasi: cabut perangkat yang kena dari jaringan, tapi jangan dimatikan dulu (bukti di memori bisa hilang)\n- Lindungi backup: pastikan backup terputus dan gak ikut terenkripsi\n- Aktifkan tim respons dan rantai komando: siapa memutuskan apa\n- Catat semuanya dengan waktu (timeline), dari menit pertama\n\nKepanikan bikin orang menghapus bukti atau mematikan server yang salah. Itulah gunanya rencana yang dilatih sebelumnya.",
+        "tip": "Kayak kebakaran di gedung: tutup pintu biar api gak merembet, selamatkan dokumen penting, dan ikuti jalur evakuasi yang udah dilatih.",
+        "visual": {
+          "kind": "botnet",
+          "labels": [
+            "backup",
+            "terenkripsi"
+          ]
+        }
+      },
+      {
+        "title": "Komunikasi & kewajiban",
+        "body": "Insiden besar bukan cuma urusan teknis:\n- Internal: karyawan perlu tahu apa yang boleh dan gak boleh dilakukan; jangan pakai email yang mungkin sudah disusupi untuk koordinasi\n- Pimpinan: butuh gambaran dampak bisnis, bukan detail teknis\n- Pelanggan dan publik: komunikasi jujur dan tepat waktu\n- Regulator: UU Pelindungan Data Pribadi mewajibkan pemberitahuan tertulis paling lambat 3 x 24 jam jika terjadi kegagalan pelindungan data pribadi\n- Aparat dan lembaga terkait, seperti BSSN dan kepolisian\n\nKeputusan bayar tebusan atau tidak melibatkan pimpinan, hukum, dan sering pihak asuransi.",
+        "tip": "Saat rumah kemalingan, kamu gak cuma benerin pintu. Kamu juga ngabarin keluarga, lapor RT, dan urus asuransi."
+      },
+      {
+        "title": "Pulih dan belajar",
+        "body": "Pemulihan yang benar:\n- Pastikan akses penyerang benar-benar hilang (akun, backdoor, persistence) sebelum memulihkan; kalau enggak, serangan bisa terulang\n- Pulihkan dari backup bersih, prioritaskan sistem paling kritis\n- Ganti semua kredensial yang mungkin bocor\n- Pantau ketat beberapa minggu setelahnya\n\nLalu lakukan post-incident review tanpa menyalahkan individu: apa yang terjadi, kenapa bisa, apa yang diperbaiki. Latih rencana lewat tabletop exercise: simulasi diskusi \"bagaimana kalau...\" bersama tim dan pimpinan.",
+        "tip": "Sebelum pindah balik ke rumah yang abis kebakaran, pastiin baranya udah padam semua."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Saat ransomware terdeteksi, perangkat yang kena sebaiknya...",
+        "options": [
+          "Langsung dimatikan dan diformat",
+          "Diisolasi dari jaringan tanpa dimatikan dulu",
+          "Dibiarkan",
+          "Dipakai kerja seperti biasa"
+        ],
+        "explanation": "Bukti di memori bisa hilang kalau dimatikan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa koordinasi insiden sebaiknya gak lewat email kantor?",
+        "options": [
+          "Lambat",
+          "Email mungkin sudah disusupi penyerang",
+          "Mahal",
+          "Gak ada alasannya"
+        ],
+        "explanation": "Penyerang bisa membaca rencana respons.",
+        "answer": 1
+      },
+      {
+        "prompt": "UU PDP mewajibkan pemberitahuan kegagalan pelindungan data paling lambat...",
+        "options": [
+          "3 x 24 jam",
+          "1 tahun",
+          "Gak wajib",
+          "30 hari kerja"
+        ],
+        "explanation": "Pemberitahuan tertulis ke subjek data dan lembaga.",
+        "answer": 0
+      },
+      {
+        "prompt": "Sebelum memulihkan dari backup, yang harus dipastikan adalah...",
+        "options": [
+          "Wallpaper baru",
+          "Akses penyerang benar-benar sudah dihapus",
+          "Internet cepat",
+          "Semua orang cuti"
+        ],
+        "explanation": "Kalau belum, serangan bisa terulang.",
+        "answer": 1
+      },
+      {
+        "prompt": "Tabletop exercise adalah...",
+        "options": [
+          "Simulasi diskusi \"bagaimana kalau\" untuk melatih rencana respons",
+          "Lomba meja",
+          "Jenis firewall",
+          "Backup harian"
+        ],
+        "explanation": "Melatih keputusan tanpa menunggu insiden nyata.",
+        "answer": 0
+      }
+    ]
+  }
+]

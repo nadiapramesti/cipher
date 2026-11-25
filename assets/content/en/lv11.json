@@ -1,0 +1,378 @@
+[
+  {
+    "id": "lv11-memory",
+    "level": 11,
+    "title": "Memory & Buffer Overflows",
+    "summary": "The legendary low-level flaw, and its modern mitigations.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "How programs use memory",
+        "body": "A running program stores data in memory (RAM). Two key areas:\n- Stack: a function's temporary data, including the \"return\" address for when the function ends\n- Heap: data allocated while the program runs\n\nLanguages like C and C++ give full control over memory but don't check bounds automatically. If a program writes more data than the space allows, it overflows into neighboring areas.",
+        "tip": "The stack is like a pile of trays in a canteen: last on, first off. Too many trays and they spill onto the next table.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Buffer",
+            "Canary",
+            "Return address",
+            "Stack"
+          ]
+        }
+      },
+      {
+        "title": "Buffer overflows",
+        "body": "In a classic stack buffer overflow, overly long input overwrites the function's return address. If the attacker controls that overwritten value, they can redirect the program's flow to code of their choosing.\n\nIt's one of history's most dangerous vulnerability classes: famous worms and many system exploits were born from it. It's still found today in routers, IoT devices, and legacy software.\n\nMemory-safe languages (Rust, Go, Java, Dart, Python) automatically prevent most of this class of bugs.",
+        "tip": "Like a form whose address field is filled in so long it overwrites the \"deliver to\" field below it."
+      },
+      {
+        "title": "Modern mitigations",
+        "body": "Modern operating systems stack many mitigations:\n- Stack canary: a secret value before the return address; if it changes, the program stops\n- DEP/NX: data areas may not run as code\n- ASLR: memory addresses are randomized every run, so attackers struggle to guess targets\n- Memory-safe languages and compilers that warn about dangerous functions\n\nAdvanced attackers try to bypass these, which is why patches still matter. To go deeper, try the CTF \"pwn\" category and legal practice like picoCTF and pwn.college.",
+        "tip": "Mitigations are like an alarm, a padlock, and CCTV together: each can be beaten, but combined they make the thief work very hard.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "ASLR",
+            "DEP/NX",
+            "Canary",
+            "Memory-safe"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "In a classic stack buffer overflow, what often gets overwritten is...",
+        "options": [
+          "The function's return address",
+          "The wallpaper",
+          "A file name",
+          "The Wi-Fi password"
+        ],
+        "explanation": "Controlling the return address = redirecting program flow.",
+        "answer": 0
+      },
+      {
+        "prompt": "ASLR protects by...",
+        "options": [
+          "Randomizing memory addresses every run",
+          "Deleting programs",
+          "Encrypting email",
+          "Blocking ads"
+        ],
+        "explanation": "Attackers struggle to guess target addresses.",
+        "answer": 0
+      },
+      {
+        "prompt": "A stack canary is...",
+        "options": [
+          "A pet bird",
+          "A secret value checked before a function returns",
+          "A firewall type",
+          "A compiler name"
+        ],
+        "explanation": "If it changes, an overflow occurred; the program stops.",
+        "answer": 1
+      },
+      {
+        "prompt": "Examples of memory-safe languages...",
+        "options": [
+          "C",
+          "Rust and Dart",
+          "Assembly",
+          "C without bounds checks"
+        ],
+        "explanation": "These languages check memory bounds automatically.",
+        "answer": 1
+      },
+      {
+        "prompt": "DEP/NX prevents...",
+        "options": [
+          "Data areas from running as code",
+          "Double logins",
+          "Slow internet",
+          "File deletion"
+        ],
+        "explanation": "Injected data can't be executed directly.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv11-privesc",
+    "level": 11,
+    "title": "Privilege Escalation",
+    "summary": "From a normal account to root: why small misconfigurations can be fatal.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "What privilege escalation is",
+        "body": "Attackers rarely get admin access right away. Usually they get in as a normal user (via a leaked password or app flaw), then look for a way up to root or Administrator. This is privilege escalation (privesc).\n\nTwo directions:\n- Vertical: climbing to higher rights, e.g. user → root\n- Horizontal: moving to another account with equal rights, e.g. accessing another user's data\n\nIn pentests, privesc is the stage that decides how severe a flaw's impact is.",
+        "tip": "Getting in through the staff door is just the start. The danger is finding the master key left in a drawer.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "user",
+            "sudo",
+            "root"
+          ]
+        }
+      },
+      {
+        "title": "The most common causes",
+        "body": "On Linux:\n- Overly loose sudo rules (a user may run certain programs as root)\n- Files or programs with an SUID bit they shouldn't have\n- Root cron jobs running scripts that normal users can edit\n- Passwords stored in config files or terminal history\n- Unpatched kernels\n\nOn Windows:\n- Services running as SYSTEM with weak paths or file permissions\n- Normal users who turn out to be in the admin group\n- Missed patches\n\nCommands to view your rights on Linux:\n$ id\n$ sudo -l",
+        "tip": "Privesc rarely needs magic. Usually it's a spare key under the doormat."
+      },
+      {
+        "title": "Preventing it and practicing",
+        "body": "For system admins:\n- Least privilege: keep sudo rules tight, audit admin groups\n- Regularly audit SUID files and cron jobs\n- Never store passwords in text files or scripts\n- Patch regularly, especially the kernel and services running as root/SYSTEM\n- Monitor logs: who runs sudo, new accounts in admin groups (Event ID 4732 from LV.06)\n\nFor legal practice: Linux and Windows privesc rooms on TryHackMe, and OverTheWire levels. GTFOBins is a public reference of Linux programs that can be abused if given excess rights, useful for admins auditing their own systems.",
+        "tip": "An admin who audits regularly is like a homeowner who routinely checks no spare key was left outside."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Vertical privilege escalation means...",
+        "options": [
+          "Rising from a normal user to root/admin",
+          "Moving to an equal account",
+          "Changing a password",
+          "Deleting an account"
+        ],
+        "explanation": "Horizontal = moving to an equal account.",
+        "answer": 0
+      },
+      {
+        "prompt": "The Linux command to see what you may run with sudo?",
+        "options": [
+          "sudo -l",
+          "ls -sudo",
+          "cat sudo",
+          "whoami -root"
+        ],
+        "explanation": "It lists the sudo rules for your account.",
+        "answer": 0
+      },
+      {
+        "prompt": "A root cron job running a script that normal users can edit is dangerous because...",
+        "options": [
+          "It's slow",
+          "A normal user can insert commands that run as root",
+          "It deletes logs",
+          "It isn't"
+        ],
+        "explanation": "The script runs with root rights.",
+        "answer": 1
+      },
+      {
+        "prompt": "The main prevention for privesc is...",
+        "options": [
+          "Least privilege, audits, and regular patching",
+          "Changing the wallpaper",
+          "Turning off the monitor",
+          "A new font"
+        ],
+        "explanation": "Reduce excess rights and close known flaws.",
+        "answer": 0
+      },
+      {
+        "prompt": "The Windows event indicating an account was added to a group (e.g. Administrators) is...",
+        "options": [
+          "4624",
+          "4625",
+          "4732",
+          "1234"
+        ],
+        "explanation": "Monitor it to detect privesc.",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "lv11-cracking",
+    "level": 11,
+    "title": "Offline Password Cracking",
+    "summary": "How leaked hashes get guessed, and why long passwords win.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Online vs offline",
+        "body": "- Online: guessing via a login form. Slow, due to rate limits and lockouts\n- Offline: the attacker already has hashes from a leaked database and guesses on their own machine. No limits beyond hardware power\n\nModern graphics cards (GPUs) can try billions of guesses per second against fast hashes like MD5. That's why LV.03 said passwords must be stored with deliberately slow bcrypt or Argon2.",
+        "tip": "Online is trying keys at a guarded door. Offline is taking the padlock home and trying all night.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "GPU",
+            "wordlist",
+            "password?"
+          ]
+        }
+      },
+      {
+        "title": "Techniques used",
+        "body": "Popular tools: Hashcat (GPU-powered) and John the Ripper. Common techniques:\n- Dictionary attack: trying word lists and previously leaked passwords (famous wordlists like rockyou.txt)\n- Rules: automatic variations, e.g. nadia → Nadia123!, n4d14\n- Mask/brute force: every combination of a pattern, e.g. 8 digits\n\n\"Unique\" passwords that are really common patterns (name + birth year + symbol) usually fall in the first minutes.\n\nLegal practice: password cracking rooms on TryHackMe with provided hashes.",
+        "tip": "Attackers don't guess randomly. They start with human habits: names, dates, and an exclamation mark at the end."
+      },
+      {
+        "title": "The math that keeps you safe",
+        "body": "Password strength grows exponentially with length. Compare:\n- 8 mixed characters: can fall within hours on a fast hash\n- A 4–5 random-word passphrase: needs an unrealistic amount of time\n\nWhat keeps you safe:\n- Long and random (a password manager or random-word passphrase)\n- Unique per account, so one site's leak doesn't spread\n- 2FA or passkeys, since even a cracked hash isn't enough without the second factor\n\nCompare for yourself in Toolbox → Password Strength Check.",
+        "tip": "Adding one character is like adding a digit to a combination lock: the possibilities multiply instantly."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Offline password cracking means...",
+        "options": [
+          "Guessing through a login form",
+          "Guessing stolen hashes on one's own machine",
+          "Forgetting a password",
+          "Resetting via email"
+        ],
+        "explanation": "There are no rate limits offline.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why are GPUs used for cracking?",
+        "options": [
+          "Nice screens",
+          "They can try billions of guesses per second",
+          "Cheaper than phones",
+          "To avoid detection"
+        ],
+        "explanation": "GPU parallelism suits fast hashes.",
+        "answer": 1
+      },
+      {
+        "prompt": "A dictionary attack tries...",
+        "options": [
+          "Every random combination",
+          "Lists of words and previously leaked passwords",
+          "One password only",
+          "Domain names"
+        ],
+        "explanation": "Wordlists from real leaks are very effective.",
+        "answer": 1
+      },
+      {
+        "prompt": "The password \"Nadia2003!\" is likely...",
+        "options": [
+          "Very safe",
+          "Quick to fall due to the common name + year + symbol pattern",
+          "Unguessable",
+          "Safe because of the capital letter"
+        ],
+        "explanation": "Rules are designed for exactly this pattern.",
+        "answer": 1
+      },
+      {
+        "prompt": "A user's best defense against cracking is...",
+        "options": [
+          "Short but complex passwords",
+          "Long, random, unique passwords plus 2FA/passkeys",
+          "Changing passwords daily",
+          "Using pet names"
+        ],
+        "explanation": "Length beats short complexity.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv11-wireless",
+    "level": 11,
+    "title": "Advanced Wi-Fi Security",
+    "summary": "WPA2, WPA3, handshakes, and evil twins.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "The evolution of Wi-Fi encryption",
+        "body": "- WEP: old, broken encryption crackable in minutes. Don't use it\n- WPA2-Personal (PSK): still the most common standard. Safe with a strong password\n- WPA3: newer, uses SAE, which resists offline guessing and protects past traffic even if the password leaks later\n\nCheck your router settings. If WPA3 or mixed WPA2/WPA3 mode is available, enable it.",
+        "tip": "WEP is a toy padlock, WPA2 a good padlock that depends on its code, WPA3 a padlock that can't be tried out at the thief's home."
+      },
+      {
+        "title": "Handshakes and offline guessing",
+        "body": "When a device joins a WPA2-PSK network, a 4-way handshake occurs. An attacker nearby can record that handshake, then guess the Wi-Fi password offline, like in the cracking module.\n\nThat means short or common Wi-Fi passwords (\"12345678\", phone numbers, shop names) can be guessed without the attacker ever joining the network.\n\nWPS (quick-connect button/PIN) also has long-known weaknesses. Turn WPS off on your router.",
+        "tip": "A handshake is like a recording of you saying the door's password. If it's short, the recording can be matched at home.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "Phone",
+            "4-way handshake",
+            "capture",
+            "Router"
+          ]
+        }
+      },
+      {
+        "title": "Evil twins & defenses",
+        "body": "An evil twin is a fake access point with the same name as the real Wi-Fi (recall LV.00). The advanced version shows a fake \"Wi-Fi login\" page that asks for the password or personal data.\n\nHome and small office defenses:\n- WPA3, or WPA2 with a long passphrase\n- Disable WPS, change the router admin password, update firmware\n- Separate guest Wi-Fi and IoT devices (segmentation from LV.01)\n\nEnterprise defenses: WPA2/WPA3-Enterprise with per-user logins, and rogue access point detection.\n\nPractice only on your own router. Attacking other people's Wi-Fi is illegal.",
+        "tip": "An evil twin is a fake stall opened right next to your favorite one, with the same signboard.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "Real Wi-Fi",
+            "Evil twin",
+            "Guest",
+            "router"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "The broken Wi-Fi encryption you shouldn't use is...",
+        "options": [
+          "WEP",
+          "WPA2",
+          "WPA3",
+          "WPA3-Enterprise"
+        ],
+        "explanation": "WEP can be cracked in minutes.",
+        "answer": 0
+      },
+      {
+        "prompt": "Why is a short WPA2 Wi-Fi password dangerous?",
+        "options": [
+          "Weaker signal",
+          "The handshake can be recorded and guessed offline",
+          "The router overheats",
+          "It isn't"
+        ],
+        "explanation": "The attacker doesn't need to join the network to guess.",
+        "answer": 1
+      },
+      {
+        "prompt": "The router feature to disable due to old weaknesses is...",
+        "options": [
+          "WPS",
+          "WPA3",
+          "Firewall",
+          "DHCP"
+        ],
+        "explanation": "WPS PINs have long-known weaknesses.",
+        "answer": 0
+      },
+      {
+        "prompt": "The advantage of WPA3 (SAE) is...",
+        "options": [
+          "Resistance to offline guessing from handshakes",
+          "No password needed",
+          "Longer range",
+          "Free internet"
+        ],
+        "explanation": "SAE prevents offline guessing.",
+        "answer": 0
+      },
+      {
+        "prompt": "An evil twin is...",
+        "options": [
+          "A backup router",
+          "A fake access point imitating the real Wi-Fi",
+          "An antivirus",
+          "A network cable"
+        ],
+        "explanation": "Often paired with a fake login page.",
+        "answer": 1
+      }
+    ]
+  }
+]

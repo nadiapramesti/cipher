@@ -29,6 +29,14 @@ final List<BadgeDef> badges = [
   BadgeDef('lv7_done', Icons.cloud_done_rounded, (s) => _levelDone(s, 7)),
   BadgeDef('lv8_done', Icons.build_circle_rounded, (s) => _levelDone(s, 8)),
   BadgeDef('lv9_done', Icons.qr_code_scanner_rounded, (s) => _levelDone(s, 9)),
+  BadgeDef('lv10_done', Icons.api_rounded, (s) => _levelDone(s, 10)),
+  BadgeDef('lv11_done', Icons.memory_rounded, (s) => _levelDone(s, 11)),
+  BadgeDef('lv12_done', Icons.radar_rounded, (s) => _levelDone(s, 12)),
+  BadgeDef('lv13_done', Icons.emoji_events_rounded, (s) => _levelDone(s, 13)),
+  BadgeDef('tamat', Icons.auto_awesome_rounded, (s) {
+    final levels = s.content.levels.where((l) => l.available);
+    return levels.isNotEmpty && levels.every(s.isLevelDone);
+  }),
   BadgeDef('exam_first', Icons.verified_rounded, (s) => s.examsPassed >= 1),
   BadgeDef('exam_all', Icons.military_tech_rounded, (s) {
     final levels = s.content.levels.where((l) => l.available);

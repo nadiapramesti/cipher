@@ -1,0 +1,378 @@
+[
+  {
+    "id": "lv11-memory",
+    "level": 11,
+    "title": "Memori & Buffer Overflow",
+    "summary": "Celah legendaris di level paling rendah, dan mitigasi modernnya.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Gimana program pakai memori",
+        "body": "Program yang jalan menyimpan data di memori (RAM). Dua area penting:\n- Stack: data sementara fungsi, termasuk alamat \"pulang\" setelah fungsi selesai\n- Heap: data yang dialokasikan saat program berjalan\n\nBahasa seperti C dan C++ memberi kendali penuh atas memori, tapi gak otomatis mengecek batas. Kalau program menulis data lebih panjang dari ruang yang disediakan, data itu meluap ke area sebelahnya.",
+        "tip": "Stack itu kayak tumpukan nampan di kantin: yang terakhir ditaruh, yang pertama diambil. Kalau nampan kebanyakan, numpuk ke meja sebelah.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Buffer",
+            "Canary",
+            "Alamat pulang",
+            "Stack"
+          ]
+        }
+      },
+      {
+        "title": "Buffer overflow",
+        "body": "Pada buffer overflow klasik di stack, input yang terlalu panjang menimpa alamat pulang fungsi. Kalau penyerang bisa mengatur nilai yang menimpa itu, dia bisa membelokkan alur program ke kode pilihannya.\n\nIni salah satu kelas celah paling berbahaya dalam sejarah: worm-worm terkenal dan banyak eksploit sistem lahir dari sini. Masih ditemukan sampai sekarang di router, perangkat IoT, dan software lama.\n\nBahasa yang memory-safe (Rust, Go, Java, Dart, Python) secara otomatis mencegah sebagian besar kelas celah ini.",
+        "tip": "Kayak formulir yang kolom alamatnya diisi kepanjangan sampai nimpa kolom \"kirim ke\" di bawahnya."
+      },
+      {
+        "title": "Mitigasi modern",
+        "body": "Sistem operasi modern menumpuk banyak mitigasi:\n- Stack canary: nilai rahasia sebelum alamat pulang; kalau berubah, program dihentikan\n- DEP/NX: area data gak boleh dijalankan sebagai kode\n- ASLR: alamat memori diacak tiap program jalan, jadi penyerang susah menebak tujuan\n- Bahasa memory-safe dan compiler yang memperingatkan fungsi berbahaya\n\nPenyerang tingkat lanjut mencoba melewati mitigasi ini, makanya patch tetap penting. Buat belajar lebih dalam, ada kategori \"pwn\" di CTF dan latihan legal seperti picoCTF dan pwn.college.",
+        "tip": "Mitigasi itu kayak alarm, gembok, dan CCTV sekaligus: masing-masing bisa diakali, tapi bareng-bareng bikin maling kerja sangat keras.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "ASLR",
+            "DEP/NX",
+            "Canary",
+            "Memory-safe"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Pada buffer overflow stack klasik, yang sering ditimpa adalah...",
+        "options": [
+          "Alamat pulang fungsi",
+          "Wallpaper",
+          "Nama file",
+          "Password Wi-Fi"
+        ],
+        "explanation": "Mengendalikan alamat pulang = membelokkan alur program.",
+        "answer": 0
+      },
+      {
+        "prompt": "ASLR melindungi dengan cara...",
+        "options": [
+          "Mengacak alamat memori tiap program jalan",
+          "Menghapus program",
+          "Mengenkripsi email",
+          "Memblokir iklan"
+        ],
+        "explanation": "Penyerang jadi susah menebak alamat tujuan.",
+        "answer": 0
+      },
+      {
+        "prompt": "Stack canary adalah...",
+        "options": [
+          "Burung peliharaan",
+          "Nilai rahasia yang dicek sebelum fungsi pulang",
+          "Jenis firewall",
+          "Nama compiler"
+        ],
+        "explanation": "Kalau nilainya berubah, ada luapan; program dihentikan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Bahasa yang memory-safe contohnya...",
+        "options": [
+          "C",
+          "Rust dan Dart",
+          "Assembly",
+          "C tanpa cek batas"
+        ],
+        "explanation": "Bahasa ini mengecek batas memori otomatis.",
+        "answer": 1
+      },
+      {
+        "prompt": "DEP/NX mencegah...",
+        "options": [
+          "Area data dijalankan sebagai kode",
+          "Login ganda",
+          "Internet lambat",
+          "File dihapus"
+        ],
+        "explanation": "Data yang disuntikkan gak bisa langsung dieksekusi.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv11-privesc",
+    "level": 11,
+    "title": "Privilege Escalation",
+    "summary": "Dari akun biasa ke root: kenapa salah setelan kecil bisa fatal.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Apa itu privilege escalation",
+        "body": "Penyerang jarang langsung dapat akses admin. Biasanya dia masuk sebagai pengguna biasa (lewat password bocor atau celah aplikasi), lalu mencari jalan naik ke root atau Administrator. Ini disebut privilege escalation (privesc).\n\nAda dua arah:\n- Vertikal: naik ke hak lebih tinggi, misal user → root\n- Horizontal: pindah ke akun lain dengan hak setara, misal akses data pengguna lain\n\nDi pentest, privesc adalah tahap yang menentukan seberapa parah dampak sebuah celah.",
+        "tip": "Masuk lewat pintu karyawan itu baru awal. Yang bahaya kalau dia nemu kunci master yang ketinggalan di laci.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "user",
+            "sudo",
+            "root"
+          ]
+        }
+      },
+      {
+        "title": "Penyebab yang paling sering",
+        "body": "Di Linux:\n- Aturan sudo yang terlalu longgar (pengguna boleh menjalankan program tertentu sebagai root)\n- File atau program dengan bit SUID yang gak seharusnya\n- Cron job root yang menjalankan script yang bisa diedit pengguna biasa\n- Password tersimpan di file konfigurasi atau riwayat terminal\n- Kernel yang belum di-patch\n\nDi Windows:\n- Layanan yang berjalan sebagai SYSTEM dengan path atau izin file yang lemah\n- Pengguna biasa yang ternyata anggota grup admin\n- Patch yang tertinggal\n\nPerintah untuk melihat hak di Linux:\n$ id\n$ sudo -l",
+        "tip": "Privesc jarang butuh sihir. Seringnya cuma kunci cadangan yang ditaruh di bawah keset."
+      },
+      {
+        "title": "Mencegah dan berlatih",
+        "body": "Buat admin sistem:\n- Least privilege: aturan sudo seketat mungkin, audit grup admin\n- Audit file SUID dan cron job secara berkala\n- Jangan simpan password di file teks atau script\n- Patch rutin, terutama kernel dan layanan yang berjalan sebagai root/SYSTEM\n- Pantau log: siapa menjalankan sudo, akun baru di grup admin (Event ID 4732 di LV.06)\n\nBuat latihan legal: room privesc Linux dan Windows di TryHackMe, dan level OverTheWire. GTFOBins adalah referensi publik program Linux yang bisa disalahgunakan jika diberi hak berlebih, berguna untuk admin mengaudit sistemnya sendiri.",
+        "tip": "Admin yang rajin audit itu kayak pemilik rumah yang rutin ngecek gak ada kunci cadangan ketinggalan di luar."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Privilege escalation vertikal artinya...",
+        "options": [
+          "Naik dari user biasa ke root/admin",
+          "Pindah ke akun lain yang setara",
+          "Mengganti password",
+          "Menghapus akun"
+        ],
+        "explanation": "Horizontal = pindah ke akun setara.",
+        "answer": 0
+      },
+      {
+        "prompt": "Perintah Linux buat lihat program apa yang boleh kamu jalankan pakai sudo?",
+        "options": [
+          "sudo -l",
+          "ls -sudo",
+          "cat sudo",
+          "whoami -root"
+        ],
+        "explanation": "Menampilkan aturan sudo untuk akun kamu.",
+        "answer": 0
+      },
+      {
+        "prompt": "Cron job root yang menjalankan script yang bisa diedit pengguna biasa itu berbahaya karena...",
+        "options": [
+          "Bikin lambat",
+          "Pengguna biasa bisa menyisipkan perintah yang jalan sebagai root",
+          "Menghapus log",
+          "Gak berbahaya"
+        ],
+        "explanation": "Script dijalankan dengan hak root.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pencegahan utama privesc adalah...",
+        "options": [
+          "Least privilege, audit, dan patch rutin",
+          "Ganti wallpaper",
+          "Matikan monitor",
+          "Pakai font baru"
+        ],
+        "explanation": "Kurangi hak berlebih dan tutup celah yang diketahui.",
+        "answer": 0
+      },
+      {
+        "prompt": "Event Windows yang menandakan akun ditambahkan ke grup (misal Administrators) adalah...",
+        "options": [
+          "4624",
+          "4625",
+          "4732",
+          "1234"
+        ],
+        "explanation": "Pantau ini buat mendeteksi privesc.",
+        "answer": 2
+      }
+    ]
+  },
+  {
+    "id": "lv11-cracking",
+    "level": 11,
+    "title": "Password Cracking Offline",
+    "summary": "Gimana hash yang bocor ditebak, dan kenapa password panjang menang.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Online vs offline",
+        "body": "- Online: menebak lewat form login. Lambat, karena ada rate limit dan penguncian akun\n- Offline: penyerang sudah punya hash dari database yang bocor, lalu menebak di komputernya sendiri. Gak ada batas, cuma dibatasi kekuatan hardware\n\nKartu grafis (GPU) modern bisa mencoba miliaran tebakan per detik untuk hash cepat seperti MD5. Itulah kenapa LV.03 bilang: password harus disimpan pakai bcrypt atau Argon2 yang sengaja lambat.",
+        "tip": "Online itu kayak nyoba kunci di pintu yang dijaga satpam. Offline itu kayak gemboknya udah dibawa pulang dan bisa dicoba semalaman.",
+        "visual": {
+          "kind": "hash",
+          "labels": [
+            "GPU",
+            "wordlist",
+            "password?"
+          ]
+        }
+      },
+      {
+        "title": "Teknik yang dipakai",
+        "body": "Alat populer: Hashcat (pakai GPU) dan John the Ripper. Teknik umumnya:\n- Dictionary attack: mencoba daftar kata dan password yang pernah bocor (wordlist terkenal seperti rockyou.txt)\n- Rules: variasi otomatis, misal nadia → Nadia123!, n4d14\n- Mask/brute force: mencoba semua kombinasi pola tertentu, misal 8 angka\n\nPassword \"unik\" yang sebenarnya pola umum (nama + tahun lahir + simbol) biasanya tumbang di menit-menit awal.\n\nLatihan legal: room password cracking di TryHackMe dengan hash yang disediakan.",
+        "tip": "Penyerang gak nebak acak. Dia mulai dari kebiasaan manusia: nama, tanggal, dan tanda seru di belakang."
+      },
+      {
+        "title": "Matematika yang bikin kamu aman",
+        "body": "Kekuatan password tumbuh eksponensial dengan panjang. Bandingkan:\n- 8 karakter campuran: bisa jatuh dalam hitungan jam pada hash cepat\n- Passphrase 4–5 kata acak: butuh waktu yang gak realistis\n\nYang bikin aman:\n- Panjang dan acak (password manager atau passphrase kata acak)\n- Unik per akun, supaya kebocoran satu situs gak merembet\n- 2FA atau passkey, karena hash yang retak pun gak cukup tanpa faktor kedua\n\nCoba bandingkan sendiri di Toolbox → Cek Kekuatan Password.",
+        "tip": "Nambah satu karakter itu kayak nambah satu digit di gembok angka: kemungkinannya langsung berlipat."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Password cracking offline artinya...",
+        "options": [
+          "Menebak lewat form login",
+          "Menebak hash yang sudah dicuri di komputer sendiri",
+          "Lupa password",
+          "Reset lewat email"
+        ],
+        "explanation": "Gak ada rate limit dalam serangan offline.",
+        "answer": 1
+      },
+      {
+        "prompt": "Kenapa GPU dipakai untuk cracking?",
+        "options": [
+          "Layarnya bagus",
+          "Bisa mencoba miliaran tebakan per detik",
+          "Lebih murah dari HP",
+          "Biar gak ketahuan"
+        ],
+        "explanation": "Paralelisme GPU cocok untuk hash cepat.",
+        "answer": 1
+      },
+      {
+        "prompt": "Dictionary attack mencoba...",
+        "options": [
+          "Semua kombinasi acak",
+          "Daftar kata dan password yang pernah bocor",
+          "Satu password saja",
+          "Nama domain"
+        ],
+        "explanation": "Wordlist dari kebocoran nyata sangat efektif.",
+        "answer": 1
+      },
+      {
+        "prompt": "Password \"Nadia2003!\" kemungkinan...",
+        "options": [
+          "Sangat aman",
+          "Cepat jatuh karena pola umum nama + tahun + simbol",
+          "Gak bisa ditebak",
+          "Aman kalau pakai huruf besar"
+        ],
+        "explanation": "Rules dirancang untuk pola persis seperti ini.",
+        "answer": 1
+      },
+      {
+        "prompt": "Pertahanan terbaik terhadap cracking bagi pengguna adalah...",
+        "options": [
+          "Password pendek tapi rumit",
+          "Password panjang acak, unik, plus 2FA/passkey",
+          "Ganti password tiap hari",
+          "Pakai nama hewan"
+        ],
+        "explanation": "Panjang mengalahkan kerumitan pendek.",
+        "answer": 1
+      }
+    ]
+  },
+  {
+    "id": "lv11-wireless",
+    "level": 11,
+    "title": "Keamanan Wi-Fi Lanjut",
+    "summary": "WPA2, WPA3, handshake, dan evil twin.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "Evolusi enkripsi Wi-Fi",
+        "body": "- WEP: enkripsi lama yang sudah rusak, bisa dibobol dalam menit. Jangan dipakai\n- WPA2-Personal (PSK): standar yang masih paling umum. Aman kalau password-nya kuat\n- WPA3: lebih baru, pakai SAE yang tahan terhadap tebakan offline dan melindungi lalu lintas lama walau password bocor belakangan\n\nCek setelan router kamu. Kalau bisa WPA3 atau mode campuran WPA2/WPA3, aktifkan.",
+        "tip": "WEP itu gembok mainan, WPA2 gembok bagus yang tergantung kodenya, WPA3 gembok yang gak bisa dicoba-coba di rumah maling."
+      },
+      {
+        "title": "Handshake dan tebakan offline",
+        "body": "Saat perangkat tersambung ke Wi-Fi WPA2-PSK, terjadi 4-way handshake. Penyerang di sekitar bisa merekam handshake itu, lalu menebak password Wi-Fi secara offline seperti di modul cracking.\n\nArtinya: password Wi-Fi pendek atau umum (\"12345678\", nomor HP, nama toko) bisa ditebak tanpa penyerang perlu masuk ke jaringan.\n\nWPS (tombol/PIN sambung cepat) juga punya kelemahan yang sudah lama dikenal. Matikan WPS di router.",
+        "tip": "Handshake itu kayak rekaman suara kamu nyebut kata sandi pintu. Kalau kata sandinya pendek, rekamannya bisa dicocokin di rumah.",
+        "visual": {
+          "kind": "packets",
+          "labels": [
+            "HP",
+            "4-way handshake",
+            "rekam",
+            "Router"
+          ]
+        }
+      },
+      {
+        "title": "Evil twin & pertahanan",
+        "body": "Evil twin adalah access point palsu dengan nama sama seperti Wi-Fi asli (ingat LV.00). Versi lanjutnya menampilkan halaman \"login Wi-Fi\" palsu yang minta password atau data pribadi.\n\nPertahanan rumah dan kantor kecil:\n- WPA3 atau WPA2 dengan passphrase panjang\n- Matikan WPS, ganti password admin router, update firmware\n- Pisahkan Wi-Fi tamu dan perangkat IoT (segmentasi dari LV.01)\n\nPertahanan perusahaan: WPA2/WPA3-Enterprise dengan login per pengguna, dan sistem pendeteksi access point palsu.\n\nLatihan cuma di router milikmu sendiri. Menyerang Wi-Fi orang lain itu melanggar hukum.",
+        "tip": "Evil twin itu warung palsu yang dibuka persis di sebelah warung langganan, pakai papan nama yang sama.",
+        "visual": {
+          "kind": "subnet",
+          "labels": [
+            "Wi-Fi asli",
+            "Evil twin",
+            "Tamu",
+            "router"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Enkripsi Wi-Fi yang sudah rusak dan gak boleh dipakai adalah...",
+        "options": [
+          "WEP",
+          "WPA2",
+          "WPA3",
+          "WPA3-Enterprise"
+        ],
+        "explanation": "WEP bisa dibobol dalam hitungan menit.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kenapa password Wi-Fi WPA2 pendek berbahaya?",
+        "options": [
+          "Bikin sinyal lemah",
+          "Handshake bisa direkam lalu ditebak offline",
+          "Router jadi panas",
+          "Gak berbahaya"
+        ],
+        "explanation": "Penyerang gak perlu masuk jaringan untuk menebak.",
+        "answer": 1
+      },
+      {
+        "prompt": "Fitur router yang sebaiknya dimatikan karena kelemahan lama adalah...",
+        "options": [
+          "WPS",
+          "WPA3",
+          "Firewall",
+          "DHCP"
+        ],
+        "explanation": "PIN WPS punya kelemahan yang sudah lama dikenal.",
+        "answer": 0
+      },
+      {
+        "prompt": "Kelebihan WPA3 (SAE) adalah...",
+        "options": [
+          "Tahan terhadap tebakan offline dari handshake",
+          "Gak perlu password",
+          "Sinyal lebih jauh",
+          "Gratis internet"
+        ],
+        "explanation": "SAE mencegah tebakan offline.",
+        "answer": 0
+      },
+      {
+        "prompt": "Evil twin adalah...",
+        "options": [
+          "Router cadangan",
+          "Access point palsu yang meniru Wi-Fi asli",
+          "Antivirus",
+          "Kabel jaringan"
+        ],
+        "explanation": "Sering disertai halaman login palsu.",
+        "answer": 1
+      }
+    ]
+  }
+]

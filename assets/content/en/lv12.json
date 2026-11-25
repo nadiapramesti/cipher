@@ -1,0 +1,377 @@
+[
+  {
+    "id": "lv12-attack",
+    "level": 12,
+    "title": "MITRE ATT&CK & the Kill Chain",
+    "summary": "The map of attacker behavior used by security teams worldwide.",
+    "minutes": 6,
+    "pages": [
+      {
+        "title": "The Cyber Kill Chain",
+        "body": "The kill chain breaks an attack into ordered stages:\n1. Reconnaissance: researching the target (LV.04)\n2. Weaponization: preparing tools, e.g. a malware-laden document\n3. Delivery: sending it, e.g. via phishing email\n4. Exploitation: a flaw is used\n5. Installation: malware persists\n6. Command & Control: the attacker controls it remotely\n7. Actions on objectives: stealing data, encrypting, etc.\n\nThe lesson: defenses can break the chain at any stage. The earlier it breaks, the smaller the damage.",
+        "tip": "Like a bicycle chain: break one link and the bike stops.",
+        "visual": {
+          "kind": "layers",
+          "labels": [
+            "Recon",
+            "Weaponize",
+            "Delivery",
+            "Exploit",
+            "Install",
+            "C2"
+          ]
+        }
+      },
+      {
+        "title": "MITRE ATT&CK",
+        "body": "MITRE ATT&CK is an open knowledge base of real attacker behavior, organized as a matrix:\n- Tactics: the attacker's goals, e.g. Initial Access, Persistence, Privilege Escalation, Exfiltration\n- Techniques: how they achieve them, e.g. Phishing (T1566) or Valid Accounts (T1078)\n\nSecurity teams use it to:\n- Map which detections exist and which are missing\n- Speak a shared language when reporting incidents\n- Design red team and purple team exercises\n\nAll of ATT&CK is free at attack.mitre.org.",
+        "tip": "ATT&CK is like the attackers' complete cookbook. Defenders read it so they know which dishes are coming.",
+        "visual": {
+          "kind": "tree",
+          "labels": [
+            "ATT&CK",
+            "Initial Access",
+            "Persistence",
+            "T1566",
+            "T1078",
+            "T1053",
+            "T1547"
+          ]
+        }
+      },
+      {
+        "title": "Applying it",
+        "body": "Example: the APK invitation scam from LV.05 can be mapped:\n- Initial Access: phishing via a chat app\n- Execution: the victim installs the APK\n- Credential Access: reading OTP SMS\n- Exfiltration: sending data to a Telegram bot\n\nOnce mapped, the team asks at each stage: \"what could detect or block this?\". For example user education early on, Play Protect at execution, and bank transaction monitoring at the end.",
+        "tip": "Mapping an attack is like drawing the burglar's route, then putting CCTV at every turn."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "The core idea of the kill chain is...",
+        "options": [
+          "Attacks happen all at once",
+          "Attacks have stages; breaking one can foil the whole attack",
+          "Bicycle chains",
+          "A malware type"
+        ],
+        "explanation": "The earlier it breaks, the smaller the damage.",
+        "answer": 1
+      },
+      {
+        "prompt": "In MITRE ATT&CK, \"Persistence\" is a...",
+        "options": [
+          "Technique",
+          "Tactic (attacker goal)",
+          "Tool",
+          "Malware name"
+        ],
+        "explanation": "Tactic = goal, technique = method.",
+        "answer": 1
+      },
+      {
+        "prompt": "ATT&CK's use for blue teams is...",
+        "options": [
+          "Building malware",
+          "Mapping existing and missing detections",
+          "Speeding up Wi-Fi",
+          "Making logos"
+        ],
+        "explanation": "It helps prioritize defenses.",
+        "answer": 1
+      },
+      {
+        "prompt": "The stage of sending stolen data out is called...",
+        "options": [
+          "Exfiltration",
+          "Reconnaissance",
+          "Weaponization",
+          "Backup"
+        ],
+        "explanation": "Exfiltration = data leaving the victim's network.",
+        "answer": 0
+      },
+      {
+        "prompt": "The earliest kill chain stage is...",
+        "options": [
+          "Reconnaissance",
+          "Installation",
+          "Actions on objectives",
+          "Command & Control"
+        ],
+        "explanation": "Researching the target always comes first.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv12-hunting",
+    "level": 12,
+    "title": "Threat Hunting & Detection",
+    "summary": "Hunting attackers who slipped past alarms, and writing your own detection rules.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Don't wait for alarms",
+        "body": "Threat hunting is actively searching for attacker traces, assuming \"someone may already be in but undetected\". Hunters start from a hypothesis, e.g.:\n- \"If stolen passwords are in use, there'll be successful logins from unusual countries\"\n- \"If malware persisted, there'll be odd new scheduled tasks\"\n\nThen they test the hypothesis against log data. Confirmed findings become automated detection rules.",
+        "tip": "A regular guard waits for the alarm. A hunter walks around checking windows that look shut but aren't locked."
+      },
+      {
+        "title": "Detection rules: Sigma",
+        "body": "Sigma is an open detection rule format, like a \"recipe\" translatable to many SIEMs. A simple example detecting many failed Windows logins:\n| title: Many failed logins\n| logsource:\n|   product: windows\n|   service: security\n| detection:\n|   selection:\n|     EventID: 4625\n|   condition: selection | count() > 20\n| level: medium\n\nThe community shares thousands of free Sigma rules, many mapped to ATT&CK techniques.",
+        "tip": "A detection rule is like a wanted poster at the guard post: anyone matching gets flagged.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "4625 > 20",
+            "Sigma"
+          ]
+        }
+      },
+      {
+        "title": "Detection quality",
+        "body": "Good detection rules are balanced:\n- Too loose: lots of false positives, the team burns out and starts ignoring alerts (recall LV.06)\n- Too strict: attackers who vary slightly slip through (false negatives)\n\nHealthy practice:\n- Test rules with simulated attack data (purple teaming)\n- Document why each alert matters and how to respond (playbooks)\n- Measure: time from event to detection, and to resolution\n\nPractice: TryHackMe's SOC Level 1 path covers log analysis and detection.",
+        "tip": "An alarm that rings for every passing cat gets unplugged. An alarm that never rings is useless too."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Threat hunting starts from...",
+        "options": [
+          "Waiting for alarms",
+          "A hypothesis about attacker behavior",
+          "Buying antivirus",
+          "Disabling logs"
+        ],
+        "explanation": "The hypothesis is then tested against data.",
+        "answer": 1
+      },
+      {
+        "prompt": "Sigma is...",
+        "options": [
+          "An antivirus",
+          "An open detection rule format translatable to many SIEMs",
+          "A game language",
+          "A firewall type"
+        ],
+        "explanation": "One rule, many platforms.",
+        "answer": 1
+      },
+      {
+        "prompt": "An overly loose detection rule causes...",
+        "options": [
+          "Excessive false positives",
+          "Attackers always caught",
+          "Faster servers",
+          "No effect"
+        ],
+        "explanation": "False alarms make teams careless.",
+        "answer": 0
+      },
+      {
+        "prompt": "A false negative means...",
+        "options": [
+          "An alarm on a safe event",
+          "A real attack that went undetected",
+          "A successful login",
+          "A failed backup"
+        ],
+        "explanation": "This is the most dangerous kind.",
+        "answer": 1
+      },
+      {
+        "prompt": "Purple teaming is...",
+        "options": [
+          "Red and blue teams working together to test detections",
+          "A design team",
+          "A theme color",
+          "A malware type"
+        ],
+        "explanation": "Simulated attacks are used to improve detection.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv12-malware",
+    "level": 12,
+    "title": "Malware Analysis",
+    "summary": "Dissecting malware safely: static, dynamic, and YARA.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "Safe lab first",
+        "body": "Malware analysis must happen in an isolated environment:\n- A dedicated virtual machine with snapshots so it can be reverted\n- Network disconnected or redirected to a fake network\n- No personal accounts, important files, or folders shared with the main computer\n- Samples kept in password-protected archives (by convention the password \"infected\") so they aren't run by accident\n\nA mistake here can infect your own computer.",
+        "tip": "Malware analysis is like studying viruses in a biosafety lab: sealed doors, special suits, nothing goes home.",
+        "visual": {
+          "kind": "vault",
+          "labels": [
+            "SANDBOX",
+            "SAMPLE"
+          ]
+        }
+      },
+      {
+        "title": "Static vs dynamic",
+        "body": "Static analysis (without running it):\n- Hash the file and look it up on VirusTotal\n- Read embedded strings: URLs, IPs, file names, messages\n- Inspect headers, libraries used, and permissions (like the APK dissection in LV.08)\n- Decompile or disassemble with tools like Ghidra (free, from the NSA) for Windows/Linux programs\n\nDynamic analysis (run in a sandbox):\n- Watch processes created, files changed, registry edits, and network connections\n- Online sandboxes like ANY.RUN or Hybrid Analysis show its behavior\n\nThe output is Indicators of Compromise (IoCs): hashes, domains, IPs, file names other teams can use for detection.",
+        "tip": "Static is reading the recipe without cooking. Dynamic is cooking in a sealed kitchen while watching where the smoke goes."
+      },
+      {
+        "title": "YARA: malware fingerprints",
+        "body": "YARA is a rule language for recognizing files by patterns. An example detecting scam APKs that send data to a Telegram bot:\n| rule APK_Telegram_Exfil {\n|   strings:\n|     $a = \"api.telegram.org/bot\"\n|     $b = \"android.permission.RECEIVE_SMS\"\n|   condition:\n|     all of them\n| }\n\nYARA rules are used by antivirus engines, sandboxes, and incident response teams to scan thousands of files at once. They're written from analysis findings, then shared with the community.",
+        "tip": "YARA is like a wanted photo sent to every post: the moment something matches, it's caught.",
+        "visual": {
+          "kind": "scan",
+          "labels": [
+            "YARA match",
+            "YARA"
+          ]
+        }
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "Malware analysis should be done on...",
+        "options": [
+          "Your main laptop",
+          "An isolated VM with snapshots",
+          "Your personal phone",
+          "A networked office computer"
+        ],
+        "explanation": "Isolation prevents infection from spreading.",
+        "answer": 1
+      },
+      {
+        "prompt": "Static analysis means...",
+        "options": [
+          "Running the malware",
+          "Examining the file without running it",
+          "Deleting the malware",
+          "Sending it to a friend"
+        ],
+        "explanation": "Reading strings, headers, and code.",
+        "answer": 1
+      },
+      {
+        "prompt": "Examples of Indicators of Compromise (IoCs)...",
+        "options": [
+          "Malicious file hashes, domains, and IPs",
+          "Theme colors",
+          "Your username",
+          "Working hours"
+        ],
+        "explanation": "IoCs are used for detection elsewhere.",
+        "answer": 0
+      },
+      {
+        "prompt": "Ghidra is...",
+        "options": [
+          "A free reverse engineering tool",
+          "A game",
+          "A paid antivirus",
+          "A Wi-Fi type"
+        ],
+        "explanation": "Released open-source by the NSA.",
+        "answer": 0
+      },
+      {
+        "prompt": "YARA is used to...",
+        "options": [
+          "Recognize files by patterns",
+          "Edit photos",
+          "Create passwords",
+          "Speed up internet"
+        ],
+        "explanation": "YARA rules scan many files at once.",
+        "answer": 0
+      }
+    ]
+  },
+  {
+    "id": "lv12-ir",
+    "level": 12,
+    "title": "Large-Scale Incident Response",
+    "summary": "When ransomware hits the office: decisions, communication, and recovery.",
+    "minutes": 7,
+    "pages": [
+      {
+        "title": "The first hours",
+        "body": "Scenario: Monday morning, dozens of office computers show a ransom note. First-hour decisions are critical:\n- Isolate: disconnect affected devices from the network, but don't power them off yet (evidence in memory may be lost)\n- Protect backups: make sure they're disconnected and not encrypted too\n- Activate the response team and chain of command: who decides what\n- Record everything with timestamps (a timeline) from the first minute\n\nPanic makes people delete evidence or shut down the wrong servers. That's what a rehearsed plan is for.",
+        "tip": "Like a building fire: close doors so it doesn't spread, save key documents, and follow the evacuation route you practiced.",
+        "visual": {
+          "kind": "botnet",
+          "labels": [
+            "backup",
+            "encrypted"
+          ]
+        }
+      },
+      {
+        "title": "Communication & obligations",
+        "body": "A major incident isn't just technical:\n- Internal: staff need to know what to do and not do; don't coordinate over email that may be compromised\n- Leadership: needs the business impact, not technical detail\n- Customers and the public: honest, timely communication\n- Regulators: data protection laws often require prompt notification; Indonesia's PDP Law requires written notice within 3 x 24 hours of a personal data protection failure\n- Law enforcement and relevant agencies\n\nWhether to pay a ransom involves leadership, legal, and often insurers.",
+        "tip": "When your house is burgled, you don't just fix the door. You tell the family, report it, and handle the insurance."
+      },
+      {
+        "title": "Recover and learn",
+        "body": "Proper recovery:\n- Make sure the attacker's access is truly gone (accounts, backdoors, persistence) before restoring; otherwise the attack can repeat\n- Restore from clean backups, critical systems first\n- Rotate every credential that may have leaked\n- Monitor closely for weeks afterwards\n\nThen run a blameless post-incident review: what happened, why it was possible, what gets fixed. Rehearse the plan with tabletop exercises: discussion-based \"what if...\" simulations with the team and leadership.",
+        "tip": "Before moving back into a burned house, make sure every ember is out."
+      }
+    ],
+    "quiz": [
+      {
+        "prompt": "When ransomware is detected, affected devices should be...",
+        "options": [
+          "Shut down and wiped immediately",
+          "Isolated from the network without powering off yet",
+          "Left alone",
+          "Used as normal"
+        ],
+        "explanation": "Evidence in memory may be lost if powered off.",
+        "answer": 1
+      },
+      {
+        "prompt": "Why avoid coordinating an incident over office email?",
+        "options": [
+          "It's slow",
+          "Email may already be compromised",
+          "It's expensive",
+          "No reason"
+        ],
+        "explanation": "The attacker could read the response plan.",
+        "answer": 1
+      },
+      {
+        "prompt": "Indonesia's PDP Law requires notifying a data protection failure within...",
+        "options": [
+          "3 x 24 hours",
+          "1 year",
+          "Not required",
+          "30 working days"
+        ],
+        "explanation": "Written notice to data subjects and the authority.",
+        "answer": 0
+      },
+      {
+        "prompt": "Before restoring from backup, you must ensure...",
+        "options": [
+          "A new wallpaper",
+          "The attacker's access is truly removed",
+          "Fast internet",
+          "Everyone is on leave"
+        ],
+        "explanation": "Otherwise the attack can repeat.",
+        "answer": 1
+      },
+      {
+        "prompt": "A tabletop exercise is...",
+        "options": [
+          "A discussion-based \"what if\" simulation to rehearse the response plan",
+          "A table contest",
+          "A firewall type",
+          "A daily backup"
+        ],
+        "explanation": "It rehearses decisions without waiting for a real incident.",
+        "answer": 0
+      }
+    ]
+  }
+]
